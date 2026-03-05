@@ -29,13 +29,11 @@ Skills live in `.claude/skills/`. Each skill gets its own folder with a `SKILL.m
 
 Skills are built organically as recurring workflows emerge. Don't create skills preemptively -- wait until a workflow has been repeated 2-3 times, then templatize it.
 
-### Skills to Build (Backlog)
+### Available Skills
 
-These emerged from onboarding. Build these as Eric starts using them:
-
-- **Cold email outreach** -- Draft and manage outreach emails to potential clients
-- **Email response** -- Draft replies to incoming emails
-- **Local business research** -- Find small businesses with outdated websites as potential clients
+- **Cold email outreach** -- `.claude/skills/cold-email-outreach/` -- Draft outreach emails to potential clients
+- **Email response** -- `.claude/skills/email-response/` -- Draft replies to incoming emails
+- **Local business research** -- `.claude/skills/local-business-research/` -- Find small businesses with outdated websites as potential clients
 
 ## Decision Log
 
