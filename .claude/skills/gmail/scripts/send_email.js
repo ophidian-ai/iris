@@ -34,7 +34,7 @@ function buildRawMessage({ to, cc, subject, body, html, attachments, inReplyTo, 
       `Content-Type: ${contentType}`,
       "",
       html || body,
-    ].filter(Boolean);
+    ].filter(line => line !== null);
 
     for (const att of attachments) {
       const fileData = fs.readFileSync(att.path);
@@ -63,7 +63,7 @@ function buildRawMessage({ to, cc, subject, body, html, attachments, inReplyTo, 
     references ? `References: ${references}` : null,
     "",
     html || body,
-  ].filter(Boolean);
+  ].filter(line => line !== null);
 
   return Buffer.from(lines.join("\r\n")).toString("base64url");
 }
