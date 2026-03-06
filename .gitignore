@@ -8,5 +8,9 @@ node_modules/
 .claude/skills/gmail/scripts/token.json
 .claude/skills/gmail/scripts/node_modules/
 
+# Plugin temp files
+.playwright-mcp/
+.firecrawl/
+
 # Client projects (each has its own git repo)
 projects/active-projects/*/
