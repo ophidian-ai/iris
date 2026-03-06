@@ -1,0 +1,1983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Columbus Massage Center & Salon | Your Sanctuary for Relaxation & Renewal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ============================================
+           CSS VARIABLES & RESET
+           ============================================ */
+        :root {
+            --sage-deep: #4a5d4a;
+            --sage: #6b7f6b;
+            --sage-light: #8fa38f;
+            --sage-mist: #c5d4c0;
+            --sage-whisper: #e8efe5;
+            --cream: #faf7f2;
+            --cream-warm: #f5efe6;
+            --linen: #ede7db;
+            --gold: #c4a265;
+            --gold-light: #d4b87a;
+            --gold-pale: #e8d5a8;
+            --charcoal: #2c2c2c;
+            --text: #3a3a3a;
+            --text-light: #6b6b6b;
+            --text-muted: #9a9a9a;
+            --white: #ffffff;
+            --shadow-sm: 0 2px 8px rgba(74, 93, 74, 0.08);
+            --shadow-md: 0 4px 20px rgba(74, 93, 74, 0.12);
+            --shadow-lg: 0 8px 40px rgba(74, 93, 74, 0.15);
+            --shadow-gold: 0 4px 20px rgba(196, 162, 101, 0.2);
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --transition-slow: 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text);
+            background: var(--cream);
+            line-height: 1.7;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Linen texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        img { max-width: 100%; display: block; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* ============================================
+           TYPOGRAPHY
+           ============================================ */
+        h1, h2, h3, h4, h5 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+            line-height: 1.2;
+            color: var(--charcoal);
+        }
+
+        .section-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+        }
+
+        .section-subtitle {
+            font-size: 1rem;
+            color: var(--text-light);
+            max-width: 560px;
+            font-weight: 300;
+            line-height: 1.8;
+        }
+
+        /* ============================================
+           BUTTONS
+           ============================================ */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            padding: 1rem 2.5rem;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: var(--sage-deep);
+            color: var(--white);
+            border-radius: var(--radius-sm);
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: 0.6s;
+        }
+
+        .btn-primary:hover {
+            background: var(--sage);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-primary:hover::before { left: 100%; }
+
+        .btn-gold {
+            background: var(--gold);
+            color: var(--white);
+            border-radius: var(--radius-sm);
+        }
+
+        .btn-gold:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-gold);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--sage-deep);
+            border: 1.5px solid var(--sage-deep);
+            border-radius: var(--radius-sm);
+        }
+
+        .btn-outline:hover {
+            background: var(--sage-deep);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        /* ============================================
+           HEADER / NAV
+           ============================================ */
+        .header {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            padding: 1.25rem 0;
+            transition: var(--transition);
+        }
+
+        .header.scrolled {
+            background: rgba(250, 247, 242, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 0.75rem 0;
+            box-shadow: 0 1px 0 rgba(74, 93, 74, 0.08);
+        }
+
+        .header-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .logo-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-weight: 500;
+            color: var(--sage-deep);
+            letter-spacing: 0.02em;
+            line-height: 1.1;
+            transition: var(--transition);
+        }
+
+        .header.scrolled .logo-name { color: var(--charcoal); }
+
+        .logo-tagline {
+            font-size: 0.6rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--sage-light);
+            font-weight: 500;
+            margin-top: 2px;
+        }
+
+        .nav { display: flex; align-items: center; gap: 2.5rem; }
+
+        .nav-link {
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--sage-deep);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .header.scrolled .nav-link { color: var(--text); }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--gold);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover::after { width: 100%; }
+        .nav-link:hover { color: var(--gold); }
+
+        .nav-cta {
+            font-size: 0.68rem;
+            padding: 0.7rem 1.5rem;
+        }
+
+        /* Mobile menu */
+        .mobile-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .mobile-toggle span {
+            width: 24px;
+            height: 1.5px;
+            background: var(--sage-deep);
+            transition: var(--transition);
+        }
+
+        /* ============================================
+           HERO
+           ============================================ */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(160deg, #e8efe5 0%, #f5efe6 30%, #faf7f2 60%, #ede7db 100%);
+        }
+
+        /* Organic blob shapes */
+        .hero-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .hero-blob-1 {
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, var(--sage-mist), transparent 70%);
+            top: -200px; right: -100px;
+            animation-delay: 0s;
+        }
+
+        .hero-blob-2 {
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, var(--gold-pale), transparent 70%);
+            bottom: -150px; left: -100px;
+            animation-delay: -7s;
+        }
+
+        .hero-blob-3 {
+            width: 300px; height: 300px;
+            background: radial-gradient(circle, var(--sage-whisper), transparent 70%);
+            top: 40%; left: 20%;
+            animation-delay: -14s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -20px) scale(1.05); }
+            66% { transform: translate(-20px, 15px) scale(0.95); }
+        }
+
+        /* Decorative botanical line art */
+        .hero-botanical {
+            position: absolute;
+            width: 300px;
+            height: 400px;
+            opacity: 0.06;
+        }
+
+        .hero-botanical-left {
+            left: 4%;
+            bottom: 10%;
+        }
+
+        .hero-botanical-right {
+            right: 4%;
+            top: 15%;
+            transform: scaleX(-1);
+        }
+
+        .hero-content {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            padding: 2rem;
+            max-width: 800px;
+        }
+
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 2rem;
+        }
+
+        .hero-eyebrow::before,
+        .hero-eyebrow::after {
+            content: '';
+            width: 40px;
+            height: 1px;
+            background: var(--gold);
+        }
+
+        .hero-title {
+            font-size: clamp(2.8rem, 6vw, 5rem);
+            font-weight: 300;
+            color: var(--charcoal);
+            margin-bottom: 0.5rem;
+            line-height: 1.1;
+        }
+
+        .hero-title em {
+            font-style: italic;
+            font-weight: 300;
+            color: var(--sage-deep);
+        }
+
+        .hero-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            font-weight: 300;
+            font-style: italic;
+            color: var(--text-light);
+            margin-bottom: 3rem;
+            letter-spacing: 0.02em;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--sage-light);
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            animation: pulse-down 2s ease-in-out infinite;
+        }
+
+        .hero-scroll-line {
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--sage-light), transparent);
+        }
+
+        @keyframes pulse-down {
+            0%, 100% { opacity: 1; transform: translateX(-50%) translateY(0); }
+            50% { opacity: 0.5; transform: translateX(-50%) translateY(8px); }
+        }
+
+        /* ============================================
+           TRUST BAR
+           ============================================ */
+        .trust-bar {
+            background: var(--sage-deep);
+            padding: 2.5rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .trust-bar::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(90deg, rgba(196,162,101,0.08) 0%, transparent 50%, rgba(196,162,101,0.08) 100%);
+        }
+
+        .trust-items {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+
+        .trust-item {
+            text-align: center;
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .trust-icon {
+            width: 44px;
+            height: 44px;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .trust-icon svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--gold-light);
+            fill: none;
+            stroke-width: 1.5;
+        }
+
+        .trust-text {
+            text-align: left;
+        }
+
+        .trust-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 500;
+            line-height: 1.1;
+            color: var(--gold-light);
+        }
+
+        .trust-label {
+            font-size: 0.65rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            opacity: 0.8;
+            font-weight: 400;
+        }
+
+        /* ============================================
+           SECTIONS - GENERAL
+           ============================================ */
+        .section {
+            padding: 6rem 2rem;
+        }
+
+        .section-center {
+            text-align: center;
+        }
+
+        .section-center .section-subtitle {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Decorative divider */
+        .divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .divider-line {
+            width: 60px;
+            height: 1px;
+            background: var(--gold-pale);
+        }
+
+        .divider-diamond {
+            width: 6px;
+            height: 6px;
+            background: var(--gold);
+            transform: rotate(45deg);
+        }
+
+        /* ============================================
+           SERVICES
+           ============================================ */
+        .services {
+            background: var(--white);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3.5rem;
+        }
+
+        .service-card {
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            border: 1px solid var(--sage-whisper);
+            border-radius: var(--radius-md);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            background: var(--white);
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--sage-mist), var(--gold-pale), var(--sage-mist));
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+            border-color: transparent;
+        }
+
+        .service-card:hover::before { opacity: 1; }
+
+        .service-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 1.5rem;
+            background: var(--sage-whisper);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .service-card:hover .service-icon {
+            background: var(--sage-deep);
+        }
+
+        .service-icon svg {
+            width: 28px;
+            height: 28px;
+            stroke: var(--sage-deep);
+            fill: none;
+            stroke-width: 1.5;
+            transition: var(--transition);
+        }
+
+        .service-card:hover .service-icon svg { stroke: var(--white); }
+
+        .service-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+            color: var(--charcoal);
+        }
+
+        .service-desc {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        .service-link {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--gold);
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .service-link:hover { color: var(--sage-deep); }
+
+        .service-link svg {
+            width: 14px;
+            height: 14px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+            transition: var(--transition);
+        }
+
+        .service-link:hover svg { transform: translateX(4px); }
+
+        /* ============================================
+           ABOUT / STORY
+           ============================================ */
+        .about {
+            background: var(--cream);
+            position: relative;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-top: 3rem;
+        }
+
+        .about-image-wrapper {
+            position: relative;
+        }
+
+        .about-image {
+            width: 100%;
+            aspect-ratio: 4/5;
+            background: linear-gradient(135deg, var(--sage-mist), var(--sage-whisper));
+            border-radius: var(--radius-lg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(74,93,74,0.1), transparent 60%);
+        }
+
+        /* Placeholder spa imagery via CSS */
+        .about-image-inner {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 1rem;
+            color: var(--sage);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            font-style: italic;
+        }
+
+        .about-image-inner svg {
+            width: 80px;
+            height: 80px;
+            stroke: var(--sage);
+            fill: none;
+            stroke-width: 1;
+            opacity: 0.5;
+        }
+
+        .about-accent {
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            width: 140px;
+            height: 140px;
+            border: 2px solid var(--gold-pale);
+            border-radius: var(--radius-lg);
+            z-index: -1;
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+        }
+
+        .about-text p {
+            color: var(--text-light);
+            font-weight: 300;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .about-text p:last-of-type { margin-bottom: 2rem; }
+
+        .about-signature {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-style: italic;
+            color: var(--sage-deep);
+            margin-top: 1.5rem;
+        }
+
+        /* ============================================
+           TESTIMONIALS
+           ============================================ */
+        .testimonials {
+            background: linear-gradient(180deg, var(--sage-deep) 0%, #3d4f3d 100%);
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonials::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+
+        .testimonials .section-label { color: var(--gold-light); }
+        .testimonials .section-title { color: var(--white); }
+        .testimonials .section-subtitle { color: rgba(255,255,255,0.7); }
+        .testimonials .divider-line { background: rgba(212,184,122,0.3); }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem 2rem;
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+        }
+
+        .testimonial-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-4px);
+        }
+
+        .testimonial-stars {
+            display: flex;
+            gap: 3px;
+            margin-bottom: 1.5rem;
+        }
+
+        .testimonial-stars svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--gold-light);
+        }
+
+        .testimonial-quote {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15rem;
+            font-style: italic;
+            line-height: 1.7;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .testimonial-quote::before {
+            content: '\201C';
+            font-size: 4rem;
+            position: absolute;
+            top: -1.5rem;
+            left: -0.5rem;
+            color: var(--gold);
+            opacity: 0.3;
+            font-style: normal;
+            line-height: 1;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .testimonial-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--sage-mist), var(--gold-pale));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--sage-deep);
+        }
+
+        .testimonial-name {
+            font-weight: 500;
+            font-size: 0.85rem;
+            color: var(--white);
+        }
+
+        .testimonial-role {
+            font-size: 0.72rem;
+            color: rgba(255,255,255,0.5);
+            font-weight: 300;
+        }
+
+        /* ============================================
+           GIFT CARDS
+           ============================================ */
+        .gift-cards {
+            background: var(--cream-warm);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gift-card-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .gift-card-visual {
+            position: relative;
+        }
+
+        .gift-card-mock {
+            width: 100%;
+            max-width: 420px;
+            aspect-ratio: 1.6/1;
+            background: linear-gradient(135deg, var(--sage-deep) 0%, #3d5040 50%, var(--sage) 100%);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg), 0 20px 60px rgba(74, 93, 74, 0.25);
+            transform: rotate(-3deg);
+            transition: var(--transition-slow);
+        }
+
+        .gift-card-mock:hover {
+            transform: rotate(0deg) scale(1.02);
+        }
+
+        .gift-card-mock::before {
+            content: '';
+            position: absolute;
+            top: -50%; right: -50%;
+            width: 100%; height: 100%;
+            background: radial-gradient(circle, rgba(196,162,101,0.15), transparent 60%);
+        }
+
+        .gift-card-mock::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 50%;
+            background: linear-gradient(to top, rgba(0,0,0,0.15), transparent);
+        }
+
+        .gift-card-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            color: var(--white);
+            position: relative;
+            z-index: 1;
+            font-weight: 400;
+        }
+
+        .gift-card-bottom {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .gift-card-label {
+            font-size: 0.6rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.6);
+        }
+
+        .gift-card-amount {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            color: var(--gold-light);
+            font-weight: 300;
+        }
+
+        .gift-card-stripe {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(196,162,101,0.3), transparent);
+            z-index: 1;
+        }
+
+        .gift-card-text h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 300;
+        }
+
+        .gift-card-text p {
+            color: var(--text-light);
+            font-weight: 300;
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        /* ============================================
+           TEAM
+           ============================================ */
+        .team {
+            background: var(--white);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+            margin-top: 3.5rem;
+        }
+
+        .team-card {
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .team-card:hover { transform: translateY(-4px); }
+
+        .team-photo {
+            width: 100%;
+            aspect-ratio: 3/4;
+            background: linear-gradient(145deg, var(--sage-whisper), var(--linen));
+            border-radius: var(--radius-lg);
+            margin-bottom: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .team-photo svg {
+            width: 60px;
+            height: 60px;
+            stroke: var(--sage-mist);
+            fill: none;
+            stroke-width: 1;
+        }
+
+        .team-photo::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 30%;
+            background: linear-gradient(to top, rgba(74,93,74,0.08), transparent);
+        }
+
+        .team-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.25rem;
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+        }
+
+        .team-role {
+            font-size: 0.75rem;
+            color: var(--gold);
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        /* ============================================
+           CONTACT
+           ============================================ */
+        .contact {
+            background: var(--cream);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-top: 3.5rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            gap: 1.25rem;
+            align-items: flex-start;
+        }
+
+        .contact-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--sage-whisper);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .contact-icon svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--sage-deep);
+            fill: none;
+            stroke-width: 1.5;
+        }
+
+        .contact-detail h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--charcoal);
+            margin-bottom: 0.3rem;
+        }
+
+        .contact-detail p, .contact-detail a {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        .contact-detail a:hover { color: var(--gold); }
+
+        .contact-map {
+            width: 100%;
+            height: 100%;
+            min-height: 350px;
+            background: var(--sage-whisper);
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 1rem;
+            border: 1px solid var(--sage-mist);
+            color: var(--sage);
+            font-size: 0.85rem;
+        }
+
+        .contact-map svg {
+            width: 48px;
+            height: 48px;
+            stroke: var(--sage-light);
+            fill: none;
+            stroke-width: 1;
+        }
+
+        /* ============================================
+           CTA BANNER
+           ============================================ */
+        .cta-banner {
+            background: linear-gradient(135deg, var(--sage-deep), #3d5040);
+            padding: 5rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle at 30% 50%, rgba(196,162,101,0.1), transparent 50%),
+                        radial-gradient(circle at 70% 50%, rgba(196,162,101,0.08), transparent 50%);
+        }
+
+        .cta-banner .section-title {
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .cta-banner p {
+            color: rgba(255,255,255,0.7);
+            font-weight: 300;
+            margin-bottom: 2.5rem;
+            font-size: 1rem;
+        }
+
+        .cta-banner .btn-gold {
+            font-size: 0.8rem;
+            padding: 1.2rem 3rem;
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .footer {
+            background: var(--charcoal);
+            color: rgba(255,255,255,0.6);
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .footer-brand .logo-name {
+            color: var(--white);
+            font-size: 1.6rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-brand .logo-tagline {
+            color: rgba(255,255,255,0.4);
+            margin-bottom: 1rem;
+        }
+
+        .footer-brand p {
+            font-size: 0.85rem;
+            font-weight: 300;
+            line-height: 1.8;
+            max-width: 300px;
+        }
+
+        .footer-heading {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--gold-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links li { margin-bottom: 0.75rem; }
+
+        .footer-links a {
+            font-size: 0.85rem;
+            font-weight: 300;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover { color: var(--white); }
+
+        .footer-social {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+        }
+
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .footer-social a:hover {
+            border-color: var(--gold);
+            background: rgba(196,162,101,0.1);
+        }
+
+        .footer-social svg {
+            width: 16px;
+            height: 16px;
+            fill: rgba(255,255,255,0.6);
+            transition: var(--transition);
+        }
+
+        .footer-social a:hover svg { fill: var(--gold-light); }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            font-weight: 300;
+        }
+
+        .footer-bottom a { transition: var(--transition); }
+        .footer-bottom a:hover { color: var(--white); }
+
+        /* ============================================
+           SCROLL ANIMATIONS
+           ============================================ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                        transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+        .reveal-delay-5 { transition-delay: 0.5s; }
+
+        /* Hero entrance animations */
+        .hero-content > * {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: hero-enter 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        .hero-eyebrow { animation-delay: 0.2s; }
+        .hero-title { animation-delay: 0.4s; }
+        .hero-subtitle { animation-delay: 0.6s; }
+        .hero-actions { animation-delay: 0.8s; }
+
+        @keyframes hero-enter {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 1024px) {
+            .about-grid,
+            .gift-card-wrapper,
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav { display: none; }
+            .mobile-toggle { display: flex; }
+
+            .nav.open {
+                display: flex;
+                flex-direction: column;
+                position: fixed;
+                top: 0; left: 0; right: 0; bottom: 0;
+                background: rgba(250, 247, 242, 0.98);
+                backdrop-filter: blur(20px);
+                justify-content: center;
+                align-items: center;
+                gap: 2rem;
+                z-index: 999;
+            }
+
+            .nav.open .nav-link {
+                font-size: 1rem;
+                color: var(--charcoal);
+            }
+
+            .nav.open .close-nav {
+                position: absolute;
+                top: 1.5rem;
+                right: 2rem;
+                background: none;
+                border: none;
+                font-size: 1.5rem;
+                cursor: pointer;
+                color: var(--charcoal);
+            }
+
+            .hero { min-height: 90vh; }
+            .hero-title { font-size: clamp(2.2rem, 8vw, 3.5rem); }
+
+            .trust-items { gap: 2rem; }
+            .trust-item { flex-direction: column; text-align: center; }
+            .trust-text { text-align: center; }
+
+            .section { padding: 4rem 1.5rem; }
+
+            .services-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .gift-card-mock { transform: rotate(0deg); }
+
+            .team-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 0.5rem;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .services-grid,
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .hero-botanical { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================
+         HEADER
+         ============================================ -->
+    <header class="header" id="header">
+        <div class="header-inner">
+            <a href="#" class="logo">
+                <span class="logo-name">Columbus Massage Center</span>
+                <span class="logo-tagline">& Salon</span>
+            </a>
+            <nav class="nav" id="nav">
+                <button class="close-nav" onclick="toggleNav()" style="display:none">&times;</button>
+                <a href="#services" class="nav-link">Services</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#reviews" class="nav-link">Reviews</a>
+                <a href="#gift-cards" class="nav-link">Gift Cards</a>
+                <a href="#team" class="nav-link">Our Team</a>
+                <a href="#contact" class="nav-link">Contact</a>
+                <a href="#book" class="btn btn-primary nav-cta">Book Now</a>
+            </nav>
+            <button class="mobile-toggle" onclick="toggleNav()" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- ============================================
+         HERO
+         ============================================ -->
+    <section class="hero" id="home">
+        <div class="hero-blob hero-blob-1"></div>
+        <div class="hero-blob hero-blob-2"></div>
+        <div class="hero-blob hero-blob-3"></div>
+
+        <!-- Botanical SVG decoration - left -->
+        <div class="hero-botanical hero-botanical-left">
+            <svg viewBox="0 0 200 300" fill="none" stroke="currentColor" stroke-width="0.5" color="#4a5d4a">
+                <path d="M100 280 Q100 200 80 160 Q60 120 30 100 Q60 90 80 60 Q100 30 100 0"/>
+                <path d="M100 280 Q100 200 120 160 Q140 120 170 100 Q140 90 120 60 Q100 30 100 0"/>
+                <path d="M100 220 Q70 200 50 180" opacity="0.5"/>
+                <path d="M100 220 Q130 200 150 180" opacity="0.5"/>
+                <path d="M100 180 Q80 160 60 150" opacity="0.4"/>
+                <path d="M100 180 Q120 160 140 150" opacity="0.4"/>
+                <ellipse cx="100" cy="140" rx="25" ry="35" opacity="0.15" fill="currentColor"/>
+                <ellipse cx="65" cy="110" rx="18" ry="25" transform="rotate(-30 65 110)" opacity="0.1" fill="currentColor"/>
+                <ellipse cx="135" cy="110" rx="18" ry="25" transform="rotate(30 135 110)" opacity="0.1" fill="currentColor"/>
+            </svg>
+        </div>
+
+        <!-- Botanical SVG decoration - right -->
+        <div class="hero-botanical hero-botanical-right">
+            <svg viewBox="0 0 200 300" fill="none" stroke="currentColor" stroke-width="0.5" color="#4a5d4a">
+                <path d="M100 280 Q100 200 80 160 Q60 120 30 100 Q60 90 80 60 Q100 30 100 0"/>
+                <path d="M100 280 Q100 200 120 160 Q140 120 170 100 Q140 90 120 60 Q100 30 100 0"/>
+                <path d="M100 220 Q70 200 50 180" opacity="0.5"/>
+                <path d="M100 220 Q130 200 150 180" opacity="0.5"/>
+                <ellipse cx="100" cy="140" rx="25" ry="35" opacity="0.15" fill="currentColor"/>
+            </svg>
+        </div>
+
+        <div class="hero-content">
+            <span class="hero-eyebrow">Columbus, Indiana</span>
+            <h1 class="hero-title">Your Sanctuary for<br><em>Relaxation & Renewal</em></h1>
+            <p class="hero-subtitle">Massage therapy, hair, facials, waxing, and nail services -- crafted with care for over a decade.</p>
+            <div class="hero-actions">
+                <a href="#book" class="btn btn-primary">Book Your Appointment</a>
+                <a href="#services" class="btn btn-outline">Explore Services</a>
+            </div>
+        </div>
+
+        <div class="hero-scroll">
+            <span>Scroll</span>
+            <div class="hero-scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         TRUST BAR
+         ============================================ -->
+    <section class="trust-bar">
+        <div class="trust-items">
+            <div class="trust-item reveal">
+                <div class="trust-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                </div>
+                <div class="trust-text">
+                    <div class="trust-number">250+</div>
+                    <div class="trust-label">Five-Star Reviews</div>
+                </div>
+            </div>
+            <div class="trust-item reveal reveal-delay-1">
+                <div class="trust-icon">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </div>
+                <div class="trust-text">
+                    <div class="trust-number">11+</div>
+                    <div class="trust-label">Years of Excellence</div>
+                </div>
+            </div>
+            <div class="trust-item reveal reveal-delay-2">
+                <div class="trust-icon">
+                    <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                </div>
+                <div class="trust-text">
+                    <div class="trust-number">Local</div>
+                    <div class="trust-label">Owned & Operated</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         SERVICES
+         ============================================ -->
+    <section class="section services section-center" id="services">
+        <div class="container">
+            <span class="section-label reveal">What We Offer</span>
+            <h2 class="section-title reveal">Our Services</h2>
+            <div class="divider reveal">
+                <div class="divider-line"></div>
+                <div class="divider-diamond"></div>
+                <div class="divider-line"></div>
+            </div>
+            <p class="section-subtitle reveal">From therapeutic massage to complete salon services, we provide a full spectrum of wellness and beauty treatments tailored to your needs.</p>
+
+            <div class="services-grid">
+                <!-- Massage -->
+                <div class="service-card reveal reveal-delay-1">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 22c-4.97 0-9-2.24-9-5v-2c0-2.76 4.03-5 9-5s9 2.24 9 5v2c0 2.76-4.03 5-9 5z"/><path d="M12 10c-4.97 0-9-2.24-9-5s4.03-5 9-5 9 2.24 9 5-4.03 5-9 5z"/><ellipse cx="12" cy="5" rx="4" ry="2" opacity="0.3"/></svg>
+                    </div>
+                    <h3 class="service-name">Massage Therapy</h3>
+                    <p class="service-desc">Swedish, deep tissue, hot stone, and therapeutic massage to melt away tension and restore balance.</p>
+                    <a href="#" class="service-link">Learn More <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></a>
+                </div>
+
+                <!-- Hair -->
+                <div class="service-card reveal reveal-delay-2">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><path d="M8 7h8M8 11h6M8 15h4" opacity="0.5"/></svg>
+                    </div>
+                    <h3 class="service-name">Hair Services</h3>
+                    <p class="service-desc">Expert cuts, color, highlights, balayage, and styling for every occasion and every hair type.</p>
+                    <a href="#" class="service-link">Learn More <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></a>
+                </div>
+
+                <!-- Waxing -->
+                <div class="service-card reveal reveal-delay-3">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 3c-1.5 0-3 .5-4 1.5C7 5.5 6 7 6 9c0 3 2 5 4 7 .5.5 1 1 2 2 1-1 1.5-1.5 2-2 2-2 4-4 4-7 0-2-1-3.5-2-4.5-1-1-2.5-1.5-4-1.5z"/><path d="M12 3v18" opacity="0.3"/></svg>
+                    </div>
+                    <h3 class="service-name">Waxing</h3>
+                    <p class="service-desc">Gentle, precise waxing services for face and body using premium products for smooth, lasting results.</p>
+                    <a href="#" class="service-link">Learn More <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></a>
+                </div>
+
+                <!-- Facials -->
+                <div class="service-card reveal reveal-delay-4">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2" opacity="0.5"/><circle cx="9" cy="10" r="0.5" fill="currentColor" stroke="none"/><circle cx="15" cy="10" r="0.5" fill="currentColor" stroke="none"/></svg>
+                    </div>
+                    <h3 class="service-name">Facials</h3>
+                    <p class="service-desc">Customized facial treatments that cleanse, exfoliate, and rejuvenate for a radiant, healthy glow.</p>
+                    <a href="#" class="service-link">Learn More <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></a>
+                </div>
+
+                <!-- Nails -->
+                <div class="service-card reveal reveal-delay-5">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24"><path d="M7 3h10l1 5H6l1-5z"/><path d="M6 8v9a4 4 0 0 0 4 4h4a4 4 0 0 0 4-4V8"/><path d="M9 8v6M12 8v8M15 8v6" opacity="0.3"/></svg>
+                    </div>
+                    <h3 class="service-name">Nail Services</h3>
+                    <p class="service-desc">Manicures, pedicures, gel nails, and nail art -- a pampering experience from fingertips to toes.</p>
+                    <a href="#" class="service-link">Learn More <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         ABOUT
+         ============================================ -->
+    <section class="section about" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image-wrapper reveal">
+                    <div class="about-image">
+                        <div class="about-image-inner">
+                            <svg viewBox="0 0 24 24"><path d="M12 22c-4.97 0-9-2.24-9-5v-2c0-2.76 4.03-5 9-5s9 2.24 9 5v2c0 2.76-4.03 5-9 5z"/><path d="M3 15c0-2.76 4.03-5 9-5s9 2.24 9 5"/><path d="M3 10c0-2.76 4.03-5 9-5s9 2.24 9 5"/></svg>
+                            <span>Spa Interior Photo</span>
+                        </div>
+                    </div>
+                    <div class="about-accent"></div>
+                </div>
+                <div class="about-text reveal reveal-delay-2">
+                    <span class="section-label">Our Story</span>
+                    <h3>A Decade of Dedicated<br>Wellness & Beauty</h3>
+                    <p>For over eleven years, Columbus Massage Center & Salon has been Columbus, Indiana's trusted destination for relaxation and rejuvenation. What began as a passion for healing through touch has grown into a full-service wellness and beauty sanctuary.</p>
+                    <p>Every treatment is delivered by skilled, licensed professionals who genuinely care about your well-being. We believe everyone deserves a space to unwind, recharge, and feel their best -- and we have built exactly that.</p>
+                    <p>From the moment you walk through our doors, you will feel the difference. This is your time. Your sanctuary.</p>
+                    <div class="about-signature">-- Dana Greathouse, Owner</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         TESTIMONIALS
+         ============================================ -->
+    <section class="section testimonials section-center" id="reviews">
+        <div class="container">
+            <span class="section-label reveal">Client Experiences</span>
+            <h2 class="section-title reveal">What People Are Saying</h2>
+            <div class="divider reveal">
+                <div class="divider-line"></div>
+                <div class="divider-diamond"></div>
+                <div class="divider-line"></div>
+            </div>
+            <p class="section-subtitle reveal">Over 250 five-star reviews from clients who have made us part of their wellness routine.</p>
+
+            <div class="testimonials-grid">
+                <div class="testimonial-card reveal reveal-delay-1">
+                    <div class="testimonial-stars">
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    </div>
+                    <p class="testimonial-quote">I have been coming here for years and it is always an incredible experience. The deep tissue massage completely relieved the tension I had been carrying for months. The atmosphere is so calming -- it feels like a true escape from the outside world.</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">SH</div>
+                        <div>
+                            <div class="testimonial-name">Sarah H.</div>
+                            <div class="testimonial-role">Regular Client</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card reveal reveal-delay-2">
+                    <div class="testimonial-stars">
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    </div>
+                    <p class="testimonial-quote">Best hair salon experience I have had in Columbus. My stylist listened to exactly what I wanted and delivered beautifully. The color was perfect, and they took the time to teach me how to maintain it at home. Will not go anywhere else.</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">MR</div>
+                        <div>
+                            <div class="testimonial-name">Michelle R.</div>
+                            <div class="testimonial-role">Hair Client</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card reveal reveal-delay-3">
+                    <div class="testimonial-stars">
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    </div>
+                    <p class="testimonial-quote">From the moment you walk in, you feel welcome. The staff is so friendly and professional. I treated myself to the facial and it was absolutely heavenly. My skin has never looked better. This place is a hidden gem right here in Columbus.</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">JT</div>
+                        <div>
+                            <div class="testimonial-name">Jennifer T.</div>
+                            <div class="testimonial-role">Facial & Spa Client</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         GIFT CARDS
+         ============================================ -->
+    <section class="section gift-cards" id="gift-cards">
+        <div class="container">
+            <div class="gift-card-wrapper">
+                <div class="gift-card-visual reveal">
+                    <div class="gift-card-mock">
+                        <div class="gift-card-logo">Columbus Massage Center & Salon</div>
+                        <div class="gift-card-stripe"></div>
+                        <div class="gift-card-bottom">
+                            <div>
+                                <div class="gift-card-label">Gift Card</div>
+                            </div>
+                            <div class="gift-card-amount">$100</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="gift-card-text reveal reveal-delay-2">
+                    <span class="section-label">The Perfect Gift</span>
+                    <h3>Give the Gift of<br>Relaxation</h3>
+                    <p>Treat someone special to the ultimate self-care experience. Our gift cards are available in any amount and can be used for any service -- from a soothing massage to a complete salon transformation. Available for purchase online or in-store.</p>
+                    <a href="#" class="btn btn-gold">Buy Gift Cards</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         TEAM
+         ============================================ -->
+    <section class="section team section-center" id="team">
+        <div class="container">
+            <span class="section-label reveal">The People Behind the Magic</span>
+            <h2 class="section-title reveal">Meet Our Team</h2>
+            <div class="divider reveal">
+                <div class="divider-line"></div>
+                <div class="divider-diamond"></div>
+                <div class="divider-line"></div>
+            </div>
+            <p class="section-subtitle reveal">Our licensed professionals bring years of experience, ongoing education, and a genuine passion for helping you look and feel your best.</p>
+
+            <div class="team-grid">
+                <div class="team-card reveal reveal-delay-1">
+                    <div class="team-photo">
+                        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    </div>
+                    <h4 class="team-name">Dana Greathouse</h4>
+                    <p class="team-role">Owner & Lead Therapist</p>
+                </div>
+                <div class="team-card reveal reveal-delay-2">
+                    <div class="team-photo">
+                        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    </div>
+                    <h4 class="team-name">Team Member</h4>
+                    <p class="team-role">Massage Therapist</p>
+                </div>
+                <div class="team-card reveal reveal-delay-3">
+                    <div class="team-photo">
+                        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    </div>
+                    <h4 class="team-name">Team Member</h4>
+                    <p class="team-role">Hair Stylist</p>
+                </div>
+                <div class="team-card reveal reveal-delay-4">
+                    <div class="team-photo">
+                        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    </div>
+                    <h4 class="team-name">Team Member</h4>
+                    <p class="team-role">Esthetician</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         CONTACT
+         ============================================ -->
+    <section class="section contact" id="contact">
+        <div class="container">
+            <div class="section-center">
+                <span class="section-label reveal">Get In Touch</span>
+                <h2 class="section-title reveal">Visit Our Studio</h2>
+                <div class="divider reveal">
+                    <div class="divider-line"></div>
+                    <div class="divider-diamond"></div>
+                    <div class="divider-line"></div>
+                </div>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-info reveal">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        </div>
+                        <div class="contact-detail">
+                            <h4>Address</h4>
+                            <p>3126 17th Street<br>Columbus, IN 47201</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        </div>
+                        <div class="contact-detail">
+                            <h4>Phone</h4>
+                            <a href="tel:8123782880">(812) 378-2880</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        </div>
+                        <div class="contact-detail">
+                            <h4>Hours</h4>
+                            <p>Monday -- Saturday: 9:00 AM -- 7:00 PM<br>Sunday: Closed</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                        </div>
+                        <div class="contact-detail">
+                            <h4>Website</h4>
+                            <a href="https://columbusmassagecenter.com" target="_blank">columbusmassagecenter.com</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-map reveal reveal-delay-2">
+                    <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <span>Interactive Map</span>
+                    <span style="font-size: 0.7rem; opacity: 0.6;">3126 17th Street, Columbus, IN 47201</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         CTA BANNER
+         ============================================ -->
+    <section class="cta-banner" id="book">
+        <div class="container reveal">
+            <h2 class="section-title">Ready to Relax?</h2>
+            <p>Book your appointment today and experience the Columbus Massage Center difference.</p>
+            <a href="#" class="btn btn-gold">Book Your Appointment</a>
+        </div>
+    </section>
+
+    <!-- ============================================
+         FOOTER
+         ============================================ -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <span class="logo-name">Columbus Massage Center</span>
+                        <span class="logo-tagline">& Salon</span>
+                    </div>
+                    <p>Your sanctuary for relaxation and renewal in Columbus, Indiana. Over a decade of dedicated wellness and beauty services.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook">
+                            <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                        </a>
+                        <a href="#" aria-label="Instagram">
+                            <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="17.5" cy="6.5" r="1.5"/></svg>
+                        </a>
+                        <a href="#" aria-label="TripAdvisor">
+                            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 12h8M12 8v8" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h5 class="footer-heading">Services</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">Massage Therapy</a></li>
+                        <li><a href="#">Hair Services</a></li>
+                        <li><a href="#">Waxing</a></li>
+                        <li><a href="#">Facials</a></li>
+                        <li><a href="#">Nail Services</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="footer-heading">Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="#book">Book Online</a></li>
+                        <li><a href="#gift-cards">Gift Cards</a></li>
+                        <li><a href="#team">Our Team</a></li>
+                        <li><a href="#reviews">Reviews</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="footer-heading">Contact</h5>
+                    <ul class="footer-links">
+                        <li>3126 17th Street</li>
+                        <li>Columbus, IN 47201</li>
+                        <li><a href="tel:8123782880">(812) 378-2880</a></li>
+                        <li>Mon-Sat: 9am - 7pm</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; 2026 Columbus Massage Center & Salon. All rights reserved.</span>
+                <span>Website by <a href="https://ophidianai.com" target="_blank" style="color: var(--gold-light);">OphidianAI</a></span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================
+         JAVASCRIPT
+         ============================================ -->
+    <script>
+        // Sticky header
+        const header = document.getElementById('header');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            if (currentScroll > 80) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+            lastScroll = currentScroll;
+        });
+
+        // Mobile nav toggle
+        function toggleNav() {
+            const nav = document.getElementById('nav');
+            nav.classList.toggle('open');
+            const closeBtn = nav.querySelector('.close-nav');
+            if (nav.classList.contains('open')) {
+                closeBtn.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            } else {
+                closeBtn.style.display = 'none';
+                document.body.style.overflow = '';
+            }
+        }
+
+        // Close nav on link click
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                const nav = document.getElementById('nav');
+                if (nav.classList.contains('open')) {
+                    toggleNav();
+                }
+            });
+        });
+
+        // Scroll reveal animations
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const headerHeight = header.offsetHeight;
+                    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
