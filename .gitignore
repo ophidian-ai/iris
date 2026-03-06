@@ -2,3 +2,11 @@
 CLAUDE.local.md
 .claude/settings.local.json
 node_modules/
+
+# Gmail skill secrets
+.claude/skills/gmail/scripts/credentials.json
+.claude/skills/gmail/scripts/token.json
+.claude/skills/gmail/scripts/node_modules/
+
+# Client projects (each has its own git repo)
+projects/active-projects/*/

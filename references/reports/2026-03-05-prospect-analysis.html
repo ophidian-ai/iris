@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OphidianAI - Prospect Website Analysis</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
+
+  :root {
+    --venom-green: #39FF14;
+    --circuit-teal: #0DB1B2;
+    --deep-navy: #0D1B2A;
+    --obsidian-black: #0B0C10;
+    --ghost-white: #E8EDF2;
+    --serpent-mid: #108B54;
+    --dark-surface: #111827;
+    --card-bg: #1A2332;
+    --border-color: #1E3A4F;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--deep-navy);
+    color: var(--ghost-white);
+    line-height: 1.6;
+    font-size: 11pt;
+  }
+
+  .page {
+    width: 8.5in;
+    min-height: 11in;
+    margin: 0 auto;
+    padding: 0.6in 0.7in;
+    background: var(--deep-navy);
+    page-break-after: always;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .page::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--venom-green), var(--circuit-teal), var(--serpent-mid));
+  }
+
+  .page::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--circuit-teal) 0%, transparent 100%);
+  }
+
+  /* Cover Page */
+  .cover {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 11in;
+    padding: 1in;
+  }
+
+  .cover .logo-container {
+    margin-bottom: 40px;
+  }
+
+  .cover .logo-container img {
+    width: 120px;
+    height: auto;
+  }
+
+  .cover .company-name {
+    font-size: 36pt;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--ghost-white);
+    margin-bottom: 8px;
+  }
+
+  .cover .company-name span {
+    color: var(--venom-green);
+  }
+
+  .cover .tagline {
+    font-family: 'Space Mono', monospace;
+    font-size: 10pt;
+    color: var(--circuit-teal);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 60px;
+  }
+
+  .cover .report-title {
+    font-size: 22pt;
+    font-weight: 600;
+    color: var(--ghost-white);
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+
+  .cover .report-subtitle {
+    font-size: 12pt;
+    color: #8899AA;
+    margin-bottom: 50px;
+    max-width: 500px;
+  }
+
+  .cover .report-meta {
+    font-family: 'Space Mono', monospace;
+    font-size: 9pt;
+    color: #667788;
+    letter-spacing: 1px;
+  }
+
+  .cover .divider-line {
+    width: 80px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--venom-green), var(--circuit-teal));
+    margin: 30px auto;
+  }
+
+  /* Headers */
+  h1 {
+    font-size: 20pt;
+    font-weight: 700;
+    color: var(--ghost-white);
+    margin-bottom: 6px;
+    letter-spacing: -0.5px;
+  }
+
+  h2 {
+    font-size: 15pt;
+    font-weight: 600;
+    color: var(--venom-green);
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  h3 {
+    font-size: 12pt;
+    font-weight: 600;
+    color: var(--circuit-teal);
+    margin-bottom: 8px;
+  }
+
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 8pt;
+    color: var(--circuit-teal);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+  }
+
+  /* Cards */
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+
+  .card-accent {
+    border-left: 3px solid var(--venom-green);
+  }
+
+  .card-teal {
+    border-left: 3px solid var(--circuit-teal);
+  }
+
+  /* Score Badge */
+  .score-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--venom-green), var(--serpent-mid));
+    color: var(--obsidian-black);
+    font-weight: 700;
+    font-size: 11pt;
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-left: 10px;
+  }
+
+  .score-badge-low {
+    background: linear-gradient(135deg, #667788, #445566);
+    color: var(--ghost-white);
+  }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 9.5pt;
+  }
+
+  th {
+    background: var(--obsidian-black);
+    color: var(--circuit-teal);
+    font-family: 'Space Mono', monospace;
+    font-size: 8pt;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 2px solid var(--venom-green);
+  }
+
+  td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--ghost-white);
+    vertical-align: top;
+  }
+
+  tr:last-child td {
+    border-bottom: none;
+  }
+
+  /* Issue Tags */
+  .tag {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 7.5pt;
+    padding: 2px 8px;
+    border-radius: 3px;
+    margin: 2px 4px 2px 0;
+    letter-spacing: 0.5px;
+  }
+
+  .tag-critical {
+    background: rgba(255, 60, 60, 0.15);
+    color: #FF6B6B;
+    border: 1px solid rgba(255, 60, 60, 0.3);
+  }
+
+  .tag-warning {
+    background: rgba(255, 183, 77, 0.15);
+    color: #FFB74D;
+    border: 1px solid rgba(255, 183, 77, 0.3);
+  }
+
+  .tag-info {
+    background: rgba(13, 177, 178, 0.15);
+    color: var(--circuit-teal);
+    border: 1px solid rgba(13, 177, 178, 0.3);
+  }
+
+  .tag-success {
+    background: rgba(57, 255, 20, 0.1);
+    color: var(--venom-green);
+    border: 1px solid rgba(57, 255, 20, 0.2);
+  }
+
+  /* Lists */
+  ul {
+    padding-left: 18px;
+    margin: 8px 0;
+  }
+
+  ul li {
+    margin-bottom: 6px;
+    color: #B8C8D8;
+  }
+
+  ul li strong {
+    color: var(--ghost-white);
+  }
+
+  /* Approach Section */
+  .approach-step {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 14px;
+  }
+
+  .step-number {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    background: linear-gradient(135deg, var(--venom-green), var(--circuit-teal));
+    color: var(--obsidian-black);
+    font-weight: 700;
+    font-size: 12pt;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin-right: 14px;
+    margin-top: 2px;
+  }
+
+  .step-content h4 {
+    font-size: 10.5pt;
+    font-weight: 600;
+    color: var(--ghost-white);
+    margin-bottom: 3px;
+  }
+
+  .step-content p {
+    font-size: 9.5pt;
+    color: #8899AA;
+  }
+
+  /* Footer */
+  .page-footer {
+    position: absolute;
+    bottom: 0.4in;
+    left: 0.7in;
+    right: 0.7in;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 7pt;
+    color: #445566;
+    padding-top: 8px;
+    border-top: 1px solid var(--border-color);
+  }
+
+  .highlight-box {
+    background: linear-gradient(135deg, rgba(57, 255, 20, 0.05), rgba(13, 177, 178, 0.05));
+    border: 1px solid rgba(57, 255, 20, 0.2);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 14px 0;
+  }
+
+  .highlight-box p {
+    font-size: 10pt;
+    color: var(--ghost-white);
+    font-style: italic;
+  }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .stat-box {
+    text-align: center;
+    padding: 14px;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+  }
+
+  .stat-box .stat-value {
+    font-size: 22pt;
+    font-weight: 700;
+    color: var(--venom-green);
+    line-height: 1;
+  }
+
+  .stat-box .stat-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 7pt;
+    color: #667788;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 4px;
+  }
+
+  @media print {
+    body { background: var(--deep-navy); }
+    .page { margin: 0; padding: 0.6in 0.7in; }
+  }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1: COVER -->
+<div class="page cover">
+  <div class="logo-container">
+    <img src="logo_icon.png" alt="OphidianAI" />
+  </div>
+  <div class="company-name">Ophidian<span>AI</span></div>
+  <div class="tagline">Intelligence. Engineered.</div>
+  <div class="divider-line"></div>
+  <div class="report-title">Local Business<br>Website Analysis</div>
+  <div class="report-subtitle">
+    A targeted assessment of Columbus, IN businesses with websites that are actively costing them customers and revenue.
+  </div>
+  <div class="divider-line"></div>
+  <div class="report-meta">
+    PREPARED: MARCH 5, 2026 &nbsp;&nbsp;|&nbsp;&nbsp; CONFIDENTIAL
+  </div>
+</div>
+
+<!-- PAGE 2: EXECUTIVE SUMMARY -->
+<div class="page">
+  <div class="section-label">Section 01</div>
+  <h1>Executive Summary</h1>
+  <p style="color: #8899AA; margin-bottom: 20px;">
+    We evaluated 5 established Columbus, IN businesses across auto repair, landscaping, and personal care industries. Each business shows signs of financial stability and customer demand, but their websites are failing to convert visitors into customers.
+  </p>
+
+  <div class="two-col" style="margin-bottom: 20px;">
+    <div class="stat-box">
+      <div class="stat-value">5</div>
+      <div class="stat-label">Businesses Evaluated</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-value">2</div>
+      <div class="stat-label">High-Priority Prospects</div>
+    </div>
+  </div>
+
+  <h2>Evaluation Scores</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Business</th>
+        <th>Industry</th>
+        <th>Opportunity Score</th>
+        <th>Verdict</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>SAK Automotive</strong></td>
+        <td>Auto Repair</td>
+        <td><span class="score-badge">8 / 10</span></td>
+        <td><span class="tag tag-success">TOP PROSPECT</span></td>
+      </tr>
+      <tr>
+        <td><strong>Columbus Massage Center</strong></td>
+        <td>Spa / Salon</td>
+        <td><span class="score-badge">7 / 10</span></td>
+        <td><span class="tag tag-success">TOP PROSPECT</span></td>
+      </tr>
+      <tr>
+        <td>Hawkins Lawn & Snow</td>
+        <td>Landscaping</td>
+        <td><span class="score-badge score-badge-low">6 / 10</span></td>
+        <td><span class="tag tag-info">PASS - No contact info</span></td>
+      </tr>
+      <tr>
+        <td>Divine Hair Studio</td>
+        <td>Hair Salon</td>
+        <td><span class="score-badge score-badge-low">6 / 10</span></td>
+        <td><span class="tag tag-info">PASS - Minor fixes only</span></td>
+      </tr>
+      <tr>
+        <td>Positive Performance Auto</td>
+        <td>Auto Repair</td>
+        <td><span class="score-badge score-badge-low">3 / 10</span></td>
+        <td><span class="tag tag-info">PASS - Already professional</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="highlight-box">
+    <p>"Both top prospects are losing customers daily due to broken functionality and outdated platforms. These are not cosmetic issues -- they are revenue problems with clear, measurable solutions."</p>
+  </div>
+
+  <div class="page-footer">
+    <span>OphidianAI - Confidential</span>
+    <span>Page 2</span>
+  </div>
+</div>
+
+<!-- PAGE 3: PROSPECT 1 - SAK AUTOMOTIVE -->
+<div class="page">
+  <div class="section-label">Section 02 &mdash; Prospect Analysis</div>
+  <h1>SAK Automotive Service & Tire</h1>
+  <p style="color: #667788; margin-bottom: 16px;">330 Center St, Columbus, IN 47201 &nbsp;&nbsp;|&nbsp;&nbsp; (812) 372-8000 &nbsp;&nbsp;|&nbsp;&nbsp; sakautomotive.com</p>
+
+  <div class="card card-accent">
+    <h3>Business Profile</h3>
+    <ul>
+      <li>Full-service auto repair and tire shop, south side of Columbus</li>
+      <li>Services: automotive repair, maintenance, tire rotation, installation, alignment</li>
+      <li>Positive reviews across Yelp and Google -- described as "honest" with "fair pricing"</li>
+      <li>Chamber of Commerce member -- established and reputable</li>
+    </ul>
+  </div>
+
+  <h2>Technical Assessment</h2>
+
+  <div class="card">
+    <h3>Critical Issues</h3>
+    <div style="margin-bottom: 10px;">
+      <span class="tag tag-critical">NO SSL/HTTPS</span>
+      <span class="tag tag-critical">DEAD PLATFORM</span>
+      <span class="tag tag-critical">NO BOOKING</span>
+      <span class="tag tag-warning">NO REVIEWS SHOWN</span>
+      <span class="tag tag-warning">CONTACT INFO HIDDEN</span>
+      <span class="tag tag-warning">NO STRUCTURED DATA</span>
+      <span class="tag tag-info">NO OPEN GRAPH</span>
+    </div>
+    <ul>
+      <li><strong>Platform:</strong> HostGator Website Builder (Webzai), November 2018. Dead-end platform with zero upgrade path -- requires complete rebuild.</li>
+      <li><strong>Security:</strong> No HTTPS. Every visitor sees "Not Secure" in their browser. Google actively penalizes this in search rankings.</li>
+      <li><strong>SEO:</strong> No structured data (Schema.org), no Open Graph tags. Meta description has a typo ("vehcile"). Sitemap references HTTP URLs.</li>
+      <li><strong>Functionality:</strong> No online booking, no reviews integration, no contact form on homepage. PayPal config still has placeholder email.</li>
+      <li><strong>Mobile:</strong> Basic responsive techniques from 2018 era. Not optimized for modern mobile-first indexing.</li>
+    </ul>
+  </div>
+
+  <h2>Revenue Impact</h2>
+  <div class="card card-teal">
+    <ul>
+      <li><strong>Lost search traffic:</strong> No SSL means Google is ranking competitors higher for "auto repair Columbus IN" searches.</li>
+      <li><strong>Lost appointments:</strong> No online booking means customers searching at 9pm go to the shop that lets them book instantly.</li>
+      <li><strong>Lost trust:</strong> "Not Secure" browser warning makes visitors question the legitimacy of the business.</li>
+      <li><strong>Invisible reviews:</strong> Positive Yelp and Google reviews are not displayed on the site, removing social proof at the conversion point.</li>
+    </ul>
+  </div>
+
+  <div class="page-footer">
+    <span>OphidianAI - Confidential</span>
+    <span>Page 3</span>
+  </div>
+</div>
+
+<!-- PAGE 4: SAK AUTOMOTIVE - PROPOSED SOLUTION -->
+<div class="page">
+  <div class="section-label">Section 02 &mdash; Continued</div>
+  <h1>SAK Automotive: Proposed Solution</h1>
+
+  <h2>What We Would Build</h2>
+  <div class="card card-accent">
+    <table>
+      <thead>
+        <tr>
+          <th>Page / Feature</th>
+          <th>Purpose</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Homepage</strong></td>
+          <td>Hero with click-to-call, services overview, Google Reviews feed, booking CTA</td>
+        </tr>
+        <tr>
+          <td><strong>Services</strong> (individual pages)</td>
+          <td>Dedicated pages per service for long-tail SEO targeting</td>
+        </tr>
+        <tr>
+          <td><strong>About</strong></td>
+          <td>Team, story, certifications -- builds trust and local connection</td>
+        </tr>
+        <tr>
+          <td><strong>Reviews</strong></td>
+          <td>Auto-pulling Google and Yelp reviews to showcase social proof</td>
+        </tr>
+        <tr>
+          <td><strong>Online Booking</strong></td>
+          <td>Integrated appointment scheduling (Calendly or custom form)</td>
+        </tr>
+        <tr>
+          <td><strong>Contact</strong></td>
+          <td>Google Maps embed, click-to-call, contact form, business hours</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Technical Specifications</h2>
+  <div class="two-col">
+    <div class="card">
+      <h3>Included</h3>
+      <ul>
+        <li>SSL/HTTPS (required)</li>
+        <li>Mobile-first responsive design</li>
+        <li>Schema.org LocalBusiness + AutoRepair structured data</li>
+        <li>Google Analytics 4</li>
+        <li>Open Graph + social meta tags</li>
+        <li>XML sitemap + robots.txt</li>
+        <li>Core Web Vitals optimized</li>
+        <li>WCAG 2.1 AA accessibility</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Project Scope</h3>
+      <ul>
+        <li><strong>Type:</strong> Full website rebuild</li>
+        <li><strong>Pages:</strong> 5-7</li>
+        <li><strong>Complexity:</strong> Small to medium</li>
+        <li><strong>Integrations:</strong> Booking, reviews, maps</li>
+        <li><strong>Hosting:</strong> Vercel or similar (fast, reliable, free tier available)</li>
+        <li><strong>CMS:</strong> Optional headless CMS for content updates</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>Outreach Approach</h2>
+  <div class="card card-teal">
+    <div class="approach-step">
+      <div class="step-number">1</div>
+      <div class="step-content">
+        <h4>Opening Hook</h4>
+        <p>"I noticed your website shows as 'Not Secure' in every browser -- Google has been penalizing sites like this in search results since 2018. I can show you exactly where you're ranking vs. where you should be."</p>
+      </div>
+    </div>
+    <div class="approach-step">
+      <div class="step-number">2</div>
+      <div class="step-content">
+        <h4>Value Demonstration</h4>
+        <p>Show a side-by-side comparison: their current site on a phone vs. a modern auto shop website. Point out the "Not Secure" warning, the missing booking feature, and the hidden reviews.</p>
+      </div>
+    </div>
+    <div class="approach-step">
+      <div class="step-number">3</div>
+      <div class="step-content">
+        <h4>The Ask</h4>
+        <p>"I'd like to show you a quick mockup of what your site could look like -- no cost, no obligation. If you like it, we can talk about making it happen."</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>OphidianAI - Confidential</span>
+    <span>Page 4</span>
+  </div>
+</div>
+
+<!-- PAGE 5: PROSPECT 2 - COLUMBUS MASSAGE CENTER -->
+<div class="page">
+  <div class="section-label">Section 03 &mdash; Prospect Analysis</div>
+  <h1>Columbus Massage Center & Salon</h1>
+  <p style="color: #667788; margin-bottom: 16px;">3126 17th Street, Columbus, IN 47201 &nbsp;&nbsp;|&nbsp;&nbsp; (812) 378-2880 &nbsp;&nbsp;|&nbsp;&nbsp; columbusmassagecenter.com</p>
+
+  <div class="card card-accent">
+    <h3>Business Profile</h3>
+    <ul>
+      <li>Massage therapy, hair services, waxing, facials, and nail services</li>
+      <li>11+ years of online presence (since 2013)</li>
+      <li>252 reviews on LocalStylist -- consistent customer traffic</li>
+      <li>Listed on TripAdvisor with active Facebook presence</li>
+      <li>Owner: Dana Greathouse -- identifiable decision-maker</li>
+    </ul>
+  </div>
+
+  <h2>Technical Assessment</h2>
+
+  <div class="card">
+    <h3>Critical Issues</h3>
+    <div style="margin-bottom: 10px;">
+      <span class="tag tag-critical">BROKEN BOOKING</span>
+      <span class="tag tag-critical">BROKEN GIFT CARDS</span>
+      <span class="tag tag-warning">OUTDATED WORDPRESS THEME</span>
+      <span class="tag tag-warning">LEGACY ANALYTICS</span>
+      <span class="tag tag-warning">UNOPTIMIZED IMAGES</span>
+      <span class="tag tag-info">CLUTTERED NAVIGATION</span>
+    </div>
+    <ul>
+      <li><strong>Platform:</strong> WordPress with Graphene theme (last updated Dec 2021). Heavy plugin dependencies: Jetpack, Contact Form 7, Vagaro, Slick Carousel.</li>
+      <li><strong>Broken functionality:</strong> Vagaro booking widgets display as broken placeholders. Gift card section shows placeholder text only. Testimonials reference deprecated Google Plus API.</li>
+      <li><strong>Performance:</strong> Serves unoptimized 2048px images. 15+ JavaScript dependencies. Extensive inline CSS.</li>
+      <li><strong>Analytics:</strong> Still running legacy Google Analytics (not GA4) -- will lose data tracking.</li>
+      <li><strong>Navigation:</strong> Cluttered menu structure with inconsistent hierarchy and too many top-level items.</li>
+    </ul>
+  </div>
+
+  <h2>Revenue Impact</h2>
+  <div class="card card-teal">
+    <ul>
+      <li><strong>Lost bookings:</strong> The #1 conversion action on a massage center website is broken. Every visitor who tries to book online and fails either calls (best case) or goes to a competitor (worst case).</li>
+      <li><strong>Lost gift card revenue:</strong> Gift cards are pure profit drivers, especially around holidays. A broken gift card page is literally leaving money on the table.</li>
+      <li><strong>Wasted investment:</strong> This business already paid for booking integration, gift cards, and intake forms. None of them work properly. They're paying for features they can't use.</li>
+      <li><strong>Eroding trust:</strong> Broken elements make an otherwise established business look unprofessional or abandoned.</li>
+    </ul>
+  </div>
+
+  <div class="page-footer">
+    <span>OphidianAI - Confidential</span>
+    <span>Page 5</span>
+  </div>
+</div>
+
+<!-- PAGE 6: COLUMBUS MASSAGE CENTER - PROPOSED SOLUTION -->
+<div class="page">
+  <div class="section-label">Section 03 &mdash; Continued</div>
+  <h1>Columbus Massage Center: Proposed Solution</h1>
+
+  <h2>What We Would Build</h2>
+  <div class="card card-accent">
+    <table>
+      <thead>
+        <tr>
+          <th>Page / Feature</th>
+          <th>Purpose</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Homepage</strong></td>
+          <td>Clean hero, service categories, working booking CTA, reviews feed</td>
+        </tr>
+        <tr>
+          <td><strong>Massage Services</strong></td>
+          <td>Detailed descriptions, pricing, duration, benefits for each type</td>
+        </tr>
+        <tr>
+          <td><strong>Salon Services</strong></td>
+          <td>Hair, waxing, facials, nails -- each with clear pricing</td>
+        </tr>
+        <tr>
+          <td><strong>Staff / Team</strong></td>
+          <td>Bios with photos and specialties -- builds personal connection</td>
+        </tr>
+        <tr>
+          <td><strong>Gift Cards</strong></td>
+          <td>Working e-commerce gift card purchasing (e.g., Square or Stripe)</td>
+        </tr>
+        <tr>
+          <td><strong>Online Booking</strong></td>
+          <td>Properly integrated Vagaro (or alternative like Jane App / Square Appointments)</td>
+        </tr>
+        <tr>
+          <td><strong>Health Intake Form</strong></td>
+          <td>Digital intake form replacing paper -- streamlines first visit</td>
+        </tr>
+        <tr>
+          <td><strong>Contact / FAQ</strong></td>
+          <td>Location, hours, parking info, cancellation policy, maps</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Technical Specifications</h2>
+  <div class="two-col">
+    <div class="card">
+      <h3>Included</h3>
+      <ul>
+        <li>Working booking integration</li>
+        <li>Gift card e-commerce</li>
+        <li>Digital health intake forms</li>
+        <li>Google/Yelp reviews display</li>
+        <li>Image optimization pipeline</li>
+        <li>GA4 analytics (replace legacy)</li>
+        <li>Schema.org HealthAndBeautyBusiness</li>
+        <li>Mobile-first design</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Project Scope</h3>
+      <ul>
+        <li><strong>Type:</strong> Full website rebuild</li>
+        <li><strong>Pages:</strong> 8-12</li>
+        <li><strong>Complexity:</strong> Medium</li>
+        <li><strong>Integrations:</strong> Booking, e-commerce, forms, reviews</li>
+        <li><strong>Hosting:</strong> Vercel or similar</li>
+        <li><strong>CMS:</strong> Headless CMS for service/staff updates</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>Outreach Approach</h2>
+  <div class="card card-teal">
+    <div class="approach-step">
+      <div class="step-number">1</div>
+      <div class="step-content">
+        <h4>Opening Hook</h4>
+        <p>"I tried to book a massage on your website today and the booking system wouldn't load. I also tried to buy a gift card and that section is broken too. How long has that been an issue?"</p>
+      </div>
+    </div>
+    <div class="approach-step">
+      <div class="step-number">2</div>
+      <div class="step-content">
+        <h4>Value Demonstration</h4>
+        <p>"You already invested in the right features -- online booking, gift cards, intake forms. The problem is they don't work. A rebuild on a modern platform would fix all of this and cost less than you might think."</p>
+      </div>
+    </div>
+    <div class="approach-step">
+      <div class="step-number">3</div>
+      <div class="step-content">
+        <h4>The Ask</h4>
+        <p>"Would you be open to a 15-minute call where I walk you through exactly what's broken and what it would take to fix it? No charge."</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>OphidianAI - Confidential</span>
+    <span>Page 6</span>
+  </div>
+</div>
+
+<!-- PAGE 7: NEXT STEPS -->
+<div class="page">
+  <div class="section-label">Section 04</div>
+  <h1>Recommended Next Steps</h1>
+  <p style="color: #8899AA; margin-bottom: 24px;">Priority-ordered actions to convert these prospects into clients.</p>
+
+  <div class="card card-accent" style="margin-bottom: 20px;">
+    <h3>Priority 1: SAK Automotive</h3>
+    <div class="approach-step">
+      <div class="step-number">1</div>
+      <div class="step-content">
+        <h4>Call (812) 372-8000</h4>
+        <p>Lead with the SSL/security issue -- it's concrete, verifiable, and urgent. Offer to show them their Google ranking vs. competitors.</p>
+      </div>
+    </div>
+    <div class="approach-step">
+      <div class="step-number">2</div>
+      <div class="step-content">
+        <h4>Prepare a Visual Comparison</h4>
+        <p>Screenshot their site with the "Not Secure" warning alongside a modern auto shop website. The contrast sells itself.</p>
+      </div>
+    </div>
+    <div class="approach-step">
+      <div class="step-number">3</div>
+      <div class="step-content">
+        <h4>Offer a Free Mockup</h4>
+        <p>Build a quick homepage mockup to show what's possible. Low effort for OphidianAI, high impact for the prospect.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card card-teal" style="margin-bottom: 24px;">
+    <h3>Priority 2: Columbus Massage Center</h3>
+    <div class="approach-step">
+      <div class="step-number">1</div>
+      <div class="step-content">
+        <h4>Call (812) 378-2880 or Visit in Person</h4>
+        <p>Lead with the broken booking widget -- they may not even know it's down. Frame it as "I tried to use your services and couldn't."</p>
+      </div>
+    </div>
+    <div class="approach-step">
+      <div class="step-number">2</div>
+      <div class="step-content">
+        <h4>Quantify the Loss</h4>
+        <p>Estimate: "If even 2 people per week give up on broken booking, at $80/session, that's $8,000+/year in missed revenue."</p>
+      </div>
+    </div>
+    <div class="approach-step">
+      <div class="step-number">3</div>
+      <div class="step-content">
+        <h4>Emphasize the Fix, Not the Rebuild</h4>
+        <p>Position it as "fixing what you already paid for" rather than "starting over." This reduces perceived cost and friction.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p>"Both prospects have clear, demonstrable problems that any business owner can understand. The pitch is not 'your website could be better' -- it's 'your website is broken and it's costing you money right now.'"</p>
+  </div>
+
+  <div style="margin-top: 30px; text-align: center; padding: 30px 0;">
+    <div style="font-size: 10pt; color: #667788; margin-bottom: 8px;">Prepared by</div>
+    <div style="font-size: 18pt; font-weight: 700; color: var(--ghost-white);">Ophidian<span style="color: var(--venom-green);">AI</span></div>
+    <div style="font-family: 'Space Mono', monospace; font-size: 8pt; color: var(--circuit-teal); letter-spacing: 2px; margin-top: 4px;">INTELLIGENCE. ENGINEERED.</div>
+    <div style="font-family: 'Space Mono', monospace; font-size: 8pt; color: #445566; margin-top: 12px;">Columbus, Indiana &nbsp;&nbsp;|&nbsp;&nbsp; ophidianai.com</div>
+  </div>
+
+  <div class="page-footer">
+    <span>OphidianAI - Confidential</span>
+    <span>Page 7</span>
+  </div>
+</div>
+
+</body>
+</html>
