@@ -1,6 +1,8 @@
 # SAK Automotive Service & Tire -- Prospect
 
-**Status:** Prospect / Mockup Ready
+**Status:** Outreach sent (2026-03-06) -- cold email + website assessment PDF
+**Owner:** Scott Kelsay
+**Email:** scott.kelsay@sakautomotive.com
 **Location:** 330 Center St, Columbus, IN 47201
 **Phone:** (812) 372-8000
 **Current Site:** sakautomotive.com (HostGator Webzai, circa 2018)

@@ -2,10 +2,11 @@
 
 **Prospect:** Columbus Massage Center & Salon
 **Owner:** Dana Greathouse
+**Email:** dana@columbusmassagecenter.com
 **Location:** 3126 17th Street, Columbus, IN 47201
 **Phone:** (812) 378-2880
 **Current Site:** columbusmassagecenter.com (WordPress)
-**Status:** Prospecting -- mockup created, awaiting outreach
+**Status:** Outreach sent (2026-03-06) -- cold email + website assessment PDF
 
 ---
 

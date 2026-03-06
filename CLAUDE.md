@@ -85,6 +85,13 @@ Memory + context files + decision log = Iris gets smarter over time without re-e
 - Add reference files to `references/` as needed
 - Build skills in `.claude/skills/` when recurring workflows emerge
 
+## Lead Generation
+
+Prospect pipeline lives in `lead-generation/`. The single source of truth for pipeline status is `lead-generation/prospect-tracker.md`.
+
+- `lead-generation/prospects/` -- Individual prospect folders with research, mockups, outreach emails, and assessments
+- `lead-generation/prospect-tracker.md` -- Pipeline table with status, dates, and follow-up schedule
+
 ## Projects
 
 Active workstreams live in `projects/`. Each project gets a folder with a `README.md` describing what it is, its status, and key dates.
@@ -106,12 +113,19 @@ Reference materials, SOPs, and examples live in `references/`.
 - `references/sops/` -- Standard operating procedures
 - `references/examples/` -- Example outputs and style guides
 
-## Saved Conversations
+## Session Startup
 
-On every new session start, check `saved-conversations/` for any `.md` files.
+On every new session start:
 
-- **If files exist:** Read them, then ask Eric if he wants to pick up where he left off. If yes, continue from that context. After loading, delete the file so the folder stays empty.
-- **If empty:** Start the session normally.
+1. **Check for prospect replies** -- Run the reply monitor script against all emails in `lead-generation/prospect-tracker.md`. Report any replies.
+   ```bash
+   echo '["dana@columbusmassagecenter.com","scott.kelsay@sakautomotive.com"]' | node .claude/skills/gmail/scripts/check_replies.js
+   ```
+   Update the prospect tracker if status has changed.
+
+2. **Check saved conversations** -- Check `saved-conversations/` for any `.md` files.
+   - **If files exist:** Read them, then ask Eric if he wants to pick up where he left off. If yes, continue from that context. After loading, delete the file so the folder stays empty.
+   - **If empty:** Continue normally.
 - **Saving:** Only save a conversation when Eric explicitly asks. Write a summary to `saved-conversations/` with the format `YYYY-MM-DD-<topic>.md`.
 
 ## Archives

@@ -17,16 +17,52 @@ function getAuth() {
   return oAuth2Client;
 }
 
-function buildRawMessage({ to, cc, subject, body, inReplyTo, references, threadId }) {
+function buildRawMessage({ to, cc, subject, body, html, attachments, inReplyTo, references, threadId }) {
+  if (attachments && attachments.length > 0) {
+    const boundary = "boundary_" + Date.now();
+    const contentType = html ? 'text/html; charset="UTF-8"' : 'text/plain; charset="UTF-8"';
+    const lines = [
+      `To: ${to}`,
+      cc ? `Cc: ${cc}` : null,
+      `Subject: ${subject}`,
+      `MIME-Version: 1.0`,
+      `Content-Type: multipart/mixed; boundary="${boundary}"`,
+      inReplyTo ? `In-Reply-To: ${inReplyTo}` : null,
+      references ? `References: ${references}` : null,
+      "",
+      `--${boundary}`,
+      `Content-Type: ${contentType}`,
+      "",
+      html || body,
+    ].filter(Boolean);
+
+    for (const att of attachments) {
+      const fileData = fs.readFileSync(att.path);
+      const base64Data = fileData.toString("base64");
+      const filename = att.filename || path.basename(att.path);
+      const mimeType = att.mimeType || "application/octet-stream";
+      lines.push(`--${boundary}`);
+      lines.push(`Content-Type: ${mimeType}; name="${filename}"`);
+      lines.push(`Content-Disposition: attachment; filename="${filename}"`);
+      lines.push(`Content-Transfer-Encoding: base64`);
+      lines.push("");
+      lines.push(base64Data);
+    }
+    lines.push(`--${boundary}--`);
+
+    return Buffer.from(lines.join("\r\n")).toString("base64url");
+  }
+
+  const contentType = html ? 'text/html; charset="UTF-8"' : 'text/plain; charset="UTF-8"';
   const lines = [
     `To: ${to}`,
     cc ? `Cc: ${cc}` : null,
     `Subject: ${subject}`,
-    `Content-Type: text/plain; charset="UTF-8"`,
+    `Content-Type: ${contentType}`,
     inReplyTo ? `In-Reply-To: ${inReplyTo}` : null,
     references ? `References: ${references}` : null,
     "",
-    body,
+    html || body,
   ].filter(Boolean);
 
   return Buffer.from(lines.join("\r\n")).toString("base64url");
@@ -63,7 +99,7 @@ async function main() {
 
   const options = JSON.parse(input);
 
-  if (!options.to || !options.subject || !options.body) {
+  if (!options.to || !options.subject || (!options.body && !options.html)) {
     console.error("Required fields: to, subject, body");
     console.error("Optional fields: cc, inReplyTo, references, threadId");
     process.exit(1);

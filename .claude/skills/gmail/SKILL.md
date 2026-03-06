@@ -66,6 +66,52 @@ echo '{"to":"someone@example.com","subject":"Re: Hello","body":"Reply here","thr
 **Required fields:** to, subject, body
 **Optional fields:** cc, inReplyTo, references, threadId
 
+### check_replies.js
+
+Check for replies from a list of prospect email addresses. Accepts a JSON array of email addresses via stdin or a file path argument. Returns JSON with reply status and message details for each address.
+
+```bash
+# Via stdin
+echo '["dana@example.com","info@sakautomotive.com"]' | node .claude/skills/gmail/scripts/check_replies.js
+
+# Via file (file contains a JSON array of email addresses)
+node .claude/skills/gmail/scripts/check_replies.js prospects.json
+
+# With --since to limit search window (format: YYYY/MM/DD)
+echo '["dana@example.com"]' | node .claude/skills/gmail/scripts/check_replies.js --since 2026/03/01
+
+# File + --since
+node .claude/skills/gmail/scripts/check_replies.js --since 2026/02/01 prospects.json
+```
+
+**Input:** JSON array of email addresses (via stdin or file path argument)
+
+**Options:**
+- `--since YYYY/MM/DD` -- Only check for messages after this date (default: 7 days ago)
+
+**Output:** JSON array of objects:
+```json
+[
+  {
+    "email": "dana@example.com",
+    "hasReplies": true,
+    "messages": [
+      {
+        "id": "abc123",
+        "subject": "Re: Website Redesign",
+        "snippet": "Thanks for reaching out...",
+        "date": "Wed, 05 Mar 2026 10:30:00 -0500"
+      }
+    ]
+  },
+  {
+    "email": "info@sakautomotive.com",
+    "hasReplies": false,
+    "messages": []
+  }
+]
+```
+
 ## Workflow
 
 1. **Check inbox:** Search with `in:inbox` or `in:inbox is:unread`
