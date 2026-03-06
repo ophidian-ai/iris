@@ -62,7 +62,7 @@
 | Tier | Monthly Fee |
 |---|---|
 | Starter / Professional | $100/mo |
-| E-Commerce | $125-$150/mo |
+| E-Commerce | $150/mo |
 
 **Included in all maintenance plans:**
 - Hosting on Vercel (fast, secure, auto-scaling)

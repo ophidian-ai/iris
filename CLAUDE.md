@@ -115,18 +115,11 @@ Reference materials, SOPs, and examples live in `references/`.
 
 ## Session Startup
 
-On every new session start:
+On every new session start, run `/morning-coffee`.
 
-1. **Check for prospect replies** -- Run the reply monitor script against all emails in `lead-generation/prospect-tracker.md`. Report any replies.
-   ```bash
-   echo '["dana@columbusmassagecenter.com","scott.kelsay@sakautomotive.com"]' | node .claude/skills/gmail/scripts/check_replies.js
-   ```
-   Update the prospect tracker if status has changed.
+This generates a branded daily briefing PDF with inbox, pipeline, calendar, projects, tasks, revenue, AI intel, and prioritized recommendations. It also checks for saved conversations. See `.claude/skills/morning-coffee/SKILL.md` for full details.
 
-2. **Check saved conversations** -- Check `saved-conversations/` for any `.md` files.
-   - **If files exist:** Read them, then ask Eric if he wants to pick up where he left off. If yes, continue from that context. After loading, delete the file so the folder stays empty.
-   - **If empty:** Continue normally.
-- **Saving:** Only save a conversation when Eric explicitly asks. Write a summary to `saved-conversations/` with the format `YYYY-MM-DD-<topic>.md`.
+- **Saving conversations:** Only save a conversation when Eric explicitly asks. Write a summary to `saved-conversations/` with the format `YYYY-MM-DD-<topic>.md`.
 
 ## Archives
 
