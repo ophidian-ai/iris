@@ -32,7 +32,13 @@ async function createEvent(eventData) {
       ? { date: eventData.end }
       : { dateTime: eventData.end, timeZone: eventData.timeZone || "America/New_York" },
     attendees: (eventData.attendees || []).map((email) => ({ email })),
-    reminders: eventData.reminders || { useDefault: true },
+    reminders: eventData.reminders || {
+      useDefault: false,
+      overrides: [
+        { method: "popup", minutes: 1440 },
+        { method: "popup", minutes: 120 },
+      ],
+    },
   };
 
   if (eventData.recurrence) {
