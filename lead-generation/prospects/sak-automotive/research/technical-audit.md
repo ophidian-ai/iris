@@ -37,7 +37,7 @@ SAK Automotive's website is built on HostGator's Webzai (WZUK) website builder p
 | **Tire Ordering** | TireMotion (tiremotion.com) | DEAD | Domain is parked on GoDaddy with "Launching Soon" placeholder. Link is completely broken. |
 | **Contact Form** | Webzai built-in form | Active (likely) | Custom form elements (not standard HTML forms), no `<form>` tag. Fields: Name, Email, Phone, Message. Submit handled by viewer.js. |
 | **Google reCAPTCHA** | Google | Active | reCAPTCHA v2, site key: `6LeCLkUUAAAAABEGEwlYoLyKNxIztJfM2okdeb2V`. Used on contact form. |
-| **Google Maps** | Google Maps JS API | Active (with warnings) | API key: `AIzaSyDQtuw04WyGWiY3JULv0HDpHdTK16H4_nI`. Coordinates: 39.1938988, -85.8997904. Deprecation warnings active. |
+| **Google Maps** | Google Maps JS API | Active (with warnings) | API key: `[REDACTED]`. Coordinates: 39.1938988, -85.8997904. Deprecation warnings active. |
 | **Google AdSense** | Google | Active | Publisher ID: `ca-pub-8835639782862770`. Ads are loading on all pages. |
 | **SureCritic Reviews** | SureCritic | Broken/Empty | Widget configured (business ID 25024, widget 50016) but testimonials page shows zero content. Widget loads jQuery 1.12.4 independently. |
 | **Font Awesome** | Font Awesome (kit) | BROKEN | Kit `397d6e1e6a` returns 403 Forbidden. Icons are not loading. |
@@ -88,7 +88,7 @@ SAK Automotive's website is built on HostGator's Webzai (WZUK) website builder p
 | **SSL Certificate** | OK | Let's Encrypt wildcard cert (*.sakautomotive.com). Valid Jan 24 - Apr 24, 2026. Auto-renewing. HTTP redirects to HTTPS. |
 | **Mixed Content** | Low | Internal `baseAddress` configured as `http://` but site serves over HTTPS. Sitemap URLs are HTTP. |
 | **Favicon** | Broken | Returns HTTP 500 on every page load. |
-| **Google Maps API Key** | Medium | API key (`AIzaSyDQtuw04WyGWiY3JULv0HDpHdTK16H4_nI`) is exposed in client-side code with no domain restrictions visible. |
+| **Google Maps API Key** | Medium | API key (`[REDACTED]`) is exposed in client-side code with no domain restrictions visible. |
 | **reCAPTCHA Key** | Low | Site key exposed (expected for client-side), but the secret key handling is inside the proprietary Webzai platform. |
 | **No Security Headers** | Medium | No Content-Security-Policy, X-Frame-Options, or other security headers. |
 
