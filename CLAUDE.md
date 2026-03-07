@@ -94,7 +94,7 @@ Prospect pipeline lives in `lead-generation/`. The single source of truth for pi
 
 ## Projects
 
-Active workstreams live in `projects/`. Each project gets a folder with a `README.md` describing what it is, its status, and key dates.
+Active workstreams live in `projects/`. Each project gets a folder with a `README.md` describing what it is, its status, and key dates. Every project also gets a `point-of-contact/contact.md` with the client's contact information (use `templates/point-of-contact.md` as the template).
 
 Current projects:
 
@@ -105,6 +105,7 @@ Current projects:
 Reusable templates live in `templates/`.
 
 - `templates/session-summary.md` -- Session closeout template
+- `templates/point-of-contact.md` -- Client contact info template (add to every new project)
 
 ## References
 

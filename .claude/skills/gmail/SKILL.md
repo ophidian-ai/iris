@@ -28,6 +28,7 @@ node .claude/skills/gmail/scripts/search_gmail.js <query>
 ```
 
 **Examples:**
+
 - `node .claude/skills/gmail/scripts/search_gmail.js "in:inbox"` -- Recent inbox messages
 - `node .claude/skills/gmail/scripts/search_gmail.js "in:inbox is:unread"` -- Unread inbox
 - `node .claude/skills/gmail/scripts/search_gmail.js "from:someone@example.com"` -- From a specific sender
@@ -87,6 +88,7 @@ node .claude/skills/gmail/scripts/check_replies.js --since 2026/02/01 prospects.
 **Input:** JSON array of email addresses (via stdin or file path argument)
 
 **Options:**
+
 - `--since YYYY/MM/DD` -- Only check for messages after this date (default: 7 days ago)
 
 **Output:** JSON array of objects:

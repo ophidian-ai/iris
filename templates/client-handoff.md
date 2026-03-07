@@ -24,11 +24,13 @@
 Email **eric.lefler@ophidianai.com** with your request.
 
 Please include:
+
 - What page needs to be changed
 - What the change is
 - Any new text or images
 
 **Turnaround times:**
+
 - Minor updates (text, images): within 2 business days
 - Larger changes (new pages, layout changes): quoted separately
 
@@ -44,11 +46,11 @@ Please include:
 
 ## Your Accounts
 
-| Account | Details |
-|---|---|
-| Domain registrar | {{DOMAIN_REGISTRAR}} (you own this) |
-| Google Analytics | {{GA_ACCESS}} |
-| Google Business Profile | {{GBP_ACCESS}} |
+| Account                 | Details                             |
+| ----------------------- | ----------------------------------- |
+| Domain registrar        | {{DOMAIN_REGISTRAR}} (you own this) |
+| Google Analytics        | {{GA_ACCESS}}                       |
+| Google Business Profile | {{GBP_ACCESS}}                      |
 
 ---
 

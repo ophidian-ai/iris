@@ -42,6 +42,7 @@ cd "c:/Claude Code/Iris" && node .claude/skills/clickup/scripts/clickup.js tasks
 Check all known list IDs: Backlog (901711710045), Project 1 (901711707665), Project 2 (901711707666).
 
 **File reads (parallel):**
+
 - Read `lead-generation/prospect-tracker.md`
 - Read each prospect's `lead-generation/prospects/[slug]/README.md` (needed for pipeline value breakdowns)
 - Read `marketing/activity-log.md`
@@ -50,6 +51,7 @@ Check all known list IDs: Backlog (901711710045), Project 1 (901711707665), Proj
 
 **AI News -- Firecrawl:**
 Use the Firecrawl skill to search for 2-3 of these topics (rotate daily):
+
 - "Claude Code latest updates"
 - "AI web design tools trends"
 - "MCP server new integrations"
@@ -62,18 +64,18 @@ For each article found, write a brief analysis: what it's about and how it relat
 
 From the gathered data, calculate:
 
-| Metric | How to Calculate |
-|---|---|
-| **Pipeline Value (Potential)** | Sum the "Est. Value" column from prospect-tracker.md for all prospects NOT in Closed Lost/Inactive status |
-| **Revenue (Actualized)** | Sum the "Est. Value" for prospects in "Closed Won" status. If none, show $0. |
-| **Active Prospects** | Count of prospects not in Closed Lost/Inactive status |
-| **Days Since Last Outreach** | Days between today and the most recent "Outreach Date" or "Follow-Up Date" in the tracker |
-| **Outreach This Week** | Count prospects with Outreach Date in the current Monday-Sunday week |
-| **Outreach This Month** | Count prospects with Outreach Date in the current calendar month |
-| **Response Rate** | (Prospects with status Replied or later) / (Total prospects with Outreach Sent or later). Show as percentage. If zero contacted, show "N/A". |
-| **Last Social Post** | Most recent "social-post" date from marketing/activity-log.md. If none, show "N/A". |
-| **Last Blog Post** | Most recent "blog-article" date from marketing/activity-log.md. If none, show "N/A". |
-| **MRR** | Count of Closed Won prospects * their maintenance tier rate ($100/mo for Starter/Professional, $150/mo for E-Commerce). If none, show $0. |
+| Metric                         | How to Calculate                                                                                                                             |
+| ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Pipeline Value (Potential)** | Sum the "Est. Value" column from prospect-tracker.md for all prospects NOT in Closed Lost/Inactive status                                    |
+| **Revenue (Actualized)**       | Sum the "Est. Value" for prospects in "Closed Won" status. If none, show $0.                                                                 |
+| **Active Prospects**           | Count of prospects not in Closed Lost/Inactive status                                                                                        |
+| **Days Since Last Outreach**   | Days between today and the most recent "Outreach Date" or "Follow-Up Date" in the tracker                                                    |
+| **Outreach This Week**         | Count prospects with Outreach Date in the current Monday-Sunday week                                                                         |
+| **Outreach This Month**        | Count prospects with Outreach Date in the current calendar month                                                                             |
+| **Response Rate**              | (Prospects with status Replied or later) / (Total prospects with Outreach Sent or later). Show as percentage. If zero contacted, show "N/A". |
+| **Last Social Post**           | Most recent "social-post" date from marketing/activity-log.md. If none, show "N/A".                                                          |
+| **Last Blog Post**             | Most recent "blog-article" date from marketing/activity-log.md. If none, show "N/A".                                                         |
+| **MRR**                        | Count of Closed Won prospects * their maintenance tier rate ($100/mo for Starter/Professional, $150/mo for E-Commerce). If none, show $0.    |
 
 ### Step 3: Determine CSS Classes
 
@@ -178,6 +180,7 @@ If the email failed, replace the "Email sent" line with: `Email failed: [error r
 ### Step 9: Saved Conversations Check
 
 Check `saved-conversations/` for any `.md` files.
+
 - If files exist: Read them, ask Eric if he wants to pick up where he left off. If yes, continue from that context. After loading, delete the file.
 - If empty: Continue normally.
 
@@ -191,13 +194,13 @@ Check `saved-conversations/` for any `.md` files.
 
 **This is critical.** Every API call must be checked for success vs. failure. Empty results are NOT failures.
 
-| Source | Success (empty) | Failure |
-|---|---|---|
-| **Gmail (inbox)** | Script exits 0, returns `[]` or empty results. Show: "No unread emails." | Script exits non-zero or throws error. Show: "Inbox unavailable -- API error." |
-| **Gmail (replies)** | Script exits 0, no replies found. Show nothing special. | Script exits non-zero. Note in terminal summary: "Reply check failed." |
-| **Google Calendar** | Script exits 0, returns `[]`. Show: "No events scheduled for today." | Script exits non-zero or throws error. Show: "Calendar unavailable -- API error." |
-| **ClickUp** | Script exits 0, returns empty task list. Show: "No open tasks." | Script exits non-zero or throws error. Show: "Tasks unavailable -- API error." |
-| **Firecrawl** | Returns results with no relevant articles. Show: "No notable updates today." | Request fails or returns error. Show: "AI Intel unavailable -- API error." |
+| Source              | Success (empty)                                                              | Failure                                                                           |
+| ------------------- | ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| **Gmail (inbox)**   | Script exits 0, returns `[]` or empty results. Show: "No unread emails."     | Script exits non-zero or throws error. Show: "Inbox unavailable -- API error."    |
+| **Gmail (replies)** | Script exits 0, no replies found. Show nothing special.                      | Script exits non-zero. Note in terminal summary: "Reply check failed."            |
+| **Google Calendar** | Script exits 0, returns `[]`. Show: "No events scheduled for today."         | Script exits non-zero or throws error. Show: "Calendar unavailable -- API error." |
+| **ClickUp**         | Script exits 0, returns empty task list. Show: "No open tasks."              | Script exits non-zero or throws error. Show: "Tasks unavailable -- API error."    |
+| **Firecrawl**       | Returns results with no relevant articles. Show: "No notable updates today." | Request fails or returns error. Show: "AI Intel unavailable -- API error."        |
 
 **How to check:** If the script exits with code 0 and returns valid JSON (even `[]`), it succeeded. If it exits non-zero, prints to stderr, or throws an exception, it failed.
 

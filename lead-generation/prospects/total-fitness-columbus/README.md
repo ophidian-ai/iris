@@ -53,16 +53,16 @@ Student, Senior, Individual, Couple, Family, Corporate, Group Discounts -- prici
 
 ### Online Presence
 
-| Platform | URL / Status |
-|----------|-------------|
-| Website | totalfitnessofcolumbus.net |
-| Facebook | facebook.com/total-fitness-of-columbus-115476835148586 (~209 reviews) |
-| Instagram | instagram.com/explore/locations/790132/total-fitness-of-columbus/ (location tag only) |
-| LinkedIn | linkedin.com/company/total-fitness-of-columbus |
-| Yelp | yelp.com/biz/total-fitness-of-columbus-columbus (16 reviews) |
-| Nextdoor | nextdoor.com/pages/total-fitness-of-columbus-columbus-in/ |
-| TikTok | Discover page only -- no owned account found |
-| Google Business | Listed, 4.3-4.4 stars, 361 reviews |
+| Platform        | URL / Status                                                                          |
+| --------------- | ------------------------------------------------------------------------------------- |
+| Website         | totalfitnessofcolumbus.net                                                            |
+| Facebook        | facebook.com/total-fitness-of-columbus-115476835148586 (~209 reviews)                 |
+| Instagram       | instagram.com/explore/locations/790132/total-fitness-of-columbus/ (location tag only) |
+| LinkedIn        | linkedin.com/company/total-fitness-of-columbus                                        |
+| Yelp            | yelp.com/biz/total-fitness-of-columbus-columbus (16 reviews)                          |
+| Nextdoor        | nextdoor.com/pages/total-fitness-of-columbus-columbus-in/                             |
+| TikTok          | Discover page only -- no owned account found                                          |
+| Google Business | Listed, 4.3-4.4 stars, 361 reviews                                                    |
 
 ---
 
@@ -92,6 +92,7 @@ Student, Senior, Individual, Couple, Family, Corporate, Group Discounts -- prici
 **Core Deliverable:** Modern, fast, mobile-first website redesign that converts visitors into members and showcases the facility's impressive amenities.
 
 **Pages:**
+
 - Homepage (hero with facility photos, services overview, class schedule preview, testimonials, CTA)
 - About / Our Story (27-year history, Mark Perry's background)
 - Our Facility (photo gallery, amenity breakdown, virtual tour potential)
@@ -103,6 +104,7 @@ Student, Senior, Individual, Couple, Family, Corporate, Group Discounts -- prici
 - Contact (form, map, hours, directions)
 
 **Technical:**
+
 - Responsive, mobile-first design
 - Fast load times (replace Avada/Slider Revolution bloat)
 - Google Analytics 4 setup

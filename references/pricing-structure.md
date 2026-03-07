@@ -11,6 +11,7 @@
 **Best for:** Small businesses that need a clean, modern web presence.
 
 **Scope:**
+
 - Up to 5 pages (Home, About, Services, Contact, +1)
 - Custom, modern design (mobile-first, responsive)
 - Basic on-page SEO (meta tags, sitemap, semantic HTML, alt text)
@@ -27,6 +28,7 @@
 **Best for:** Businesses ready to invest in their online presence as a growth tool.
 
 **Scope:**
+
 - Up to 10 pages
 - Custom design with advanced animations (scroll effects, transitions, hover states)
 - Full SEO setup (keyword research, schema markup, Google Search Console, internal linking strategy)
@@ -45,6 +47,7 @@
 **Best for:** Businesses selling products online.
 
 **Scope:**
+
 - Everything in Professional tier
 - Product catalog with categories
 - Shopping cart and checkout flow
@@ -59,12 +62,13 @@
 
 ## Monthly Maintenance
 
-| Tier | Monthly Fee |
-|---|---|
-| Starter / Professional | $100/mo |
-| E-Commerce | $150/mo |
+| Tier                   | Monthly Fee |
+| ---------------------- | ----------- |
+| Starter / Professional | $100/mo     |
+| E-Commerce             | $150/mo     |
 
 **Included in all maintenance plans:**
+
 - Hosting on Vercel (fast, secure, auto-scaling)
 - SSL certificate
 - Monthly security and performance checks
@@ -73,6 +77,7 @@
 - Monthly performance report (if GA4 set up)
 
 **Not included:**
+
 - New page additions (quoted separately, typically $200-$400/page)
 - Major redesigns
 - Third-party service fees (domain, email hosting)
@@ -84,40 +89,40 @@
 
 Use this to determine which tier fits:
 
-| Signal | Recommended Tier |
-|---|---|
-| No website or completely broken site | Starter |
-| Has site but outdated, < 5 pages needed | Starter |
-| Needs 6-10 pages, wants SEO | Professional |
-| Wants content written for them | Professional |
-| Sells products online | E-Commerce |
-| Needs booking system (Vagaro, Calendly, etc.) | Professional + integration add-on |
-| Needs custom functionality (portal, dashboard) | Custom quote |
+| Signal                                         | Recommended Tier                  |
+| ---------------------------------------------- | --------------------------------- |
+| No website or completely broken site           | Starter                           |
+| Has site but outdated, < 5 pages needed        | Starter                           |
+| Needs 6-10 pages, wants SEO                    | Professional                      |
+| Wants content written for them                 | Professional                      |
+| Sells products online                          | E-Commerce                        |
+| Needs booking system (Vagaro, Calendly, etc.)  | Professional + integration add-on |
+| Needs custom functionality (portal, dashboard) | Custom quote                      |
 
 ---
 
 ## Add-Ons
 
-| Add-On | Price |
-|---|---|
-| Additional pages (beyond tier limit) | $200-$400/page |
-| Blog setup | $300-$500 |
-| Email marketing integration (Mailchimp, etc.) | $200-$400 |
-| Booking system integration | $300-$500 |
-| Logo design | $300-$500 |
-| Content writing (per page, if not in tier) | $100-$200/page |
+| Add-On                                        | Price          |
+| --------------------------------------------- | -------------- |
+| Additional pages (beyond tier limit)          | $200-$400/page |
+| Blog setup                                    | $300-$500      |
+| Email marketing integration (Mailchimp, etc.) | $200-$400      |
+| Booking system integration                    | $300-$500      |
+| Logo design                                   | $300-$500      |
+| Content writing (per page, if not in tier)    | $100-$200/page |
 
 ---
 
 ## Cost to Deliver (Internal)
 
-| Expense | Cost |
-|---|---|
-| Vercel hosting per client | ~$20/mo |
-| Domain (if managed) | ~$1/mo |
-| Claude Pro (fixed) | $100/mo |
-| Uptime monitoring | $0 (free tier) |
-| Eric's time per maintenance client | ~1-2 hrs/mo |
+| Expense                            | Cost           |
+| ---------------------------------- | -------------- |
+| Vercel hosting per client          | ~$20/mo        |
+| Domain (if managed)                | ~$1/mo         |
+| Claude Pro (fixed)                 | $100/mo        |
+| Uptime monitoring                  | $0 (free tier) |
+| Eric's time per maintenance client | ~1-2 hrs/mo    |
 
 **Margin per maintenance client:** ~$79-$129/mo after hosting costs.
 

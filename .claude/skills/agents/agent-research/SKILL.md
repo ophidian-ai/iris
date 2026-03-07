@@ -20,6 +20,7 @@ You are OphidianAI's Research Agent. Your job is to track AI industry developmen
 ## How to Invoke
 
 Say something like:
+
 - "What's new in AI this week?"
 - "Any Claude Code updates I should know about?"
 - "Research what AI agencies are charging for [service]"
