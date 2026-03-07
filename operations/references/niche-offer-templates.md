@@ -1,0 +1,73 @@
+# Niche Offer Templates
+
+Tangible, free offers for cold email outreach. Each offer should take 10-15 minutes to deliver and demonstrate OphidianAI's value without overwhelming the prospect.
+
+## Principles
+
+- The offer must be something they can "touch and feel" -- not just information or advice
+- It should be specific to their business, not generic
+- It should be small enough to deliver quickly but valuable enough to start a conversation
+- The full website assessment is a **second-touch** resource, not the opening offer
+
+## Auto Services (Mechanics, Body Shops, Detailing)
+
+**Offer:** "I'll put together a quick plan showing exactly what needs to change on your site so you show up when people search for [service] in [city]."
+
+**Why it works:** Auto shop owners care about phone calls and walk-ins. They understand "showing up in search results" without needing to know what SEO means.
+
+**Delivery:** A short, visual one-page document showing their current Google search position vs. where they could be, with 3-4 specific action items.
+
+## Health & Wellness (Massage, Fitness, Yoga, Chiropractic)
+
+**Offer:** "I'll write your 3 best service descriptions optimized so you show up when people search for [service] near them. Yours to use however you want."
+
+**Why it works:** These businesses live on bookings. Better service descriptions = more clicks = more bookings. It's copy they can use immediately.
+
+**Delivery:** 3 polished service descriptions (100-150 words each) written for their specific services, optimized for search.
+
+## Restaurants & Food Service
+
+**Offer:** "I'll mock up what your menu page could look like on mobile -- clean, easy to scroll, loads fast. Takes me 10 minutes and it's yours to keep."
+
+**Why it works:** Most restaurant sites have PDF menus that don't work on phones. A visual mockup shows them the gap between what they have and what's possible.
+
+**Delivery:** A screenshot or live preview of a mobile-friendly menu page using their actual menu items.
+
+## Retail & Shops
+
+**Offer:** "I'll put together a quick mockup showing how your top products could look online -- clean, modern, easy to browse on any device."
+
+**Why it works:** Retail owners understand the value of product presentation. Showing their products looking better online is immediately compelling.
+
+**Delivery:** A mockup of a product grid or featured products section using their actual inventory/photos.
+
+## Professional Services (Law, Accounting, Consulting)
+
+**Offer:** "I'll draft a homepage layout that positions your firm the way your best clients already see you -- professional, clear, and easy to contact."
+
+**Why it works:** Professional services firms care about credibility and trust signals. A clean homepage mockup speaks directly to that.
+
+**Delivery:** A wireframe or visual mockup of a homepage with their firm name, services, and a clear contact CTA.
+
+## General Local Service (Landscaping, Cleaning, Plumbing, etc.)
+
+**Offer:** "I'll show you exactly what needs to change on your site so you get more calls from people searching for [service] in [city]. Takes me about 10 minutes."
+
+**Why it works:** Service businesses measure success in phone calls and booked jobs. This frames everything in terms of "more calls."
+
+**Delivery:** A short plan (3-5 bullet points) showing specific changes that would improve their search visibility, written in plain language.
+
+## How to Choose
+
+1. Match the prospect's industry to the closest niche above
+2. If no exact match, use "General Local Service"
+3. Customize the offer language using the prospect's actual business name, services, and city
+4. Reference something specific you noticed about their current site or online presence
+
+## After They Reply
+
+When a prospect says "yes" to the offer:
+
+1. Deliver the promised item within 24 hours
+2. In the delivery email, include: "Happy to walk you through this on a quick 15-minute call if you'd like -- no pressure either way."
+3. The call is where the real conversation happens. Use the call to understand their full needs and pitch the project.
