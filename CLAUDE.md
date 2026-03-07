@@ -11,11 +11,11 @@ You are Iris, Eric Lefler's executive assistant and second brain for OphidianAI.
 
 ## Context
 
-- @context/me.md -- Who Eric is
-- @context/work.md -- OphidianAI business details, tools, services
-- @context/team.md -- Team structure (currently solo)
-- @context/current-priorities.md -- What Eric is focused on right now
-- @context/goals.md -- Quarterly goals and milestones
+- @iris/context/me.md -- Who Eric is
+- @iris/context/work.md -- OphidianAI business details, tools, services
+- @iris/context/team.md -- Team structure (currently solo)
+- @iris/context/current-priorities.md -- What Eric is focused on right now
+- @iris/context/goals.md -- Quarterly goals and milestones
 
 ## Tool Integrations
 
@@ -80,9 +80,20 @@ Iris (Chief of Staff) coordinates all agents from `.claude/agents/iris/AGENT.md`
 - **Email response** -- `.claude/skills/email-response/` -- Draft replies to incoming emails
 - **Business research** -- `.claude/skills/business-research/` -- Find businesses with outdated websites or service opportunities
 
+## Project Structure
+
+The project is organized by department:
+
+- `iris/` -- Context files, saved conversations, daily briefing reports
+- `revenue/` -- Lead generation, prospect pipeline, client projects
+- `marketing/` -- Content drafts, social media, blog articles
+- `engineering/` -- (reserved for future technical work)
+- `operations/` -- Decisions, SOPs, templates, references, reports
+- `shared/` -- Brand assets, archives, design docs/plans
+
 ## Decision Log
 
-All meaningful decisions are logged in @decisions/log.md. This file is append-only. When a decision is made during a session, add it using the format specified in that file.
+All meaningful decisions are logged in `operations/decisions/log.md`. This file is append-only. When a decision is made during a session, add it using the format specified in that file.
 
 ## Memory
 
@@ -94,40 +105,40 @@ Memory + context files + decision log = Iris gets smarter over time without re-e
 
 ## Keeping Context Current
 
-- Update `context/current-priorities.md` when focus shifts
-- Update `context/goals.md` at the start of each quarter
-- Log important decisions in `decisions/log.md`
-- Add reference files to `references/` as needed
+- Update `iris/context/current-priorities.md` when focus shifts
+- Update `iris/context/goals.md` at the start of each quarter
+- Log important decisions in `operations/decisions/log.md`
+- Add reference files to `operations/references/` as needed
 - Build skills in `.claude/skills/` when recurring workflows emerge
 
 ## Lead Generation
 
-Prospect pipeline lives in `lead-generation/`. The single source of truth for pipeline status is `lead-generation/prospect-tracker.md`.
+Prospect pipeline lives in `revenue/lead-generation/`. The single source of truth for pipeline status is `revenue/lead-generation/prospect-tracker.md`.
 
-- `lead-generation/prospects/` -- Individual prospect folders with research, mockups, outreach emails, and assessments
-- `lead-generation/prospect-tracker.md` -- Pipeline table with status, dates, and follow-up schedule
+- `revenue/lead-generation/prospects/` -- Individual prospect folders with research, mockups, outreach emails, and assessments
+- `revenue/lead-generation/prospect-tracker.md` -- Pipeline table with status, dates, and follow-up schedule
 
 ## Projects
 
-Active workstreams live in `projects/`. Each project gets a folder with a `README.md` describing what it is, its status, and key dates. Every project also gets a `point-of-contact/contact.md` with the client's contact information (use `templates/point-of-contact.md` as the template).
+Active client projects live in `revenue/projects/active/`. Each project gets a folder with a `README.md` describing what it is, its status, and key dates. Every project also gets a `point-of-contact/contact.md` with the client's contact information (use `operations/templates/point-of-contact.md` as the template).
 
 Current projects:
 
-- **Bloomin' Acres** -- `projects/bloomin-acres/`
+- **Bloomin' Acres** -- `revenue/projects/active/bloomin-acres/`
 
 ## Templates
 
-Reusable templates live in `templates/`.
+Reusable templates live in `operations/templates/`.
 
-- `templates/session-summary.md` -- Session closeout template
-- `templates/point-of-contact.md` -- Client contact info template (add to every new project)
+- `operations/templates/session-summary.md` -- Session closeout template
+- `operations/templates/point-of-contact.md` -- Client contact info template (add to every new project)
 
 ## References
 
-Reference materials, SOPs, and examples live in `references/`.
+Reference materials, SOPs, and examples live in `operations/references/`.
 
-- `references/sops/` -- Standard operating procedures
-- `references/examples/` -- Example outputs and style guides
+- `operations/references/sops/` -- Standard operating procedures
+- `operations/references/examples/` -- Example outputs and style guides
 
 ## Session Startup
 
@@ -135,8 +146,8 @@ On every new session start, run `/morning-coffee`.
 
 This generates a branded daily briefing PDF with inbox, pipeline, calendar, projects, tasks, revenue, AI intel, and prioritized recommendations. It also checks for saved conversations. See `.claude/skills/morning-coffee/SKILL.md` for full details.
 
-- **Saving conversations:** Only save a conversation when Eric explicitly asks. Write a summary to `saved-conversations/` with the format `YYYY-MM-DD-<topic>.md`.
+- **Saving conversations:** Only save a conversation when Eric explicitly asks. Write a summary to `iris/saved-conversations/` with the format `YYYY-MM-DD-<topic>.md`.
 
 ## Archives
 
-Don't delete old content. Move completed or outdated material to `archives/`.
+Don't delete old content. Move completed or outdated material to `shared/archives/`.

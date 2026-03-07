@@ -27,8 +27,8 @@ Take a prospect from "identified" to "client signed." Steps are sequential -- co
 | Step              | Action                                                                                                                                                                                                | Tools/Skills                                            |
 | ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
 | 1. Research       | Run technical audit on prospect's current site. Capture screenshots. Identify platform, integrations, issues.                                                                                         | business-research skill, Firecrawl, Playwright          |
-| 2. Assessment     | Generate a one-pager: side-by-side before/after showing current state vs what OphidianAI would deliver. Use OphidianAI branding in header/footer, client colors in body. No pricing on the one-pager. | Assessment template (`templates/website-assessment.md`) |
-| 3. Price analysis | Based on audit findings, recommend a tier (Starter/Professional/E-Commerce). Document reasoning: page count, feature needs, integrations to preserve.                                                 | Pricing reference (`references/pricing-structure.md`)   |
+| 2. Assessment     | Generate a one-pager: side-by-side before/after showing current state vs what OphidianAI would deliver. Use OphidianAI branding in header/footer, client colors in body. No pricing on the one-pager. | Assessment template (`operations/templates/website-assessment.md`) |
+| 3. Price analysis | Based on audit findings, recommend a tier (Starter/Professional/E-Commerce). Document reasoning: page count, feature needs, integrations to preserve.                                                 | Pricing reference (`operations/references/pricing-structure.md`)   |
 | 4. Mockup         | Build a quick visual mockup of the prospect's homepage using frontend-design skill. Save to `projects/<prospect>/mockup/`.                                                                            | Frontend Design skill                                   |
 | 5. Outreach       | Draft cold email referencing specific audit findings. Attach or reference the assessment.                                                                                                             | cold-email-outreach skill, Gmail                        |
 | 6. Follow-up      | If no response after 3-5 business days, draft follow-up. Max 3 follow-ups.                                                                                                                            | email-response skill, Gmail                             |
@@ -40,13 +40,13 @@ Client said yes. Move from signed deal to live website.
 
 | Step                 | Action                                                                                                    | Tools/Skills                                                                                                       |
 | -------------------- | --------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| 8. Project setup     | Initialize project folder from client template. Create ClickUp tasks for the build.                       | `templates/client-project/`, clickup skill                                                                         |
-| 9. Content gathering | Send client the content request checklist. Track what's been received vs outstanding.                     | Content request template (`templates/content-request.md`)                                                          |
+| 8. Project setup     | Initialize project folder from client template. Create ClickUp tasks for the build.                       | `operations/templates/client-project/`, clickup skill                                                                         |
+| 9. Content gathering | Send client the content request checklist. Track what's been received vs outstanding.                     | Content request template (`operations/templates/content-request.md`)                                                          |
 | 10. Build            | Hand off to Dev Agent with full scope, assets, and timeline. Monitor progress.                            | Dev Agent, frontend-design skill                                                                                   |
 | 11. Review cycles    | Manage client feedback rounds. Track revision count (Starter: 2 rounds, Professional: unlimited).         | ClickUp                                                                                                            |
-| 12. SEO & GBP        | Execute SEO checklist (basic or full depending on tier). Set up Google Business Profile if Professional+. | `references/sops/seo-basics.md` or `references/sops/seo-full-setup.md`, `references/sops/google-business-setup.md` |
-| 13. Go-live          | Execute the go-live checklist. Deploy to Vercel. Set up monitoring.                                       | `references/sops/go-live-checklist.md`, Vercel, `references/sops/monitoring-setup.md`                              |
-| 14. Handoff          | Send client handoff documentation. Add site to monthly maintenance schedule.                              | `templates/client-handoff.md`, `references/sops/monthly-maintenance.md`                                            |
+| 12. SEO & GBP        | Execute SEO checklist (basic or full depending on tier). Set up Google Business Profile if Professional+. | `operations/references/sops/seo-basics.md` or `operations/references/sops/seo-full-setup.md`, `operations/references/sops/google-business-setup.md` |
+| 13. Go-live          | Execute the go-live checklist. Deploy to Vercel. Set up monitoring.                                       | `operations/references/sops/go-live-checklist.md`, Vercel, `operations/references/sops/monitoring-setup.md`                              |
+| 14. Handoff          | Send client handoff documentation. Add site to monthly maintenance schedule.                              | `operations/templates/client-handoff.md`, `operations/references/sops/monthly-maintenance.md`                                            |
 
 ## Skills Access
 
@@ -56,10 +56,10 @@ Client said yes. Move from signed deal to live website.
 
 ## Project Structure
 
-Every prospect/client gets a folder at `projects/<name>/` with:
+Every prospect/client gets a folder at `revenue/projects/active/<name>/` with:
 
 ```
-projects/<name>/
+revenue/projects/active/<name>/
   README.md            -- Status, tier, key dates, contacts
   research/
     technical-audit.md -- Platform, integrations, issues

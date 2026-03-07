@@ -28,7 +28,7 @@ cd "c:/Claude Code/Iris" && node .claude/skills/gmail/scripts/search_gmail.js "i
 ```bash
 cd "c:/Claude Code/Iris" && echo '{{PROSPECT_EMAILS_JSON}}' | node .claude/skills/gmail/scripts/check_replies.js
 ```
-Build the prospect email JSON array by reading `lead-generation/prospect-tracker.md` and extracting all email addresses.
+Build the prospect email JSON array by reading `revenue/lead-generation/prospect-tracker.md` and extracting all email addresses.
 
 **Google Calendar -- Today + next 48 hours:**
 ```bash
@@ -43,11 +43,11 @@ Check all known list IDs: Backlog (901711710045), Project 1 (901711707665), Proj
 
 **File reads (parallel):**
 
-- Read `lead-generation/prospect-tracker.md`
-- Read each prospect's `lead-generation/prospects/[slug]/README.md` (needed for pipeline value breakdowns)
+- Read `revenue/lead-generation/prospect-tracker.md`
+- Read each prospect's `revenue/lead-generation/prospects/[slug]/README.md` (needed for pipeline value breakdowns)
 - Read `marketing/activity-log.md`
-- Read `projects/active-projects/bloomin-acres/README.md` (and any other project READMEs)
-- Read `saved-conversations/` directory (check if any files exist)
+- Read `revenue/projects/active/bloomin-acres/README.md` (and any other project READMEs)
+- Read `iris/saved-conversations/` directory (check if any files exist)
 
 **AI News -- Firecrawl:**
 Use the Firecrawl skill to search for 2-3 of these topics (rotate daily):
@@ -110,7 +110,7 @@ Categories: PIPELINE, FOLLOW-UP, OUTREACH, TASKS, MARKETING, REVENUE, AI-INTEL
 
 1. Read the template from `.claude/skills/morning-coffee/templates/briefing-template.html`
 2. Replace all `{{TOKEN}}` placeholders with computed values
-3. For `{{LOGO_PATH}}`, use the absolute path: `file:///c:/Claude Code/Iris/references/brand-assets/logo_icon.png`
+3. For `{{LOGO_PATH}}`, use the absolute path: `file:///c:/Claude Code/Iris/shared/brand-assets/logo_icon.png`
 4. For `{{DATE}}`, use format: `MARCH 6, 2026` (uppercase month, day, year)
 5. Build HTML fragments for:
    - `{{INBOX_CONTENT}}` -- List of `.inbox-item` divs for each unread email (max 5). If prospect reply detected, add `.inbox-tag` with "PROSPECT REPLY". If no unread, show `.empty` with "No unread emails."
@@ -118,7 +118,7 @@ Categories: PIPELINE, FOLLOW-UP, OUTREACH, TASKS, MARKETING, REVENUE, AI-INTEL
      1. **Main row:** Business name, status badge, days in stage, follow-up date (add `.overdue` class if past due), and est. value in a `.price-cell`.
      2. **Breakdown row:** A `<tr class="value-breakdown-row">` with a single `<td colspan="5">` containing a `.value-breakdown` div. Inside it:
         - A `.value-breakdown-label` reading "VALUE BASIS"
-        - A `.value-breakdown-items` div with `.value-breakdown-item` entries explaining the estimate: pricing tier (e.g., "Professional tier"), page count, key features driving the price (e.g., booking integration, SEO, e-commerce). Pull this from the prospect's README.md in `lead-generation/prospects/[slug]/README.md` -- look at Project Scope and any pricing notes.
+        - A `.value-breakdown-items` div with `.value-breakdown-item` entries explaining the estimate: pricing tier (e.g., "Professional tier"), page count, key features driving the price (e.g., booking integration, SEO, e-commerce). Pull this from the prospect's README.md in `revenue/lead-generation/prospects/[slug]/README.md` -- look at Project Scope and any pricing notes.
    - `{{CALENDAR_CONTENT}}` -- `.cal-day-label` for "TODAY" and "TOMORROW", with `.cal-item` entries. If no events for a given day, show `.empty` with "No events scheduled." under that day label. If no events at all, show a single `.empty` with "No events scheduled for today."
    - `{{PROJECTS_CONTENT}}` -- `.project-item` divs for each active project.
    - `{{TASKS_CONTENT}}` -- Table with task name, status, due date. Or `.empty` if none.
@@ -135,7 +135,7 @@ const { chromium } = require('playwright');
   const browser = await chromium.launch();
   const page = await browser.newPage();
   await page.goto('file:///c:/Claude Code/Iris/.claude/skills/morning-coffee/templates/briefing.html', { waitUntil: 'networkidle' });
-  await page.pdf({ path: 'c:/Claude Code/Iris/reports/briefings/{{YYYY-MM-DD}}.pdf', format: 'A4', printBackground: true });
+  await page.pdf({ path: 'c:/Claude Code/Iris/iris/reports/briefings/{{YYYY-MM-DD}}.pdf', format: 'A4', printBackground: true });
   await browser.close();
   console.log('PDF generated');
 })();
@@ -149,7 +149,7 @@ Replace `{{YYYY-MM-DD}}` with today's date.
 Send the briefing PDF to Eric via Gmail so he can read it on the go.
 
 ```bash
-cd "c:/Claude Code/Iris" && echo '{"to":"eric.lefler@ophidianai.com","subject":"Morning Coffee -- {{DATE}}","html":"<p>Your daily briefing is attached.</p>","attachments":[{"path":"c:/Claude Code/Iris/reports/briefings/{{YYYY-MM-DD}}.pdf","filename":"morning-coffee-{{YYYY-MM-DD}}.pdf","mimeType":"application/pdf"}]}' | node .claude/skills/gmail/scripts/send_email.js
+cd "c:/Claude Code/Iris" && echo '{"to":"eric.lefler@ophidianai.com","subject":"Morning Coffee -- {{DATE}}","html":"<p>Your daily briefing is attached.</p>","attachments":[{"path":"c:/Claude Code/Iris/iris/reports/briefings/{{YYYY-MM-DD}}.pdf","filename":"morning-coffee-{{YYYY-MM-DD}}.pdf","mimeType":"application/pdf"}]}' | node .claude/skills/gmail/scripts/send_email.js
 ```
 
 Replace `{{DATE}}` and `{{YYYY-MM-DD}}` with the same values used in previous steps.
@@ -169,7 +169,7 @@ Inbox: {{UNREAD_COUNT}} unread{{REPLY_ALERT}}
 Calendar: {{EVENT_COUNT}} events today
 Tasks: {{TASKS_DUE}} due today, {{TASKS_OVERDUE}} overdue
 
-PDF saved to reports/briefings/{{YYYY-MM-DD}}.pdf
+PDF saved to iris/reports/briefings/{{YYYY-MM-DD}}.pdf
 Email sent to eric.lefler@ophidianai.com
 ```
 
@@ -179,7 +179,7 @@ If the email failed, replace the "Email sent" line with: `Email failed: [error r
 
 ### Step 9: Saved Conversations Check
 
-Check `saved-conversations/` for any `.md` files.
+Check `iris/saved-conversations/` for any `.md` files.
 
 - If files exist: Read them, ask Eric if he wants to pick up where he left off. If yes, continue from that context. After loading, delete the file.
 - If empty: Continue normally.
@@ -188,7 +188,7 @@ Check `saved-conversations/` for any `.md` files.
 
 - The prospect email list for reply checking must be built dynamically from prospect-tracker.md each time -- don't hardcode email addresses.
 - AI Intel uses Firecrawl credits. Keep searches to 2-3 per briefing to conserve credits.
-- If `reports/briefings/{{YYYY-MM-DD}}.pdf` already exists (re-running same day), overwrite it.
+- If `iris/reports/briefings/{{YYYY-MM-DD}}.pdf` already exists (re-running same day), overwrite it.
 
 ### API Status: Empty Data vs. Failure
 

@@ -18,7 +18,7 @@ When a prospect replies to outreach and wants to learn more, or when Eric says "
 - **Timeline preference** -- If the prospect mentioned urgency or flexibility
 - **Notes** -- Pain points, what they care about, assessment findings, conversation context
 
-Pull missing details from `lead-generation/prospects/[business-name]/` research files and assessment.
+Pull missing details from `revenue/lead-generation/prospects/[business-name]/` research files and assessment.
 
 ## Proposal Structure
 
@@ -43,7 +43,7 @@ The HTML document contains these sections in order:
 
 7. **Investment** -- Pricing table. Columns: Item, Details, Price. Rows: base tier, each add-on, monthly maintenance. Show a clear total for the one-time cost. Maintenance shown as separate recurring line.
 
-8. **What's Included** -- Bullet list of everything in the tier. Pull from `references/pricing-structure.md`. Examples: responsive design, SEO setup, SSL certificate, hosting, performance optimization, browser testing.
+8. **What's Included** -- Bullet list of everything in the tier. Pull from `operations/references/pricing-structure.md`. Examples: responsive design, SEO setup, SSL certificate, hosting, performance optimization, browser testing.
 
 9. **Next Steps** -- Clear CTA: "1) Reply to confirm you'd like to move forward. 2) We'll send a brief content questionnaire. 3) Work begins within [X] business days."
 
@@ -59,7 +59,7 @@ The HTML document contains these sections in order:
 
 ## Rules
 
-- **Use exact pricing from `references/pricing-structure.md`.** Never make up prices.
+- **Use exact pricing from `operations/references/pricing-structure.md`.** Never make up prices.
 - Justify the tier recommendation based on the prospect's specific needs.
 - Frame maintenance as standard (included), not optional.
 - Professional but warm tone -- these are small business owners, not corporate buyers.
@@ -70,7 +70,7 @@ The HTML document contains these sections in order:
 
 ## Output
 
-1. **HTML proposal** -- Save to `lead-generation/prospects/[business-name]/outreach/proposal.html`
+1. **HTML proposal** -- Save to `revenue/lead-generation/prospects/[business-name]/outreach/proposal.html`
 
 2. **PDF conversion** -- Convert HTML to PDF using Playwright:
    ```javascript
@@ -84,7 +84,7 @@ The HTML document contains these sections in order:
      await browser.close();
    })();
    ```
-   Save PDF to `lead-generation/prospects/[business-name]/outreach/proposal.pdf`
+   Save PDF to `revenue/lead-generation/prospects/[business-name]/outreach/proposal.pdf`
 
 3. **Send via Gmail** -- Use `.claude/skills/gmail/scripts/send_email.js` with the PDF attached:
    ```bash
@@ -92,11 +92,11 @@ The HTML document contains these sections in order:
    ```
    **Always test-send to eric.lefler@ophidianai.com first.**
 
-4. **Update tracker** -- Set prospect status to "Proposal Sent" in `lead-generation/prospect-tracker.md`.
+4. **Update tracker** -- Set prospect status to "Proposal Sent" in `revenue/lead-generation/prospect-tracker.md`.
 
 ## Checklist Before Sending
 
-- [ ] Pricing matches `references/pricing-structure.md`
+- [ ] Pricing matches `operations/references/pricing-structure.md`
 - [ ] All pages and features listed match what was discussed
 - [ ] Assessment findings are accurately referenced
 - [ ] PDF renders correctly (check formatting, page breaks)

@@ -31,21 +31,21 @@ Final touch. Acknowledge they're busy, leave the door open. "If timing isn't rig
 Generate an HTML email using the OphidianAI branded template:
 
 - Dark gradient header (#0D1B2A), teal accent (#0DB1B2), lime green (#39FF14)
-- OphidianAI logo in header (base64-encoded from `references/brand-assets/logo_icon_40.png`)
+- OphidianAI logo in header (base64-encoded from `shared/brand-assets/logo_icon_40.png`)
 - Signature block and footer matching cold email template
 - Subject line: `Re: [original subject]` (keeps it in the same thread)
 - Email body should be significantly shorter than the cold email
 
 Save the HTML file to:
 ```
-lead-generation/prospects/[business-name]/outreach/follow-up-[number].html
+revenue/lead-generation/prospects/[business-name]/outreach/follow-up-[number].html
 ```
 
 ## Sending
 
 1. Write a JSON file with `to`, `subject`, `html`, and `threadId` fields:
    ```
-   lead-generation/prospects/[business-name]/outreach/follow-up-[number].json
+   revenue/lead-generation/prospects/[business-name]/outreach/follow-up-[number].json
    ```
 
 2. Send a test email first:
@@ -56,10 +56,10 @@ lead-generation/prospects/[business-name]/outreach/follow-up-[number].html
 
 3. After Eric confirms, update the JSON with the prospect's email and send:
    ```bash
-   node .claude/skills/gmail/scripts/send_email.js lead-generation/prospects/[business-name]/outreach/follow-up-[number].json
+   node .claude/skills/gmail/scripts/send_email.js revenue/lead-generation/prospects/[business-name]/outreach/follow-up-[number].json
    ```
 
-4. Update `lead-generation/prospect-tracker.md` -- set status to "Follow-Up [N] Sent" and log the date.
+4. Update `revenue/lead-generation/prospect-tracker.md` -- set status to "Follow-Up [N] Sent" and log the date.
 
 ### Getting the threadId
 
