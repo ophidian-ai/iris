@@ -98,6 +98,9 @@ Use this to determine which tier fits:
 | Sells products online                          | E-Commerce                        |
 | Needs booking system (Vagaro, Calendly, etc.)  | Professional + integration add-on |
 | Needs custom functionality (portal, dashboard) | Custom quote                      |
+| Has decent site but invisible on Google         | SEO Cleanup                       |
+| Wants ongoing search visibility improvement     | SEO Growth retainer               |
+| Bad site AND bad SEO                            | Website rebuild (SEO bundled)     |
 
 ---
 
@@ -111,6 +114,56 @@ Use this to determine which tier fits:
 | Booking system integration                    | $300-$500      |
 | Logo design                                   | $300-$500      |
 | Content writing (per page, if not in tier)    | $100-$200/page |
+| SEO Cleanup (for existing website clients)    | $400-$800      |
+
+---
+
+## SEO Services
+
+### SEO Audit -- Free (Lead Magnet)
+
+**Purpose:** Lead generation. Not a revenue line.
+
+**Scope:**
+- AI-automated site scan (Firecrawl + Claude analysis)
+- 1-2 page branded PDF: on-page issues, keyword gaps, technical problems, GBP status
+- Turnaround: under 1 hour of actual work
+
+**When to offer:** Prospect has a decent website but poor search visibility. Use as cold email offer or follow-up deliverable.
+
+---
+
+### SEO Cleanup -- One-Time
+
+| Delivery Mode | Price | Description |
+|---|---|---|
+| Done-for-you | $800-$1,200 | We get CMS access and implement all fixes |
+| Advisory | $400-$600 | Prioritized action plan with step-by-step instructions |
+
+**Scope:**
+- On-page SEO fixes (meta tags, headings, alt text, URL structure)
+- Schema markup (LocalBusiness, Organization, BreadcrumbList, FAQ)
+- Google Search Console setup and sitemap submission
+- Internal linking fixes
+- Google Business Profile optimization
+- Image optimization
+- Keyword-to-page matrix
+- Turnaround: 1-2 weeks
+
+**When to recommend:** Business has a decent site but poor SEO. They don't need a redesign -- they need optimization.
+
+---
+
+### SEO Growth -- Monthly Retainer
+
+| Scope Level | Monthly Fee | Includes |
+|---|---|---|
+| Standard | $200-$250/mo | Keyword tracking, 1 blog post/page update per month, GBP management, monthly report |
+| Premium | $300-$350/mo | Everything in Standard + 2 posts/updates per month, quarterly strategy call, internal linking maintenance |
+
+**Minimum commitment:** 3 months
+
+**When to recommend:** After SEO Cleanup is complete, or for clients who want ongoing optimization without a cleanup project.
 
 ---
 
@@ -122,7 +175,9 @@ Use this to determine which tier fits:
 | Domain (if managed)                | ~$1/mo         |
 | Claude Pro (fixed)                 | $100/mo        |
 | Uptime monitoring                  | $0 (free tier) |
-| Eric's time per maintenance client | ~1-2 hrs/mo    |
+| Eric's time per maintenance client  | ~1-2 hrs/mo    |
+| Eric's time per SEO Cleanup client  | ~3-5 hrs       |
+| Eric's time per SEO Growth client   | ~3-4 hrs/mo    |
 
 **Margin per maintenance client:** ~$79-$129/mo after hosting costs.
 
