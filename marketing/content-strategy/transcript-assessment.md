@@ -47,7 +47,16 @@ Traffic -> Holding Pattern -> Selling Event -> Loop
 7. Lead magnets from content (e.g., "Top 10 SEO Mistakes Local Businesses Make")
 8. Eric as promoter -- LinkedIn posts, YouTube, visible content creation
 
+## YouTube Strategy Decision
+
+Two separate channels, not one:
+- **AI/Agency channel (launch first):** Building with AI, Claude Code, agency operations, journey content. Eric has knowledge and opinions here. Grows fast in AI community.
+- **Client-facing channel (launch later):** Case studies, before/afters, local SEO tips, "what a good website costs." Needs portfolio material first (2-3 completed projects).
+
+Sequence: AI channel now, client channel after Bloomin' Acres + first SEO clients close.
+
 ## Decisions Pending
-- YouTube content calendar and launch plan
-- Newsletter platform selection
+- YouTube AI channel content calendar and launch plan
+- Newsletter platform selection (holding pattern)
 - Instantly vs. Warmbox final decision
+- Client-facing YouTube channel timing (after portfolio builds)
