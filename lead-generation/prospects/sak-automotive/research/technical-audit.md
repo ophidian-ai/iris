@@ -1,7 +1,7 @@
 # SAK Automotive -- Technical Website Audit
 
 **Date:** 2026-03-05
-**URL:** https://sakautomotive.com
+**URL:** <https://sakautomotive.com>
 **Audited by:** Iris (OphidianAI)
 
 ---
@@ -41,7 +41,7 @@ SAK Automotive's website is built on HostGator's Webzai (WZUK) website builder p
 | **Google AdSense** | Google | Active | Publisher ID: `ca-pub-8835639782862770`. Ads are loading on all pages. |
 | **SureCritic Reviews** | SureCritic | Broken/Empty | Widget configured (business ID 25024, widget 50016) but testimonials page shows zero content. Widget loads jQuery 1.12.4 independently. |
 | **Font Awesome** | Font Awesome (kit) | BROKEN | Kit `397d6e1e6a` returns 403 Forbidden. Icons are not loading. |
-| **Facebook Page** | Facebook | Active (link only) | Links to https://www.facebook.com/sakautomotive/ -- icon link in footer. No embeds or pixel. |
+| **Facebook Page** | Facebook | Active (link only) | Links to <https://www.facebook.com/sakautomotive/> -- icon link in footer. No embeds or pixel. |
 | **PayPal** | PayPal | NOT CONFIGURED | PayPal account set to placeholder `"YourPayPalEmail@domain.com"`. Never set up. |
 | **Insights/Analytics (Webzai)** | Webzai built-in | Active | Tracking ID: `d4509cdb-3da4-4969-a620-d1bb13941925`. This is Webzai's own analytics, not Google. |
 
@@ -144,7 +144,7 @@ No jQuery is loaded by the main site (Webzai has its own rendering engine). Sure
 
 ### What to keep (migrate)
 - **Business information:** Address (330 Center St, Columbus, IN 47201), phone (812-372-8000), team bios, service list, warranty details
-- **Facebook page link:** https://www.facebook.com/sakautomotive/
+- **Facebook page link:** <https://www.facebook.com/sakautomotive/>
 - **Google Maps location:** Coordinates 39.1938988, -85.8997904
 - **Domain name:** sakautomotive.com (will need DNS changes)
 

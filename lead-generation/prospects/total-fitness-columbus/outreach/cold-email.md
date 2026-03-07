@@ -1,7 +1,7 @@
 # Cold Email -- Total Fitness of Columbus
 
-**To:** info@totalfitnessofcolumbus.net
-**From:** eric.lefler@ophidianai.com
+**To:** <info@totalfitnessofcolumbus.net>
+**From:** <eric.lefler@ophidianai.com>
 **Attachment:** website-assessment.pdf
 
 ## Subject Line Options
