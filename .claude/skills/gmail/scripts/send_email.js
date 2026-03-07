@@ -17,11 +17,12 @@ function getAuth() {
   return oAuth2Client;
 }
 
-function buildRawMessage({ to, cc, subject, body, html, attachments, inReplyTo, references, threadId }) {
+function buildRawMessage({ to, cc, from, subject, body, html, attachments, inReplyTo, references, threadId }) {
   if (attachments && attachments.length > 0) {
     const boundary = "boundary_" + Date.now();
     const contentType = html ? 'text/html; charset="UTF-8"' : 'text/plain; charset="UTF-8"';
     const lines = [
+      from ? `From: ${from}` : null,
       `To: ${to}`,
       cc ? `Cc: ${cc}` : null,
       `Subject: ${subject}`,
@@ -55,6 +56,7 @@ function buildRawMessage({ to, cc, subject, body, html, attachments, inReplyTo, 
 
   const contentType = html ? 'text/html; charset="UTF-8"' : 'text/plain; charset="UTF-8"';
   const lines = [
+    from ? `From: ${from}` : null,
     `To: ${to}`,
     cc ? `Cc: ${cc}` : null,
     `Subject: ${subject}`,

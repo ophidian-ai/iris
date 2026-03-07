@@ -47,6 +47,19 @@ Research > Mockup > Approved > Build > Testing > Launch > Maintenance
 | **Target Launch** | {{TARGET}} |
 | **Actual Launch**  | --       |
 
+## Folder Structure
+
+| Folder | Purpose |
+|---|---|
+| `assets/` | Client-provided assets (logos, images, copy) |
+| `build/` | Active build files |
+| `current-site/` | Screenshots and reference from existing site |
+| `deployment/` | Deployment configs and notes |
+| `mockup/` | Design mockups and screenshots |
+| `outreach/` | Emails, proposals, assessments |
+| `reports/` | Current state assessments, status reports, session handoffs |
+| `research/` | Business research, audit findings, competitor notes |
+
 ## Notes
 
 {{NOTES}}
