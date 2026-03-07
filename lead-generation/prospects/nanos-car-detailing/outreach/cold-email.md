@@ -1,7 +1,7 @@
 # Cold Email -- Nano's Car Detailing & Cleaning
 
-**To:** lorena29medina@hotmail.com
-**From:** eric.lefler@ophidianai.com
+**To:** <lorena29medina@hotmail.com>
+**From:** <eric.lefler@ophidianai.com>
 **Attachment:** website-assessment.pdf
 
 ---

@@ -1,6 +1,6 @@
 # Technical Audit: Columbus Massage Center
 
-**URL:** https://www.columbusmassagecenter.com/
+**URL:** <https://www.columbusmassagecenter.com/>
 **Audit Date:** 2026-03-05
 **Auditor:** Iris (OphidianAI)
 

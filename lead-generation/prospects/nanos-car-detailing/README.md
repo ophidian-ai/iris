@@ -3,11 +3,11 @@
 **Prospect:** Nano's Car Detailing & Cleaning
 **Owner:** Wazhinton Orellana (CEO/Owner)
 **Co-Owner/Contact:** Lorena Medina
-**Email:** lorena29medina@hotmail.com
+**Email:** <lorena29medina@hotmail.com>
 **Location:** 2161 State Street, Columbus, IN 47201
 **Phone:** (812) 343-1008
 **Text:** (812) 603-2335
-**Facebook:** https://www.facebook.com/nanoscardetailingllc/
+**Facebook:** <https://www.facebook.com/nanoscardetailingllc/>
 **Current Site:** nanoscardetailingandcleaning.com (Hibu template)
 **BBB Accredited:** Yes (since 6/3/2022)
 **Status:** Researching

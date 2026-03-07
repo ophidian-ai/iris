@@ -2,7 +2,7 @@
 
 **Prospect:** Total Fitness of Columbus
 **Owner:** Mark Perry (Co-Owner), Amanda Perry (Co-Owner)
-**Email:** info@totalfitnessofcolumbus.net
+**Email:** <info@totalfitnessofcolumbus.net>
 **Location:** 3075 Middle Road, Columbus, IN 47201
 **Phone:** (812) 373-9992
 **Current Site:** totalfitnessofcolumbus.net (WordPress / Avada theme)

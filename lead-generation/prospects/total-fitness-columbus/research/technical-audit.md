@@ -1,6 +1,6 @@
 # Technical Audit: Total Fitness of Columbus
 
-**URL:** https://www.totalfitnessofcolumbus.net/
+**URL:** <https://www.totalfitnessofcolumbus.net/>
 **Audit Date:** 2026-03-06
 **Auditor:** Iris (OphidianAI)
 
