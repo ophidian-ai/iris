@@ -61,90 +61,500 @@
     page-break-after: avoid;
   }
 
-  .header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; padding-bottom: 12px; border-bottom: 1px solid rgba(0, 209, 178, 0.2); }
-  .header-left { display: flex; align-items: center; gap: 14px; }
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 4px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(0, 209, 178, 0.2);
+  }
+
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
   .header-left img { width: 40px; height: 40px; }
-  .brand-name { font-size: 20px; font-weight: 700; letter-spacing: 1px; color: #E8EDF2; }
+
+  .brand-name {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #E8EDF2;
+  }
+
   .brand-name span { color: #39FF14; }
-  .brand-tagline { font-size: 9px; color: rgba(232, 237, 242, 0.5); letter-spacing: 3px; text-transform: uppercase; margin-top: 1px; }
+
+  .brand-tagline {
+    font-size: 9px;
+    color: rgba(232, 237, 242, 0.5);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-top: 1px;
+  }
+
   .header-right { text-align: right; }
-  .header-date { font-family: 'Space Mono', monospace; font-size: 11px; color: #00D1B2; letter-spacing: 1px; }
-  .header-label { font-size: 18px; font-weight: 700; color: #E8EDF2; margin-top: 2px; }
+
+  .header-date {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: #00D1B2;
+    letter-spacing: 1px;
+  }
+
+  .header-label {
+    font-size: 18px;
+    font-weight: 700;
+    color: #E8EDF2;
+    margin-top: 2px;
+  }
 
   .stats-bar { display: flex; gap: 12px; margin: 16px 0; }
-  .stat-card { flex: 1; background: linear-gradient(160deg, rgba(13, 14, 20, 0.9), rgba(20, 22, 30, 0.95)); border: 1px solid rgba(0, 209, 178, 0.15); border-radius: 8px; padding: 12px 14px; text-align: center; position: relative; overflow: hidden; }
-  .stat-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, #10B854, #00D1B2); border-radius: 8px 8px 0 0; }
-  .stat-card.highlight::before { background: linear-gradient(90deg, #39FF14, #00D1B2); height: 3px; }
-  .stat-label { font-size: 8px; font-family: 'Space Mono', monospace; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(232, 237, 242, 0.5); margin-bottom: 4px; }
-  .stat-value { font-family: 'Space Mono', monospace; font-size: 18px; font-weight: 700; color: #39FF14; }
+
+  .stat-card {
+    flex: 1;
+    background: linear-gradient(160deg, rgba(13, 14, 20, 0.9), rgba(20, 22, 30, 0.95));
+    border: 1px solid rgba(0, 209, 178, 0.15);
+    border-radius: 8px;
+    padding: 12px 14px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #10B854, #00D1B2);
+    border-radius: 8px 8px 0 0;
+  }
+
+  .stat-card.highlight::before {
+    background: linear-gradient(90deg, #39FF14, #00D1B2);
+    height: 3px;
+  }
+
+  .stat-label {
+    font-size: 8px;
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(232, 237, 242, 0.5);
+    margin-bottom: 4px;
+  }
+
+  .stat-value {
+    font-family: 'Space Mono', monospace;
+    font-size: 18px;
+    font-weight: 700;
+    color: #39FF14;
+  }
+
   .stat-value.zero { color: rgba(232, 237, 242, 0.3); }
   .stat-value.warning { color: #FF6B35; }
-  .stat-sub { font-size: 9px; color: rgba(232, 237, 242, 0.4); margin-top: 2px; }
 
-  .section { margin-bottom: 10px; }
-  .section-title { font-size: 13px; font-weight: 700; color: #E8EDF2; margin-bottom: 8px; padding-bottom: 5px; border-bottom: 1px solid rgba(0, 209, 178, 0.12); display: flex; align-items: center; gap: 8px; }
-  .section-title .dot { width: 6px; height: 6px; border-radius: 50%; background: #39FF14; flex-shrink: 0; }
+  .stat-sub {
+    font-size: 9px;
+    color: rgba(232, 237, 242, 0.4);
+    margin-top: 2px;
+  }
+
+  .section { margin-bottom: 14px; }
+
+  .section-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #E8EDF2;
+    margin-bottom: 8px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid rgba(0, 209, 178, 0.12);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .section-title .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #39FF14;
+    flex-shrink: 0;
+  }
+
   .section-title .dot.orange { background: #FF6B35; }
-  .section-title .count { font-family: 'Space Mono', monospace; font-size: 10px; color: #00D1B2; margin-left: auto; }
+
+  .section-title .count {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: #00D1B2;
+    margin-left: auto;
+  }
 
   table { width: 100%; border-collapse: collapse; font-size: 11px; }
-  thead th { text-align: left; padding: 6px 10px; font-family: 'Space Mono', monospace; font-size: 8px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #00D1B2; background: rgba(0, 209, 178, 0.06); border-bottom: 1px solid rgba(0, 209, 178, 0.15); }
-  tbody td { padding: 6px 10px; border-bottom: 1px solid rgba(232, 237, 242, 0.05); color: rgba(232, 237, 242, 0.85); }
+
+  thead th {
+    text-align: left;
+    padding: 6px 10px;
+    font-family: 'Space Mono', monospace;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #00D1B2;
+    background: rgba(0, 209, 178, 0.06);
+    border-bottom: 1px solid rgba(0, 209, 178, 0.15);
+  }
+
+  tbody td {
+    padding: 6px 10px;
+    border-bottom: 1px solid rgba(232, 237, 242, 0.05);
+    color: rgba(232, 237, 242, 0.85);
+  }
+
   tbody tr:last-child td { border-bottom: none; }
+
   .overdue { color: #FF6B35; font-weight: 600; }
-  .status-badge { display: inline-block; font-family: 'Space Mono', monospace; font-size: 8px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 2px 6px; border-radius: 3px; }
+
+  .status-badge {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 2px 6px;
+    border-radius: 3px;
+  }
+
   .status-badge.outreach { color: #00D1B2; background: rgba(0, 209, 178, 0.1); }
-  .price-cell { font-family: 'Space Mono', monospace; font-weight: 700; color: #39FF14; white-space: nowrap; }
+  .status-badge.followup { color: #FF6B35; background: rgba(255, 107, 53, 0.1); }
+  .status-badge.replied { color: #39FF14; background: rgba(57, 255, 20, 0.1); }
+  .status-badge.closed-won { color: #39FF14; background: rgba(57, 255, 20, 0.15); }
+  .status-badge.closed-lost { color: rgba(232, 237, 242, 0.4); background: rgba(232, 237, 242, 0.05); }
+  .status-badge.researching { color: #A78BFA; background: rgba(167, 139, 250, 0.1); }
 
-  .value-breakdown-row td { padding: 0 10px 8px 10px; border-bottom: 1px solid rgba(232, 237, 242, 0.08); }
-  .value-breakdown { background: rgba(0, 209, 178, 0.04); border-left: 2px solid rgba(0, 209, 178, 0.2); border-radius: 0 4px 4px 0; padding: 6px 10px; margin-left: 4px; }
-  .value-breakdown-label { font-family: 'Space Mono', monospace; font-size: 7px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(0, 209, 178, 0.6); margin-bottom: 3px; }
+  .price-cell {
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    color: #39FF14;
+    white-space: nowrap;
+  }
+
+  .value-breakdown-row td {
+    padding: 0 10px 8px 10px;
+    border-bottom: 1px solid rgba(232, 237, 242, 0.08);
+  }
+
+  .value-breakdown {
+    background: rgba(0, 209, 178, 0.04);
+    border-left: 2px solid rgba(0, 209, 178, 0.2);
+    border-radius: 0 4px 4px 0;
+    padding: 6px 10px;
+    margin-left: 4px;
+  }
+
+  .value-breakdown-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 7px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(0, 209, 178, 0.6);
+    margin-bottom: 3px;
+  }
+
   .value-breakdown-items { display: flex; flex-wrap: wrap; gap: 4px 12px; }
-  .value-breakdown-item { font-size: 9px; color: rgba(232, 237, 242, 0.55); }
-  .value-breakdown-item span { color: rgba(232, 237, 242, 0.75); font-weight: 500; }
 
-  .empty { font-size: 10px; color: rgba(232, 237, 242, 0.3); font-style: italic; padding: 6px 0; }
-  .cal-day-label { font-family: 'Space Mono', monospace; font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(232, 237, 242, 0.4); margin-top: 6px; margin-bottom: 2px; }
+  .value-breakdown-item {
+    font-size: 9px;
+    color: rgba(232, 237, 242, 0.55);
+  }
 
-  .project-item { display: flex; justify-content: space-between; align-items: baseline; padding: 5px 0; border-bottom: 1px solid rgba(232, 237, 242, 0.05); }
-  .project-item:last-child { border-bottom: none; }
-  .project-name { font-size: 11px; font-weight: 600; color: #E8EDF2; }
-  .project-status { font-family: 'Space Mono', monospace; font-size: 9px; color: #00D1B2; }
-  .project-detail { font-size: 9px; color: rgba(232, 237, 242, 0.5); margin-top: 1px; }
+  .value-breakdown-item span {
+    color: rgba(232, 237, 242, 0.75);
+    font-weight: 500;
+  }
+
+  .inbox-item {
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(232, 237, 242, 0.05);
+  }
+
+  .inbox-item:last-child { border-bottom: none; }
+
+  .inbox-from { font-size: 11px; font-weight: 600; color: #E8EDF2; }
+
+  .inbox-subject { font-size: 10px; color: rgba(232, 237, 242, 0.7); }
+
+  .inbox-snippet {
+    font-size: 9px;
+    color: rgba(232, 237, 242, 0.4);
+    font-style: italic;
+    margin-top: 2px;
+  }
+
+  .inbox-tag {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 7px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 1px 5px;
+    border-radius: 2px;
+    color: #39FF14;
+    background: rgba(57, 255, 20, 0.1);
+    margin-left: 6px;
+  }
+
+  .cal-item { display: flex; gap: 10px; padding: 4px 0; font-size: 11px; }
+
+  .cal-time {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: #00D1B2;
+    min-width: 70px;
+    flex-shrink: 0;
+  }
+
+  .cal-title { color: rgba(232, 237, 242, 0.85); }
+
+  .cal-day-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(232, 237, 242, 0.4);
+    margin-top: 6px;
+    margin-bottom: 2px;
+  }
+
+  .box-grid { display: flex; gap: 14px; }
+
+  .box {
+    flex: 1;
+    background: rgba(13, 14, 20, 0.8);
+    border: 1px solid rgba(0, 209, 178, 0.12);
+    border-radius: 8px;
+    padding: 12px 14px;
+  }
+
+  .box h3 { font-size: 11px; font-weight: 600; color: #E8EDF2; margin-bottom: 8px; }
+
+  .box-item {
+    font-size: 10px;
+    color: rgba(232, 237, 242, 0.7);
+    padding: 2px 0;
+    padding-left: 14px;
+    position: relative;
+    line-height: 1.5;
+  }
+
+  .box-item::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 8px;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #10B854;
+    opacity: 0.7;
+  }
+
+  .box-item.warning::before { background: #FF6B35; }
+  .box-item.inactive::before { background: rgba(232, 237, 242, 0.3); }
 
   .revenue-grid { display: flex; gap: 14px; }
-  .revenue-box { flex: 1; background: rgba(13, 14, 20, 0.8); border: 1px solid rgba(0, 209, 178, 0.12); border-radius: 8px; padding: 10px 14px; text-align: center; }
-  .revenue-box h3 { font-size: 9px; font-family: 'Space Mono', monospace; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(232, 237, 242, 0.5); margin-bottom: 6px; }
-  .revenue-amount { font-family: 'Space Mono', monospace; font-size: 18px; font-weight: 700; color: #39FF14; }
+
+  .revenue-box {
+    flex: 1;
+    background: rgba(13, 14, 20, 0.8);
+    border: 1px solid rgba(0, 209, 178, 0.12);
+    border-radius: 8px;
+    padding: 12px 14px;
+    text-align: center;
+  }
+
+  .revenue-box h3 {
+    font-size: 9px;
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(232, 237, 242, 0.5);
+    margin-bottom: 6px;
+  }
+
+  .revenue-amount {
+    font-family: 'Space Mono', monospace;
+    font-size: 22px;
+    font-weight: 700;
+    color: #39FF14;
+  }
+
   .revenue-amount.zero { color: rgba(232, 237, 242, 0.25); }
-  .revenue-detail { font-size: 9px; color: rgba(232, 237, 242, 0.4); margin-top: 4px; }
+
+  .revenue-detail {
+    font-size: 9px;
+    color: rgba(232, 237, 242, 0.4);
+    margin-top: 4px;
+  }
 
   .pulse-grid { display: flex; gap: 10px; flex-wrap: wrap; }
-  .pulse-item { flex: 1; min-width: 100px; background: rgba(13, 14, 20, 0.6); border: 1px solid rgba(0, 209, 178, 0.08); border-radius: 6px; padding: 6px 10px; text-align: center; }
-  .pulse-label { font-size: 8px; font-family: 'Space Mono', monospace; letter-spacing: 1px; text-transform: uppercase; color: rgba(232, 237, 242, 0.4); margin-bottom: 3px; }
-  .pulse-value { font-family: 'Space Mono', monospace; font-size: 14px; font-weight: 700; color: #00D1B2; }
+
+  .pulse-item {
+    flex: 1;
+    min-width: 100px;
+    background: rgba(13, 14, 20, 0.6);
+    border: 1px solid rgba(0, 209, 178, 0.08);
+    border-radius: 6px;
+    padding: 8px 10px;
+    text-align: center;
+  }
+
+  .pulse-label {
+    font-size: 8px;
+    font-family: 'Space Mono', monospace;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: rgba(232, 237, 242, 0.4);
+    margin-bottom: 3px;
+  }
+
+  .pulse-value {
+    font-family: 'Space Mono', monospace;
+    font-size: 14px;
+    font-weight: 700;
+    color: #00D1B2;
+  }
+
   .pulse-value.stale { color: #FF6B35; }
 
-  .intel-item { padding: 5px 0; border-bottom: 1px solid rgba(232, 237, 242, 0.05); }
+  .intel-item {
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(232, 237, 242, 0.05);
+  }
+
   .intel-item:last-child { border-bottom: none; }
+
   .intel-headline { font-size: 11px; font-weight: 600; color: #E8EDF2; margin-bottom: 3px; }
-  .intel-source { font-family: 'Space Mono', monospace; font-size: 8px; color: rgba(0, 209, 178, 0.6); letter-spacing: 1px; text-transform: uppercase; }
-  .intel-analysis { font-size: 10px; color: rgba(232, 237, 242, 0.65); line-height: 1.5; margin-top: 3px; }
+
+  .intel-source {
+    font-family: 'Space Mono', monospace;
+    font-size: 8px;
+    color: rgba(0, 209, 178, 0.6);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .intel-analysis {
+    font-size: 10px;
+    color: rgba(232, 237, 242, 0.65);
+    line-height: 1.5;
+    margin-top: 3px;
+  }
 
   .rec-list { list-style: none; padding: 0; counter-reset: rec; }
-  .rec-list li { counter-increment: rec; font-size: 10px; color: rgba(232, 237, 242, 0.85); padding: 4px 0 4px 28px; position: relative; line-height: 1.5; border-bottom: 1px solid rgba(232, 237, 242, 0.04); }
-  .rec-list li:last-child { border-bottom: none; }
-  .rec-list li::before { content: counter(rec); position: absolute; left: 0; top: 5px; width: 18px; height: 18px; border-radius: 50%; background: rgba(57, 255, 20, 0.1); color: #39FF14; font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center; line-height: 1; text-align: center; padding-top: 1px; }
-  .rec-tag { font-family: 'Space Mono', monospace; font-size: 8px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #00D1B2; }
 
-  .footer { position: absolute; bottom: 24px; left: 40px; right: 40px; display: flex; justify-content: space-between; align-items: center; padding-top: 12px; border-top: 1px solid rgba(0, 209, 178, 0.1); }
+  .rec-list li {
+    counter-increment: rec;
+    font-size: 11px;
+    color: rgba(232, 237, 242, 0.85);
+    padding: 5px 0 5px 28px;
+    position: relative;
+    line-height: 1.5;
+    border-bottom: 1px solid rgba(232, 237, 242, 0.04);
+  }
+
+  .rec-list li:last-child { border-bottom: none; }
+
+  .rec-list li::before {
+    content: counter(rec);
+    position: absolute;
+    left: 0; top: 5px;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: rgba(57, 255, 20, 0.1);
+    color: #39FF14;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    text-align: center;
+    padding-top: 1px;
+  }
+
+  .rec-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #00D1B2;
+  }
+
+  .footer {
+    position: absolute;
+    bottom: 24px;
+    left: 40px; right: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 12px;
+    border-top: 1px solid rgba(0, 209, 178, 0.1);
+  }
+
   .footer-left { font-size: 9px; color: rgba(232, 237, 242, 0.3); }
-  .footer-right { font-family: 'Space Mono', monospace; font-size: 9px; color: rgba(0, 209, 178, 0.35); letter-spacing: 1px; }
+
+  .footer-right {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    color: rgba(0, 209, 178, 0.35);
+    letter-spacing: 1px;
+  }
+
+  .empty {
+    font-size: 10px;
+    color: rgba(232, 237, 242, 0.3);
+    font-style: italic;
+    padding: 6px 0;
+  }
+
+  .project-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(232, 237, 242, 0.05);
+  }
+
+  .project-item:last-child { border-bottom: none; }
+
+  .project-name { font-size: 11px; font-weight: 600; color: #E8EDF2; }
+
+  .project-status {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    color: #00D1B2;
+  }
+
+  .project-detail {
+    font-size: 9px;
+    color: rgba(232, 237, 242, 0.5);
+    margin-top: 1px;
+  }
 </style>
 </head>
 <body>
 
-<!-- PAGE 1: Dashboard + Operations -->
+<!-- PAGE 1 -->
 <div class="page">
   <div class="header">
     <div class="header-left">
@@ -155,16 +565,15 @@
       </div>
     </div>
     <div class="header-right">
-      <div class="header-date">MARCH 6, 2026</div>
+      <div class="header-date">MARCH 7, 2026</div>
       <div class="header-label">Morning Coffee</div>
     </div>
   </div>
 
-  <!-- Quick Stats -->
   <div class="stats-bar">
     <div class="stat-card highlight">
       <div class="stat-label">Pipeline Value</div>
-      <div class="stat-value">$7,000</div>
+      <div class="stat-value">$14,000</div>
       <div class="stat-sub">potential</div>
     </div>
     <div class="stat-card">
@@ -174,17 +583,16 @@
     </div>
     <div class="stat-card">
       <div class="stat-label">Active Prospects</div>
-      <div class="stat-value">2</div>
+      <div class="stat-value">4</div>
       <div class="stat-sub">in pipeline</div>
     </div>
     <div class="stat-card">
       <div class="stat-label">Last Outreach</div>
-      <div class="stat-value">0</div>
+      <div class="stat-value">1</div>
       <div class="stat-sub">days ago</div>
     </div>
   </div>
 
-  <!-- Inbox -->
   <div class="section">
     <div class="section-title">
       <div class="dot"></div> Inbox
@@ -193,7 +601,6 @@
     <div class="empty">No unread emails.</div>
   </div>
 
-  <!-- Pipeline -->
   <div class="section">
     <div class="section-title">
       <div class="dot"></div> Pipeline
@@ -212,7 +619,7 @@
         <tr>
           <td>Columbus Massage Center</td>
           <td><span class="status-badge outreach">Outreach Sent</span></td>
-          <td>0</td>
+          <td>1</td>
           <td>Mar 10</td>
           <td class="price-cell">$3,500</td>
         </tr>
@@ -222,11 +629,10 @@
               <div class="value-breakdown-label">VALUE BASIS</div>
               <div class="value-breakdown-items">
                 <div class="value-breakdown-item"><span>Professional tier</span></div>
-                <div class="value-breakdown-item">8+ pages</div>
-                <div class="value-breakdown-item">Vagaro booking integration</div>
-                <div class="value-breakdown-item">Gift card purchasing flow</div>
+                <div class="value-breakdown-item">10+ pages</div>
+                <div class="value-breakdown-item">Booking integration (Vagaro)</div>
+                <div class="value-breakdown-item">Gift card e-commerce</div>
                 <div class="value-breakdown-item">Full SEO + GBP</div>
-                <div class="value-breakdown-item">Mobile-first redesign</div>
               </div>
             </div>
           </td>
@@ -234,7 +640,7 @@
         <tr>
           <td>SAK Automotive</td>
           <td><span class="status-badge outreach">Outreach Sent</span></td>
-          <td>0</td>
+          <td>1</td>
           <td>Mar 10</td>
           <td class="price-cell">$3,500</td>
         </tr>
@@ -244,11 +650,53 @@
               <div class="value-breakdown-label">VALUE BASIS</div>
               <div class="value-breakdown-items">
                 <div class="value-breakdown-item"><span>Professional tier</span></div>
-                <div class="value-breakdown-item">6+ pages</div>
+                <div class="value-breakdown-item">7-10 pages</div>
                 <div class="value-breakdown-item">Online appointment booking</div>
-                <div class="value-breakdown-item">Google Reviews integration</div>
-                <div class="value-breakdown-item">Full SEO + GBP</div>
-                <div class="value-breakdown-item">SSL + modern hosting</div>
+                <div class="value-breakdown-item">Google Reviews feed</div>
+                <div class="value-breakdown-item">SSL + SEO + GBP</div>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>Nano's Car Detailing</td>
+          <td><span class="status-badge researching">Researching</span></td>
+          <td>--</td>
+          <td>--</td>
+          <td class="price-cell">$3,500</td>
+        </tr>
+        <tr class="value-breakdown-row">
+          <td colspan="5">
+            <div class="value-breakdown">
+              <div class="value-breakdown-label">VALUE BASIS</div>
+              <div class="value-breakdown-items">
+                <div class="value-breakdown-item"><span>Professional tier</span></div>
+                <div class="value-breakdown-item">8-9 pages</div>
+                <div class="value-breakdown-item">Before/after gallery</div>
+                <div class="value-breakdown-item">Bilingual (EN/ES)</div>
+                <div class="value-breakdown-item">Online booking</div>
+                <div class="value-breakdown-item">SEO + GBP cleanup</div>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>Total Fitness of Columbus</td>
+          <td><span class="status-badge researching">Researching</span></td>
+          <td>--</td>
+          <td>--</td>
+          <td class="price-cell">$3,500</td>
+        </tr>
+        <tr class="value-breakdown-row">
+          <td colspan="5">
+            <div class="value-breakdown">
+              <div class="value-breakdown-label">VALUE BASIS</div>
+              <div class="value-breakdown-items">
+                <div class="value-breakdown-item"><span>Professional tier</span></div>
+                <div class="value-breakdown-item">9 pages</div>
+                <div class="value-breakdown-item">Class schedule system</div>
+                <div class="value-breakdown-item">Membership inquiry forms</div>
+                <div class="value-breakdown-item">Full SEO + GBP + GA4</div>
               </div>
             </div>
           </td>
@@ -257,12 +705,14 @@
     </table>
   </div>
 
-  <!-- Calendar -->
   <div class="section">
     <div class="section-title">
       <div class="dot"></div> Calendar
     </div>
-    <div class="empty">No events scheduled for today.</div>
+    <div class="cal-day-label">TODAY -- SAT MAR 7</div>
+    <div class="empty">No events scheduled.</div>
+    <div class="cal-day-label">TOMORROW -- SUN MAR 8</div>
+    <div class="empty">No events scheduled.</div>
   </div>
 
   <div class="footer">
@@ -271,7 +721,7 @@
   </div>
 </div>
 
-<!-- PAGE 2: Projects + Strategy -->
+<!-- PAGE 2 -->
 <div class="page">
   <div class="header">
     <div class="header-left">
@@ -282,12 +732,11 @@
       </div>
     </div>
     <div class="header-right">
-      <div class="header-date">MARCH 6, 2026</div>
+      <div class="header-date">MARCH 7, 2026</div>
       <div class="header-label">Morning Coffee</div>
     </div>
   </div>
 
-  <!-- Active Projects -->
   <div class="section" style="margin-top: 16px;">
     <div class="section-title">
       <div class="dot"></div> Active Projects
@@ -295,54 +744,50 @@
     <div class="project-item">
       <div>
         <div class="project-name">Bloomin' Acres</div>
-        <div class="project-detail">Sourdough &amp; fresh produce website -- in progress</div>
+        <div class="project-detail">Sourdough and fresh produce website</div>
       </div>
       <div class="project-status">ACTIVE</div>
     </div>
-    <div class="project-item">
-      <div>
-        <div class="project-name">OphidianAI.com</div>
-        <div class="project-detail">Company website -- not yet started</div>
-      </div>
-      <div class="project-status">PLANNED</div>
-    </div>
   </div>
 
-  <!-- ClickUp Tasks -->
   <div class="section">
     <div class="section-title">
       <div class="dot"></div> Tasks
-      <div class="count">3 open, 0 overdue</div>
+      <div class="count">4 open, 3 due tomorrow</div>
     </div>
     <table>
       <thead>
         <tr>
           <th>Task</th>
-          <th>Priority</th>
+          <th>Status</th>
           <th>Due</th>
         </tr>
       </thead>
       <tbody>
         <tr>
+          <td>Created SEO Pipeline</td>
+          <td>To Do</td>
+          <td>Mar 8</td>
+        </tr>
+        <tr>
           <td>Follow up: SAK Automotive</td>
-          <td>High</td>
+          <td>To Do</td>
           <td>Mar 8</td>
         </tr>
         <tr>
           <td>Follow up: Columbus Massage Center</td>
-          <td>High</td>
+          <td>To Do</td>
           <td>Mar 8</td>
         </tr>
         <tr>
           <td>Build Accounting/Finance Sub-Agent</td>
-          <td>Low</td>
+          <td>To Do</td>
           <td>--</td>
         </tr>
       </tbody>
     </table>
   </div>
 
-  <!-- Revenue Tracker -->
   <div class="section">
     <div class="section-title">
       <div class="dot"></div> Revenue
@@ -351,17 +796,16 @@
       <div class="revenue-box">
         <h3>Actualized</h3>
         <div class="revenue-amount zero">$0</div>
-        <div class="revenue-detail">0 closed deals | $0 MRR</div>
+        <div class="revenue-detail">No closed deals yet</div>
       </div>
       <div class="revenue-box">
         <h3>Potential Pipeline</h3>
-        <div class="revenue-amount">$7,000</div>
-        <div class="revenue-detail">2 prospects at ~$3,500 avg</div>
+        <div class="revenue-amount">$14,000</div>
+        <div class="revenue-detail">4 prospects at $3,500 avg</div>
       </div>
     </div>
   </div>
 
-  <!-- Activity Pulse -->
   <div class="section">
     <div class="section-title">
       <div class="dot"></div> Activity Pulse
@@ -390,39 +834,37 @@
     </div>
   </div>
 
-  <!-- AI Intel -->
   <div class="section">
     <div class="section-title">
       <div class="dot"></div> AI Intel
     </div>
     <div class="intel-item">
-      <div class="intel-headline">Claude Code Voice Mode Rolls Out</div>
-      <div class="intel-source">Winbuzzer / Anthropic</div>
-      <div class="intel-analysis">Anthropic launched voice mode for Claude Code (hold spacebar to talk, release to send). Currently at ~5% rollout expanding through March. Could speed up your development workflow significantly -- worth enabling when available. Hands-free coding while reviewing designs or managing client calls.</div>
+      <div class="intel-headline">Claude Code Ultrathink Is Back</div>
+      <div class="intel-source">Medium</div>
+      <div class="intel-analysis">Extended thinking mode has returned to Claude Code, enabling deeper reasoning on complex coding tasks. Directly benefits OphidianAI's development workflow -- use ultrathink for complex client site architectures and debugging.</div>
     </div>
     <div class="intel-item">
-      <div class="intel-headline">40% of Web Designers Now Use AI Tools Daily</div>
-      <div class="intel-source">Figma / DesignRush / Codrops</div>
-      <div class="intel-analysis">AI web design tools (Framer, Webflow AI, Wix AI) are mainstream but focused on templates and no-code. OphidianAI's custom-built approach with Next.js + React is a differentiator -- position against template-based AI tools by emphasizing custom design, performance, and ownership. "AI-assisted, not AI-generated" is a strong pitch angle.</div>
+      <div class="intel-headline">2026 Agentic Coding Trends Report</div>
+      <div class="intel-source">Anthropic</div>
+      <div class="intel-analysis">Anthropic's report on agentic coding adoption trends. Worth reviewing for positioning OphidianAI's AI integration services -- data on how businesses are adopting AI-assisted development could inform client pitches.</div>
     </div>
     <div class="intel-item">
-      <div class="intel-headline">Opus 4.6 Defaults to Medium Effort for Subscribers</div>
-      <div class="intel-source">Anthropic / Releasebot</div>
-      <div class="intel-analysis">The model powering Iris now defaults to a balanced speed/thoroughness mode. This means morning coffee runs and prospect research should be faster without sacrificing quality. No action needed -- just a performance improvement to be aware of.</div>
+      <div class="intel-headline">12 Top Web Design Tools for 2026</div>
+      <div class="intel-source">Codrops</div>
+      <div class="intel-analysis">Roundup of leading web design tools this year. Check for new tools that could speed up client site delivery or offer competitive advantages over template builders like Hibu and Wix.</div>
     </div>
   </div>
 
-  <!-- Recommendations -->
   <div class="section">
     <div class="section-title">
       <div class="dot"></div> Today's Priorities
     </div>
     <ol class="rec-list">
-      <li><span class="rec-tag">PIPELINE</span> Both prospects were contacted today. Monitor for replies over the next 3-4 days. Follow-ups are scheduled for March 10.</li>
-      <li><span class="rec-tag">REVENUE</span> Revenue is at $0. Focus energy on closing one of the two active prospects. Consider preparing proposals proactively so you're ready when they respond.</li>
-      <li><span class="rec-tag">OUTREACH</span> Only 2 prospects in the pipeline. Research and contact 2-3 more businesses this week to keep the funnel moving.</li>
-      <li><span class="rec-tag">MARKETING</span> No social media or blog activity yet. Even one LinkedIn post about OphidianAI's approach to web design would start building visibility.</li>
-      <li><span class="rec-tag">AI-INTEL</span> Position against AI template builders (Wix, Framer) by emphasizing custom design + code ownership. Use "AI-assisted, not AI-generated" in outreach messaging.</li>
+      <li><span class="rec-tag">OUTREACH</span> Complete outreach for Nano's Car Detailing and Total Fitness -- cold emails are drafted, assessment HTMLs need PDF conversion and sending.</li>
+      <li><span class="rec-tag">TASKS</span> 3 ClickUp tasks due tomorrow (Mar 8): SEO Pipeline setup, SAK Automotive follow-up, Columbus Massage Center follow-up. Review and prep now.</li>
+      <li><span class="rec-tag">MARKETING</span> No social media or blog posts yet. Create your first piece of content to establish OphidianAI's online presence.</li>
+      <li><span class="rec-tag">REVENUE</span> Zero actualized revenue. Focus on moving the 2 outreach-sent prospects (CMC, SAK) toward meetings. Follow-ups are due Mar 10.</li>
+      <li><span class="rec-tag">AI-INTEL</span> Review Anthropic's 2026 Agentic Coding Trends Report for data points to use in client pitches about AI integration services.</li>
     </ol>
   </div>
 
