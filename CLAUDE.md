@@ -51,13 +51,28 @@ Skills are built organically as recurring workflows emerge. Don't create skills 
 
 ### Agents
 
-Specialized sub-agents that handle specific domains. Invoke by name or by describing what you need.
+Specialized agents organized by department. Invoke by name or by describing what you need.
 
-- **Sales Agent** -- `.claude/skills/agents/agent-sales/` -- Lead research, cold outreach, follow-ups, pipeline
-- **Content Agent** -- `.claude/skills/agents/agent-content/` -- Social posts, blog articles, website copy, case studies
-- **Dev Agent** -- `.claude/skills/agents/agent-dev/` -- Website builds, code quality, deployment, technical decisions
-- **Ops Agent** -- `.claude/skills/agents/agent-ops/` -- Project tracking, invoicing, proposals, SOPs, decision logging
-- **Research Agent** -- `.claude/skills/agents/agent-research/` -- AI industry tracking, Claude Code updates, competitive intel, tool discovery
+**Revenue Department** (`.claude/agents/revenue/`)
+
+- **Sales Agent** -- Lead research, cold outreach, follow-ups, pipeline
+- **Onboarding Agent** -- Prospect lifecycle (research through handoff)
+- **Research Agent** -- AI industry tracking, competitive intel, tool discovery
+
+**Marketing Department** (`.claude/agents/marketing/`)
+
+- **Content Agent** -- Social posts, blog articles, website copy, case studies
+
+**Engineering Department** (`.claude/agents/engineering/`)
+
+- **Dev Agent** -- Website builds, code quality, deployment, technical decisions
+
+**Operations Department** (`.claude/agents/operations/`)
+
+- **Ops Agent** -- Project tracking, invoicing, proposals, SOPs, decision logging
+
+Agent definitions live in `.claude/agents/<department>/<agent>/AGENT.md`.
+Iris (Chief of Staff) coordinates all agents from `.claude/agents/iris/AGENT.md`.
 
 ### Workflow Skills
 
