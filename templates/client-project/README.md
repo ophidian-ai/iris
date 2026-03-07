@@ -32,9 +32,11 @@ Research > Mockup > Approved > Build > Testing > Launch > Maintenance
 ## Scope
 
 **Pages:**
+
 - {{LIST_PAGES}}
 
 **Features:**
+
 - {{LIST_FEATURES}}
 
 ## Timeline

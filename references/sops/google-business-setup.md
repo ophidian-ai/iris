@@ -16,16 +16,16 @@
 
 ## 2. Optimize the Profile
 
-| Field | Guidance |
-|---|---|
-| **Business name** | Exact legal name. No keyword stuffing. |
-| **Primary category** | Most specific match (e.g., "Massage Therapist" not "Health & Wellness"). |
-| **Secondary categories** | Add 2-3 relevant ones. |
-| **Description** | 750 chars max. Include city name and core services. Natural tone, not salesy. |
-| **Phone number** | Main business line. |
-| **Website** | Link to the new OphidianAI-built site. |
-| **Hours** | Accurate, including special hours for holidays. |
-| **Service area** | Set if the business travels to customers. |
+| Field                    | Guidance                                                                      |
+| ------------------------ | ----------------------------------------------------------------------------- |
+| **Business name**        | Exact legal name. No keyword stuffing.                                        |
+| **Primary category**     | Most specific match (e.g., "Massage Therapist" not "Health & Wellness").      |
+| **Secondary categories** | Add 2-3 relevant ones.                                                        |
+| **Description**          | 750 chars max. Include city name and core services. Natural tone, not salesy. |
+| **Phone number**         | Main business line.                                                           |
+| **Website**              | Link to the new OphidianAI-built site.                                        |
+| **Hours**                | Accurate, including special hours for holidays.                               |
+| **Service area**         | Set if the business travels to customers.                                     |
 
 ## 3. Photos & Visual Content
 

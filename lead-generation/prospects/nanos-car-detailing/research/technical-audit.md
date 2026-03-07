@@ -29,12 +29,14 @@ The following raw template variables are rendered in the page footer, visible to
 {{placeholder_footer_reserve3}}
 {{placeholder_footer_reserve4}}
 ```
+
 - These are Hibu platform template variables that should be hidden or populated
 - Suggests the site was set up hastily and never properly reviewed
 
 ### 3. Incorrect Google Maps Link
 - The "Get Directions" link points to:
   `https://maps.google.com/maps?q=2161+State+Street%2C+Columbus%2C+IN+47201%2C+US(Eric%27s+Auto+Shops)`
+
 - The business is labeled as **"Eric's Auto Shops"** instead of Nano's Car Detailing & Cleaning
 - This is either a leftover from a previous Maps listing or a Hibu setup error
 
@@ -107,13 +109,13 @@ The following raw template variables are rendered in the page footer, visible to
 
 ## Summary
 
-| Category | Issues Found |
-|---|---|
-| Critical (visible to customers) | 4 |
-| Content | 4 |
-| SEO | 3 |
-| Design/UX | 3 |
-| Performance/Platform | 1 |
-| **Total** | **15** |
+| Category                        | Issues Found |
+| ------------------------------- | ------------ |
+| Critical (visible to customers) | 4            |
+| Content                         | 4            |
+| SEO                             | 3            |
+| Design/UX                       | 3            |
+| Performance/Platform            | 1            |
+| **Total**                       | **15**       |
 
 The site has fundamental credibility problems (lorem ipsum text, exposed template tags, wrong business name in Maps link) that are actively harming a well-established business with strong reviews and 12+ years of operation. This is a clear case where the quality of the business far exceeds the quality of its online presence.

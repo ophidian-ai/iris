@@ -20,30 +20,33 @@ PDF-style HTML documents to email to prospective clients showing what's wrong wi
 
 ## Layout
 
-| Section | Content |
-|---|---|
-| Header | OphidianAI dark background, logo, tagline, teal/green accents |
-| Title bar | Client business name, "Website Assessment" |
-| The Problem | 3-4 bullet points with icons calling out broken/outdated issues |
-| The Impact | 2-3 short statements tying issues to lost customers/revenue |
+| Section                 | Content                                                                                               |
+| ----------------------- | ----------------------------------------------------------------------------------------------------- |
+| Header                  | OphidianAI dark background, logo, tagline, teal/green accents                                         |
+| Title bar               | Client business name, "Website Assessment"                                                            |
+| The Problem             | 3-4 bullet points with icons calling out broken/outdated issues                                       |
+| The Impact              | 2-3 short statements tying issues to lost customers/revenue                                           |
 | Side-by-side comparison | Left: "Your Website Today" (current screenshot). Right: "What It Could Look Like" (mockup screenshot) |
-| What's Included | 4-5 feature highlights with icons |
-| Footer | OphidianAI branded (matches header) |
+| What's Included         | 4-5 feature highlights with icons                                                                     |
+| Footer                  | OphidianAI branded (matches header)                                                                   |
 
 ## Branding
 
 **Header/Footer (OphidianAI):**
+
 - Background: #0D1B2A
 - Teal accent: #0DB1B2
 - Green accent: #39FF14
 
 **CMC Body:**
+
 - Sage deep: #4a5d4a
 - Sage: #6b7f6b
 - Cream: #faf7f2
 - Gold: #c4a265
 
 **SAK Body:**
+
 - Charcoal: #1a1d21
 - Steel: #2a2d33
 - Orange: #e8601c
@@ -54,17 +57,20 @@ PDF-style HTML documents to email to prospective clients showing what's wrong wi
 ### Columbus Massage Center
 
 **The Problem:**
+
 - Booking widget is broken -- customers can't schedule online
 - Gift card purchasing page doesn't work
 - WordPress theme last updated in 2021 -- outdated and unmaintained
 - Mixed content warnings -- browser shows security issues
 
 **The Impact:**
+
 - Every failed booking attempt is a customer who goes somewhere else
 - Broken gift card page is lost revenue, especially around holidays
 - Security warnings erode trust from first-time visitors
 
 **What's Included:**
+
 - Working online booking integration
 - Functional gift card purchasing
 - Mobile-first responsive design
@@ -74,17 +80,20 @@ PDF-style HTML documents to email to prospective clients showing what's wrong wi
 ### SAK Automotive
 
 **The Problem:**
+
 - Built on HostGator Webzai -- a dead platform with no future
 - No SSL certificate -- browser shows "Not Secure" warning
 - No online booking or appointment scheduling
 - Not mobile-optimized -- invisible to 60%+ of searchers
 
 **The Impact:**
+
 - "Not Secure" warning drives away customers who Google them after a referral
 - No online booking means lost after-hours leads
 - Copyright still says 2017 -- signals a neglected business to new customers
 
 **What's Included:**
+
 - Modern responsive design with click-to-call
 - Online appointment booking
 - SSL certificate (HTTPS)
@@ -103,6 +112,7 @@ All captured and stored:
 ## Standard Practice
 
 Going forward, when researching any new prospect:
+
 1. Use Playwright to capture screenshots of their current website
 2. Save to `projects/<prospect>/current-site/` folder
 3. These screenshots feed into outreach materials and proposals

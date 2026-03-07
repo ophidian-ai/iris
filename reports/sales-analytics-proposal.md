@@ -14,31 +14,31 @@ OphidianAI is in early-stage outreach with no historical data. As volume increas
 
 ### Core Pipeline Metrics
 
-| Metric | Definition | How to Track |
-|---|---|---|
-| **Outreach Volume** | Total cold emails sent per week/month | Count of "Outreach Sent" status changes in prospect-tracker.md |
-| **Response Rate** | % of outreach that gets any reply | (Replied + later stages) / Outreach Sent |
-| **Meeting Rate** | % of outreach that converts to a meeting | Meeting Scheduled / Outreach Sent |
-| **Close Rate** | % of meetings that close | Closed Won / Meeting Scheduled |
-| **Pipeline Value** | Sum of Est. Value for all active prospects | Already tracked in morning coffee briefing |
-| **Win Rate** | % of total prospects that become clients | Closed Won / (Closed Won + Closed Lost) |
+| Metric              | Definition                                 | How to Track                                                   |
+| ------------------- | ------------------------------------------ | -------------------------------------------------------------- |
+| **Outreach Volume** | Total cold emails sent per week/month      | Count of "Outreach Sent" status changes in prospect-tracker.md |
+| **Response Rate**   | % of outreach that gets any reply          | (Replied + later stages) / Outreach Sent                       |
+| **Meeting Rate**    | % of outreach that converts to a meeting   | Meeting Scheduled / Outreach Sent                              |
+| **Close Rate**      | % of meetings that close                   | Closed Won / Meeting Scheduled                                 |
+| **Pipeline Value**  | Sum of Est. Value for all active prospects | Already tracked in morning coffee briefing                     |
+| **Win Rate**        | % of total prospects that become clients   | Closed Won / (Closed Won + Closed Lost)                        |
 
 ### Velocity Metrics
 
-| Metric | Definition | How to Track |
-|---|---|---|
-| **Days to First Reply** | Calendar days from outreach to first response | Replied date - Outreach Date |
-| **Days to Close** | Calendar days from first outreach to Closed Won | Closed Won date - Outreach Date |
-| **Stage Duration** | Average days spent in each pipeline stage | Track stage transition dates |
-| **Follow-Up Cadence** | Days between outreach and first follow-up | Follow-Up Date - Outreach Date |
+| Metric                  | Definition                                      | How to Track                    |
+| ----------------------- | ----------------------------------------------- | ------------------------------- |
+| **Days to First Reply** | Calendar days from outreach to first response   | Replied date - Outreach Date    |
+| **Days to Close**       | Calendar days from first outreach to Closed Won | Closed Won date - Outreach Date |
+| **Stage Duration**      | Average days spent in each pipeline stage       | Track stage transition dates    |
+| **Follow-Up Cadence**   | Days between outreach and first follow-up       | Follow-Up Date - Outreach Date  |
 
 ### Source Effectiveness
 
-| Metric | Definition | How to Track |
-|---|---|---|
+| Metric                     | Definition                                           | How to Track                             |
+| -------------------------- | ---------------------------------------------------- | ---------------------------------------- |
 | **Lead Source Conversion** | Which sources (Yelp, Chamber, Google) produce closes | Tag each prospect with source in tracker |
-| **Industry Conversion** | Which industries respond and close | Tag each prospect with industry |
-| **Outreach Method** | Cold email vs. phone vs. walk-in effectiveness | Tag each prospect with method |
+| **Industry Conversion**    | Which industries respond and close                   | Tag each prospect with industry          |
+| **Outreach Method**        | Cold email vs. phone vs. walk-in effectiveness       | Tag each prospect with method            |
 
 ## Implementation Plan
 
@@ -46,11 +46,11 @@ OphidianAI is in early-stage outreach with no historical data. As volume increas
 
 Add these columns to `prospect-tracker.md`:
 
-| New Column | Purpose |
-|---|---|
-| **Lead Source** | Where we found them (Yelp, Chamber, Google Maps, etc.) |
-| **Industry** | Business category (auto services, fitness, food, etc.) |
-| **Stage Dates** | Comma-separated dates for each stage transition |
+| New Column        | Purpose                                                     |
+| ----------------- | ----------------------------------------------------------- |
+| **Lead Source**   | Where we found them (Yelp, Chamber, Google Maps, etc.)      |
+| **Industry**      | Business category (auto services, fitness, food, etc.)      |
+| **Stage Dates**   | Comma-separated dates for each stage transition             |
 | **Outcome Notes** | Why won/lost (price, timing, no response, competitor, etc.) |
 
 This is lightweight -- just 4 new columns in the existing tracker.

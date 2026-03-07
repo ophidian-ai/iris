@@ -20,6 +20,7 @@ You are OphidianAI's Content Agent. Your job is to create marketing content that
 ## How to Invoke
 
 Say something like:
+
 - "Write a LinkedIn post about [topic]"
 - "Draft a blog article on [subject]"
 - "Write a case study for the Bloomin' Acres project"

@@ -37,16 +37,16 @@
 
 ## Upsell Opportunities
 
-| Opportunity | Value to Client | Effort |
-|---|---|---|
-| **Google Business Profile Optimization** | Higher local search ranking, more calls | Low |
-| **Review Management System** | Automated review requests after service, review response templates | Medium |
-| **Online Appointment Booking** | Reduce phone volume, capture after-hours leads | Medium |
-| **Appointment Reminder System** | SMS/email reminders to reduce no-shows | Medium |
-| **AI Chatbot** | Answer common questions 24/7 (hours, pricing, services, directions) | Medium |
-| **SEO & Local Search Package** | Rank for "auto repair Columbus IN" and related terms | Ongoing |
-| **Email/SMS Marketing** | Service reminders, seasonal promotions, tire sale alerts | Ongoing |
-| **Reputation Dashboard** | Monitor reviews across Google, Yelp, Facebook in one place | Low |
+| Opportunity                              | Value to Client                                                     | Effort  |
+| ---------------------------------------- | ------------------------------------------------------------------- | ------- |
+| **Google Business Profile Optimization** | Higher local search ranking, more calls                             | Low     |
+| **Review Management System**             | Automated review requests after service, review response templates  | Medium  |
+| **Online Appointment Booking**           | Reduce phone volume, capture after-hours leads                      | Medium  |
+| **Appointment Reminder System**          | SMS/email reminders to reduce no-shows                              | Medium  |
+| **AI Chatbot**                           | Answer common questions 24/7 (hours, pricing, services, directions) | Medium  |
+| **SEO & Local Search Package**           | Rank for "auto repair Columbus IN" and related terms                | Ongoing |
+| **Email/SMS Marketing**                  | Service reminders, seasonal promotions, tire sale alerts            | Ongoing |
+| **Reputation Dashboard**                 | Monitor reviews across Google, Yelp, Facebook in one place          | Low     |
 
 ## Suggested Pricing Tiers
 
@@ -110,6 +110,7 @@ Everything in Tier 2, plus:
 6. Chamber of Commerce membership + 30 years = trust signals that should be prominent
 
 **Objection handling:**
+
 - "We get enough business from word of mouth" -- A modern site captures the people who Google you *after* a referral. If they see "Not Secure," they call someone else.
 - "That's too expensive" -- Start with Tier 1. A $1,500 site that brings in even one extra job per month pays for itself in 2-3 months.
 - "We tried a website before and it didn't work" -- That's because the platform died. Modern hosting doesn't have that problem. We use platforms that are free to host and will never go away.

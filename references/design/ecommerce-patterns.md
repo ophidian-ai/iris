@@ -100,6 +100,7 @@ Categories are stored in Supabase `menu_sections` table with `title` and `sort_o
 ### Product Card Component
 
 Each menu item row contains:
+
 - Product name (linked to detail page)
 - Dotted leader line
 - Formatted price
@@ -199,6 +200,7 @@ const session = await stripe.billingPortal.sessions.create({
 ### Setup
 
 The webhook endpoint at `api/stripe/webhook.js` must:
+
 - Disable Vercel's default body parser to access raw body for signature verification.
 - Validate the `stripe-signature` header against `STRIPE_WEBHOOK_SECRET`.
 
@@ -345,6 +347,7 @@ lpContent.forEach(({ key, value }) => {
 ### Auth-Aware Navigation
 
 The sidebar navigation adapts based on auth state:
+
 - **Logged out:** Shows "Sign In" link.
 - **Logged in (regular user):** Shows "My Account" submenu with Cart, Favorites, Orders, Profile.
 - **Logged in (admin):** Shows "Dashboard" link instead of My Account submenu.

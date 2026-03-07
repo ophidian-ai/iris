@@ -559,16 +559,16 @@ Framer Motion respects `prefers-reduced-motion` automatically as of v10+. No ext
 
 ## When to Use What
 
-| Pattern | Best For | Complexity |
-|---|---|---|
-| CSS-only fade-in | Static HTML sites, minimal JS | Low |
-| CSS staggered children | Feature grids, team sections | Low |
-| CSS image reveal | Portfolio pages, case studies | Low |
-| Tailwind animate | Tailwind projects, quick effects | Low |
-| Framer Motion fade-in | React/Next.js projects | Medium |
-| Framer Motion staggered | Dynamic lists, React apps | Medium |
-| Framer Motion parallax | Hero sections, visual depth | Medium |
-| Framer Motion page transitions | Multi-page React/Next.js apps | Medium |
+| Pattern                        | Best For                         | Complexity |
+| ------------------------------ | -------------------------------- | ---------- |
+| CSS-only fade-in               | Static HTML sites, minimal JS    | Low        |
+| CSS staggered children         | Feature grids, team sections     | Low        |
+| CSS image reveal               | Portfolio pages, case studies    | Low        |
+| Tailwind animate               | Tailwind projects, quick effects | Low        |
+| Framer Motion fade-in          | React/Next.js projects           | Medium     |
+| Framer Motion staggered        | Dynamic lists, React apps        | Medium     |
+| Framer Motion parallax         | Hero sections, visual depth      | Medium     |
+| Framer Motion page transitions | Multi-page React/Next.js apps    | Medium     |
 
 ## Guidelines
 

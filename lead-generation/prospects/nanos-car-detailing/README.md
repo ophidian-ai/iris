@@ -59,14 +59,14 @@
 
 ## Upsell Opportunities
 
-| Opportunity | Value | Notes |
-|---|---|---|
-| Google Business Profile optimization | Included in Professional | Fix the "Eric's Auto Shops" Maps listing issue |
-| Online booking system | $200-400 add-on | Replace basic contact form with real scheduling |
-| Bilingual site (EN/ES) | $300-500 add-on | They already serve Spanish-speaking clients |
-| Email marketing integration | $100-200 add-on | They already have an email list signup on current site |
-| Monthly maintenance | $100/mo | Hosting, SSL, updates, monitoring |
-| Gift card/coupon system | $200-300 add-on | They already promote holiday gift cards and discount codes |
+| Opportunity                          | Value                    | Notes                                                      |
+| ------------------------------------ | ------------------------ | ---------------------------------------------------------- |
+| Google Business Profile optimization | Included in Professional | Fix the "Eric's Auto Shops" Maps listing issue             |
+| Online booking system                | $200-400 add-on          | Replace basic contact form with real scheduling            |
+| Bilingual site (EN/ES)               | $300-500 add-on          | They already serve Spanish-speaking clients                |
+| Email marketing integration          | $100-200 add-on          | They already have an email list signup on current site     |
+| Monthly maintenance                  | $100/mo                  | Hosting, SSL, updates, monitoring                          |
+| Gift card/coupon system              | $200-300 add-on          | They already promote holiday gift cards and discount codes |
 
 ## Sales Angle
 

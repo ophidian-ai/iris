@@ -16,6 +16,7 @@ When Eric wants to find businesses that could benefit from OphidianAI's services
 ## Tools
 
 Use the **Firecrawl** plugin (`/firecrawl`) for all web research:
+
 - Search for businesses using `firecrawl search`
 - Scrape and evaluate business websites using `firecrawl scrape`
 - Use `firecrawl map` to discover pages on a business site
@@ -31,10 +32,10 @@ Use the **Firecrawl** plugin (`/firecrawl`) for all web research:
 
 A table with the following columns:
 
-| Business Name | Location | Industry | Website | Issues Found | Opportunity | Contact Info |
-|---|---|---|---|---|---|---|
-| Example Bakery | Columbus, IN | Bakery | www.example.com | Not mobile-friendly, slow | Redesign | (555) 123-4567 |
-| Joe's Plumbing | Columbus, IN | Trades | None | No web presence | New site | Found on Google Maps |
+| Business Name  | Location     | Industry | Website         | Issues Found              | Opportunity | Contact Info         |
+| -------------- | ------------ | -------- | --------------- | ------------------------- | ----------- | -------------------- |
+| Example Bakery | Columbus, IN | Bakery   | www.example.com | Not mobile-friendly, slow | Redesign    | (555) 123-4567       |
+| Joe's Plumbing | Columbus, IN | Trades   | None            | No web presence           | New site    | Found on Google Maps |
 
 After the table, include:
 

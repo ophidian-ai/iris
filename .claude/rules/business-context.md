@@ -2,6 +2,7 @@
 
 ## Stage
 OphidianAI is pre-revenue and early stage. Every recommendation should factor in:
+
 - Limited budget (solo founder, no funding)
 - Limited time (Eric is the only person doing everything)
 - Growth is the priority -- bias toward actions that generate clients and revenue
