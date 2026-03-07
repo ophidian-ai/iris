@@ -6,10 +6,10 @@
 
 | Metric | Amount |
 | --- | --- |
-| Total Monthly Recurring | $0.00 |
-| Total Annual Recurring | $0.00 |
+| Total Monthly Recurring | $126.20 |
+| Total Annual Recurring | $1,514.40 |
 | Total One-Time (This Month) | $0.00 |
-| Monthly Burn Rate | $0.00 |
+| Monthly Burn Rate | $126.20 |
 
 ## Recurring Expenses
 
@@ -19,7 +19,7 @@
 | Cloudflare (ophidianai.com) | $0.00 | ~$10.00 | Infrastructure | -- | Domain registration and DNS | Active |
 | Claude Code Max | $100.00 | $1,200.00 | Dev Tools | 2026-03-02 | AI-assisted development, Iris agent | Active |
 | Firecrawl | $0.00 | $0.00 | Sales | 2026-03-05 | Web scraping for prospect research. Free tier. Upgrade to $19/mo when actively prospecting. | Active (Free) |
-| Warmbox Solo | $19.00 | $228.00 | Sales | Pending | Email warmup for cold outreach deliverability. Required before resuming cold emails. | Pending |
+| Warmbox Solo | $19.00 | $228.00 | Sales | 2026-03-07 | Email warmup for cold outreach deliverability. Required before resuming cold emails. | Active |
 
 **Notes:**
 
