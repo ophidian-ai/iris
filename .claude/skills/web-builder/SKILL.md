@@ -341,6 +341,72 @@ Reference: `operations/references/sops/seo-full-setup.md`
 
 ---
 
+## Audit Checkpoints
+
+Audits run at the end of each phase and at key transition points. Each audit produces a structured report and blocks progress until issues are resolved.
+
+### When to Audit
+
+| Trigger | Audit Type |
+|---------|-----------|
+| End of Phase 2 (Scaffold) | **Foundation Audit** -- dev server runs, folder structure correct, Tailwind config matches brand, vercel.json headers present |
+| End of Phase 3 (Design System) | **Component Audit** -- all planned components render without errors, barrel exports work, no TypeScript errors, consistent prop patterns |
+| After Home page (Phase 4) | **Pattern Audit** -- visual consistency, section composition works, responsive at all breakpoints, content is real (no lorem ipsum) |
+| End of Phase 4 (All Pages) | **Content Audit** -- every page has real copy, no placeholder text, all internal links resolve, heading hierarchy correct (single H1), all images have alt text |
+| End of Phase 5 (Integration) | **Integration Audit** -- every selected feature works end-to-end (forms send, payments process, blog renders, analytics fires, SEO metadata present on all pages) |
+| End of Phase 6 (Pre-deploy) | **Production Audit** -- Lighthouse scores meet targets, go-live checklist complete, OG image exists, security headers verified, no console errors |
+
+### Audit Report Format
+
+Each audit produces a report saved to the project's reports folder:
+- **OphidianAI site:** `docs/audits/YYYY-MM-DD-<phase>-audit.md`
+- **Client projects:** `revenue/projects/active/<project>/reports/YYYY-MM-DD-<phase>-audit.md`
+
+```markdown
+# [Phase Name] Audit Report
+**Date:** YYYY-MM-DD
+**Phase:** [phase number and name]
+**Status:** PASS / FAIL / PASS WITH WARNINGS
+
+## Checks
+
+| Check | Status | Notes |
+|-------|--------|-------|
+| [item] | PASS/FAIL/WARN | [details] |
+
+## Issues Found
+- [list of issues with severity: CRITICAL / WARNING / INFO]
+
+## Actions Required
+- [ ] [action items that must be resolved before proceeding]
+
+## Score
+[X/Y checks passed] -- [percentage]%
+```
+
+### Audit Follow-Up
+
+Every audit is immediately followed by a **fix cycle**:
+
+1. **Review the report** -- present findings to the user
+2. **Triage issues** -- confirm which items to fix now vs defer vs intentionally remove
+3. **Fix all CRITICAL items** -- these block progress unconditionally
+4. **Fix or remove WARNING items** -- either resolve or make a deliberate decision to remove the feature/section
+5. **Log INFO items** -- note for future improvement, no action required now
+6. **Re-run affected checks** -- verify fixes resolved the issues
+7. **Update the audit report** -- append a "Follow-Up" section with resolution status
+
+Do not advance to the next phase until the follow-up is complete and all CRITICAL/WARNING items are resolved or intentionally deferred with user approval.
+
+### Audit Rules
+
+- **CRITICAL issues block progress** -- do not advance to the next phase until resolved
+- **WARNING issues get logged** -- can proceed but must be resolved before Phase 6
+- **INFO items are advisory** -- nice-to-have improvements
+- **All audits are cumulative** -- later audits re-check items from earlier phases to catch regressions
+
+---
+
 ## Related Skills & SOPs
 
 | Resource | Path | Purpose |

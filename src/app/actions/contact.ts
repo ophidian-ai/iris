@@ -1,5 +1,9 @@
 "use server";
 
+import { Resend } from "resend";
+
+const resend = new Resend(process.env.RESEND_API_KEY);
+
 export type ContactFormState = {
   success: boolean;
   message: string;
@@ -29,19 +33,29 @@ export async function submitContactForm(
     return { success: false, message: "Message is required." };
   }
 
-  // --- Send email (placeholder) ---
-  // TODO: Replace with Resend integration:
-  //
-  // import { Resend } from "resend";
-  // const resend = new Resend(process.env.RESEND_API_KEY);
-  // await resend.emails.send({
-  //   from: "OphidianAI <noreply@ophidianai.com>",
-  //   to: "eric.lefler@ophidianai.com",
-  //   subject: `New contact form submission from ${name}`,
-  //   text: `Name: ${name}\nEmail: ${email}\nCompany: ${company}\nBudget: ${budget}\n\n${message}`,
-  // });
-
-  console.log("Contact form submission:", { name, email, company, budget, message });
+  // --- Send email via Resend ---
+  try {
+    await resend.emails.send({
+      from: "OphidianAI Contact Form <onboarding@resend.dev>",
+      to: "eric.lefler@ophidianai.com",
+      subject: `New contact form submission from ${name}`,
+      text: [
+        `Name: ${name}`,
+        `Email: ${email}`,
+        `Company: ${company || "Not provided"}`,
+        `Budget: ${budget || "Not provided"}`,
+        "",
+        `Message:`,
+        message,
+      ].join("\n"),
+    });
+  } catch (error) {
+    console.error("Failed to send contact form email:", error);
+    return {
+      success: false,
+      message: "Something went wrong sending your message. Please try again.",
+    };
+  }
 
   return { success: true, message: "Message sent. We'll be in touch shortly." };
 }

@@ -24,12 +24,12 @@ export default function PortfolioPage() {
         <section className="py-24 md:py-32">
           <Container width="default">
             <div className="glass rounded-2xl overflow-hidden border border-primary/10 animate-fade-up">
-              {/* Screenshot placeholder */}
-              <div className="relative aspect-video bg-surface flex items-center justify-center border-b border-primary/10">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5" />
-                <Text variant="body" className="text-foreground-dim">
-                  Screenshot coming soon
-                </Text>
+              <div className="relative aspect-video bg-surface border-b border-primary/10 overflow-hidden">
+                <img
+                  src="/images/portfolio/bloomin-acres-homepage.png"
+                  alt="Bloomin' Acres website homepage showing the bakery's menu and ordering system"
+                  className="w-full h-full object-cover object-top"
+                />
               </div>
 
               {/* Content */}
@@ -70,10 +70,6 @@ export default function PortfolioPage() {
                     </div>
                   ))}
                 </div>
-
-                <Button variant="secondary" size="md" href="#">
-                  View Project
-                </Button>
               </div>
             </div>
           </Container>

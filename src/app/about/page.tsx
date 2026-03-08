@@ -69,10 +69,16 @@ export default function AboutPage() {
               {/* Right: photo placeholder */}
               <div className="w-full lg:w-1/2">
                 <div className="glass relative aspect-[4/3] rounded-2xl overflow-hidden flex items-center justify-center border border-primary/10 bg-surface">
-                  <Text variant="small" className="text-foreground-dim">
-                    Photo coming soon
-                  </Text>
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5" />
+                  <div className="flex flex-col items-center gap-4">
+                    <div className="h-24 w-24 rounded-full bg-primary/10 border-2 border-primary/30 flex items-center justify-center">
+                      <span className="text-4xl font-bold text-primary font-mono">EL</span>
+                    </div>
+                    <div className="text-center">
+                      <p className="text-foreground font-semibold">Eric Lefler</p>
+                      <p className="text-foreground-muted text-sm">Founder, OphidianAI</p>
+                    </div>
+                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 pointer-events-none" />
                 </div>
               </div>
             </div>

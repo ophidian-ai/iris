@@ -6,6 +6,38 @@ import { Container } from "@/components/ui/Container";
 import { Heading } from "@/components/ui/Heading";
 import { Text } from "@/components/ui/Text";
 import { Button } from "@/components/ui/Button";
+import { JsonLd } from "@/components/JsonLd";
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  itemListElement: [
+    {
+      "@type": "Service",
+      position: 1,
+      name: "AI Assistants & Chatbots",
+      description:
+        "Custom conversational AI for customer support, lead qualification, and internal operations.",
+      provider: { "@type": "Organization", name: "OphidianAI" },
+    },
+    {
+      "@type": "Service",
+      position: 2,
+      name: "Workflow Automation",
+      description:
+        "Connect tools and automate repetitive processes with intelligent automation.",
+      provider: { "@type": "Organization", name: "OphidianAI" },
+    },
+    {
+      "@type": "Service",
+      position: 3,
+      name: "Custom AI Integrations",
+      description:
+        "AI solutions built on your proprietary data, plugged into your existing tech stack.",
+      provider: { "@type": "Organization", name: "OphidianAI" },
+    },
+  ],
+};
 
 const services = [
   {
@@ -96,6 +128,7 @@ const services = [
 export default function ServicesPage() {
   return (
     <PageWrapper>
+      <JsonLd data={serviceSchema} />
       <div className="grain">
         <HeroSimple
           title="Our Services"
