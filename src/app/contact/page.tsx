@@ -30,7 +30,7 @@ export default function ContactPage() {
               />
             </div>
 
-            {/* Right: Contact info + Calendly */}
+            {/* Right: Contact info */}
             <div className="lg:col-span-2 space-y-8">
               <Card>
                 <Heading level={3} className="mb-6 text-lg font-semibold">
@@ -119,44 +119,11 @@ export default function ContactPage() {
                   </div>
                 </div>
               </Card>
-
-              <Card>
-                <Heading level={3} className="mb-4 text-lg font-semibold">
-                  Prefer to schedule directly?
-                </Heading>
-                <Text variant="small" className="mb-4">
-                  Pick a time that works for you and we&apos;ll meet to discuss
-                  your project.
-                </Text>
-                <div className="rounded-lg border border-surface-border bg-surface/50 p-8 text-center">
-                  <Text variant="small" className="!text-foreground-dim">
-                    Calendly widget coming soon
-                  </Text>
-                </div>
-              </Card>
             </div>
           </div>
         </Container>
       </section>
 
-      {/* Newsletter placeholder */}
-      <section className="border-t border-surface-border py-16 md:py-20">
-        <Container width="narrow">
-          <div className="text-center">
-            <Heading level={3} className="mb-3 text-xl font-semibold">
-              Not ready to talk?
-            </Heading>
-            <Text variant="body" className="mb-6">
-              Subscribe to our newsletter for AI insights and industry updates.
-            </Text>
-            <div className="rounded-lg border border-surface-border bg-surface/50 p-6 text-center">
-              <Text variant="small" className="!text-foreground-dim">
-                Newsletter signup coming soon
-              </Text>
-            </div>
-          </div>
-        </Container>
-      </section>
     </PageWrapper>
   );
 }

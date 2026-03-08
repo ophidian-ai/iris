@@ -86,26 +86,6 @@ export function FooterMain() {
               </li>
               <li>
                 <a
-                  href="https://linkedin.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-foreground-muted transition-colors hover:text-primary"
-                >
-                  LinkedIn
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://x.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-foreground-muted transition-colors hover:text-primary"
-                >
-                  X / Twitter
-                </a>
-              </li>
-              <li>
-                <a
                   href="https://github.com/ophidian-ai"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -126,18 +106,9 @@ export function FooterMain() {
             &copy; 2026 OphidianAI. All rights reserved.
           </p>
           <div className="flex gap-6">
-            <Link
-              href="/privacy"
-              className="text-xs text-foreground-dim transition-colors hover:text-foreground-muted"
-            >
-              Privacy
-            </Link>
-            <Link
-              href="/terms"
-              className="text-xs text-foreground-dim transition-colors hover:text-foreground-muted"
-            >
-              Terms
-            </Link>
+            <span className="text-xs text-foreground-dim">
+              Columbus, Indiana
+            </span>
           </div>
         </div>
       </div>
