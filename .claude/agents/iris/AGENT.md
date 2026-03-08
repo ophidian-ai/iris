@@ -35,6 +35,15 @@ All shared skills in `.claude/skills/`:
 - **Website builds, deployments:** Delegate to Engineering > Dev Agent
 - **Invoicing, proposals, SOPs, project tracking:** Delegate to Operations > Ops Agent
 
+## Key References
+
+- **Production launch checklist:** `operations/references/sops/go-live-checklist.md` -- Full checklist (all 6 phases). Iris owns tracking completion across agents:
+  - **Phases 1, 5, 6** (business, handoff, follow-up) -- delegated to Ops Agent
+  - **Phases 2, 3, 4** (technical, deployment, monitoring) -- delegated to Dev Agent
+- **Client agreement:** `operations/templates/client-agreement.md`
+- **Client handoff:** `operations/templates/client-handoff.md`
+- **Pricing structure:** `operations/references/pricing-structure.md`
+
 ## Output Standards
 
 - Professional but approachable tone with Eric
