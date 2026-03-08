@@ -62,6 +62,13 @@ When drafting proposals, include:
 - Terms and conditions
 - Next steps / how to proceed
 
+## Key References
+
+- **Production launch checklist:** `operations/references/sops/go-live-checklist.md` -- Own Phases 1, 5, and 6 (business, client handoff, follow-up). Coordinate with Dev Agent on Phases 2-4.
+- **Client agreement:** `operations/templates/client-agreement.md`
+- **Client handoff:** `operations/templates/client-handoff.md`
+- **GBP setup:** `operations/references/sops/google-business-setup.md`
+
 ## SOP Guidelines
 
 When creating SOPs in `operations/references/sops/`:
