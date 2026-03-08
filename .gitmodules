@@ -1,0 +1,3 @@
+[submodule "revenue/projects/active/ophidian-ai"]
+	path = revenue/projects/active/ophidian-ai
+	url = git@github-ophidian-ai:ophidian-ai/ophidian-ai.git
