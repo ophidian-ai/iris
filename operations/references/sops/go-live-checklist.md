@@ -26,6 +26,8 @@ Reference SOPs: `seo-basics.md`, `seo-full-setup.md`, `monitoring-setup.md`, `go
 - [ ] All external links working and opening in new tab
 - [ ] Forms submitting correctly (contact, signup, checkout)
 - [ ] Payment processing tested (if e-commerce)
+- [ ] Order review/confirmation step before payment redirect (if e-commerce)
+- [ ] Cart stock validation -- client-side warning + server-side enforcement (if e-commerce)
 - [ ] Email notifications firing correctly (if applicable)
 - [ ] Authentication flows working (if applicable)
 
@@ -44,6 +46,7 @@ Reference SOPs: `seo-basics.md`, `seo-full-setup.md`, `monitoring-setup.md`, `go
 - [ ] Twitter card tags on all pages
 - [ ] Schema markup: LocalBusiness on homepage, BreadcrumbList on subpages
 - [ ] Product schema on product pages (if e-commerce)
+- [ ] JS-rendered pages have static SEO fallback content (prevents soft 404s from Google)
 
 ### Performance
 
@@ -60,6 +63,25 @@ Reference SOPs: `seo-basics.md`, `seo-full-setup.md`, `monitoring-setup.md`, `go
 - [ ] Environment variables properly configured
 - [ ] Admin/dashboard pages blocked from indexing (`noindex`)
 - [ ] HTTPS enforced (HTTP redirects to HTTPS)
+- [ ] Security headers configured in `vercel.json` (or equivalent):
+  - [ ] `Content-Security-Policy` -- restrict script/style/font/img/connect sources
+  - [ ] `Strict-Transport-Security` -- `max-age=63072000; includeSubDomains; preload`
+  - [ ] `X-Content-Type-Options: nosniff`
+  - [ ] `X-Frame-Options: DENY`
+  - [ ] `Referrer-Policy: strict-origin-when-cross-origin`
+  - [ ] `Permissions-Policy` -- disable unused APIs (camera, microphone, geolocation)
+- [ ] Static asset caching headers configured:
+  - [ ] Images/brand assets: `max-age=31536000, immutable`
+  - [ ] CSS/JS: `max-age=86400, stale-while-revalidate=604800`
+
+### Accessibility
+
+- [ ] Skip-to-content link on all pages (visually hidden, visible on focus)
+- [ ] All interactive elements meet 44px minimum touch target (WCAG 2.5.5)
+- [ ] Form inputs have `min-height: 44px` for mobile usability
+- [ ] Focus-visible styles on all interactive elements
+- [ ] Proper heading hierarchy (h1 > h2 > h3, no skipped levels)
+- [ ] Alt text on all images (decorative images use `alt=""` with `aria-hidden="true"`)
 
 ## Phase 3: DNS & Deployment
 
