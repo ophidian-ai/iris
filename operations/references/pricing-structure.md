@@ -115,6 +115,7 @@ Use this to determine which tier fits:
 | Logo design                                   | $300-$500      |
 | Content writing (per page, if not in tier)    | $100-$200/page |
 | SEO Cleanup (for existing website clients)    | $400-$800      |
+| Attribution removal ("Built by OphidianAI")   | $500 (one-time) |
 
 ---
 

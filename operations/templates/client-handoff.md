@@ -8,6 +8,12 @@
 
 ---
 
+## Agreement
+
+Your signed service agreement is on file and covers project scope, intellectual property, attribution, and maintenance terms. Contact eric.lefler@ophidianai.com for a copy.
+
+---
+
 ## What's Included in Your Monthly Plan (${{MONTHLY_FEE}}/mo)
 
 - Hosting on fast, secure servers (Vercel)
