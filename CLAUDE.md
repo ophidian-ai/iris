@@ -86,9 +86,9 @@ Iris (Chief of Staff) coordinates all agents from `.claude/agents/iris/AGENT.md`
 The project is organized by department:
 
 - `iris/` -- Context files, saved conversations, daily briefing reports
-- `revenue/` -- Lead generation, prospect pipeline, client projects
+- `revenue/` -- Lead generation and prospect pipeline
 - `marketing/` -- Content drafts, social media, blog articles
-- `engineering/` -- (reserved for future technical work)
+- `engineering/` -- Client delivery build shop: active projects, dev tools, references, templates, specs
 - `operations/` -- Decisions, SOPs, templates, references, reports
 - `shared/` -- Brand assets, archives, design docs/plans
 
@@ -114,18 +114,18 @@ Memory + context files + decision log = Iris gets smarter over time without re-e
 
 ## Lead Generation
 
-Prospect pipeline lives in `revenue/lead-generation/`. The single source of truth for pipeline status is `revenue/lead-generation/prospect-tracker.md`.
+Revenue owns lead generation and the prospect pipeline (not project delivery -- that's Engineering). Prospect pipeline lives in `revenue/lead-generation/`. The single source of truth for pipeline status is `revenue/lead-generation/prospect-tracker.md`.
 
 - `revenue/lead-generation/prospects/` -- Individual prospect folders with research, mockups, outreach emails, and assessments
 - `revenue/lead-generation/prospect-tracker.md` -- Pipeline table with status, dates, and follow-up schedule
 
 ## Projects
 
-Active client projects live in `revenue/projects/active/`. Each project gets a folder with a `README.md` describing what it is, its status, and key dates. Every project also gets a `point-of-contact/contact.md` with the client's contact information (use `operations/templates/point-of-contact.md` as the template).
+Active client projects live in `engineering/projects/`. Each project gets a folder with a `README.md` describing what it is, its status, and key dates. Every project also gets a `point-of-contact/contact.md` with the client's contact information (use `operations/templates/point-of-contact.md` as the template).
 
 Current projects:
 
-- **Bloomin' Acres** -- `revenue/projects/active/bloomin-acres/`
+- **Bloomin' Acres** -- `engineering/projects/bloomin-acres/`
 
 ## Templates
 

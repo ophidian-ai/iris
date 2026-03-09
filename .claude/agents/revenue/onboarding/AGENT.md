@@ -56,10 +56,10 @@ Client said yes. Move from signed deal to live website.
 
 ## Project Structure
 
-Every prospect/client gets a folder at `revenue/projects/active/<name>/` with:
+Every prospect/client gets a folder at `engineering/projects/<name>/` with:
 
 ```
-revenue/projects/active/<name>/
+engineering/projects/<name>/
   README.md            -- Status, tier, key dates, contacts
   research/
     technical-audit.md -- Platform, integrations, issues
