@@ -18,7 +18,7 @@ Ongoing SEO optimization for retainer clients. Covers the monthly workflow, repo
 4. [ ] Set up keyword tracking (manual spreadsheet for now)
 5. [ ] Agree on KPIs with client: which metrics define success
 6. [ ] Set up monthly reporting cadence (which day of month, delivery format)
-7. [ ] Save onboarding data to `revenue/projects/active/[client-name]/seo/baseline.md`
+7. [ ] Save onboarding data to `engineering/projects/[client-name]/seo/baseline.md`
 
 ---
 

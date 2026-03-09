@@ -46,7 +46,7 @@ Check all known list IDs: Backlog (901711710045), Project 1 (901711707665), Proj
 - Read `revenue/lead-generation/prospect-tracker.md`
 - Read each prospect's `revenue/lead-generation/prospects/[slug]/README.md` (needed for pipeline value breakdowns)
 - Read `marketing/activity-log.md`
-- Read `revenue/projects/active/bloomin-acres/README.md` (and any other project READMEs)
+- Read `engineering/projects/bloomin-acres/README.md` (and any other project READMEs)
 - Read `iris/saved-conversations/` directory (check if any files exist)
 
 **AI News -- Firecrawl:**

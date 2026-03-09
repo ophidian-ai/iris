@@ -360,7 +360,7 @@ Audits run at the end of each phase and at key transition points. Each audit pro
 
 Each audit produces a report saved to the project's reports folder:
 - **OphidianAI site:** `docs/audits/YYYY-MM-DD-<phase>-audit.md`
-- **Client projects:** `revenue/projects/active/<project>/reports/YYYY-MM-DD-<phase>-audit.md`
+- **Client projects:** `engineering/projects/<project>/reports/YYYY-MM-DD-<phase>-audit.md`
 
 ```markdown
 # [Phase Name] Audit Report
