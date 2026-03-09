@@ -1,3 +1,6 @@
 [submodule "revenue/projects/active/ophidian-ai"]
-	path = revenue/projects/active/ophidian-ai
+	path = engineering/projects/ophidian-ai
 	url = git@github-ophidian-ai:ophidian-ai/ophidian-ai.git
+[submodule "engineering/projects/bloomin-acres"]
+	path = engineering/projects/bloomin-acres
+	url = git@github-ophidian-ai:ophidian-ai/bloomin-acres.git
