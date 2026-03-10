@@ -1,3 +1,8 @@
+---
+name: web-builder
+description: Build client websites from discovery through deployment using Next.js 15 + Tailwind CSS 4 + TypeScript. Use when Eric says "build a website", "start a new site", "redesign their site", "new web project", or when starting any client website build. Covers the full pipeline -- discovery, scaffold, design system, page building, integrations, QA, and deploy.
+---
+
 # Web Builder
 
 A conversational pipeline that builds client websites from discovery through deployment. Each phase adapts to the client's needs through targeted questions.
@@ -417,3 +422,20 @@ Do not advance to the next phase until the follow-up is complete and all CRITICA
 | SEO Setup | `operations/references/sops/seo-full-setup.md` | SEO implementation |
 | Monitoring | `operations/references/sops/monitoring-setup.md` | Post-launch monitoring |
 | Brand Assets | `shared/brand-assets/` | Logo, brand guide |
+
+## Portal Integration Checklist
+
+Every client website build must include these steps for the client portal:
+
+- [ ] Create GA4 property for the client site
+- [ ] Add GA4 tracking snippet to the client's site
+- [ ] Verify site ownership in Google Search Console
+- [ ] Add OphidianAI service account as viewer on GA4 property
+- [ ] Add OphidianAI service account as owner on Search Console property
+- [ ] Create client record in Supabase (via admin dashboard)
+- [ ] Assign GA4 property ID to client record
+- [ ] Assign Search Console URL to client record
+- [ ] Create Stripe customer for the client
+- [ ] Assign Stripe customer ID to client record
+- [ ] Set up maintenance subscription if applicable
+- [ ] Generate and send welcome email with portal login
