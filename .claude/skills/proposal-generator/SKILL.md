@@ -1,3 +1,8 @@
+---
+name: proposal-generator
+description: Generate professional, branded client proposals when a prospect expresses interest. Use when Eric says "generate a proposal", "send them a quote", "write up a proposal", or when a prospect replies positively to outreach and it's time to formalize the offer. Outputs HTML and PDF with pricing, scope, and timeline.
+---
+
 # Proposal Generator
 
 Generate professional, branded client proposals when a prospect expresses interest. Outputs HTML and PDF documents ready to send.
@@ -73,22 +78,23 @@ The HTML document contains these sections in order:
 1. **HTML proposal** -- Save to `revenue/lead-generation/prospects/[business-name]/outreach/proposal.html`
 
 2. **PDF conversion** -- Convert HTML to PDF using Playwright:
-   ```javascript
-   // Run inline with: node -e "..."
+   ```bash
+   node -e "
    const { chromium } = require('playwright');
    (async () => {
      const browser = await chromium.launch();
      const page = await browser.newPage();
-     await page.goto('file:///absolute/path/to/proposal.html');
-     await page.pdf({ path: 'proposal.pdf', format: 'Letter', printBackground: true });
+     await page.goto('file:///c:/Claude Code/OphidianAI/revenue/lead-generation/prospects/[business-name]/outreach/proposal.html', { waitUntil: 'networkidle' });
+     await page.pdf({ path: 'c:/Claude Code/OphidianAI/revenue/lead-generation/prospects/[business-name]/outreach/proposal.pdf', format: 'Letter', printBackground: true });
      await browser.close();
+     console.log('PDF generated');
    })();
+   "
    ```
-   Save PDF to `revenue/lead-generation/prospects/[business-name]/outreach/proposal.pdf`
 
-3. **Send via Gmail** -- Use `.claude/skills/gmail/scripts/send_email.js` with the PDF attached:
+3. **Send via Gmail** -- Use the GWS CLI with the PDF attached:
    ```bash
-   echo '{"to":"prospect@email.com","subject":"OphidianAI Proposal for [Business Name]","html":"<p>Hi [Name],</p><p>Thanks for your interest. Attached is a proposal outlining what we can build for [Business Name].</p><p>Happy to answer any questions or hop on a quick call.</p><p>Eric Lefler<br>OphidianAI</p>","attachments":[{"filename":"OphidianAI-Proposal-[Business].pdf","path":"absolute/path/to/proposal.pdf"}]}' | node .claude/skills/gmail/scripts/send_email.js
+   echo '{"to":"prospect@email.com","subject":"OphidianAI Proposal for [Business Name]","html":"<p>Hi [Name],</p><p>Thanks for your interest. Attached is a proposal outlining what we can build for [Business Name].</p><p>Happy to answer any questions or hop on a quick call.</p><p>Eric Lefler<br>OphidianAI</p>","attachments":[{"filename":"OphidianAI-Proposal-[Business].pdf","path":"absolute/path/to/proposal.pdf","mimeType":"application/pdf"}]}' | node .claude/skills/gws-cli/scripts/build_raw_email.js | gws gmail users messages send --params '{"userId":"me"}' --json @-
    ```
    **Always test-send to eric.lefler@ophidianai.com first.**
 
@@ -102,3 +108,22 @@ The HTML document contains these sections in order:
 - [ ] PDF renders correctly (check formatting, page breaks)
 - [ ] Test email sent to Eric first
 - [ ] Eric approved the proposal
+
+## Payment Schedule Rules
+
+Include the correct payment schedule based on service and page count:
+
+| Service | Pages | Payment Schedule |
+|---------|-------|-----------------|
+| Starter | 1-2 | 100% upfront |
+| Starter | 3-5 | 50% deposit / 50% at handoff |
+| Professional | Any | 50% deposit / 50% at handoff |
+| E-Commerce | Any | 33% deposit / 33% mid-project / 33% at handoff |
+| SEO Cleanup | N/A | 100% upfront |
+
+Every proposal must include:
+- Scope and deliverables
+- Timeline with milestones
+- Payment schedule with exact amounts
+- Terms and conditions
+- Data access disclosure (GA4/Search Console viewer access for OphidianAI)
