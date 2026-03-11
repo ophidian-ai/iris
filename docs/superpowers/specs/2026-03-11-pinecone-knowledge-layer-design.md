@@ -14,6 +14,7 @@ Unified vector knowledge layer for OphidianAI using Pinecone. Enables semantic s
 
 - **Index:** `ophidianai-kb`
 - **Embedding model:** Pinecone integrated (`multilingual-e5-large`) -- no external embedding service needed
+- **Index field map:** `{ "text": "text" }` -- the `text` field in each record is the embedding source. This must be set when creating the index.
 - **Tier:** Free tier (2GB, ~100K vectors). Upgrade to Starter (~$8.25/mo) when revenue justifies it.
 - **Interaction model:** Hybrid -- auto-index on creation, auto-query at defined workflow touchpoints, manual ad-hoc queries available.
 - **Free tier constraints:** 100 namespaces per index (7 used), 100K vectors, 2GB storage, 5M embedding tokens/month.
@@ -42,7 +43,7 @@ Consistent across all namespaces:
 | `department` | string | `revenue`, `operations`, `engineering`, `marketing` |
 | `created_date` | string | ISO date |
 | `updated_date` | string | ISO date |
-| `tags` | string[] | Relevant tags (industry, service tier, status, etc.) |
+| `tags` | string[] | Relevant tags (industry, service tier, status, etc.). Stored as a JSON array of strings -- Pinecone supports arrays natively and allows `$in` filtering. |
 
 For chunked documents, IDs use the format `{namespace}/{relative-path}#chunk-{n}` with an additional `chunk_index` metadata field.
 
@@ -102,12 +103,12 @@ Each skill calls a shared indexing procedure at the end of its workflow. The pro
 }
 ```
 
-Note: Pinecone integrated indexes embed the `text` field by default (configurable via index fieldMap). All other fields are stored as searchable metadata. The `tags` field is stored as a comma-separated string (not an array) for Pinecone metadata compatibility.
+Note: The index must be created with `field_map: { "text": "text" }` so that the `text` field is embedded. All other fields are stored as searchable metadata. The `tags` field is stored as a native array of strings (Pinecone supports this and allows `$in` filtering).
 
 **The procedure:**
 
 1. Generates a deterministic ID from namespace + source file path
-2. Upserts to the correct namespace via `upsert-records` MCP tool (update if exists, create if new)
+2. Upserts to the correct namespace via `upsert-records` MCP tool, passing `namespace` as a separate parameter (not part of the record body). Update if exists, create if new.
 3. Logs the indexing action for debugging
 4. **If Pinecone is unavailable:** log the failure and continue the skill workflow normally. Indexing failures must never block primary skill output. The file system remains source of truth.
 
