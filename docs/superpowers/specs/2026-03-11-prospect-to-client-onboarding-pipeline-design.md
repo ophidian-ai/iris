@@ -13,6 +13,7 @@ Automated pipeline that converts a signed proposal into a fully onboarded client
 **Approach:** Hybrid (Portal webhook + Iris orchestration)
 
 Two execution layers:
+
 - **Server-side (Vercel)** -- instant, client-facing actions triggered by proposal approval
 - **Iris-side (local)** -- deferred internal housekeeping, runs on next session
 
@@ -20,24 +21,35 @@ Server-side handles everything the client sees. Iris catches up on internal ops 
 
 ## End-to-End Flow
 
-```
-Proposal Signed (portal)
+```text
+[Proposal Creation & Delivery]
+  1. Eric creates proposal (admin dashboard or proposal-generator skill)
+  2. System creates prospect client record (status: prospect)
+  3. System creates proposal row (status: draft)
+  4. Eric reviews/edits, clicks "Send to Client"
+  5. System generates signing token, sets status to "sent"
+  6. System emails prospect the review link with token (no login required)
   |
   v
-[Server-Side - Instant]
-  1. Record signature (typed name, IP, timestamp, user agent, doc hash)
-  2. Update proposals.status -> "approved", nullify signing_token
-  3. Generate signed PDF (proposal + signature block) via pdf-lib
-  4. Email signed PDF to both parties (Resend)
-  5. Create Supabase auth user + profile (role: client)
-  6. Create client record + client_services (reuse shared onboarding service)
-  7. Create project record (phase: discovery)
-  8. Create project milestones (5 phases)
-  9. Send welcome email with account setup link (24hr expiry)
-  10. Create Stripe customer, generate invoice (deposit, apply coupons)
-  11. Email invoice payment link to client
-  12. Queue pending Iris tasks
-  13. Notify admin: "New client onboarded"
+[Client Reviews & Signs Proposal]
+  7. Prospect clicks link, lands on proposal page (token-based access)
+  8. Prospect reviews, then: Sign & Submit / Request Changes / Decline
+  |
+  v
+[On Signature -- Server-Side - Instant]
+  9. Record signature (typed name, IP, timestamp, user agent, doc hash)
+  10. Update proposals.status -> "approved", nullify signing_token
+  11. Generate signed PDF (proposal + signature block) via pdf-lib
+  12. Email signed PDF to both parties (Resend)
+  13. Create Supabase auth user + profile (role: client)
+  14. Update client record (prospect -> active) + create client_services
+  15. Create project record (phase: discovery)
+  16. Create project milestones (5 phases)
+  17. Send welcome email with account setup link (24hr expiry)
+  18. Create Stripe customer, generate invoice (deposit, apply coupons)
+  19. Email invoice payment link to client
+  20. Queue pending Iris tasks
+  21. Notify admin: "New client onboarded"
   |
   v
 [Client Receives]
@@ -47,20 +59,54 @@ Proposal Signed (portal)
   |
   v
 [Stripe Webhook - On Payment]
-  14. Update payments.status -> "paid"
-  15. Unlock client dashboard (Discovery checklist visible)
-  16. Notify admin: "Deposit received, project ready for discovery"
+  22. Update payments.status -> "paid"
+  23. Unlock client dashboard (Discovery checklist visible)
+  24. Notify admin: "Deposit received, project ready for discovery"
   |
   v
 [Iris - Next Session]
-  17. Create ClickUp project board with phase tasks
-  18. Scaffold engineering/projects/<name>/ folder
-  19. Update prospect-tracker (status: Closed Won)
-  20. Log decision in operations/decisions/log.md
-  21. Update morning briefing context
+  25. Create ClickUp project board with phase tasks
+  26. Scaffold engineering/projects/<name>/ folder
+  27. Update prospect-tracker (status: Closed Won)
+  28. Log decision in operations/decisions/log.md
+  29. Update morning briefing context
 ```
 
 **Project stays at Discovery phase until Eric manually advances it after kickoff/content gathering is complete.**
+
+## Component 0: Proposal Creation & Delivery
+
+**This is the entry point of the pipeline.** Before a client can sign anything, Eric needs to create and send the proposal.
+
+### Creation Flow
+
+1. Eric creates a proposal from the admin dashboard (`/dashboard/admin/proposals/new`) or Iris generates one via the proposal-generator skill
+2. Eric fills in: client name, email, company, phone, service type, scope, deliverables, timeline, pricing, discounts
+3. System creates a **prospect client record** (`clients` table, status: `prospect`) with `contact_name`, `contact_email`, `company_name`, `phone`
+4. System creates a **proposal row** (`proposals` table, status: `draft`) linked to the prospect client via `client_id`
+5. Eric reviews and edits the proposal content in the admin view
+
+### Delivery Flow
+
+1. Eric clicks "Send to Client" on the admin proposal view
+2. System generates a signing token (`crypto.randomBytes(32).toString('hex')`)
+3. System stores SHA-256 hash of token in `signing_token_hash`, sets `signing_token_expires_at` to now + 7 days
+4. System updates `proposals.status` -> `sent`, records `sent_at`
+5. System emails the prospect via Resend:
+   - From: `iris@ophidianai.com`
+   - Subject: "Your proposal from OphidianAI is ready for review"
+   - Body: branded email with proposal summary and "Review Proposal" button linking to `/dashboard/proposals/[id]?token=[signing_token]`
+6. Prospect clicks the link -- no login required, token grants read + sign access
+
+### Re-Delivery (after revision)
+
+When Eric updates a proposal after a revision request:
+
+1. Previous signing token is already nullified (nullified when `revision_requested` was set)
+2. Eric edits the proposal, clicks "Resend to Client"
+3. New signing token generated, new 7-day expiry
+4. Status returns to `sent`
+5. Prospect receives new email with updated link
 
 ## Component 1: Proposal Signing Experience
 
@@ -71,6 +117,7 @@ Proposal Signed (portal)
 When Eric sends a proposal, the system creates a lightweight client record (status: `prospect`) and a proposals row with a signing token. The client receives a URL: `/dashboard/proposals/[id]?token=[signing_token]`. This route is public when accessed with a valid token -- no login required.
 
 **Signing token spec:**
+
 - Generated via `crypto.randomBytes(32).toString('hex')` (64-char hex string, 256 bits of entropy)
 - Stored as a SHA-256 hash in the `signing_token_hash` column (never stored plaintext)
 - Token is included in the URL sent to the client; the hash is what's in the database
@@ -80,6 +127,7 @@ When Eric sends a proposal, the system creates a lightweight client record (stat
 - Nullified on proposal status change (approved, declined, or revision_requested -> re-issued on resend)
 
 **Prospect client record:** When Eric creates a proposal for a new prospect:
+
 1. A client record is created with `status: 'prospect'`, `contact_email`, `contact_name`, `company_name`
 2. The proposal is linked to this client record via `client_id`
 3. On approval, the client record status updates from `prospect` to `active`
@@ -134,7 +182,7 @@ This resolves the `client_id` FK requirement -- every proposal has a client reco
 
 ### Proposal Status Flow
 
-```
+```text
 draft -> sent -> revision_requested -> sent (loop) -> approved
               -> declined
 ```
@@ -211,7 +259,7 @@ interface OnboardClientParams {
 5. **Create project** -- phase: `discovery`, linked to client_id + client_service_id
 6. **Create project milestones** -- Discovery, Design, Development, Review, Live
 7. **Generate account setup link** -- `auth.admin.generateLink({ type: 'recovery' })`, 24hr expiry
-8. **Send welcome email** -- branded dark theme, account setup link, via Resend from iris@ophidianai.com
+8. **Send welcome email** -- branded dark theme, account setup link, via Resend from `iris@ophidianai.com`
 9. **Create Stripe customer** -- `stripe.customers.create({ email, name: company, metadata: { client_id } })`
 10. **Store stripe_customer_id** on client record
 11. **Create Stripe invoice:**
@@ -281,7 +329,7 @@ Runs when Iris picks up pending tasks (morning briefing or manual invocation).
 ### Task Types
 
 | Task | Action |
-|------|--------|
+| ------ | -------- |
 | `clickup_board` | Create ClickUp folder + phase lists under Sales & Outreach or new Projects folder |
 | `engineering_scaffold` | Create `engineering/projects/<name>/` with standard folder structure from template |
 | `tracker_update` | Update `prospect-tracker.md` status to "Closed Won" + Google Sheet |
@@ -291,7 +339,7 @@ Runs when Iris picks up pending tasks (morning briefing or manual invocation).
 ### Pending Tasks Table: `pending_iris_tasks`
 
 | Column | Type | Description |
-|--------|------|-------------|
+| -------- | ------ | ------------- |
 | id | uuid | PK, gen_random_uuid() |
 | task_type | text | Task identifier |
 | payload | jsonb | client_id, project_id, company_name, service_type |
@@ -447,16 +495,19 @@ ALTER TABLE clients ADD COLUMN onboarding_step text;
 ## File Changes Summary
 
 ### New Files
+
 - `src/lib/services/onboarding.ts` -- shared onboarding service (extracted from existing + new logic)
 - `src/app/dashboard/proposals/[id]/page.tsx` -- client proposal review/signing page
 - `src/app/dashboard/admin/proposals/page.tsx` -- admin proposals table
-- `src/app/dashboard/admin/proposals/[id]/page.tsx` -- admin single proposal view
+- `src/app/dashboard/admin/proposals/[id]/page.tsx` -- admin single proposal view (edit + send)
+- `src/app/dashboard/admin/proposals/new/page.tsx` -- admin proposal creation form
 - `src/app/api/proposals/[id]/sign/route.ts` -- signing API (validates token, calls onboarding service)
 - `src/app/api/proposals/[id]/revise/route.ts` -- revision request API
 - `supabase/migrations/XXXXXX_proposal_signing_and_onboarding.sql` -- schema changes
 - `.claude/skills/client-onboarding/SKILL.md` -- Iris deferred task skill
 
 ### Modified Files
+
 - `src/app/api/admin/clients/route.ts` -- refactor to delegate to shared onboarding service
 - `src/app/api/stripe-webhook/route.ts` -- add invoice.paid handler for one-off deposits
 - `src/app/dashboard/layout.tsx` -- add "Proposals" to sidebar nav + revision badge
