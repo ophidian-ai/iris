@@ -216,7 +216,23 @@ If any prospect replied, add to `{{REPLY_ALERT}}`: ` | PROSPECT REPLY from [name
 
 If the email failed, replace the "Email sent" line with: `Email failed: [error reason]`
 
-### Step 9: Saved Conversations Check
+### Step 9: Pending Onboarding Tasks
+
+Query `pending_iris_tasks` via Supabase MCP:
+
+```sql
+SELECT task_type, payload->>'company_name' as company, retry_count, created_at
+FROM pending_iris_tasks
+WHERE status IN ('pending', 'failed')
+ORDER BY created_at ASC;
+```
+
+If results exist, include in briefing under "Action Required":
+- "N pending onboarding tasks for [company names]"
+- List each task type and retry count
+- Invoke client-onboarding skill to process them
+
+### Step 10: Saved Conversations Check
 
 Check `iris/saved-conversations/` for any `.md` files.
 

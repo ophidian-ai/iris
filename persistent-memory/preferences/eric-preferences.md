@@ -29,6 +29,7 @@ updated: 2026-03-10
 ## Workspace Conventions
 
 - **Screenshots folder:** `iris/context/screenshots/` -- when Eric says "your screenshots folder", he means this location
+- **Plans location:** All implementation plans for projects go in `engineering/projects/<project>/plans/`, not `docs/superpowers/plans/`. Plans belong with their project.
 
 ## Related
 
