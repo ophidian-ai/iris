@@ -16,15 +16,16 @@ Unified vector knowledge layer for OphidianAI using Pinecone. Enables semantic s
 - **Embedding model:** Pinecone integrated (`multilingual-e5-large`) -- no external embedding service needed
 - **Tier:** Free tier (2GB, ~100K vectors). Upgrade to Starter (~$8.25/mo) when revenue justifies it.
 - **Interaction model:** Hybrid -- auto-index on creation, auto-query at defined workflow touchpoints, manual ad-hoc queries available.
+- **Free tier constraints:** 100 namespaces per index (7 used), 100K vectors, 2GB storage, 5M embedding tokens/month.
 
 ### Namespace Map
 
 | Namespace | Contents | Primary Producers |
 |---|---|---|
-| `prospects` | Prospect READMEs, technical audits, score cards, proposal summaries | business-research, prospect-scoring, proposal-generator |
+| `prospects` | Prospect READMEs, technical audits, score cards, proposal summaries | prospect-scoring, proposal-generator |
 | `outreach` | Cold emails, follow-ups, reply outcomes, offer delivery records | cold-email-outreach, follow-up-email, offer-delivery |
 | `operations` | SOPs, pricing, templates, references, marketing strategy, lead sources | Manual / SOP updates |
-| `decisions` | Individual decision log entries | morning-coffee, any session that logs decisions |
+| `decisions` | Individual decision log entries | Any session that appends to the decision log |
 | `agent-memory` | Persistent memory vault notes, cross-session learnings, reusable patterns | Agents during workflows |
 | `research` | Firecrawl cold lead research, prospect research, competitive intel, SEO audits | business-research, seo-audit |
 | `projects` | Project READMEs, design specs, tech decisions, implementation plans | web-builder, engineering workflows |
@@ -54,7 +55,7 @@ For chunked documents, IDs use the format `{namespace}/{relative-path}#chunk-{n}
 | Skill | Trigger | What Gets Indexed | Namespace |
 |---|---|---|---|
 | `business-research` | Research completes | Processed research markdown (not raw Firecrawl JSON) | `research` |
-| `prospect-scoring` | Score card generated | Score card + README | `prospects` |
+| `prospect-scoring` | Score card generated | Score card (+ README if it exists) | `prospects` |
 | `cold-email-outreach` | Email drafted | Email content + metadata (template, industry, tier) | `outreach` |
 | `follow-up-email` | Follow-up drafted | Follow-up content + sequence number | `outreach` |
 | `offer-delivery` | Offer delivered | Outcome record (accepted, what was delivered) | `outreach` |
@@ -65,7 +66,7 @@ For chunked documents, IDs use the format `{namespace}/{relative-path}#chunk-{n}
 
 | Skill | Trigger | What Gets Indexed | Namespace |
 |---|---|---|---|
-| `morning-coffee` | Decision logged during session | Individual decision entry | `decisions` |
+| Any session that appends to `operations/decisions/log.md` | Decision logged | Individual decision entry (by `###` block) | `decisions` |
 | Any skill that updates SOPs | SOP created/updated | Full SOP content | `operations` |
 | `client-onboarding` (future) | Client onboarded | Onboarding outcome record | `projects` |
 
@@ -85,22 +86,30 @@ For chunked documents, IDs use the format `{namespace}/{relative-path}#chunk-{n}
 
 ### Shared Indexing Utility
 
-Each skill calls a shared function at the end of its workflow:
+Each skill calls a shared indexing procedure at the end of its workflow. The procedure uses the Pinecone MCP `upsert-records` tool, which accepts records as objects with an `id` field and arbitrary fields that get embedded and stored.
 
+**Record format passed to `upsert-records`:**
+
+```json
+{
+  "id": "<namespace>/<relative-path>",
+  "text": "<content to embed>",
+  "source_file": "<relative file path>",
+  "department": "<revenue|operations|engineering|marketing>",
+  "created_date": "<ISO date>",
+  "updated_date": "<ISO date>",
+  "tags": "<comma-separated tags>"
+}
 ```
-indexToKnowledgeBase({
-  text: <content>,
-  namespace: <target>,
-  sourceFile: <relative path>,
-  metadata: { department, tags, created_date, updated_date }
-})
-```
 
-The function:
+Note: Pinecone integrated indexes embed the `text` field by default (configurable via index fieldMap). All other fields are stored as searchable metadata. The `tags` field is stored as a comma-separated string (not an array) for Pinecone metadata compatibility.
 
-1. Generates a deterministic ID from the source file path
-2. Upserts to Pinecone (update if exists, create if new)
+**The procedure:**
+
+1. Generates a deterministic ID from namespace + source file path
+2. Upserts to the correct namespace via `upsert-records` MCP tool (update if exists, create if new)
 3. Logs the indexing action for debugging
+4. **If Pinecone is unavailable:** log the failure and continue the skill workflow normally. Indexing failures must never block primary skill output. The file system remains source of truth.
 
 Indexing is inline -- no batch jobs or cron. The one exception is the initial bulk load.
 
@@ -135,7 +144,7 @@ Search within a specific namespace for targeted retrieval.
 
 Fan out across multiple namespaces when broader context is needed (e.g., morning briefing pulling from decisions + prospects + projects).
 
-Implementation: run parallel queries against 2-3 namespaces, merge results by relevance score, deduplicate, return top-K.
+Implementation: run parallel `search-records` calls against 2-3 namespaces, merge results by relevance score, deduplicate, return top-K. Note: Pinecone's `cascading-search` MCP tool is cross-index only and does not apply to cross-namespace queries within a single index.
 
 ### Query Parameters
 
@@ -180,7 +189,7 @@ One-time script to index all existing data.
 
 - **Short documents** (under 2000 chars): index as a single record
 - **Long documents** (over 2000 chars): split by heading (H2/H3 sections), each section becomes its own record with shared `source_file` and `chunk_index` metadata
-- **Decision log**: split by individual decision entry (each `###` block = one record)
+- **Decision log**: split by individual decision entry (each `###` block = one record). Decision chunk IDs use the date prefix from the entry (e.g., `decisions/log#2026-03-07`) rather than positional index, so appending new entries never shifts existing IDs.
 
 ### Execution
 
@@ -192,6 +201,14 @@ One-time script to index all existing data.
 ### Re-indexing
 
 Changed files get re-upserted with the same deterministic ID on next skill run. For manual re-indexing, re-run bulk load for that namespace -- deterministic IDs prevent duplicates.
+
+### Stale Record Policy
+
+When a file is deleted or a prospect folder is renamed/moved, the old Pinecone records become orphans (new IDs are created, old IDs persist). This is a known tradeoff.
+
+**Policy:** Periodic namespace re-index. When a namespace accumulates stale records (e.g., after archiving multiple prospects), delete all records in that namespace and re-run the bulk load for it. This is a manual operation triggered by Eric or during a maintenance session.
+
+**Convention:** Prospect folder names must remain stable once created. Do not rename prospect folders after indexing. If a prospect is archived, move the folder to `shared/archives/` and note the namespace needs a re-index.
 
 ## System Boundaries
 
@@ -220,12 +237,54 @@ Changed files get re-upserted with the same deterministic ID on next skill run. 
 | Embedding | $0 (integrated model) |
 | Added burn rate impact | None until upgrade |
 
+## Knowledge Base Skill Specification
+
+**Location:** `.claude/skills/knowledge-base/SKILL.md`
+
+### Invocation
+
+- `/knowledge-base index [namespace]` -- Run bulk load for a specific namespace (or all if omitted)
+- `/knowledge-base query <namespace> <query>` -- Manual ad-hoc query for Eric
+- `/knowledge-base stats` -- Show record counts per namespace via `describe-index-stats`
+- `/knowledge-base reindex <namespace>` -- Delete all records in namespace and re-run bulk load
+
+### As a Utility (Called by Other Skills)
+
+Other skills import the indexing and query procedures. They do not invoke the skill directly -- they follow the shared indexing procedure documented in the "Shared Indexing Utility" section above.
+
+### Bulk Load Steps
+
+1. Read the namespace-to-source mapping from this spec
+2. For the target namespace, glob all source files
+3. For each file: read content, apply chunking strategy if over 2000 chars, generate deterministic ID
+4. Upsert each record via `upsert-records` MCP tool with the correct namespace
+5. Log: file path, record ID, record count, any errors
+6. After all files processed, run `describe-index-stats` and report counts
+
+### Error Handling
+
+- If Pinecone is unavailable, log the error and report to Eric. Do not retry in a loop.
+- If a single file fails to index, log it, skip it, continue with remaining files.
+- Never block a parent skill's primary output because of an indexing failure.
+
+### Change Detection
+
+None. The utility always re-upserts. Deterministic IDs make this safe -- upserting an unchanged record is a no-op from a data perspective (the vector and metadata get overwritten with identical values). This is simpler than maintaining a change-detection cache.
+
+## Edge Cases
+
+- **File deleted:** Stale record persists until namespace re-index. See Stale Record Policy.
+- **Prospect folder renamed:** Old records orphaned, new records created under new IDs. Convention: don't rename folders. See Stale Record Policy.
+- **Decision log edited (middle entry changed):** Date-derived chunk IDs (`decisions/log#2026-03-07`) remain stable. Only the edited entry's content changes on re-upsert.
+- **Pinecone unavailable during skill run:** Skill completes normally, indexing failure logged. No data loss (files are source of truth).
+- **Duplicate bulk load runs:** Safe. Deterministic IDs overwrite existing records with identical data.
+- **File exists but is empty:** Skip indexing. Do not create empty records.
+
 ## Implementation Scope
 
 ### New Files
 
 - `.claude/skills/knowledge-base/SKILL.md` -- Knowledge base skill with indexing and query utilities
-- Bulk load script (run once via skill)
 
 ### Modified Files
 
