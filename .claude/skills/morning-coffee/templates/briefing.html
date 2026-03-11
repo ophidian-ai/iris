@@ -61,6 +61,7 @@
     page-break-after: avoid;
   }
 
+  /* ---- HEADER ---- */
   .header {
     display: flex;
     align-items: center;
@@ -76,7 +77,10 @@
     gap: 14px;
   }
 
-  .header-left img { width: 40px; height: 40px; }
+  .header-left img {
+    width: 40px;
+    height: 40px;
+  }
 
   .brand-name {
     font-size: 20px;
@@ -85,7 +89,9 @@
     color: #E8EDF2;
   }
 
-  .brand-name span { color: #39FF14; }
+  .brand-name span {
+    color: #39FF14;
+  }
 
   .brand-tagline {
     font-size: 9px;
@@ -95,7 +101,9 @@
     margin-top: 1px;
   }
 
-  .header-right { text-align: right; }
+  .header-right {
+    text-align: right;
+  }
 
   .header-date {
     font-family: 'Space Mono', monospace;
@@ -111,7 +119,12 @@
     margin-top: 2px;
   }
 
-  .stats-bar { display: flex; gap: 12px; margin: 16px 0; }
+  /* ---- STATS BAR ---- */
+  .stats-bar {
+    display: flex;
+    gap: 12px;
+    margin: 16px 0;
+  }
 
   .stat-card {
     flex: 1;
@@ -155,8 +168,13 @@
     color: #39FF14;
   }
 
-  .stat-value.zero { color: rgba(232, 237, 242, 0.3); }
-  .stat-value.warning { color: #FF6B35; }
+  .stat-value.zero {
+    color: rgba(232, 237, 242, 0.3);
+  }
+
+  .stat-value.warning {
+    color: #FF6B35;
+  }
 
   .stat-sub {
     font-size: 9px;
@@ -164,7 +182,10 @@
     margin-top: 2px;
   }
 
-  .section { margin-bottom: 14px; }
+  /* ---- SECTIONS ---- */
+  .section {
+    margin-bottom: 14px;
+  }
 
   .section-title {
     font-size: 13px;
@@ -179,13 +200,16 @@
   }
 
   .section-title .dot {
-    width: 6px; height: 6px;
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
     background: #39FF14;
     flex-shrink: 0;
   }
 
-  .section-title .dot.orange { background: #FF6B35; }
+  .section-title .dot.orange {
+    background: #FF6B35;
+  }
 
   .section-title .count {
     font-family: 'Space Mono', monospace;
@@ -194,7 +218,12 @@
     margin-left: auto;
   }
 
-  table { width: 100%; border-collapse: collapse; font-size: 11px; }
+  /* ---- TABLES ---- */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11px;
+  }
 
   thead th {
     text-align: left;
@@ -215,9 +244,14 @@
     color: rgba(232, 237, 242, 0.85);
   }
 
-  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:last-child td {
+    border-bottom: none;
+  }
 
-  .overdue { color: #FF6B35; font-weight: 600; }
+  .overdue {
+    color: #FF6B35;
+    font-weight: 600;
+  }
 
   .status-badge {
     display: inline-block;
@@ -235,7 +269,7 @@
   .status-badge.replied { color: #39FF14; background: rgba(57, 255, 20, 0.1); }
   .status-badge.closed-won { color: #39FF14; background: rgba(57, 255, 20, 0.15); }
   .status-badge.closed-lost { color: rgba(232, 237, 242, 0.4); background: rgba(232, 237, 242, 0.05); }
-  .status-badge.researching { color: #A78BFA; background: rgba(167, 139, 250, 0.1); }
+  .status-badge.researching { color: #FFD700; background: rgba(255, 215, 0, 0.1); }
 
   .price-cell {
     font-family: 'Space Mono', monospace;
@@ -267,7 +301,11 @@
     margin-bottom: 3px;
   }
 
-  .value-breakdown-items { display: flex; flex-wrap: wrap; gap: 4px 12px; }
+  .value-breakdown-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+  }
 
   .value-breakdown-item {
     font-size: 9px;
@@ -279,16 +317,26 @@
     font-weight: 500;
   }
 
+  /* ---- INBOX ITEMS ---- */
   .inbox-item {
     padding: 6px 0;
     border-bottom: 1px solid rgba(232, 237, 242, 0.05);
   }
 
-  .inbox-item:last-child { border-bottom: none; }
+  .inbox-item:last-child {
+    border-bottom: none;
+  }
 
-  .inbox-from { font-size: 11px; font-weight: 600; color: #E8EDF2; }
+  .inbox-from {
+    font-size: 11px;
+    font-weight: 600;
+    color: #E8EDF2;
+  }
 
-  .inbox-subject { font-size: 10px; color: rgba(232, 237, 242, 0.7); }
+  .inbox-subject {
+    font-size: 10px;
+    color: rgba(232, 237, 242, 0.7);
+  }
 
   .inbox-snippet {
     font-size: 9px;
@@ -311,7 +359,13 @@
     margin-left: 6px;
   }
 
-  .cal-item { display: flex; gap: 10px; padding: 4px 0; font-size: 11px; }
+  /* ---- CALENDAR ---- */
+  .cal-item {
+    display: flex;
+    gap: 10px;
+    padding: 4px 0;
+    font-size: 11px;
+  }
 
   .cal-time {
     font-family: 'Space Mono', monospace;
@@ -321,7 +375,9 @@
     flex-shrink: 0;
   }
 
-  .cal-title { color: rgba(232, 237, 242, 0.85); }
+  .cal-title {
+    color: rgba(232, 237, 242, 0.85);
+  }
 
   .cal-day-label {
     font-family: 'Space Mono', monospace;
@@ -334,7 +390,11 @@
     margin-bottom: 2px;
   }
 
-  .box-grid { display: flex; gap: 14px; }
+  /* ---- BOXES (two-column) ---- */
+  .box-grid {
+    display: flex;
+    gap: 14px;
+  }
 
   .box {
     flex: 1;
@@ -344,7 +404,12 @@
     padding: 12px 14px;
   }
 
-  .box h3 { font-size: 11px; font-weight: 600; color: #E8EDF2; margin-bottom: 8px; }
+  .box h3 {
+    font-size: 11px;
+    font-weight: 600;
+    color: #E8EDF2;
+    margin-bottom: 8px;
+  }
 
   .box-item {
     font-size: 10px;
@@ -358,17 +423,28 @@
   .box-item::before {
     content: '';
     position: absolute;
-    left: 0; top: 8px;
-    width: 6px; height: 6px;
+    left: 0;
+    top: 8px;
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
     background: #10B854;
     opacity: 0.7;
   }
 
-  .box-item.warning::before { background: #FF6B35; }
-  .box-item.inactive::before { background: rgba(232, 237, 242, 0.3); }
+  .box-item.warning::before {
+    background: #FF6B35;
+  }
 
-  .revenue-grid { display: flex; gap: 14px; }
+  .box-item.inactive::before {
+    background: rgba(232, 237, 242, 0.3);
+  }
+
+  /* ---- REVENUE TRACKER ---- */
+  .revenue-grid {
+    display: flex;
+    gap: 14px;
+  }
 
   .revenue-box {
     flex: 1;
@@ -396,7 +472,9 @@
     color: #39FF14;
   }
 
-  .revenue-amount.zero { color: rgba(232, 237, 242, 0.25); }
+  .revenue-amount.zero {
+    color: rgba(232, 237, 242, 0.25);
+  }
 
   .revenue-detail {
     font-size: 9px;
@@ -404,7 +482,12 @@
     margin-top: 4px;
   }
 
-  .pulse-grid { display: flex; gap: 10px; flex-wrap: wrap; }
+  /* ---- ACTIVITY PULSE ---- */
+  .pulse-grid {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
 
   .pulse-item {
     flex: 1;
@@ -432,16 +515,26 @@
     color: #00D1B2;
   }
 
-  .pulse-value.stale { color: #FF6B35; }
+  .pulse-value.stale {
+    color: #FF6B35;
+  }
 
+  /* ---- AI INTEL ---- */
   .intel-item {
     padding: 8px 0;
     border-bottom: 1px solid rgba(232, 237, 242, 0.05);
   }
 
-  .intel-item:last-child { border-bottom: none; }
+  .intel-item:last-child {
+    border-bottom: none;
+  }
 
-  .intel-headline { font-size: 11px; font-weight: 600; color: #E8EDF2; margin-bottom: 3px; }
+  .intel-headline {
+    font-size: 11px;
+    font-weight: 600;
+    color: #E8EDF2;
+    margin-bottom: 3px;
+  }
 
   .intel-source {
     font-family: 'Space Mono', monospace;
@@ -458,7 +551,12 @@
     margin-top: 3px;
   }
 
-  .rec-list { list-style: none; padding: 0; counter-reset: rec; }
+  /* ---- RECOMMENDATIONS ---- */
+  .rec-list {
+    list-style: none;
+    padding: 0;
+    counter-reset: rec;
+  }
 
   .rec-list li {
     counter-increment: rec;
@@ -470,13 +568,17 @@
     border-bottom: 1px solid rgba(232, 237, 242, 0.04);
   }
 
-  .rec-list li:last-child { border-bottom: none; }
+  .rec-list li:last-child {
+    border-bottom: none;
+  }
 
   .rec-list li::before {
     content: counter(rec);
     position: absolute;
-    left: 0; top: 5px;
-    width: 18px; height: 18px;
+    left: 0;
+    top: 5px;
+    width: 18px;
+    height: 18px;
     border-radius: 50%;
     background: rgba(57, 255, 20, 0.1);
     color: #39FF14;
@@ -500,10 +602,12 @@
     color: #00D1B2;
   }
 
+  /* ---- FOOTER ---- */
   .footer {
     position: absolute;
     bottom: 24px;
-    left: 40px; right: 40px;
+    left: 40px;
+    right: 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -511,7 +615,10 @@
     border-top: 1px solid rgba(0, 209, 178, 0.1);
   }
 
-  .footer-left { font-size: 9px; color: rgba(232, 237, 242, 0.3); }
+  .footer-left {
+    font-size: 9px;
+    color: rgba(232, 237, 242, 0.3);
+  }
 
   .footer-right {
     font-family: 'Space Mono', monospace;
@@ -520,6 +627,7 @@
     letter-spacing: 1px;
   }
 
+  /* ---- EMPTY STATE ---- */
   .empty {
     font-size: 10px;
     color: rgba(232, 237, 242, 0.3);
@@ -527,6 +635,7 @@
     padding: 6px 0;
   }
 
+  /* ---- PROJECT ITEMS ---- */
   .project-item {
     display: flex;
     justify-content: space-between;
@@ -535,9 +644,15 @@
     border-bottom: 1px solid rgba(232, 237, 242, 0.05);
   }
 
-  .project-item:last-child { border-bottom: none; }
+  .project-item:last-child {
+    border-bottom: none;
+  }
 
-  .project-name { font-size: 11px; font-weight: 600; color: #E8EDF2; }
+  .project-name {
+    font-size: 11px;
+    font-weight: 600;
+    color: #E8EDF2;
+  }
 
   .project-status {
     font-family: 'Space Mono', monospace;
@@ -554,26 +669,27 @@
 </head>
 <body>
 
-<!-- PAGE 1 -->
+<!-- PAGE 1: Dashboard + Operations -->
 <div class="page">
   <div class="header">
     <div class="header-left">
-      <img src="file:///c:/Claude Code/Iris/references/brand-assets/logo_icon.png" alt="OphidianAI">
+      <img src="file:///c:/Claude Code/OphidianAI/shared/ophidianai-brand-assets/logo_icon.png" alt="OphidianAI">
       <div>
         <div class="brand-name">Ophidian<span>AI</span></div>
         <div class="brand-tagline">Intelligence. Engineered.</div>
       </div>
     </div>
     <div class="header-right">
-      <div class="header-date">MARCH 7, 2026</div>
+      <div class="header-date">MARCH 10, 2026</div>
       <div class="header-label">Morning Coffee</div>
     </div>
   </div>
 
+  <!-- Quick Stats -->
   <div class="stats-bar">
     <div class="stat-card highlight">
       <div class="stat-label">Pipeline Value</div>
-      <div class="stat-value">$14,000</div>
+      <div class="stat-value ">$14,000</div>
       <div class="stat-sub">potential</div>
     </div>
     <div class="stat-card">
@@ -588,11 +704,12 @@
     </div>
     <div class="stat-card">
       <div class="stat-label">Last Outreach</div>
-      <div class="stat-value">1</div>
+      <div class="stat-value ">4</div>
       <div class="stat-sub">days ago</div>
     </div>
   </div>
 
+  <!-- Inbox -->
   <div class="section">
     <div class="section-title">
       <div class="dot"></div> Inbox
@@ -601,6 +718,7 @@
     <div class="empty">No unread emails.</div>
   </div>
 
+  <!-- Pipeline -->
   <div class="section">
     <div class="section-title">
       <div class="dot"></div> Pipeline
@@ -619,8 +737,8 @@
         <tr>
           <td>Columbus Massage Center</td>
           <td><span class="status-badge outreach">Outreach Sent</span></td>
-          <td>1</td>
-          <td>Mar 10</td>
+          <td>4</td>
+          <td class="overdue">Mar 10 (TODAY)</td>
           <td class="price-cell">$3,500</td>
         </tr>
         <tr class="value-breakdown-row">
@@ -629,10 +747,10 @@
               <div class="value-breakdown-label">VALUE BASIS</div>
               <div class="value-breakdown-items">
                 <div class="value-breakdown-item"><span>Professional tier</span></div>
-                <div class="value-breakdown-item">10+ pages</div>
-                <div class="value-breakdown-item">Booking integration (Vagaro)</div>
+                <div class="value-breakdown-item">5-7 pages</div>
+                <div class="value-breakdown-item">Vagaro booking integration</div>
                 <div class="value-breakdown-item">Gift card e-commerce</div>
-                <div class="value-breakdown-item">Full SEO + GBP</div>
+                <div class="value-breakdown-item">SEO + GA4</div>
               </div>
             </div>
           </td>
@@ -640,8 +758,8 @@
         <tr>
           <td>SAK Automotive</td>
           <td><span class="status-badge outreach">Outreach Sent</span></td>
-          <td>1</td>
-          <td>Mar 10</td>
+          <td>4</td>
+          <td class="overdue">Mar 10 (TODAY)</td>
           <td class="price-cell">$3,500</td>
         </tr>
         <tr class="value-breakdown-row">
@@ -650,10 +768,10 @@
               <div class="value-breakdown-label">VALUE BASIS</div>
               <div class="value-breakdown-items">
                 <div class="value-breakdown-item"><span>Professional tier</span></div>
-                <div class="value-breakdown-item">7-10 pages</div>
-                <div class="value-breakdown-item">Online appointment booking</div>
+                <div class="value-breakdown-item">5-7 pages</div>
+                <div class="value-breakdown-item">Online booking integration</div>
                 <div class="value-breakdown-item">Google Reviews feed</div>
-                <div class="value-breakdown-item">SSL + SEO + GBP</div>
+                <div class="value-breakdown-item">SSL + SEO</div>
               </div>
             </div>
           </td>
@@ -671,11 +789,10 @@
               <div class="value-breakdown-label">VALUE BASIS</div>
               <div class="value-breakdown-items">
                 <div class="value-breakdown-item"><span>Professional tier</span></div>
-                <div class="value-breakdown-item">8-9 pages</div>
-                <div class="value-breakdown-item">Before/after gallery</div>
+                <div class="value-breakdown-item">8+ pages</div>
                 <div class="value-breakdown-item">Bilingual (EN/ES)</div>
+                <div class="value-breakdown-item">Before/after gallery</div>
                 <div class="value-breakdown-item">Online booking</div>
-                <div class="value-breakdown-item">SEO + GBP cleanup</div>
               </div>
             </div>
           </td>
@@ -694,9 +811,9 @@
               <div class="value-breakdown-items">
                 <div class="value-breakdown-item"><span>Professional tier</span></div>
                 <div class="value-breakdown-item">9 pages</div>
-                <div class="value-breakdown-item">Class schedule system</div>
-                <div class="value-breakdown-item">Membership inquiry forms</div>
-                <div class="value-breakdown-item">Full SEO + GBP + GA4</div>
+                <div class="value-breakdown-item">Class booking system</div>
+                <div class="value-breakdown-item">Member portal potential</div>
+                <div class="value-breakdown-item">Full SEO + GA4</div>
               </div>
             </div>
           </td>
@@ -705,13 +822,14 @@
     </table>
   </div>
 
+  <!-- Calendar -->
   <div class="section">
     <div class="section-title">
       <div class="dot"></div> Calendar
     </div>
-    <div class="cal-day-label">TODAY -- SAT MAR 7</div>
+    <div class="cal-day-label">TODAY -- MARCH 10</div>
     <div class="empty">No events scheduled.</div>
-    <div class="cal-day-label">TOMORROW -- SUN MAR 8</div>
+    <div class="cal-day-label">TOMORROW -- MARCH 11</div>
     <div class="empty">No events scheduled.</div>
   </div>
 
@@ -721,22 +839,23 @@
   </div>
 </div>
 
-<!-- PAGE 2 -->
+<!-- PAGE 2: Projects + Strategy -->
 <div class="page">
   <div class="header">
     <div class="header-left">
-      <img src="file:///c:/Claude Code/Iris/references/brand-assets/logo_icon.png" alt="OphidianAI">
+      <img src="file:///c:/Claude Code/OphidianAI/shared/ophidianai-brand-assets/logo_icon.png" alt="OphidianAI">
       <div>
         <div class="brand-name">Ophidian<span>AI</span></div>
         <div class="brand-tagline">Intelligence. Engineered.</div>
       </div>
     </div>
     <div class="header-right">
-      <div class="header-date">MARCH 7, 2026</div>
+      <div class="header-date">MARCH 10, 2026</div>
       <div class="header-label">Morning Coffee</div>
     </div>
   </div>
 
+  <!-- Active Projects -->
   <div class="section" style="margin-top: 16px;">
     <div class="section-title">
       <div class="dot"></div> Active Projects
@@ -744,50 +863,29 @@
     <div class="project-item">
       <div>
         <div class="project-name">Bloomin' Acres</div>
-        <div class="project-detail">Sourdough and fresh produce website</div>
+        <div class="project-detail">Sourdough and fresh produce business website</div>
       </div>
       <div class="project-status">ACTIVE</div>
     </div>
+    <div class="project-item">
+      <div>
+        <div class="project-name">OphidianAI.com</div>
+        <div class="project-detail">Company website -- build session scheduled yesterday</div>
+      </div>
+      <div class="project-status">IN PROGRESS</div>
+    </div>
   </div>
 
+  <!-- ClickUp Tasks -->
   <div class="section">
     <div class="section-title">
-      <div class="dot"></div> Tasks
-      <div class="count">4 open, 3 due tomorrow</div>
+      <div class="dot "></div> Tasks
+      <div class="count">API unavailable</div>
     </div>
-    <table>
-      <thead>
-        <tr>
-          <th>Task</th>
-          <th>Status</th>
-          <th>Due</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Created SEO Pipeline</td>
-          <td>To Do</td>
-          <td>Mar 8</td>
-        </tr>
-        <tr>
-          <td>Follow up: SAK Automotive</td>
-          <td>To Do</td>
-          <td>Mar 8</td>
-        </tr>
-        <tr>
-          <td>Follow up: Columbus Massage Center</td>
-          <td>To Do</td>
-          <td>Mar 8</td>
-        </tr>
-        <tr>
-          <td>Build Accounting/Finance Sub-Agent</td>
-          <td>To Do</td>
-          <td>--</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="empty">Tasks unavailable -- API error (missing .env configuration).</div>
   </div>
 
+  <!-- Revenue Tracker -->
   <div class="section">
     <div class="section-title">
       <div class="dot"></div> Revenue
@@ -806,6 +904,7 @@
     </div>
   </div>
 
+  <!-- Activity Pulse -->
   <div class="section">
     <div class="section-title">
       <div class="dot"></div> Activity Pulse
@@ -813,7 +912,7 @@
     <div class="pulse-grid">
       <div class="pulse-item">
         <div class="pulse-label">Outreach/Wk</div>
-        <div class="pulse-value">2</div>
+        <div class="pulse-value">0</div>
       </div>
       <div class="pulse-item">
         <div class="pulse-label">Outreach/Mo</div>
@@ -834,37 +933,25 @@
     </div>
   </div>
 
+  <!-- AI Intel -->
   <div class="section">
     <div class="section-title">
       <div class="dot"></div> AI Intel
     </div>
-    <div class="intel-item">
-      <div class="intel-headline">Claude Code Ultrathink Is Back</div>
-      <div class="intel-source">Medium</div>
-      <div class="intel-analysis">Extended thinking mode has returned to Claude Code, enabling deeper reasoning on complex coding tasks. Directly benefits OphidianAI's development workflow -- use ultrathink for complex client site architectures and debugging.</div>
-    </div>
-    <div class="intel-item">
-      <div class="intel-headline">2026 Agentic Coding Trends Report</div>
-      <div class="intel-source">Anthropic</div>
-      <div class="intel-analysis">Anthropic's report on agentic coding adoption trends. Worth reviewing for positioning OphidianAI's AI integration services -- data on how businesses are adopting AI-assisted development could inform client pitches.</div>
-    </div>
-    <div class="intel-item">
-      <div class="intel-headline">12 Top Web Design Tools for 2026</div>
-      <div class="intel-source">Codrops</div>
-      <div class="intel-analysis">Roundup of leading web design tools this year. Check for new tools that could speed up client site delivery or offer competitive advantages over template builders like Hibu and Wix.</div>
-    </div>
+    <div class="empty">AI Intel unavailable -- Firecrawl not authenticated. Run "firecrawl login --browser" to enable.</div>
   </div>
 
+  <!-- Recommendations -->
   <div class="section">
     <div class="section-title">
       <div class="dot"></div> Today's Priorities
     </div>
     <ol class="rec-list">
-      <li><span class="rec-tag">OUTREACH</span> Complete outreach for Nano's Car Detailing and Total Fitness -- cold emails are drafted, assessment HTMLs need PDF conversion and sending.</li>
-      <li><span class="rec-tag">TASKS</span> 3 ClickUp tasks due tomorrow (Mar 8): SEO Pipeline setup, SAK Automotive follow-up, Columbus Massage Center follow-up. Review and prep now.</li>
-      <li><span class="rec-tag">MARKETING</span> No social media or blog posts yet. Create your first piece of content to establish OphidianAI's online presence.</li>
-      <li><span class="rec-tag">REVENUE</span> Zero actualized revenue. Focus on moving the 2 outreach-sent prospects (CMC, SAK) toward meetings. Follow-ups are due Mar 10.</li>
-      <li><span class="rec-tag">AI-INTEL</span> Review Anthropic's 2026 Agentic Coding Trends Report for data points to use in client pitches about AI integration services.</li>
+      <li><span class="rec-tag">FOLLOW-UP</span> Send follow-up emails to Columbus Massage Center (Dana Greathouse) and SAK Automotive (Scott Kelsay) -- both are due today.</li>
+      <li><span class="rec-tag">OUTREACH</span> Complete research on Nano's Car Detailing and Total Fitness of Columbus, then send outreach. Both have strong website issues and are ready for mockups.</li>
+      <li><span class="rec-tag">REVENUE</span> No revenue actualized yet. Prioritize converting the two outreach-sent prospects -- a single close at $3,500 proves the business model.</li>
+      <li><span class="rec-tag">MARKETING</span> No social media or blog activity on record. Even one post per week builds visibility. Draft a batch of content for LinkedIn/Facebook.</li>
+      <li><span class="rec-tag">PIPELINE</span> Set up Firecrawl authentication and ClickUp .env to restore full briefing capabilities for future sessions.</li>
     </ol>
   </div>
 

@@ -1,3 +1,8 @@
+---
+name: offer-delivery
+description: Deliver the promised free item when a prospect replies "yes" to a cold email, then suggest a call. Use when a prospect responds positively to outreach, when Eric says "they replied yes", "deliver the offer", "send them what we promised", or when the morning briefing flags a prospect reply. Routes to the right deliverable (mockup, SEO plan, service descriptions) and sends via GWS CLI.
+---
+
 # Offer Delivery Skill
 
 Handles delivering the promised free item when a prospect replies "yes" to a cold email, then suggests a call.
@@ -100,8 +105,10 @@ Save the delivery email HTML to:
 
 ### Step 4: Test Send
 
-Send the email with attachment to `eric.lefler@ophidianai.com` first using:
-`.claude/skills/gmail/scripts/send_email.js`
+Send the email with attachment to `eric.lefler@ophidianai.com` first using the GWS CLI:
+```bash
+echo '{"to":"eric.lefler@ophidianai.com","subject":"[Subject]","html":"[HTML body]","attachments":[{"path":"path/to/deliverable.pdf","filename":"deliverable.pdf","mimeType":"application/pdf"}]}' | node .claude/skills/gws-cli/scripts/build_raw_email.js | gws gmail users messages send --params '{"userId":"me"}' --json @-
+```
 
 Verify:
 
@@ -114,7 +121,7 @@ Do not proceed to live send until Eric confirms the test looks good.
 
 ### Step 5: Send to Prospect
 
-After Eric approves the test, send the live email to the prospect using the same Gmail send script.
+After Eric approves the test, send the live email to the prospect using the same GWS CLI send command.
 
 ### Step 6: Update Tracker
 

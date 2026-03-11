@@ -51,7 +51,7 @@ Client said yes. Move from signed deal to live website.
 ## Skills Access
 
 - business-research, cold-email-outreach, email-response, follow-up-email (`.claude/skills/`)
-- gmail, clickup (`.claude/skills/`)
+- gws-cli, clickup (`.claude/skills/`)
 - frontend-design, vercel (global plugins)
 
 ## Project Structure

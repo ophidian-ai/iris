@@ -1,3 +1,8 @@
+---
+name: prospect-scoring
+description: Score and qualify prospects before investing time in full research, mockups, and outreach. Use when Eric mentions a new potential lead, says "score this business", "is this worth pursuing", "qualify this prospect", or before running business-research or cold-email-outreach on a new prospect. This is the gate -- score first, then decide whether to pursue.
+---
+
 # Prospect Scoring
 
 Score and qualify prospects before investing time in full research, mockups, and outreach. This is the gate -- score first, then decide whether to pursue.
@@ -126,7 +131,7 @@ Based on scoring, recommend one or more:
 5. **Recommend** -- Service type and pricing tier.
 6. **Flag** -- Note any disqualifiers.
 7. **Save** -- Write score card to prospect folder.
-8. **Update tracker** -- If prospect folder exists, update `revenue/lead-generation/prospect-tracker.md` with the score tier.
+8. **Update tracker** -- Write Score and Tier to the **Google Sheet pipeline** (Sheet ID: `1FJOPS3ABR2BQtFOn4cUAGLZzIYukKbPozK_t_m7Dwg0`). Also update `revenue/lead-generation/prospect-tracker.md` as backup.
 
 Total time target: **under 2 minutes per prospect.**
 

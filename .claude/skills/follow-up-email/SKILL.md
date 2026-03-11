@@ -1,3 +1,8 @@
+---
+name: follow-up-email
+description: Generate follow-up emails for prospects who haven't replied to initial cold outreach. Use when Eric says "follow up with them", "send a follow-up", "they haven't replied", or when the morning briefing flags overdue follow-ups. Supports a 3-touch sequence (Day 3-4, Day 7-8, Day 14) with escalating value and graceful close.
+---
+
 # Follow-Up Email
 
 Generate follow-up emails for prospects who haven't replied to initial cold outreach.
@@ -68,18 +73,17 @@ revenue/lead-generation/prospects/[business-name]/outreach/follow-up-[number].ht
    revenue/lead-generation/prospects/[business-name]/outreach/follow-up-[number].json
    ```
 
-2. Send a test email first:
+2. Send a test email first (use `to: eric.lefler@ophidianai.com`):
    ```bash
-   node .claude/skills/gmail/scripts/send_email.js follow-up-test.json
+   cat follow-up-test.json | node .claude/skills/gws-cli/scripts/build_raw_email.js | gws gmail users messages send --params '{"userId":"me"}' --json @-
    ```
-   Use `to: eric.lefler@ophidianai.com` for the test.
 
 3. After Eric confirms, update the JSON with the prospect's email and send:
    ```bash
-   node .claude/skills/gmail/scripts/send_email.js revenue/lead-generation/prospects/[business-name]/outreach/follow-up-[number].json
+   cat revenue/lead-generation/prospects/[business-name]/outreach/follow-up-[number].json | node .claude/skills/gws-cli/scripts/build_raw_email.js | gws gmail users messages send --params '{"userId":"me"}' --json @-
    ```
 
-4. Update `revenue/lead-generation/prospect-tracker.md` -- set status to "Follow-Up [N] Sent" and log the date.
+4. Update the **Google Sheet pipeline** (Sheet ID: `1FJOPS3ABR2BQtFOn4cUAGLZzIYukKbPozK_t_m7Dwg0`) -- set Status to "Follow-Up Sent", write the FU date in the appropriate column (O for FU1, P for FU2, Q for FU3). Also update `revenue/lead-generation/prospect-tracker.md` as backup.
 
 ### Getting the threadId
 

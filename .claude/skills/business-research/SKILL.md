@@ -1,3 +1,8 @@
+---
+name: business-research
+description: Research businesses to find potential clients with outdated or missing websites, weak online presence, or other service opportunities for OphidianAI. Use when Eric says "find prospects", "research businesses", "look for leads", "find companies that need websites", or any lead generation research task. Also use when scouting a specific industry or location for opportunities.
+---
+
 # Business Research
 
 Research businesses to find potential clients with outdated or missing websites, weak online presence, or other service opportunities for OphidianAI.
@@ -41,6 +46,27 @@ After the table, include:
 
 - **Top 3 prospects** -- The businesses with the clearest need and easiest pitch
 - **Suggested outreach approach** for each (what to mention in the cold email)
+
+## Pipeline Integration
+
+After research is complete:
+
+1. **Create prospect folders** -- For each viable prospect (top 3 minimum), create:
+   ```
+   revenue/lead-generation/prospects/[business-name-slug]/
+   revenue/lead-generation/prospects/[business-name-slug]/research/
+   revenue/lead-generation/prospects/[business-name-slug]/outreach/
+   ```
+
+2. **Save research summary** -- Write findings to:
+   ```
+   revenue/lead-generation/prospects/[business-name-slug]/research/initial-research.md
+   ```
+   Include: business name, URL, location, industry, issues found, opportunity type, contact info, and source.
+
+3. **Update prospect tracker** -- Append each new prospect to the **Google Sheet pipeline** (Sheet ID: `1FJOPS3ABR2BQtFOn4cUAGLZzIYukKbPozK_t_m7Dwg0`) with status "New Lead" and basic info. Also update `revenue/lead-generation/prospect-tracker.md` as backup.
+
+4. **Suggest next step** -- For hot prospects, recommend running `prospect-scoring` to qualify them before outreach.
 
 ## Rules
 

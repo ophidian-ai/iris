@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Wrexperts | Columbus Collision & Restoration | Columbus, IN</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg-dark: #0b0f14;
+            --bg-card: #111820;
+            --bg-card-hover: #161e28;
+            --accent: #00c9db;
+            --accent-hover: #00e5f7;
+            --accent-glow: rgba(0, 201, 219, 0.15);
+            --white: #ffffff;
+            --light: #d0d8e0;
+            --muted: #7a8a9a;
+            --border: rgba(255,255,255,0.06);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-dark);
+            color: var(--light);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(11, 15, 20, 0.92);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 24px;
+        }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 72px;
+        }
+
+        .nav-brand {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--white);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .nav-brand span { color: var(--accent); }
+
+        .nav-links {
+            display: none;
+            list-style: none;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--accent); }
+
+        .nav-cta {
+            display: none;
+            padding: 10px 24px;
+            background: var(--accent);
+            color: var(--bg-dark);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .nav-cta:hover {
+            background: var(--accent-hover);
+            box-shadow: 0 4px 20px var(--accent-glow);
+        }
+
+        .mobile-toggle {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .mobile-toggle span {
+            width: 24px;
+            height: 2px;
+            background: var(--white);
+        }
+
+        @media (min-width: 768px) {
+            .nav-links { display: flex; }
+            .nav-cta { display: inline-block; }
+            .mobile-toggle { display: none; }
+        }
+
+        /* MOBILE MENU */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 72px;
+            left: 0;
+            right: 0;
+            background: rgba(11, 15, 20, 0.98);
+            padding: 24px;
+            z-index: 999;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .mobile-menu.open { display: block; }
+
+        .mobile-menu a {
+            display: block;
+            padding: 14px 0;
+            color: var(--light);
+            text-decoration: none;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .mobile-menu a:hover { color: var(--accent); }
+
+        .mobile-menu .m-cta {
+            display: block;
+            margin-top: 16px;
+            padding: 16px;
+            background: var(--accent);
+            color: var(--bg-dark);
+            text-align: center;
+            font-weight: 700;
+            border-radius: 4px;
+            border: none;
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding: 120px 24px 80px;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 70% 20%, rgba(0, 201, 219, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 20% 80%, rgba(0, 201, 219, 0.04) 0%, transparent 50%),
+                linear-gradient(180deg, var(--bg-dark) 0%, #0e1319 100%);
+        }
+
+        .hero-grid-lines {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(0,201,219,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,201,219,0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .hero-text-side {}
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: var(--accent-glow);
+            border: 1px solid rgba(0,201,219,0.2);
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent);
+            margin-bottom: 28px;
+        }
+
+        .hero-tag::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        .hero h1 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 700;
+            color: var(--white);
+            text-transform: uppercase;
+            line-height: 1;
+            letter-spacing: -1px;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 .accent-text { color: var(--accent); }
+
+        .hero-sub {
+            font-size: 1.05rem;
+            color: var(--muted);
+            max-width: 520px;
+            line-height: 1.8;
+            margin-bottom: 36px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .btn-glow {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 18px 36px;
+            background: var(--accent);
+            color: var(--bg-dark);
+            text-decoration: none;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .btn-glow:hover {
+            background: var(--accent-hover);
+            box-shadow: 0 8px 30px var(--accent-glow);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 18px 36px;
+            background: transparent;
+            color: var(--white);
+            text-decoration: none;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .hero-image-side {
+            display: none;
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, var(--bg-card), rgba(0,201,219,0.05), var(--bg-card));
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-image-side::after {
+            content: 'THE WREXPERTS';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: rgba(0,201,219,0.15);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        @media (min-width: 480px) {
+            .hero-buttons { flex-direction: row; }
+        }
+
+        @media (min-width: 900px) {
+            .hero-content { grid-template-columns: 1fr 1fr; }
+            .hero-image-side { display: block; }
+        }
+
+        /* DUAL EXPERTISE BAR */
+        .expertise-bar {
+            background: var(--bg-card);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 48px 24px;
+        }
+
+        .expertise-grid {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+
+        .expertise-item {
+            text-align: center;
+            padding: 32px 24px;
+            background: var(--bg-dark);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .expertise-item:hover {
+            border-color: rgba(0,201,219,0.2);
+            transform: translateY(-2px);
+        }
+
+        .expertise-item .e-icon {
+            width: 56px;
+            height: 56px;
+            margin: 0 auto 16px;
+            background: var(--accent-glow);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--accent);
+        }
+
+        .expertise-item h3 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--white);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .expertise-item p {
+            color: var(--muted);
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+
+        @media (min-width: 600px) {
+            .expertise-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        /* SECTIONS */
+        section { padding: 80px 24px; }
+
+        @media (min-width: 768px) {
+            section { padding: 100px 24px; }
+        }
+
+        .container { max-width: 1100px; margin: 0 auto; }
+
+        .label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .heading {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            color: var(--white);
+            text-transform: uppercase;
+            line-height: 1.1;
+            margin-bottom: 16px;
+        }
+
+        .subtext {
+            color: var(--muted);
+            font-size: 0.95rem;
+            max-width: 600px;
+            line-height: 1.8;
+            margin-bottom: 48px;
+        }
+
+        /* SERVICES */
+        .services { background: var(--bg-dark); }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 32px 24px;
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            transition: all 0.4s;
+        }
+
+        .service-card:hover {
+            border-color: rgba(0,201,219,0.15);
+            background: var(--bg-card-hover);
+            transform: translateX(4px);
+        }
+
+        .service-num {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: rgba(0,201,219,0.2);
+            line-height: 1;
+            min-width: 40px;
+        }
+
+        .service-card:hover .service-num { color: var(--accent); }
+
+        .service-card h3 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--white);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .service-card p {
+            color: var(--muted);
+            font-size: 0.88rem;
+            line-height: 1.7;
+        }
+
+        @media (min-width: 768px) {
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        /* ABOUT */
+        .about {
+            background: var(--bg-card);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .about-visual {
+            aspect-ratio: 16/10;
+            background: linear-gradient(135deg, var(--bg-dark), rgba(0,201,219,0.04), var(--bg-dark));
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-visual::before {
+            content: 'THE WREXPERTS';
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: rgba(0,201,219,0.2);
+            letter-spacing: 3px;
+        }
+
+        .about-details h3 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 24px;
+            margin-bottom: 12px;
+        }
+
+        .about-details p {
+            color: var(--light);
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .about-details ul {
+            list-style: none;
+            margin-top: 12px;
+        }
+
+        .about-details ul li {
+            padding: 8px 0;
+            color: var(--light);
+            font-size: 0.9rem;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .about-details ul li::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        @media (min-width: 768px) {
+            .about-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        /* CONTACT */
+        .contact { background: var(--bg-dark); }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 48px;
+        }
+
+        .contact-block { margin-bottom: 28px; }
+
+        .contact-block h4 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .contact-block p,
+        .contact-block a {
+            color: var(--light);
+            text-decoration: none;
+            font-size: 1rem;
+            line-height: 1.6;
+            transition: color 0.3s;
+        }
+
+        .contact-block a:hover { color: var(--accent); }
+
+        .big-phone {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 2.2rem !important;
+            font-weight: 700;
+            color: var(--white) !important;
+            letter-spacing: 1px;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .contact-form input,
+        .contact-form select,
+        .contact-form textarea {
+            width: 100%;
+            padding: 16px 18px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--white);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            transition: border-color 0.3s;
+            outline: none;
+        }
+
+        .contact-form input:focus,
+        .contact-form select:focus,
+        .contact-form textarea:focus {
+            border-color: var(--accent);
+        }
+
+        .contact-form textarea { min-height: 120px; resize: vertical; }
+
+        .contact-form input::placeholder,
+        .contact-form textarea::placeholder { color: var(--muted); }
+
+        .contact-form select { color: var(--muted); }
+        .contact-form select option { background: var(--bg-card); color: var(--white); }
+
+        .hours-grid {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 4px 16px;
+            font-size: 0.9rem;
+        }
+
+        .hours-grid .day { color: var(--muted); }
+        .hours-grid .time { color: var(--light); }
+
+        .map-box {
+            width: 100%;
+            height: 180px;
+            margin-top: 20px;
+            background: linear-gradient(135deg, var(--bg-card), rgba(0,201,219,0.03), var(--bg-card));
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--muted);
+            font-size: 0.8rem;
+        }
+
+        @media (min-width: 768px) {
+            .contact-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--bg-card);
+            border-top: 1px solid var(--border);
+            padding: 36px 24px;
+            text-align: center;
+        }
+
+        .footer-brand {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--white);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 6px;
+        }
+
+        .footer-brand span { color: var(--accent); }
+
+        footer p {
+            color: var(--muted);
+            font-size: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav>
+        <div class="nav-inner">
+            <div class="nav-brand">The <span>Wrexperts</span></div>
+            <ul class="nav-links">
+                <li><a href="#services">Services</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <a href="tel:8123762763" class="nav-cta">Call (812) 376-2763</a>
+            <button class="mobile-toggle" onclick="document.querySelector('.mobile-menu').classList.toggle('open')">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="mobile-menu">
+        <a href="#services" onclick="this.parentElement.classList.remove('open')">Services</a>
+        <a href="#about" onclick="this.parentElement.classList.remove('open')">About</a>
+        <a href="#contact" onclick="this.parentElement.classList.remove('open')">Contact</a>
+        <a href="tel:8123762763" class="m-cta">(812) 376-2763</a>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-grid-lines"></div>
+        <div class="hero-content">
+            <div class="hero-text-side">
+                <div class="hero-tag">Columbus, Indiana</div>
+                <h1>Collision Repair<br><span class="accent-text">& Custom Builds</span></h1>
+                <p class="hero-sub">Columbus Collision & Restoration brings expert collision repair and custom vehicle upfitting under one roof. From insurance claims to truck accessories, The Wrexperts have you covered.</p>
+                <div class="hero-buttons">
+                    <a href="tel:8123762763" class="btn-glow">Get Free Estimate</a>
+                    <a href="#services" class="btn-outline">See Services</a>
+                </div>
+            </div>
+            <div class="hero-image-side"></div>
+        </div>
+    </section>
+
+    <!-- DUAL EXPERTISE -->
+    <div class="expertise-bar">
+        <div class="expertise-grid">
+            <div class="expertise-item">
+                <div class="e-icon">&#9670;</div>
+                <h3>Collision Center</h3>
+                <p>Full-service collision repair, insurance work, and towing. We restore your vehicle to factory condition.</p>
+            </div>
+            <div class="expertise-item">
+                <div class="e-icon">&#9670;</div>
+                <h3>Custom Upfitting</h3>
+                <p>Truck accessories, custom builds, and vehicle modifications. Transform your ride at The Wrexperts shop.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SERVICES -->
+    <section class="services" id="services">
+        <div class="container">
+            <p class="label">Our Services</p>
+            <h2 class="heading">What The Wrexperts Do</h2>
+            <p class="subtext">Two specialties, one shop. Whether you need collision repair or want to customize your vehicle, our team delivers expert craftsmanship on every job.</p>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-num">01</div>
+                    <div>
+                        <h3>Collision Repair</h3>
+                        <p>Complete collision and accident repair for all makes and models. We restore your vehicle to pre-accident condition with precision and care.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-num">02</div>
+                    <div>
+                        <h3>Towing Services</h3>
+                        <p>Need your vehicle towed after an accident? We coordinate towing directly to our shop so you don't have to worry about logistics.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-num">03</div>
+                    <div>
+                        <h3>Vehicle Upfitting</h3>
+                        <p>Custom vehicle upfitting and modifications. From lift kits to bumpers, we turn your vision into reality with professional installation.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-num">04</div>
+                    <div>
+                        <h3>Truck Accessories</h3>
+                        <p>Bed liners, tool boxes, running boards, lighting, racks, and more. We source and install top-quality truck accessories.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-num">05</div>
+                    <div>
+                        <h3>Custom Builds</h3>
+                        <p>Full custom vehicle builds and restorations. Whether it's a weekend project truck or a full rebuild, The Wrexperts bring it to life.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-num">06</div>
+                    <div>
+                        <h3>Insurance Claims</h3>
+                        <p>We work with all major insurance providers to streamline the claims process. Free estimates provided for every job.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-visual"></div>
+                <div class="about-details">
+                    <p class="label">About Us</p>
+                    <h2 class="heading">Meet The Wrexperts</h2>
+                    <p>Briana and Rodney Ferrenburg founded Columbus Collision & Restoration with a mission to bring both collision repair and custom vehicle work to Columbus, Indiana under one roof. The Wrexperts name isn't just branding -- it's a promise of expertise on every job.</p>
+
+                    <h3>Why Choose Us</h3>
+                    <ul>
+                        <li>Dual expertise: collision repair + custom upfitting</li>
+                        <li>Locally owned by Briana &amp; Rodney Ferrenburg</li>
+                        <li>Free estimates on all work</li>
+                        <li>Direct insurance billing</li>
+                        <li>Convenient Columbus, IN location</li>
+                    </ul>
+
+                    <h3>Hours</h3>
+                    <div class="hours-grid">
+                        <span class="day">Mon - Fri</span><span class="time">8:00 AM - 5:00 PM</span>
+                        <span class="day">Sat - Sun</span><span class="time">Closed</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <p class="label">Get In Touch</p>
+            <h2 class="heading">Request a Free Estimate</h2>
+            <p class="subtext">Drop by the shop, give us a call, or send a message. The Wrexperts team is ready to help with collision repair or your next custom build.</p>
+            <div class="contact-grid">
+                <div>
+                    <div class="contact-block">
+                        <h4>Call Us</h4>
+                        <a href="tel:8123762763" class="big-phone">(812) 376-2763</a>
+                    </div>
+                    <div class="contact-block">
+                        <h4>Email</h4>
+                        <a href="mailto:estimating@thewrexperts.com">estimating@thewrexperts.com</a>
+                    </div>
+                    <div class="contact-block">
+                        <h4>Location</h4>
+                        <p>351 S Mapleton St<br>Columbus, IN 47201</p>
+                    </div>
+                    <div class="contact-block">
+                        <h4>Hours</h4>
+                        <p>Monday - Friday: 8:00 AM - 5:00 PM</p>
+                    </div>
+                    <div class="map-box">Map: 351 S Mapleton St, Columbus, IN 47201</div>
+                </div>
+                <form class="contact-form" onsubmit="event.preventDefault()">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Email Address" required>
+                    <input type="tel" placeholder="Phone Number">
+                    <select>
+                        <option value="" disabled selected>What do you need?</option>
+                        <option>Collision Repair</option>
+                        <option>Vehicle Upfitting</option>
+                        <option>Truck Accessories</option>
+                        <option>Custom Build</option>
+                        <option>Insurance Claim</option>
+                        <option>Other</option>
+                    </select>
+                    <textarea placeholder="Tell us about your project or vehicle..."></textarea>
+                    <button type="submit" class="btn-glow" style="width:100%; border:none; cursor:pointer; font-family:'Rajdhani',sans-serif;">Send Request</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-brand">The <span>Wrexperts</span> | Columbus Collision &amp; Restoration</div>
+        <p>351 S Mapleton St, Columbus, IN 47201 &nbsp;|&nbsp; (812) 376-2763 &nbsp;|&nbsp; estimating@thewrexperts.com</p>
+    </footer>
+
+</body>
+</html>

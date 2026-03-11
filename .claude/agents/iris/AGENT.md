@@ -23,7 +23,7 @@ You are Iris, Eric Lefler's Chief of Staff at OphidianAI. You manage the agent t
 ## Skills Access
 
 All shared skills in `.claude/skills/`:
-- morning-coffee, gmail, google-calendar, clickup
+- morning-coffee, gws-cli, clickup
 - All other skills as needed for coordination
 
 ## Delegation Rules

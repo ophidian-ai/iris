@@ -1,0 +1,66 @@
+00:00:00
+In the last 6 weeks, we sent 100,000 cold emails and collected 30,000 running the same simple output on the system. Clothe code is what we used to speed up the boarding parts so you can keep up volume consistent without turning it into a manual job. And I want you to really hear that part. The loop stayed simple. The over stays simple. The only thing we did was remove the friction that makes people stop halfway. The crazy part is I do not even know how to write a single line of code. Neither does Daniel, my right-hand guy, who
+
+00:00:30
+built the core system after learning Clo. If you're listening to this thinking, okay, I'm not technical, so this is not for me. That is really the point. This is not a developer story. This is a volume story. This is a consistency story. This is a stop doing the same annoying tasks every week story. Clode just made it possible for us to build small internal tools fast. Not perfect tools, not public apps, just the stuff we need to the work does not stall. Look, all of this really new. One
+
+00:01:00
+of my core principle is authenticity. So, this video is going to be a little different. It is really just me talking through a bunch of stuff. We are going to bounce across topics. It is basically a pick behind the certain like here's everything we are working on because I think this is the stuff is really cool. And I'm saying that up front because I'm not going to pretend I am some clean polished engineer explaining architecture. I'm going to talk like how we actually operate, what we tried, what
+
+00:01:28
+broke, what felt slow, what we fixed, why did we even have to build something like this. The thing is we started to outgrow tools fast. Clay is great. I love the product. I think a lot of people should be using it. But when your workflow depends on large tables, row limits, and slow delets, it becomes a real bottleneck. And once you're running volume every week, bottlenecks stop being annoying and start being expansive. Because when volume is low, you can tolerate pain. You can tolerate clicking around. You can tolerate
+
+00:01:57
+waiting. You can tolerate doing work twice. You can tell yourself it is fine. But when volume is the whole game, those little delays stack up. You start thinking about the work before you even do it. You start avoiding the step. You start pushing it to tomorrow and then tomorrow becomes next week. So that is why we decide to build our own system. Not to be fancy, just to remove limits and friction. And that is the real reason. It is not ego. It was not we are too good for tools. It was literally I
+
+00:02:26
+want this to be boring. I want this system to run the same way every week without me babysitting. About one years ago, I started playing with cursor. And then more recently, we switch it over to clothe code before we made the switch. I spent about 10 grand in months with cursor. When Daniel and I were both doing it, we were spending 600 a day. And that is the part that snakes up on you. It does not feel like 600 a day while you were in it. You are just shipping. You are just trying things. You are just one more tweak. Then you
+
+00:02:54
+look up and you like why this so expensive. Then cl code came out and it was way better and way cheaper. It is 200 per months per se, which is a no-brainer compared to what we were spending. And the craziest thing is Daniel who had never touched any of those tools before built our entire core system in a week. That is what changed the game for us. Not because it made us smarter, not because it gave us some secret advantage. It just made building internal tools feel no more. It stopped feeling like coding is this huge thing.
+
+00:03:24
+It started feeling like we have a problem. Let's build a smart fix. And once you feel that once, you start seeing problems everywhere. You start noticing how much time you waste on stuff. that should not require a human brain. Here's what we are running. All of our code sits inside GitHub. I did not even know what it was two months ago. As far as I can understand, it is basically cloud storage for code. It keeps everything organized and backed up. So, we do not lose our work. And I like that because it makes the work feel
+
+00:03:52
+safe. You can change things without feeling like you are going to destroy everything. You can keep version, you can go back, you can hand it off. Your system does not leave in one person's laptop. We deploy workers to railway. Railway is really cool because you can deploy workers that run through your code. If I open the project, you can see the lead proper sitting there. It is just code in here. Once again, I do not know what it is doing. Clo did all of it, which is a pretty rad. Railway host
+
+00:04:17
+everything for us when we need a lot of processing. Think of this workers as little robots that process things 24/7. We can run a lot of them at the same time. And this is why it moves fast. And this matters because when you are doing cold email, you do not want the leaf step to be the reason you slow down. The lead step should be the boring part. It should be the part that just works. We also host the postgress databases and we have been looking at convex for realtime stuff. This is where all of our lead
+
+00:04:45
+data sits. Every lead, every validation result, every enrichment. So we are not relying on did I export that CSV or did I save that list or did we lose that batch? The system is stoalling it. The system is tracking it, the system can pull it back. We also deploy front end components on Versel. So we have dashboards and visual screens. The team can actually use Versel sync with GitHub. So when your new code gets pushed, it updates and I can preview it. That is the part I love because it means this is not just a pile of code nobody
+
+00:05:17
+can touch. We can actually see what is happening. We can actually use the tools. We can actually run it like an operation, not like a science project. You might be thinking why is a tool slow compared to a custom system. It is not that anything is wrong with the tool. It is that when you build something for yourself, you can optimize for your exact workflow. If something breaks, you fix it. If a platform breaks, it affects everyone. So, it has to be built for safety and scale in a totally different
+
+00:05:46
+way. So, I'm not saying this to drunk on anyone. A platform is built for the average user. One inter system is built for one thing. our workflow, our volume, our timing, our requirements. The reason speed matter is simple. When a campaign is not working, we do not want to wait. We want to rewrote a better list, clean it, and ship again. Fast feedback is the whole game because you cannot think your way into a working campaign. You have to run the cycle. You have to send. You have to get replies. You have to see
+
+00:06:14
+what is landing and what is that. You have to move. If your processing step is slow, you end up protecting the campaign. You end up babysitting the copy. you end up overding. Speed just makes raps easier. That is it. It keeps you in motion. It keeps the team moving. It keeps the loop alive. And this is foundation. Now, let me show you the specific tools we built on top of this. These are things we vibe coded with cursor or cloud code. And each one solves a different lead generation problem. And I want you to notice the
+
+00:06:41
+pattern here. None of these are cool. None of these are built to impress people. These are built to remove friction inside the work we already do. We built a lead generator appi lead puller for local business leads. The point is speed and repeatability. You type the exact search you want, run it and it pulls the row list without you sitting there clicking around like an idiot. Then it dumps the output into our system and starts the next step. It clicks only. It narrows all it tags only. So we are not starting at massive
+
+00:07:10
+list and guessing who is worth sending to because that is where most people die. They have a list but they do not have a usable list. They have roles. They do not have targets. We also built a YouTube data analyzer. It pulls the data that matters and turns it into something we can act on. Which videos are moving people? Which ones are dead? What is drifting? What is stable? What needs a change? Because when you post a lot, your brain starts lying to you. You remember the one comment that felt good.
+
+00:07:38
+You forgot to quit uploads. You start making decisions of mood. The daily reports keeps it simple. What is happening? What chang it? What is stable? What is not? what needs attention today and we build automation along the webinar copy not write a new webinar every time. The opposite keep the core swap what needs to change and keep it consistent across the page the email and the followup. This is the kind of thing nobody wants to do manually. And when nobody wants to do it manually, it becomes sloppy. It gets delayed. It
+
+00:08:08
+becomes we'll fix it later. Then later never comes. So we built it into the system. The system keeps track of what it changed. The system reports it back. It is just there. It is attracted. It is usable. So that is what we built on the top. A backup as AI lead generator, a YouTube analyzer, a webinar copy automation. Nothing fancy, just the tools that keeps the machine moving. You don't need to be a developer. If you did, most people here will be done already. The hard part is not the code.
+
+00:08:34
+The hard part is deciding what the tool must do, then actually using it every week. So don't copy the whole system. That's how people lose a month and end up back in manual work with a bruised ego. Start with one bottleneck. Then one thing that makes you stall the one step you keep saving for later because it's annoying. Build a smallest tool that removes the step. That's it. For us, it was a boring weights and the limits. Once that got removed, the rest was just a stacking. One tool, one win, then the
+
+00:09:02
+next. When you use code, don't talk like a programmer. Talk like an operator. I want this input. I want this output. I want it to run like this. If it breaks, I want this to happen. Then I want it to report back like this. You don't need to understand every line. You need to be clear about job. You're not trying to become a developer. You're trying to remove friction and keep it internal private tools with public products for one reason. They match your exact loop. If you already have something you can
+
+00:09:29
+sell, there are two paths. You can build your own internal tools piece by piece. Starting with the one thing that is slowing you down right now. Not a platform, not a science project, just the boring parts you touch every week. So the machine stops solving. Or you can skip the building and copy our system. I run execution deep dive this Friday. We walk through the outbound loop, the weekly volume standard and the exact way we keep it simple enough to execute every week. Here's the key. If you have
+
+00:09:56
+an offer, you bring it and you run it through the loop. If you don't have an offer, you don't get cute. You take our default lane, our default offer, and you execute. Either way, you leave with a plan you can run next week. Keep the loop simple. Remove friction. Run volume. So, stop learning AI. Start executing.
+

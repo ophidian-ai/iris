@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Taulman Chiropractic | Columbus, IN | Dr. L. Scott Taulman</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --primary: #2a7a8c;
+  --primary-light: #3a9db3;
+  --primary-dark: #1e5c6a;
+  --accent: #4ecdc4;
+  --navy: #1a2332;
+  --white: #ffffff;
+  --off-white: #f8fafb;
+  --light-bg: #eef4f6;
+  --text: #2d3748;
+  --text-light: #64748b;
+  --border: #e2e8f0;
+  --shadow: rgba(42,122,140,0.08);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--white);
+  color: var(--text);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+a { color: var(--primary); text-decoration: none; transition: color 0.3s; }
+a:hover { color: var(--primary-dark); }
+
+/* Top bar */
+.top-bar {
+  background: var(--navy);
+  color: #fff;
+  padding: 0.5rem 1.5rem;
+  font-size: 0.8rem;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.top-bar a { color: var(--accent); }
+.top-bar a:hover { color: #fff; }
+
+/* Navigation */
+nav {
+  position: sticky;
+  top: 0;
+  background: rgba(255,255,255,0.97);
+  backdrop-filter: blur(12px);
+  z-index: 100;
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-logo {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.nav-logo-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.nav-logo-tagline {
+  font-size: 0.65rem;
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+
+.nav-links a {
+  color: var(--text);
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover { color: var(--primary); }
+
+.nav-cta {
+  background: var(--primary) !important;
+  color: #fff !important;
+  padding: 0.6rem 1.5rem !important;
+  border-radius: 6px;
+  font-weight: 600 !important;
+  transition: all 0.3s !important;
+}
+
+.nav-cta:hover {
+  background: var(--primary-dark) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px var(--shadow);
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.hamburger span {
+  width: 24px;
+  height: 2px;
+  background: var(--navy);
+  transition: all 0.3s;
+}
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .nav-links.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0; right: 0;
+    background: #fff;
+    padding: 1.5rem;
+    gap: 1rem;
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+  }
+}
+
+/* Hero */
+.hero {
+  position: relative;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  background:
+    linear-gradient(135deg, rgba(26,35,50,0.88), rgba(42,122,140,0.75)),
+    linear-gradient(180deg, #2a7a8c, #1a2332);
+  padding: 6rem 1.5rem;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  bottom: -2px; left: 0; right: 0;
+  height: 80px;
+  background: var(--white);
+  clip-path: ellipse(55% 100% at 50% 100%);
+}
+
+.hero-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .hero-inner { grid-template-columns: 1fr 1fr; }
+}
+
+.hero-content { color: #fff; position: relative; z-index: 1; }
+
+.hero-badge {
+  display: inline-block;
+  background: rgba(78,205,196,0.15);
+  border: 1px solid rgba(78,205,196,0.3);
+  color: var(--accent);
+  padding: 0.35rem 1rem;
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 1.5rem;
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  margin-bottom: 1.25rem;
+  font-weight: 700;
+}
+
+.hero p {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  max-width: 500px;
+  margin-bottom: 2rem;
+  font-weight: 300;
+  line-height: 1.8;
+}
+
+.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
+
+.btn-primary {
+  display: inline-block;
+  background: var(--accent);
+  color: var(--navy);
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.3s;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background: #fff;
+  color: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+}
+
+.btn-secondary {
+  display: inline-block;
+  background: transparent;
+  color: #fff;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  border: 1px solid rgba(255,255,255,0.3);
+  transition: all 0.3s;
+}
+
+.btn-secondary:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: #fff;
+  color: #fff;
+}
+
+.hero-phone {
+  margin-top: 1.5rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.hero-phone a { color: #fff; }
+.hero-phone a:hover { color: var(--accent); }
+
+.hero-image {
+  aspect-ratio: 4/3;
+  background: linear-gradient(135deg, rgba(78,205,196,0.2), rgba(42,122,140,0.3));
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.1);
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .hero-image { display: block; }
+}
+
+/* Trust bar */
+.trust-bar {
+  padding: 3rem 1.5rem;
+  background: var(--white);
+}
+
+.trust-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  text-align: center;
+}
+
+@media (min-width: 600px) {
+  .trust-inner { grid-template-columns: repeat(4, 1fr); }
+}
+
+.trust-item h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  color: var(--primary);
+  margin-bottom: 0.25rem;
+}
+
+.trust-item p {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Section base */
+section { padding: 5rem 1.5rem; }
+
+.section-inner { max-width: 1100px; margin: 0 auto; }
+
+.section-header { text-align: center; margin-bottom: 3.5rem; }
+
+.section-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: var(--primary);
+  margin-bottom: 0.75rem;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  color: var(--navy);
+  margin-bottom: 1rem;
+}
+
+.section-subtitle {
+  color: var(--text-light);
+  font-size: 1rem;
+  max-width: 600px;
+  margin: 0 auto;
+  font-weight: 300;
+}
+
+/* Services */
+.services { background: var(--off-white); }
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.service-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 2.25rem;
+  transition: all 0.4s;
+}
+
+.service-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 40px var(--shadow);
+  border-color: var(--primary-light);
+}
+
+.service-icon {
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, var(--primary-light), var(--accent));
+  border-radius: 12px;
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: #fff;
+}
+
+.service-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem;
+  color: var(--navy);
+  margin-bottom: 0.75rem;
+}
+
+.service-card p {
+  color: var(--text-light);
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+/* About */
+.about { background: var(--white); }
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .about-grid { grid-template-columns: 1fr 1fr; }
+}
+
+.about-image {
+  aspect-ratio: 4/3;
+  background: linear-gradient(135deg, var(--light-bg), #d4eef2);
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.about-image::after {
+  content: '';
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 120px; height: 120px;
+  background: var(--accent);
+  opacity: 0.15;
+  border-radius: 50%;
+  transform: translate(30%, 30%);
+}
+
+.about-text .section-label { text-align: left; }
+.about-text .section-title { text-align: left; }
+
+.about-text p {
+  color: var(--text-light);
+  margin-bottom: 1rem;
+  line-height: 1.8;
+}
+
+.credentials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.credential-badge {
+  display: inline-block;
+  background: var(--light-bg);
+  border: 1px solid var(--border);
+  padding: 0.4rem 1rem;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--primary-dark);
+}
+
+/* Approach section */
+.approach { background: var(--navy); color: #fff; }
+.approach .section-label { color: var(--accent); }
+.approach .section-title { color: #fff; }
+.approach .section-subtitle { color: rgba(255,255,255,0.7); }
+
+.approach-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+  counter-reset: step;
+}
+
+.approach-step {
+  text-align: center;
+  padding: 2rem 1rem;
+  counter-increment: step;
+}
+
+.approach-step::before {
+  content: counter(step);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  background: rgba(78,205,196,0.15);
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  margin: 0 auto 1.25rem;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.approach-step h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+}
+
+.approach-step p {
+  color: rgba(255,255,255,0.7);
+  font-size: 0.85rem;
+  line-height: 1.7;
+}
+
+/* Contact */
+.contact { background: var(--off-white); }
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+
+@media (min-width: 768px) {
+  .contact-grid { grid-template-columns: 1fr 1fr; }
+}
+
+.contact-info-block { display: flex; flex-direction: column; gap: 2rem; }
+
+.contact-item {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.contact-icon {
+  width: 48px;
+  height: 48px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  color: var(--primary);
+}
+
+.contact-item h4 {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-light);
+  margin-bottom: 0.25rem;
+}
+
+.contact-item p {
+  font-size: 1rem;
+  color: var(--navy);
+  font-weight: 500;
+}
+
+.contact-item a { color: var(--navy); }
+.contact-item a:hover { color: var(--primary); }
+
+.contact-map {
+  aspect-ratio: 16/9;
+  background: linear-gradient(135deg, var(--light-bg), #d4eef2);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  margin-top: 1rem;
+}
+
+.contact-form {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 2.5rem;
+}
+
+.contact-form h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  color: var(--navy);
+  margin-bottom: 1.5rem;
+}
+
+.form-group { margin-bottom: 1.25rem; }
+
+.form-group label {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--text-light);
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  background: var(--off-white);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 0.85rem 1rem;
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  transition: all 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(42,122,140,0.1);
+}
+
+.form-group textarea { resize: vertical; min-height: 90px; }
+
+.form-submit {
+  width: 100%;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  padding: 1rem;
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.form-submit:hover {
+  background: var(--primary-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px var(--shadow);
+}
+
+/* Footer */
+footer {
+  background: var(--navy);
+  color: #fff;
+  padding: 3rem 1.5rem;
+}
+
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  text-align: center;
+}
+
+@media (min-width: 600px) {
+  .footer-inner { grid-template-columns: 1fr 1fr 1fr; text-align: left; }
+}
+
+.footer-brand .nav-logo-name { color: #fff; font-size: 1.2rem; }
+.footer-brand .nav-logo-tagline { color: rgba(255,255,255,0.5); }
+.footer-brand p { color: rgba(255,255,255,0.6); font-size: 0.85rem; margin-top: 0.75rem; }
+
+.footer-col h4 {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+
+.footer-col p,
+.footer-col a {
+  color: rgba(255,255,255,0.7);
+  font-size: 0.9rem;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.footer-col a:hover { color: #fff; }
+
+.footer-bottom {
+  max-width: 1100px;
+  margin: 2rem auto 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  text-align: center;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.4);
+}
+</style>
+</head>
+<body>
+
+<!-- Top Bar -->
+<div class="top-bar">
+  <span>&#9742; <a href="tel:8123429850">(812) 342-9850</a></span>
+  <span>&#9873; 1001 Washington St, Columbus, IN 47201</span>
+</div>
+
+<!-- Navigation -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">
+      <span class="nav-logo-name">Taulman Chiropractic</span>
+      <span class="nav-logo-tagline">Wellness Through Alignment</span>
+    </div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#approach">Our Approach</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#contact" class="nav-cta">Book Appointment</a></li>
+    </ul>
+    <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-badge">20+ Years of Excellence</div>
+      <h1>Feel Better. Move Better. Live Better.</h1>
+      <p>Dr. L. Scott Taulman has been helping Columbus, Indiana families achieve optimal health through expert chiropractic care for over two decades.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Schedule Your Visit</a>
+        <a href="tel:8123429850" class="btn-secondary">Call (812) 342-9850</a>
+      </div>
+      <div class="hero-phone">
+        <a href="tel:8123429850">(812) 342-9850</a>
+      </div>
+    </div>
+    <div class="hero-image"></div>
+  </div>
+</section>
+
+<!-- Trust Bar -->
+<div class="trust-bar">
+  <div class="trust-inner">
+    <div class="trust-item">
+      <h3>20+</h3>
+      <p>Years Experience</p>
+    </div>
+    <div class="trust-item">
+      <h3>D.C.</h3>
+      <p>Doctor of Chiropractic</p>
+    </div>
+    <div class="trust-item">
+      <h3>C.C.W.P.</h3>
+      <p>Wellness Certified</p>
+    </div>
+    <div class="trust-item">
+      <h3>1000s</h3>
+      <p>Patients Treated</p>
+    </div>
+  </div>
+</div>
+
+<!-- Services -->
+<section class="services" id="services">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-label">Our Services</div>
+      <h2 class="section-title">Comprehensive Chiropractic Care</h2>
+      <p class="section-subtitle">From pain relief to long-term wellness, we offer a full range of chiropractic services tailored to your needs.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">&#9883;</div>
+        <h3>Chiropractic Adjustments</h3>
+        <p>Precise spinal adjustments to restore proper alignment, reduce nerve interference, and promote natural healing throughout the body.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">&#9829;</div>
+        <h3>Wellness Care</h3>
+        <p>Proactive maintenance care to keep your spine healthy, prevent future problems, and optimize your overall well-being for the long term.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">&#9889;</div>
+        <h3>Sports Injuries</h3>
+        <p>Specialized treatment for athletic injuries including sprains, strains, and overuse injuries. Get back in the game faster and stronger.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">&#10010;</div>
+        <h3>Pain Management</h3>
+        <p>Drug-free pain relief for back pain, neck pain, headaches, sciatica, and more. Address the root cause, not just the symptoms.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">&#9881;</div>
+        <h3>Spinal Decompression</h3>
+        <p>Non-surgical decompression therapy to relieve pressure on spinal discs. Effective treatment for herniated discs and chronic back pain.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">&#9734;</div>
+        <h3>New Patient Exams</h3>
+        <p>Comprehensive initial evaluation including health history, physical exam, and personalized treatment plan designed for your specific needs.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section class="about" id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-image"></div>
+      <div class="about-text">
+        <div class="section-label">About Dr. Taulman</div>
+        <h2 class="section-title">Two Decades of Trusted Care in Columbus</h2>
+        <p>Dr. L. Scott Taulman, D.C., C.C.W.P., has been providing expert chiropractic care to Columbus, Indiana and the surrounding communities for over 20 years. His commitment to patient-centered care and evidence-based treatment has earned the trust of thousands of families.</p>
+        <p>As a Certified Chiropractic Wellness Practitioner (C.C.W.P.), Dr. Taulman goes beyond symptom relief to help patients achieve lasting wellness. His approach combines traditional chiropractic techniques with modern therapeutic methods for comprehensive care.</p>
+        <div class="credentials">
+          <span class="credential-badge">Doctor of Chiropractic (D.C.)</span>
+          <span class="credential-badge">C.C.W.P. Certified</span>
+          <span class="credential-badge">20+ Years Practice</span>
+          <span class="credential-badge">Columbus, IN Native</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Approach -->
+<section class="approach" id="approach">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-label">Our Approach</div>
+      <h2 class="section-title">Your Path to Better Health</h2>
+      <p class="section-subtitle">We make it easy to get started. Here's what to expect as a new patient.</p>
+    </div>
+    <div class="approach-steps">
+      <div class="approach-step">
+        <h3>Initial Consultation</h3>
+        <p>We'll discuss your health concerns, medical history, and wellness goals to understand exactly what you need.</p>
+      </div>
+      <div class="approach-step">
+        <h3>Thorough Examination</h3>
+        <p>A comprehensive physical exam to identify the root cause of your symptoms and assess your overall spinal health.</p>
+      </div>
+      <div class="approach-step">
+        <h3>Custom Treatment Plan</h3>
+        <p>A personalized care plan designed around your specific condition, goals, and lifestyle for optimal results.</p>
+      </div>
+      <div class="approach-step">
+        <h3>Ongoing Wellness</h3>
+        <p>Regular check-ups and adjustments to maintain your progress and keep you feeling your best long-term.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="contact" id="contact">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-label">Get In Touch</div>
+      <h2 class="section-title">Schedule Your Appointment</h2>
+      <p class="section-subtitle">New patients are always welcome. Call us or fill out the form below to get started.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info-block">
+        <div class="contact-item">
+          <div class="contact-icon">&#9742;</div>
+          <div>
+            <h4>Phone</h4>
+            <p><a href="tel:8123429850">(812) 342-9850</a></p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">&#9993;</div>
+          <div>
+            <h4>Email</h4>
+            <p><a href="mailto:info@taulmanmail.com">info@taulmanmail.com</a></p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">&#9873;</div>
+          <div>
+            <h4>Address</h4>
+            <p>1001 Washington St<br>Columbus, IN 47201</p>
+          </div>
+        </div>
+        <div class="contact-map"></div>
+      </div>
+      <div class="contact-form">
+        <h3>Request an Appointment</h3>
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" placeholder="Your full name">
+        </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" placeholder="(555) 555-5555">
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" placeholder="your@email.com">
+        </div>
+        <div class="form-group">
+          <label>What brings you in?</label>
+          <select>
+            <option value="">Select a concern...</option>
+            <option>Back Pain</option>
+            <option>Neck Pain</option>
+            <option>Headaches / Migraines</option>
+            <option>Sports Injury</option>
+            <option>Sciatica</option>
+            <option>General Wellness</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Additional Details</label>
+          <textarea placeholder="Tell us more about your symptoms or concerns..."></textarea>
+        </div>
+        <button class="form-submit">Request Appointment</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="nav-logo">
+        <span class="nav-logo-name">Taulman Chiropractic</span>
+        <span class="nav-logo-tagline">Wellness Through Alignment</span>
+      </div>
+      <p>Providing expert chiropractic care to Columbus, Indiana for over 20 years.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <a href="tel:8123429850">(812) 342-9850</a>
+      <a href="mailto:info@taulmanmail.com">info@taulmanmail.com</a>
+      <p>1001 Washington St<br>Columbus, IN 47201</p>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <a href="#services">Adjustments</a>
+      <a href="#services">Wellness Care</a>
+      <a href="#services">Sports Injuries</a>
+      <a href="#services">Pain Management</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    Taulman Chiropractic Inc. &bull; Dr. L. Scott Taulman, D.C., C.C.W.P.
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', () => {
+    document.getElementById('navLinks').classList.remove('open');
+  });
+});
+</script>
+
+</body>
+</html>

@@ -1,3 +1,8 @@
+---
+name: seo-audit
+description: Automated SEO audit for prospect websites with branded PDF report. Use when evaluating a prospect's website for cold outreach, when a prospect requests a site review, when Eric says "audit their SEO", "check their site", "run an audit", or when preparing outreach materials that need a technical assessment of a business's web presence.
+---
+
 # SEO Audit
 
 Automated SEO audit for prospect websites. Generates a branded PDF report.
@@ -68,7 +73,17 @@ Use outcome language in all findings. No jargon.
 Use Playwright to convert the HTML to PDF:
 
 ```bash
-npx playwright chromium revenue/lead-generation/prospects/[business-name]/outreach/seo-audit.html --pdf revenue/lead-generation/prospects/[business-name]/outreach/seo-audit.pdf
+node -e "
+const { chromium } = require('playwright');
+(async () => {
+  const browser = await chromium.launch();
+  const page = await browser.newPage();
+  await page.goto('file:///c:/Claude Code/OphidianAI/revenue/lead-generation/prospects/[business-name]/outreach/seo-audit.html', { waitUntil: 'networkidle' });
+  await page.pdf({ path: 'c:/Claude Code/OphidianAI/revenue/lead-generation/prospects/[business-name]/outreach/seo-audit.pdf', format: 'Letter', printBackground: true });
+  await browser.close();
+  console.log('PDF generated');
+})();
+"
 ```
 
 ### Step 5: Summary

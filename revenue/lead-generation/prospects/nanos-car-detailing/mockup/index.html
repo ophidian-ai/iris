@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nano's Car Detailing & Cleaning | Columbus, IN</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --gold: #D4A843;
+  --gold-light: #E8C96A;
+  --dark: #0A0A0A;
+  --dark-card: #141414;
+  --dark-lighter: #1A1A1A;
+  --gray: #888;
+  --light: #F5F5F5;
+  --white: #FFFFFF;
+  --red: #C0392B;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--dark);
+  color: var(--light);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(10,10,10,0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(212,168,67,0.15);
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-brand {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-decoration: none;
+}
+
+.nav-links { display: flex; gap: 1.5rem; align-items: center; }
+
+.nav-links a {
+  color: var(--light);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover { color: var(--gold); }
+
+.nav-phone {
+  display: none;
+  color: var(--gold) !important;
+  font-weight: 600 !important;
+}
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--light);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 6rem 1.5rem 4rem;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 50%, #0D0D0D 100%);
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(ellipse at 30% 50%, rgba(212,168,67,0.06) 0%, transparent 60%),
+              radial-gradient(ellipse at 70% 30%, rgba(212,168,67,0.04) 0%, transparent 50%);
+  animation: shimmer 8s ease-in-out infinite alternate;
+}
+
+@keyframes shimmer {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(-2%, 2%); }
+}
+
+.hero-content { position: relative; z-index: 1; max-width: 800px; }
+
+.hero-badge {
+  display: inline-block;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  padding: 0.4rem 1.2rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 1.5rem;
+  border-radius: 2px;
+}
+
+.hero h1 {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(2.5rem, 7vw, 5rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1.05;
+  margin-bottom: 1.25rem;
+  letter-spacing: 1px;
+}
+
+.hero h1 span { color: var(--gold); }
+
+.hero p {
+  font-size: 1.1rem;
+  color: var(--gray);
+  max-width: 550px;
+  margin: 0 auto 2.5rem;
+  font-weight: 300;
+}
+
+.hero-ctas { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+.btn {
+  display: inline-block;
+  padding: 0.9rem 2.2rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  text-decoration: none;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+  font-family: 'Inter', sans-serif;
+}
+
+.btn-primary {
+  background: var(--gold);
+  color: var(--dark);
+}
+
+.btn-primary:hover {
+  background: var(--gold-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(212,168,67,0.3);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--light);
+  border: 1px solid rgba(255,255,255,0.3);
+}
+
+.btn-outline:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  transform: translateY(-2px);
+}
+
+.hero-phone {
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  color: var(--gray);
+}
+
+.hero-phone a {
+  color: var(--gold);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+/* SECTIONS */
+section { padding: 5rem 1.5rem; }
+
+.section-header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+
+.section-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: var(--gold);
+  margin-bottom: 0.75rem;
+}
+
+.section-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.section-subtitle {
+  color: var(--gray);
+  font-size: 1rem;
+  margin-top: 0.75rem;
+  font-weight: 300;
+  max-width: 550px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* SERVICES */
+.services { background: var(--dark-lighter); }
+
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.service-card {
+  background: var(--dark-card);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 6px;
+  padding: 2rem 1.75rem;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+
+.service-card:hover::before { transform: scaleX(1); }
+
+.service-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(212,168,67,0.2);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+}
+
+.service-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(212,168,67,0.15), rgba(212,168,67,0.05));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+  font-size: 1.25rem;
+}
+
+.service-card h3 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.6rem;
+}
+
+.service-card p {
+  font-size: 0.9rem;
+  color: var(--gray);
+  line-height: 1.65;
+  font-weight: 300;
+}
+
+/* ABOUT / WHY US */
+.about {
+  background: var(--dark);
+}
+
+.about-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.about-image {
+  width: 100%;
+  height: 300px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #1A1A1A, #2A2A2A, #1A1A1A);
+  position: relative;
+  overflow: hidden;
+}
+
+.about-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(212,168,67,0.15);
+  border-radius: 8px;
+}
+
+.about-text h2 {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 1.25rem;
+}
+
+.about-text h2 span { color: var(--gold); }
+
+.about-text p {
+  color: var(--gray);
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+  font-weight: 300;
+  line-height: 1.7;
+}
+
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.stat {
+  text-align: center;
+  padding: 1.25rem 0.5rem;
+  background: var(--dark-card);
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.stat-number {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--gold);
+  display: block;
+}
+
+.stat-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--gray);
+  margin-top: 0.25rem;
+}
+
+/* REVIEWS STRIP */
+.reviews-strip {
+  background: var(--dark-lighter);
+  padding: 3.5rem 1.5rem;
+  text-align: center;
+}
+
+.reviews-strip .stars {
+  font-size: 1.75rem;
+  color: var(--gold);
+  letter-spacing: 4px;
+  margin-bottom: 0.5rem;
+}
+
+.reviews-strip p {
+  font-size: 1rem;
+  color: var(--gray);
+}
+
+.reviews-strip strong {
+  color: var(--light);
+}
+
+/* CONTACT */
+.contact { background: var(--dark); }
+
+.contact-grid {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+
+.contact-info-card {
+  background: var(--dark-card);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 8px;
+  padding: 2.5rem 2rem;
+}
+
+.contact-info-card h3 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 1.75rem;
+  color: var(--gold);
+}
+
+.contact-item {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  align-items: flex-start;
+}
+
+.contact-item-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(212,168,67,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 0.9rem;
+}
+
+.contact-item-text { flex: 1; }
+
+.contact-item-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--gray);
+  margin-bottom: 0.2rem;
+}
+
+.contact-item-value {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--light);
+}
+
+.contact-item-value a {
+  color: var(--light);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.contact-item-value a:hover { color: var(--gold); }
+
+.contact-form { display: flex; flex-direction: column; gap: 1rem; }
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 0.9rem 1.1rem;
+  background: var(--dark-lighter);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 4px;
+  color: var(--light);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  transition: border-color 0.3s;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+
+.contact-form textarea { height: 120px; resize: vertical; }
+
+.contact-form .btn-primary { width: 100%; text-align: center; }
+
+/* FOOTER */
+footer {
+  background: var(--dark-card);
+  border-top: 1px solid rgba(255,255,255,0.05);
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+}
+
+.footer-brand {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 0.5rem;
+}
+
+footer p {
+  font-size: 0.8rem;
+  color: var(--gray);
+}
+
+/* RESPONSIVE */
+@media (min-width: 640px) {
+  .services-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 768px) {
+  .nav-phone { display: inline; }
+  .about-container { grid-template-columns: 1fr 1fr; }
+  .about-image { height: 400px; }
+  .contact-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (min-width: 1024px) {
+  .services-grid { grid-template-columns: repeat(3, 1fr); }
+
+  .menu-toggle { display: none; }
+  .nav-links { display: flex !important; }
+
+  nav { padding: 0.75rem 3rem; }
+  section { padding: 6rem 3rem; }
+}
+
+@media (max-width: 1023px) {
+  .menu-toggle { display: block; }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(10,10,10,0.98);
+    flex-direction: column;
+    padding: 1.5rem;
+    gap: 1rem;
+    border-bottom: 1px solid rgba(212,168,67,0.15);
+  }
+
+  .nav-links.open { display: flex; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+  <a href="#" class="nav-brand">Nano's Detailing</a>
+  <button class="menu-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">&#9776;</button>
+  <div class="nav-links">
+    <a href="#services">Services</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+    <a href="tel:8123431008" class="nav-phone">(812) 343-1008</a>
+    <a href="#contact" class="btn btn-primary" style="padding:0.5rem 1.2rem; font-size:0.75rem;">Get a Quote</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">Columbus, IN &bull; Since 2012</div>
+    <h1>Premium Car <span>Detailing</span> You Can Trust</h1>
+    <p>Family-owned and operated for over 12 years. We treat every vehicle like it's our own -- from a quick wash to a full ceramic coating.</p>
+    <div class="hero-ctas">
+      <a href="#contact" class="btn btn-primary">Book Your Detail</a>
+      <a href="#services" class="btn btn-outline">View Services</a>
+    </div>
+    <div class="hero-phone">
+      Call or text today: <a href="tel:8123431008">(812) 343-1008</a>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-header">
+    <div class="section-label">What We Do</div>
+    <div class="section-title">Our Detailing Services</div>
+    <div class="section-subtitle">From basic washes to complete paint restoration, we have a package for every vehicle and budget.</div>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">&#9733;</div>
+      <h3>Full Detail Package</h3>
+      <p>Complete interior and exterior restoration. Deep cleaning, polishing, and protection for your entire vehicle -- inside and out.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">&#9830;</div>
+      <h3>Interior Cleaning</h3>
+      <p>Vacuuming, steam cleaning, leather conditioning, dashboard treatment, and odor elimination. Your cabin, refreshed.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">&#10052;</div>
+      <h3>Exterior Wash & Wax</h3>
+      <p>Hand wash, clay bar treatment, and premium wax application. Restore that showroom shine and protect your paint.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">&#9670;</div>
+      <h3>Ceramic Coating</h3>
+      <p>Long-lasting paint protection with professional-grade ceramic coating. Hydrophobic finish that repels water, dirt, and UV damage.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">&#10022;</div>
+      <h3>Paint Correction</h3>
+      <p>Remove swirl marks, scratches, and oxidation. Multi-stage polishing restores clarity and depth to your vehicle's finish.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">&#9881;</div>
+      <h3>Engine Cleaning</h3>
+      <p>Safe, thorough engine bay degreasing and detailing. Improve appearance and make maintenance easier with a clean engine.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-container">
+    <div class="about-image"></div>
+    <div class="about-text">
+      <h2>Over 12 Years of <span>Trusted</span> Service</h2>
+      <p>Nano's Car Detailing & Cleaning has been Columbus, Indiana's go-to detailing shop since 2012. As a family-owned business, we bring personal care and attention to every vehicle that comes through our doors.</p>
+      <p>We're proud to serve our community -- including a 5% discount for seniors and military. Bilingual service available in English and Spanish. Walk-ins welcome with a comfortable waiting room featuring free Wi-Fi and refreshments.</p>
+      <p style="color: var(--gold); font-weight:500;">2023 Readers' Choice Award Winner -- The Republic</p>
+      <div class="stats-row">
+        <div class="stat">
+          <span class="stat-number">12+</span>
+          <span class="stat-label">Years in Business</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">118+</span>
+          <span class="stat-label">Reviews</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">4.7</span>
+          <span class="stat-label">Star Rating</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS STRIP -->
+<section class="reviews-strip">
+  <div class="stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+  <p><strong>4.7 out of 5 stars</strong> from 118+ satisfied customers</p>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="section-header">
+    <div class="section-label">Get In Touch</div>
+    <div class="section-title">Ready for a Fresh Detail?</div>
+    <div class="section-subtitle">Stop by, call, or send us a message. Walk-ins welcome Monday through Saturday.</div>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-info-card">
+      <h3>Contact Info</h3>
+      <div class="contact-item">
+        <div class="contact-item-icon">&#9742;</div>
+        <div class="contact-item-text">
+          <div class="contact-item-label">Phone</div>
+          <div class="contact-item-value"><a href="tel:8123431008">(812) 343-1008</a></div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-icon">&#9993;</div>
+        <div class="contact-item-text">
+          <div class="contact-item-label">Text</div>
+          <div class="contact-item-value"><a href="sms:8126032335">(812) 603-2335</a></div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-icon">&#9872;</div>
+        <div class="contact-item-text">
+          <div class="contact-item-label">Address</div>
+          <div class="contact-item-value">2161 State Street<br>Columbus, IN 47201</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-icon">&#9200;</div>
+        <div class="contact-item-text">
+          <div class="contact-item-label">Hours</div>
+          <div class="contact-item-value">Mon - Sat: 8:00 AM - 5:00 PM<br>Walk-Ins: 8:00 AM - 12:00 PM<br>Sunday: Closed</div>
+        </div>
+      </div>
+    </div>
+    <div class="contact-info-card">
+      <h3>Request a Quote</h3>
+      <form class="contact-form" onsubmit="event.preventDefault()">
+        <input type="text" placeholder="Your Name" required>
+        <input type="tel" placeholder="Phone Number" required>
+        <input type="text" placeholder="Vehicle (Year, Make, Model)">
+        <textarea placeholder="Tell us what you need -- interior, exterior, full detail, etc."></textarea>
+        <button type="submit" class="btn btn-primary">Send Request</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Nano's Car Detailing & Cleaning</div>
+  <p>2161 State Street, Columbus, IN 47201 &bull; (812) 343-1008</p>
+  <p style="margin-top:0.5rem;">BBB Accredited &bull; Serving Columbus since 2012</p>
+</footer>
+
+</body>
+</html>

@@ -1,3 +1,8 @@
+---
+name: social-content
+description: Generate a full week of social media posts for Facebook, Instagram, and TikTok in a single batch. Use when Eric says "create social posts", "plan this week's content", "social media batch", "what should I post", or when it's time for weekly content planning. Covers carousels, reels, text posts, and stories with hashtags and visual direction.
+---
+
 # Social Content Batch Generator
 
 Generate a full week of social media posts for Facebook, Instagram, and TikTok in a single batch.
