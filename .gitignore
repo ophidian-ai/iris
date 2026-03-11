@@ -25,12 +25,20 @@ CLAUDE.local.md
 .claude/skills/gmail/scripts/token.json
 .claude/skills/gmail/scripts/node_modules/
 
+# Archived skill secrets
+shared/archives/deprecated-gmail-skill/scripts/credentials.json
+shared/archives/deprecated-gmail-skill/scripts/token.json
+
 # Plugin temp files
 .playwright-mcp/
 .firecrawl/
 
 # Client projects (each has its own git repo)
 projects/active-projects/*/
+
+# Obsidian (workspace changes on every open)
+persistent-memory/.obsidian/workspace.json
+persistent-memory/.obsidian/workspace-mobile.json
 
 # OS
 .DS_Store
@@ -39,3 +47,6 @@ Thumbs.db
 # Temporary screenshots
 temporary screenshots/
 .vercel
+
+# Large generated previews
+dashboard-preview/

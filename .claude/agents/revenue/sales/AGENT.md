@@ -31,7 +31,7 @@ You are OphidianAI's Sales Agent. Your job is to find potential clients, craft o
 
 - cold-email-outreach, email-response, follow-up-email (`.claude/skills/`)
 - business-research (`.claude/skills/`)
-- gmail (`.claude/skills/`)
+- gws-cli (`.claude/skills/`)
 
 ## Lead Qualification Criteria
 

@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tailwagger's Grooming Salon | Dog Grooming | Columbus, IN</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --teal: #2A9D8F;
+  --teal-light: #3AB8A8;
+  --teal-dark: #1F7A6E;
+  --warm: #E9C46A;
+  --warm-dark: #D4A843;
+  --terra: #D4785C;
+  --cream: #FDF8F0;
+  --cream-dark: #F5EDDF;
+  --brown: #5C4033;
+  --brown-light: #7A5C4F;
+  --dark: #2D2926;
+  --white: #FFFFFF;
+  --gray: #8A7E76;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background: var(--cream);
+  color: var(--dark);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(253,248,240,0.97);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(42,157,143,0.12);
+  padding: 0 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 64px;
+}
+
+.nav-brand {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--teal);
+  text-decoration: none;
+}
+
+.nav-brand span { color: var(--terra); }
+
+.nav-links { display: flex; gap: 1.5rem; align-items: center; }
+
+.nav-links a {
+  color: var(--brown);
+  text-decoration: none;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover { color: var(--teal); }
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--brown);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.85rem 2rem;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  text-decoration: none;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-teal {
+  background: var(--teal);
+  color: var(--white);
+}
+
+.btn-teal:hover {
+  background: var(--teal-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(42,157,143,0.3);
+}
+
+.btn-outline-teal {
+  background: transparent;
+  color: var(--teal);
+  border: 2px solid var(--teal);
+}
+
+.btn-outline-teal:hover {
+  background: var(--teal);
+  color: var(--white);
+  transform: translateY(-2px);
+}
+
+.btn-warm {
+  background: var(--terra);
+  color: var(--white);
+}
+
+.btn-warm:hover {
+  background: #C46B50;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(212,120,92,0.3);
+}
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 6rem 1.5rem 4rem;
+  background: var(--cream);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -30%;
+  left: -20%;
+  width: 140%;
+  height: 160%;
+  background: radial-gradient(ellipse at 30% 40%, rgba(42,157,143,0.06) 0%, transparent 50%),
+              radial-gradient(ellipse at 70% 60%, rgba(233,196,106,0.08) 0%, transparent 50%);
+}
+
+/* Paw pattern background */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle 4px at 10% 20%, rgba(42,157,143,0.05) 100%, transparent 100%),
+    radial-gradient(circle 3px at 12% 17%, rgba(42,157,143,0.04) 100%, transparent 100%),
+    radial-gradient(circle 3px at 8% 17%, rgba(42,157,143,0.04) 100%, transparent 100%),
+    radial-gradient(circle 3px at 10% 14%, rgba(42,157,143,0.04) 100%, transparent 100%),
+    radial-gradient(circle 4px at 85% 75%, rgba(233,196,106,0.06) 100%, transparent 100%),
+    radial-gradient(circle 3px at 87% 72%, rgba(233,196,106,0.05) 100%, transparent 100%),
+    radial-gradient(circle 3px at 83% 72%, rgba(233,196,106,0.05) 100%, transparent 100%),
+    radial-gradient(circle 3px at 85% 69%, rgba(233,196,106,0.05) 100%, transparent 100%),
+    radial-gradient(circle 4px at 45% 85%, rgba(212,120,92,0.05) 100%, transparent 100%),
+    radial-gradient(circle 3px at 47% 82%, rgba(212,120,92,0.04) 100%, transparent 100%),
+    radial-gradient(circle 3px at 43% 82%, rgba(212,120,92,0.04) 100%, transparent 100%),
+    radial-gradient(circle 3px at 45% 79%, rgba(212,120,92,0.04) 100%, transparent 100%);
+}
+
+.hero-content { position: relative; z-index: 1; max-width: 700px; }
+
+.hero-award {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(42,157,143,0.08);
+  border: 1px solid rgba(42,157,143,0.2);
+  padding: 0.5rem 1.25rem;
+  border-radius: 50px;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--teal-dark);
+  margin-bottom: 1.75rem;
+}
+
+.hero-award-star { color: var(--warm-dark); font-size: 1rem; }
+
+.hero h1 {
+  font-family: 'Quicksand', sans-serif;
+  font-size: clamp(2.2rem, 6vw, 4rem);
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 1.25rem;
+  color: var(--brown);
+}
+
+.hero h1 span { color: var(--teal); }
+
+.hero p {
+  font-size: 1.05rem;
+  color: var(--gray);
+  max-width: 520px;
+  margin: 0 auto 2.5rem;
+  font-weight: 400;
+  line-height: 1.75;
+}
+
+.hero-ctas { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+.hero-phone {
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  color: var(--gray);
+}
+
+.hero-phone a {
+  color: var(--teal);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.15rem;
+}
+
+/* TRUST STRIP */
+.trust-strip {
+  background: var(--teal);
+  padding: 2rem 1.5rem;
+  text-align: center;
+}
+
+.trust-strip-inner {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem 3.5rem;
+}
+
+.trust-stat { text-align: center; }
+
+.trust-number {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--white);
+  display: block;
+}
+
+.trust-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: rgba(255,255,255,0.7);
+  margin-top: 0.15rem;
+}
+
+/* SERVICES */
+.services { padding: 5rem 1.5rem; background: var(--white); }
+
+.section-header { text-align: center; margin-bottom: 3.5rem; }
+
+.section-label {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: var(--teal);
+  margin-bottom: 0.75rem;
+}
+
+.section-title {
+  font-family: 'Quicksand', sans-serif;
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  font-weight: 700;
+  color: var(--brown);
+}
+
+.section-subtitle {
+  color: var(--gray);
+  font-size: 0.95rem;
+  margin-top: 0.75rem;
+  font-weight: 400;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.service-card {
+  background: var(--cream);
+  border-radius: 16px;
+  padding: 2rem 1.75rem;
+  transition: all 0.4s ease;
+  border: 2px solid transparent;
+  position: relative;
+}
+
+.service-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 35px rgba(42,157,143,0.1);
+  border-color: rgba(42,157,143,0.2);
+}
+
+.service-card-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--teal), var(--teal-light));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+  color: var(--white);
+  font-size: 1.3rem;
+}
+
+.service-card h3 {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--brown);
+  margin-bottom: 0.5rem;
+}
+
+.service-card p {
+  font-size: 0.88rem;
+  color: var(--gray);
+  line-height: 1.65;
+}
+
+/* ABOUT */
+.about { padding: 5rem 1.5rem; background: var(--cream); }
+
+.about-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.about-visual {
+  width: 100%;
+  height: 300px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, var(--teal-dark), var(--teal), var(--teal-light));
+  position: relative;
+  overflow: hidden;
+}
+
+.about-visual::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle 12px at 25% 35%, rgba(255,255,255,0.08) 100%, transparent 100%),
+    radial-gradient(circle 8px at 28% 30%, rgba(255,255,255,0.06) 100%, transparent 100%),
+    radial-gradient(circle 8px at 22% 30%, rgba(255,255,255,0.06) 100%, transparent 100%),
+    radial-gradient(circle 8px at 25% 25%, rgba(255,255,255,0.06) 100%, transparent 100%),
+    radial-gradient(circle 12px at 65% 65%, rgba(255,255,255,0.06) 100%, transparent 100%),
+    radial-gradient(circle 8px at 68% 60%, rgba(255,255,255,0.04) 100%, transparent 100%),
+    radial-gradient(circle 8px at 62% 60%, rgba(255,255,255,0.04) 100%, transparent 100%),
+    radial-gradient(circle 8px at 65% 55%, rgba(255,255,255,0.04) 100%, transparent 100%);
+}
+
+.about-content h2 {
+  font-family: 'Quicksand', sans-serif;
+  font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+  font-weight: 700;
+  color: var(--brown);
+  margin-bottom: 1.25rem;
+  line-height: 1.25;
+}
+
+.about-content h2 span { color: var(--teal); }
+
+.about-content p {
+  color: var(--gray);
+  font-size: 0.93rem;
+  margin-bottom: 1rem;
+  line-height: 1.7;
+}
+
+.about-highlights {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.highlight {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--brown);
+}
+
+.highlight-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--teal);
+  flex-shrink: 0;
+}
+
+/* CTA BAND */
+.cta-band {
+  background: linear-gradient(135deg, var(--teal-dark) 0%, var(--teal) 50%, var(--teal-light) 100%);
+  padding: 4rem 1.5rem;
+  text-align: center;
+}
+
+.cta-band h2 {
+  font-family: 'Quicksand', sans-serif;
+  font-size: clamp(1.6rem, 4vw, 2.5rem);
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 0.75rem;
+}
+
+.cta-band p {
+  color: rgba(255,255,255,0.8);
+  font-size: 1rem;
+  margin-bottom: 2rem;
+}
+
+.btn-white {
+  background: var(--white);
+  color: var(--teal-dark);
+  padding: 0.9rem 2.5rem;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  text-decoration: none;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.btn-white:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+/* CONTACT */
+.contact { padding: 5rem 1.5rem; background: var(--white); }
+
+.contact-grid {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+
+.contact-card {
+  background: var(--cream);
+  border-radius: 16px;
+  padding: 2.5rem 2rem;
+}
+
+.contact-card h3 {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--teal-dark);
+  margin-bottom: 1.75rem;
+}
+
+.contact-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  align-items: flex-start;
+}
+
+.cr-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--teal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--white);
+  font-size: 1rem;
+}
+
+.cr-detail { flex: 1; }
+
+.cr-label {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--gray);
+  margin-bottom: 0.15rem;
+}
+
+.cr-value {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--brown);
+}
+
+.cr-value a {
+  color: var(--brown);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.cr-value a:hover { color: var(--teal); }
+
+.contact-form { display: flex; flex-direction: column; gap: 1rem; }
+
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+  width: 100%;
+  padding: 0.85rem 1.1rem;
+  background: var(--white);
+  border: 2px solid rgba(42,157,143,0.12);
+  border-radius: 10px;
+  color: var(--dark);
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.9rem;
+  transition: border-color 0.3s;
+  -webkit-appearance: none;
+}
+
+.contact-form input:focus,
+.contact-form select:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: var(--teal);
+}
+
+.contact-form textarea { height: 100px; resize: vertical; }
+
+.contact-form select option { background: var(--white); }
+
+.contact-form .btn-teal { width: 100%; text-align: center; }
+
+/* FOOTER */
+footer {
+  background: var(--brown);
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+}
+
+.footer-brand {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--teal-light);
+  margin-bottom: 0.5rem;
+}
+
+footer p {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.55);
+}
+
+footer a {
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+}
+
+/* RESPONSIVE */
+@media (min-width: 640px) {
+  .services-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 768px) {
+  .about-container { grid-template-columns: 1fr 1fr; }
+  .about-visual { height: 420px; }
+  .contact-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (min-width: 1024px) {
+  .services-grid { grid-template-columns: repeat(3, 1fr); }
+  .menu-toggle { display: none; }
+  .nav-links { display: flex !important; }
+  nav { padding: 0 3rem; }
+}
+
+@media (max-width: 1023px) {
+  .menu-toggle { display: block; }
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(253,248,240,0.98);
+    flex-direction: column;
+    padding: 1.5rem;
+    gap: 1rem;
+    border-bottom: 1px solid rgba(42,157,143,0.12);
+  }
+  .nav-links.open { display: flex; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-brand">Tailwagger's <span>Grooming</span></a>
+  <button class="menu-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">&#9776;</button>
+  <div class="nav-links">
+    <a href="#services">Services</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+    <a href="tel:8123721546" style="color:var(--teal);font-weight:700;">(812) 372-1546</a>
+    <a href="#contact" class="btn btn-teal" style="padding:0.5rem 1.2rem;font-size:0.72rem;">Book Now</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-award">
+      <span class="hero-award-star">&#9733;</span>
+      Voted #1 Pet Groomer in Columbus
+    </div>
+    <h1>Where Every Pup Leaves <span>Looking Their Best</span></h1>
+    <p>Columbus, Indiana's most trusted dog grooming salon since 2006. Professional grooming with a gentle touch -- because your best friend deserves the best care.</p>
+    <div class="hero-ctas">
+      <a href="tel:8123721546" class="btn btn-teal">Call to Book: (812) 372-1546</a>
+      <a href="#services" class="btn btn-outline-teal">Our Services</a>
+    </div>
+    <div class="hero-phone">
+      272+ five-star reviews and counting
+    </div>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<section class="trust-strip">
+  <div class="trust-strip-inner">
+    <div class="trust-stat">
+      <span class="trust-number">18+</span>
+      <span class="trust-label">Years of Experience</span>
+    </div>
+    <div class="trust-stat">
+      <span class="trust-number">272+</span>
+      <span class="trust-label">Happy Reviews</span>
+    </div>
+    <div class="trust-stat">
+      <span class="trust-number">#1</span>
+      <span class="trust-label">Voted Best Groomer</span>
+    </div>
+    <div class="trust-stat">
+      <span class="trust-number">5 Star</span>
+      <span class="trust-label">Average Rating</span>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-header">
+    <div class="section-label">Our Services</div>
+    <div class="section-title">Grooming Services for Every Pup</div>
+    <div class="section-subtitle">From a quick nail trim to a full spa day, we offer gentle, professional grooming tailored to your dog's breed and needs.</div>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-card-icon">&#10024;</div>
+      <h3>Full Grooming</h3>
+      <p>The complete treatment: bath, blow dry, haircut, nail trim, ear cleaning, and finishing touches. Your pup leaves looking and feeling amazing.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-card-icon">&#9737;</div>
+      <h3>Bath & Brush</h3>
+      <p>A thorough bath with premium shampoo, blow dry, and brush-out. Perfect for pups who just need a refresh between full grooms.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-card-icon">&#10029;</div>
+      <h3>Nail Trimming</h3>
+      <p>Quick, careful nail trimming and filing to keep your dog's paws healthy and comfortable. Walk-in friendly.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-card-icon">&#9834;</div>
+      <h3>Ear Cleaning</h3>
+      <p>Gentle ear cleaning to prevent buildup and infection. Especially important for floppy-eared breeds.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-card-icon">&#9729;</div>
+      <h3>De-Shedding Treatment</h3>
+      <p>Specialized de-shedding bath and blow-out to reduce loose fur and keep your home (and your dog) cleaner between visits.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-card-icon">&#9825;</div>
+      <h3>Puppy's First Groom</h3>
+      <p>A gentle, positive introduction to grooming for puppies. We take it slow to build trust and make grooming a happy experience for life.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-container">
+    <div class="about-visual"></div>
+    <div class="about-content">
+      <h2>Trusted by Columbus Dog Owners <span>Since 2006</span></h2>
+      <p>Tailwagger's Grooming Salon has been a staple of the Columbus, Indiana pet community for nearly two decades. Owner Jacqueline Oltman and her team of experienced groomers treat every dog like their own -- with patience, skill, and genuine love for animals.</p>
+      <p>With over 272 reviews and a reputation as Columbus' #1 voted pet groomer, we've earned the trust of thousands of local dog owners. Whether your pup is a first-time groomer or a seasoned regular, they're in good hands with us.</p>
+      <div class="about-highlights">
+        <div class="highlight"><span class="highlight-dot"></span>Since 2006</div>
+        <div class="highlight"><span class="highlight-dot"></span>272+ Reviews</div>
+        <div class="highlight"><span class="highlight-dot"></span>Voted #1</div>
+        <div class="highlight"><span class="highlight-dot"></span>All Breeds</div>
+        <div class="highlight"><span class="highlight-dot"></span>Gentle Approach</div>
+        <div class="highlight"><span class="highlight-dot"></span>Experienced Staff</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-band">
+  <h2>Ready to Book Your Pup's Groom?</h2>
+  <p>Give us a call and we'll get your best friend scheduled for their next visit.</p>
+  <a href="tel:8123721546" class="btn-white">Call (812) 372-1546</a>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="section-header">
+    <div class="section-label">Get In Touch</div>
+    <div class="section-title">Visit or Call Us</div>
+    <div class="section-subtitle">We'd love to meet your pup. Call to schedule or stop by our salon on National Road.</div>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-card">
+      <h3>Salon Information</h3>
+      <div class="contact-row">
+        <div class="cr-icon">&#9742;</div>
+        <div class="cr-detail">
+          <div class="cr-label">Phone</div>
+          <div class="cr-value"><a href="tel:8123721546">(812) 372-1546</a></div>
+        </div>
+      </div>
+      <div class="contact-row">
+        <div class="cr-icon">&#9872;</div>
+        <div class="cr-detail">
+          <div class="cr-label">Address</div>
+          <div class="cr-value">2370 N National Rd<br>Columbus, IN 47201</div>
+        </div>
+      </div>
+      <div class="contact-row">
+        <div class="cr-icon">&#9200;</div>
+        <div class="cr-detail">
+          <div class="cr-label">Hours</div>
+          <div class="cr-value">Mon - Fri: 7:30 AM - 4:00 PM<br>Sat: By Appointment<br>Sun: Closed</div>
+        </div>
+      </div>
+      <div style="margin-top:1.5rem; padding:1.25rem; background:rgba(42,157,143,0.06); border-radius:12px; border:1px solid rgba(42,157,143,0.1);">
+        <p style="font-size:0.85rem; color:var(--brown); font-weight:600; margin-bottom:0.25rem;">Appointments Recommended</p>
+        <p style="font-size:0.82rem; color:var(--gray);">Call ahead to reserve your pup's spot. We book up quickly, especially on weekends.</p>
+      </div>
+    </div>
+    <div class="contact-card">
+      <h3>Send Us a Message</h3>
+      <form class="contact-form" onsubmit="event.preventDefault()">
+        <input type="text" placeholder="Your Name" required>
+        <input type="tel" placeholder="Phone Number" required>
+        <input type="text" placeholder="Dog's Name & Breed">
+        <select>
+          <option value="">Service Needed</option>
+          <option>Full Grooming</option>
+          <option>Bath & Brush</option>
+          <option>Nail Trimming</option>
+          <option>De-Shedding Treatment</option>
+          <option>Puppy's First Groom</option>
+          <option>Other / Not Sure</option>
+        </select>
+        <textarea placeholder="Any special needs or notes about your dog?"></textarea>
+        <button type="submit" class="btn btn-teal">Send Message</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Tailwagger's Grooming Salon</div>
+  <p>2370 N National Rd, Columbus, IN 47201 &bull; <a href="tel:8123721546">(812) 372-1546</a></p>
+  <p style="margin-top:0.4rem;">Proudly grooming Columbus dogs since 2006</p>
+</footer>
+
+</body>
+</html>

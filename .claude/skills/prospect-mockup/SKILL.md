@@ -1,3 +1,8 @@
+---
+name: prospect-mockup
+description: Generate a pitch website mockup for a prospect based on their business info. Use when Eric says "make a mockup", "build a demo site", "show them what their site could look like", or when the offer-delivery skill needs a website mockup as the deliverable. Outputs a single-file HTML page ready to screenshot or demo.
+---
+
 # Prospect Mockup Generator
 
 Generate a pitch website mockup for a prospect based on their business info and a design reference. Outputs a single-file HTML page ready to screenshot or demo.
@@ -57,8 +62,25 @@ Create a single-file HTML page (`index.html`) with:
 ### Step 4: Save and Screenshot
 
 1. Save the mockup to `revenue/lead-generation/prospects/<name>/mockup/index.html`
-2. Use Playwright to take a full-page screenshot: `revenue/lead-generation/prospects/<name>/mockup/screenshot.png`
-3. Also take a hero-section-only screenshot (viewport height): `revenue/lead-generation/prospects/<name>/mockup/screenshot-hero.png`
+2. Take screenshots using Playwright:
+
+```bash
+node -e "
+const { chromium } = require('playwright');
+(async () => {
+  const browser = await chromium.launch();
+  const page = await browser.newPage();
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('file:///c:/Claude Code/OphidianAI/revenue/lead-generation/prospects/<name>/mockup/index.html', { waitUntil: 'networkidle' });
+  await page.screenshot({ path: 'c:/Claude Code/OphidianAI/revenue/lead-generation/prospects/<name>/mockup/screenshot.png', fullPage: true });
+  await page.screenshot({ path: 'c:/Claude Code/OphidianAI/revenue/lead-generation/prospects/<name>/mockup/screenshot-hero.png' });
+  await browser.close();
+  console.log('Screenshots captured');
+})();
+"
+```
+
+Replace `<name>` with the prospect's folder name in both the file path and the goto URL.
 
 ## Output
 

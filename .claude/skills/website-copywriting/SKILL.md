@@ -1,3 +1,8 @@
+---
+name: website-copywriting
+description: Generate complete website copy for client sites. Use when building a client website and need page content, when Eric says "write the copy", "generate content for the site", or when the web-builder skill needs content for pages. Covers homepage, about, services, contact, and any custom pages.
+---
+
 # Website Copywriting
 
 Generate complete website copy for client sites. Takes business info and produces ready-to-use text for every page.
@@ -67,6 +72,21 @@ For each page, generate:
 - Phone, email, address, hours
 - Brief encouraging text ("We'd love to hear from you")
 - Form fields: name, email, phone (optional), message
+
+## Output Location
+
+Save generated copy based on context:
+
+- **Client project (web-builder):** `engineering/projects/[project-name]/docs/copy/[page-name].md`
+- **Prospect (pre-sale mockup):** `revenue/lead-generation/prospects/[business-name]/research/website-copy.md`
+- **Standalone request:** Output directly in conversation unless Eric specifies a file path.
+
+When called from the web-builder skill, the copy should be formatted ready to drop into React component props (plain text strings, not markdown).
+
+## Related Skills
+
+- **Web Builder** (`.claude/skills/web-builder/SKILL.md`) -- Calls this skill during Phase 4 page building
+- **Pricing Structure** (`operations/references/pricing-structure.md`) -- Copywriting add-on pricing for Starter tier
 
 ## Rules
 

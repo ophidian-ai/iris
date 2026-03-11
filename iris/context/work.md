@@ -19,6 +19,7 @@
 - **GitHub** -- Code repositories
 - **Claude Code** -- AI-assisted development
 - **VS Code** -- Code editor
+- **GWS CLI** (`gws`) -- Google Workspace access (Gmail, Calendar, Sheets, Drive, Docs, Tasks) for `eric.lefler@ophidianai.com`
 
 ## MCP Servers
 - None connected currently.

@@ -21,23 +21,50 @@ Run all of these simultaneously:
 
 **Gmail -- Unread inbox:**
 ```bash
-cd "c:/Claude Code/Iris" && node .claude/skills/gmail/scripts/search_gmail.js "in:inbox is:unread"
+gws gmail +triage --query "in:inbox is:unread" --format json
 ```
 
 **Gmail -- Prospect replies:**
 ```bash
-cd "c:/Claude Code/Iris" && echo '{{PROSPECT_EMAILS_JSON}}' | node .claude/skills/gmail/scripts/check_replies.js
+# Read pipeline from Google Sheet (primary source):
+gws sheets +read --spreadsheet '1FJOPS3ABR2BQtFOn4cUAGLZzIYukKbPozK_t_m7Dwg0' --range 'Pipeline' --format json
+# For each prospect email from the sheet:
+gws gmail users messages list --params '{"userId":"me","q":"from:<prospect-email> newer_than:7d","maxResults":5}'
 ```
-Build the prospect email JSON array by reading `revenue/lead-generation/prospect-tracker.md` and extracting all email addresses.
+Build the prospect email JSON array by reading the **Google Sheet pipeline** (Sheet ID: `1FJOPS3ABR2BQtFOn4cUAGLZzIYukKbPozK_t_m7Dwg0`, column C) and extracting all email addresses. Fall back to `revenue/lead-generation/prospect-tracker.md` if the sheet is unavailable.
+
+**Cold Email Reply Tracking:**
+
+Cross-reference prospect replies with the template rotation tracker to update performance data:
+
+1. Read `revenue/lead-generation/template-rotation.md`
+2. For each prospect reply detected above, check if the prospect name matches a "Last Prospect" entry in the rotation tracker
+3. If a match is found and the template's Replies count hasn't already been incremented for this prospect:
+   - Increment the Replies column for that template
+   - Recalculate Reply Rate (Replies / Times Used as %)
+   - Update the Performance Summary table
+   - Save the updated `template-rotation.md`
+4. Include a **Template Performance** line in the terminal summary if any replies were attributed:
+   `Template wins: [template] got a reply from [prospect]`
+
+**Outreach Pipeline Status:**
+
+Check for recent pipeline activity to include in the briefing:
+
+1. Read `revenue/lead-generation/staged-emails.json` (if it exists) -- note how many emails are staged and waiting
+2. Read `revenue/lead-generation/template-rotation.md` -- pull the Performance Summary for the briefing
+3. Include in the terminal summary:
+   - `Staged emails: X waiting to send` (if any)
+   - `Template performance: [best template] at [X]% reply rate` (if any data)
 
 **Google Calendar -- Today + next 48 hours:**
 ```bash
-cd "c:/Claude Code/Iris" && node .claude/skills/google-calendar/scripts/list_events.js "$(date -I)" "$(date -I -d '+2 days')"
+gws calendar +agenda --days 2 --format json
 ```
 
 **ClickUp -- Open tasks:**
 ```bash
-cd "c:/Claude Code/Iris" && node .claude/skills/clickup/scripts/clickup.js tasks 901711710045
+node .claude/skills/clickup/scripts/clickup.js tasks 901711710045
 ```
 Check all known list IDs: Backlog (901711710045), Project 1 (901711707665), Project 2 (901711707666).
 
@@ -48,6 +75,15 @@ Check all known list IDs: Backlog (901711710045), Project 1 (901711707665), Proj
 - Read `marketing/activity-log.md`
 - Read `engineering/projects/bloomin-acres/README.md` (and any other project READMEs)
 - Read `iris/saved-conversations/` directory (check if any files exist)
+
+**Expense Receipts -- Quick Scan:**
+Run a lightweight receipt check for new expenses since last scan:
+
+```bash
+gws gmail +triage --query '"receipt" OR "invoice" OR "payment confirmation" newer_than:1d' --format json
+```
+
+If new receipts are found, run the expense-tracker skill's extract and log steps (Steps 2-4 from `.claude/skills/expense-tracker/SKILL.md`). Include a one-liner in the briefing if expenses were logged. If none found, skip silently.
 
 **AI News -- Firecrawl:**
 Use the Firecrawl skill to search for 2-3 of these topics (rotate daily):
@@ -110,7 +146,7 @@ Categories: PIPELINE, FOLLOW-UP, OUTREACH, TASKS, MARKETING, REVENUE, AI-INTEL
 
 1. Read the template from `.claude/skills/morning-coffee/templates/briefing-template.html`
 2. Replace all `{{TOKEN}}` placeholders with computed values
-3. For `{{LOGO_PATH}}`, use the absolute path: `file:///c:/Claude Code/Iris/shared/brand-assets/logo_icon.png`
+3. For `{{LOGO_PATH}}`, use the absolute path: `file:///c:/Claude Code/OphidianAI/shared/brand-assets/logo_icon.png`
 4. For `{{DATE}}`, use format: `MARCH 6, 2026` (uppercase month, day, year)
 5. Build HTML fragments for:
    - `{{INBOX_CONTENT}}` -- List of `.inbox-item` divs for each unread email (max 5). If prospect reply detected, add `.inbox-tag` with "PROSPECT REPLY". If no unread, show `.empty` with "No unread emails."
@@ -129,13 +165,13 @@ Categories: PIPELINE, FOLLOW-UP, OUTREACH, TASKS, MARKETING, REVENUE, AI-INTEL
 ### Step 6: Generate PDF
 
 ```bash
-cd "c:/Claude Code/Iris" && node -e "
+cd "c:/Claude Code/OphidianAI" && node -e "
 const { chromium } = require('playwright');
 (async () => {
   const browser = await chromium.launch();
   const page = await browser.newPage();
-  await page.goto('file:///c:/Claude Code/Iris/.claude/skills/morning-coffee/templates/briefing.html', { waitUntil: 'networkidle' });
-  await page.pdf({ path: 'c:/Claude Code/Iris/iris/reports/briefings/{{YYYY-MM-DD}}.pdf', format: 'A4', printBackground: true });
+  await page.goto('file:///c:/Claude Code/OphidianAI/.claude/skills/morning-coffee/templates/briefing.html', { waitUntil: 'networkidle' });
+  await page.pdf({ path: 'c:/Claude Code/OphidianAI/iris/reports/briefings/{{YYYY-MM-DD}}.pdf', format: 'A4', printBackground: true });
   await browser.close();
   console.log('PDF generated');
 })();
@@ -149,7 +185,7 @@ Replace `{{YYYY-MM-DD}}` with today's date.
 Send the briefing PDF to Eric via Gmail so he can read it on the go.
 
 ```bash
-cd "c:/Claude Code/Iris" && echo '{"to":"eric.lefler@ophidianai.com","subject":"Morning Coffee -- {{DATE}}","html":"<p>Your daily briefing is attached.</p>","attachments":[{"path":"c:/Claude Code/Iris/iris/reports/briefings/{{YYYY-MM-DD}}.pdf","filename":"morning-coffee-{{YYYY-MM-DD}}.pdf","mimeType":"application/pdf"}]}' | node .claude/skills/gmail/scripts/send_email.js
+echo '{"to":"eric.lefler@ophidianai.com","subject":"Morning Coffee -- {{DATE}}","html":"<p>Your daily briefing is attached.</p>","attachments":[{"path":"c:/Claude Code/OphidianAI/iris/reports/briefings/{{YYYY-MM-DD}}.pdf","filename":"morning-coffee-{{YYYY-MM-DD}}.pdf","mimeType":"application/pdf"}]}' | node .claude/skills/gws-cli/scripts/build_raw_email.js | gws gmail users messages send --params '{"userId":"me"}' --json @-
 ```
 
 Replace `{{DATE}}` and `{{YYYY-MM-DD}}` with the same values used in previous steps.
@@ -168,12 +204,15 @@ Prospects: {{ACTIVE_PROSPECTS}} active | {{OUTREACH_DAYS}} days since last outre
 Inbox: {{UNREAD_COUNT}} unread{{REPLY_ALERT}}
 Calendar: {{EVENT_COUNT}} events today
 Tasks: {{TASKS_DUE}} due today, {{TASKS_OVERDUE}} overdue
+Outreach: {{STAGED_COUNT}} staged | {{TEMPLATE_PERFORMANCE}}
 
 PDF saved to iris/reports/briefings/{{YYYY-MM-DD}}.pdf
 Email sent to eric.lefler@ophidianai.com
 ```
 
 If any prospect replied, add to `{{REPLY_ALERT}}`: ` | PROSPECT REPLY from [name]`
+- `{{STAGED_COUNT}}`: Number of emails in `staged-emails.json`, or "0 staged" if none/file missing
+- `{{TEMPLATE_PERFORMANCE}}`: Best performing template and rate (e.g., "best: W2 at 33%"), or "no data yet" if no sends
 
 If the email failed, replace the "Email sent" line with: `Email failed: [error reason]`
 
@@ -196,13 +235,13 @@ Check `iris/saved-conversations/` for any `.md` files.
 
 | Source              | Success (empty)                                                              | Failure                                                                           |
 | ------------------- | ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| **Gmail (inbox)**   | Script exits 0, returns `[]` or empty results. Show: "No unread emails."     | Script exits non-zero or throws error. Show: "Inbox unavailable -- API error."    |
-| **Gmail (replies)** | Script exits 0, no replies found. Show nothing special.                      | Script exits non-zero. Note in terminal summary: "Reply check failed."            |
-| **Google Calendar** | Script exits 0, returns `[]`. Show: "No events scheduled for today."         | Script exits non-zero or throws error. Show: "Calendar unavailable -- API error." |
-| **ClickUp**         | Script exits 0, returns empty task list. Show: "No open tasks."              | Script exits non-zero or throws error. Show: "Tasks unavailable -- API error."    |
+| **Gmail (inbox)**   | Command exits 0, returns `[]` or empty results. Show: "No unread emails."     | Command exits non-zero or throws error. Show: "Inbox unavailable -- API error."    |
+| **Gmail (replies)** | Command exits 0, no replies found. Show nothing special.                      | Command exits non-zero. Note in terminal summary: "Reply check failed."            |
+| **Google Calendar** | Command exits 0, returns `[]`. Show: "No events scheduled for today."         | Command exits non-zero or throws error. Show: "Calendar unavailable -- API error." |
+| **ClickUp**         | Command exits 0, returns empty task list. Show: "No open tasks."              | Command exits non-zero or throws error. Show: "Tasks unavailable -- API error."    |
 | **Firecrawl**       | Returns results with no relevant articles. Show: "No notable updates today." | Request fails or returns error. Show: "AI Intel unavailable -- API error."        |
 
-**How to check:** If the script exits with code 0 and returns valid JSON (even `[]`), it succeeded. If it exits non-zero, prints to stderr, or throws an exception, it failed.
+**How to check:** If the command exits with code 0 and returns valid JSON (even `[]`), it succeeded. If it exits non-zero, prints to stderr, or throws an exception, it failed.
 
 **In the PDF:** Use the `.empty` class for empty-but-working states. For failures, use `.empty` but with the "API error" message so it's visually distinct from "nothing to show."
 

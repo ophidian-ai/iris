@@ -1,6 +1,11 @@
+---
+name: expense-tracker
+description: Scan Gmail for receipts, invoices, and subscription confirmations, then log expenses to Google Sheets for tax deduction tracking. Use when Eric says "check for receipts", "log expenses", "review spending", "tax prep", "what am I paying for", or during daily/monthly/year-end financial reviews. Also triggers during morning coffee for new receipt detection.
+---
+
 # Expense Tracker
 
-Scan Gmail for receipts, invoices, and subscription confirmations. Extract expense data and log it to the financial tracker for tax deduction tracking and year-end optimization.
+Scan Gmail for receipts, invoices, and subscription confirmations. Extract expense data and log it to Google Sheets for tax deduction tracking and year-end optimization.
 
 ## When to Use
 
@@ -9,28 +14,42 @@ Scan Gmail for receipts, invoices, and subscription confirmations. Extract expen
 - Monthly: comprehensive scan for any missed receipts
 - Year-end: full audit for tax preparation
 
+## Google Sheet
+
+**Spreadsheet ID:** `1pnf3ZUbBdWlTit_u69_S82t5Fg9gshQ2ja1yLrzrhbo`
+
+**Columns (Expenses sheet):** Date, Vendor, Amount, Category, Recurring, Tax Deductible, IRS Line, Payment Method, Notes, Email ID
+
+**View:** https://docs.google.com/spreadsheets/d/1pnf3ZUbBdWlTit_u69_S82t5Fg9gshQ2ja1yLrzrhbo/edit
+
 ## Process
 
 ### Step 1: Scan Inbox for Receipts
 
-Search Gmail for recent receipts using the gmail skill:
+Search Gmail using GWS CLI:
 
-```
-Search queries (run each):
-- "receipt" newer_than:7d
-- "invoice" newer_than:7d
-- "payment confirmation" newer_than:7d
-- "subscription" newer_than:7d
-- "order confirmation" newer_than:7d
-- "billing statement" newer_than:7d
-- from:noreply OR from:billing OR from:receipts newer_than:7d
+```bash
+# Run each query (adjust date range as needed)
+gws gmail +triage --query '"receipt" newer_than:7d' --format json
+gws gmail +triage --query '"invoice" newer_than:7d' --format json
+gws gmail +triage --query '"payment confirmation" newer_than:7d' --format json
+gws gmail +triage --query '"subscription" newer_than:7d' --format json
+gws gmail +triage --query '"order confirmation" newer_than:7d' --format json
+gws gmail +triage --query '"billing statement" newer_than:7d' --format json
+gws gmail +triage --query 'from:noreply OR from:billing OR from:receipts newer_than:7d' --format json
 ```
 
 For monthly/year-end scans, adjust the date range accordingly.
 
-### Step 2: Extract Expense Data
+### Step 2: Read and Extract Expense Data
 
-For each receipt found, extract:
+For each receipt found, read the full message:
+
+```bash
+gws gmail users messages get --params '{"userId":"me","id":"<messageId>","format":"full"}'
+```
+
+Extract:
 
 | Field | Description |
 |---|---|
@@ -38,37 +57,41 @@ For each receipt found, extract:
 | Vendor | Who was paid |
 | Amount | Dollar amount |
 | Category | Match to existing categories (see below) |
-| Recurring? | Yes/No -- is this a subscription or one-time purchase? |
-| Tax Deductible? | Yes/No/Partial -- based on business use |
-| Deduction Category | IRS category (see Tax Categories below) |
+| Recurring | Yes/No -- is this a subscription or one-time purchase? |
+| Tax Deductible | Yes/No/Partial -- based on business use |
+| IRS Line | Schedule C line number (see Tax Categories below) |
+| Payment Method | Credit card, debit, PayPal, etc. |
 | Notes | What it's for, business justification |
+| Email ID | Gmail message ID (for retrieving the original receipt) |
 
-### Step 3: Log to Financial Tracker
+### Step 3: Check for Duplicates
 
-Update `operations/financial-tracker.md`:
+Before logging, read the existing sheet to avoid duplicate entries:
 
-- **New recurring expense:** Add to the Recurring Expenses table
-- **New one-time expense:** Add to the One-Time Expenses table
-- **Existing subscription renewal:** Verify amount hasn't changed, update date if needed
-- **Update Monthly Summary:** Recalculate totals after adding new expenses
-
-### Step 4: Save Receipt Archive
-
-For each new receipt, save a summary to `operations/expenses/YYYY/MM/`:
-
-```
-operations/expenses/2026/03/2026-03-07-vendor-name.md
+```bash
+gws sheets +read --spreadsheet '1pnf3ZUbBdWlTit_u69_S82t5Fg9gshQ2ja1yLrzrhbo' --range 'Expenses!A:J' --format json
 ```
 
-Each file contains:
-- Vendor, amount, date
-- Category and tax deduction status
-- Gmail message ID (for retrieving the original receipt)
-- Business justification
+Compare by Date + Vendor + Amount to detect duplicates. Skip any already logged.
+
+### Step 4: Log to Google Sheets
+
+Append new expenses:
+
+```bash
+gws sheets +append --spreadsheet '1pnf3ZUbBdWlTit_u69_S82t5Fg9gshQ2ja1yLrzrhbo' --json-values '[["2026-03-10","Cloudflare","10.46","Infrastructure","Yes","Yes","18","Credit Card","Domain and DNS","<emailId>"]]'
+```
+
+For multiple expenses, batch them:
+
+```bash
+gws sheets +append --spreadsheet '1pnf3ZUbBdWlTit_u69_S82t5Fg9gshQ2ja1yLrzrhbo' --json-values '[["2026-03-10","Cloudflare","10.46","Infrastructure","Yes","Yes","18","Credit Card","Domain and DNS","abc123"],["2026-03-10","CapCut Pro","0.00","Dev Tools","Yes","Yes","18","Credit Card","Video editing trial","def456"]]'
+```
 
 ### Step 5: Report
 
 Output a summary of what was found:
+
 - New expenses logged (table)
 - Updated monthly burn rate
 - Any flagged items (price increases, unexpected charges, duplicate charges)
@@ -129,5 +152,6 @@ Save to `operations/reports/YYYY-tax-summary.md`
 ## Integration with Morning Coffee
 
 During daily briefing, include a one-liner if new receipts were found:
-- "Found 2 new receipts since last check: Cloudflare ($10.46), CapCut Pro ($0.00). Logged to financial tracker."
+
+- "Found 2 new receipts since last check: Cloudflare ($10.46), CapCut Pro ($0.00). Logged to expense tracker."
 - If nothing new: skip the section entirely.

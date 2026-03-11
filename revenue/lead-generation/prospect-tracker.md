@@ -1,7 +1,10 @@
 # Prospect Tracker
 
-> Single source of truth for OphidianAI's sales pipeline.
-> Update this file every time a prospect's status changes.
+> **Primary tracker moved to Google Sheets.**
+> Sheet ID: `1FJOPS3ABR2BQtFOn4cUAGLZzIYukKbPozK_t_m7Dwg0`
+> URL: https://docs.google.com/spreadsheets/d/1FJOPS3ABR2BQtFOn4cUAGLZzIYukKbPozK_t_m7Dwg0/edit
+>
+> This markdown file is kept as a backup. The Google Sheet is the source of truth.
 
 ## Status Legend
 

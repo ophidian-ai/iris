@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Total Fitness of Columbus | Gym & Personal Training | Columbus, IN</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --accent: #FF6B2B;
+  --accent-light: #FF8A50;
+  --dark: #0B0B0F;
+  --dark-card: #12121A;
+  --dark-lighter: #16161F;
+  --gray: #8A8A9A;
+  --light: #F0F0F5;
+  --white: #FFFFFF;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--dark);
+  color: var(--light);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(11,11,15,0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,107,43,0.1);
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-brand {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.5rem;
+  color: var(--accent);
+  letter-spacing: 2px;
+  text-decoration: none;
+}
+
+.nav-links { display: flex; gap: 1.5rem; align-items: center; }
+
+.nav-links a {
+  color: var(--light);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover { color: var(--accent); }
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--light);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.9rem 2.2rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+  font-family: 'Inter', sans-serif;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--white);
+}
+
+.btn-primary:hover {
+  background: var(--accent-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(255,107,43,0.35);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--light);
+  border: 1px solid rgba(255,255,255,0.25);
+}
+
+.btn-outline:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 6rem 1.5rem 4rem;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(160deg, #0B0B0F 0%, #16161F 40%, #0B0B0F 100%);
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: -20%;
+  width: 70%;
+  height: 100%;
+  background: radial-gradient(ellipse at center, rgba(255,107,43,0.08) 0%, transparent 65%);
+}
+
+.hero-content { position: relative; z-index: 1; max-width: 700px; }
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255,107,43,0.1);
+  border: 1px solid rgba(255,107,43,0.25);
+  padding: 0.4rem 1rem;
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--accent);
+  margin-bottom: 1.75rem;
+}
+
+.hero h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3rem, 8vw, 6rem);
+  line-height: 0.95;
+  letter-spacing: 2px;
+  margin-bottom: 1.5rem;
+}
+
+.hero h1 span {
+  color: var(--accent);
+  display: block;
+}
+
+.hero p {
+  font-size: 1.1rem;
+  color: var(--gray);
+  max-width: 500px;
+  margin-bottom: 2.5rem;
+  font-weight: 300;
+  line-height: 1.7;
+}
+
+.hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+.hero-meta {
+  margin-top: 3rem;
+  display: flex;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.hero-meta-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-meta-number {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.2rem;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.hero-meta-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--gray);
+  margin-top: 0.25rem;
+}
+
+/* SERVICES */
+.services { padding: 5rem 1.5rem; background: var(--dark-lighter); }
+
+.section-header { text-align: center; margin-bottom: 3.5rem; }
+
+.section-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+}
+
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  letter-spacing: 2px;
+}
+
+.section-subtitle {
+  color: var(--gray);
+  font-size: 1rem;
+  margin-top: 0.75rem;
+  font-weight: 300;
+  max-width: 550px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.service-card {
+  background: var(--dark-card);
+  border: 1px solid rgba(255,255,255,0.04);
+  border-radius: 8px;
+  padding: 2.25rem 1.75rem;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-light));
+  transform: scaleX(0);
+  transition: transform 0.4s ease;
+}
+
+.service-card:hover::after { transform: scaleX(1); }
+
+.service-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 50px rgba(0,0,0,0.4);
+  border-color: rgba(255,107,43,0.15);
+}
+
+.service-number {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.5rem;
+  color: rgba(255,107,43,0.12);
+  line-height: 1;
+  margin-bottom: 0.75rem;
+}
+
+.service-card h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.3rem;
+  letter-spacing: 1px;
+  margin-bottom: 0.6rem;
+}
+
+.service-card p {
+  font-size: 0.9rem;
+  color: var(--gray);
+  line-height: 1.65;
+  font-weight: 300;
+}
+
+/* ABOUT */
+.about { padding: 5rem 1.5rem; background: var(--dark); }
+
+.about-wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.about-visual {
+  width: 100%;
+  height: 300px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #16161F 0%, #1E1E2A 50%, #12121A 100%);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-visual-text {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 6rem;
+  color: rgba(255,107,43,0.08);
+  letter-spacing: 4px;
+}
+
+.about-content h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  letter-spacing: 2px;
+  margin-bottom: 1.25rem;
+}
+
+.about-content h2 span { color: var(--accent); }
+
+.about-content p {
+  color: var(--gray);
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+  font-weight: 300;
+  line-height: 1.7;
+}
+
+.feature-list {
+  list-style: none;
+  margin-top: 1.5rem;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.feature-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.feature-list li::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* CTA BANNER */
+.cta-banner {
+  background: linear-gradient(135deg, var(--accent) 0%, #E05520 100%);
+  padding: 4rem 1.5rem;
+  text-align: center;
+}
+
+.cta-banner h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  letter-spacing: 2px;
+  color: var(--white);
+  margin-bottom: 1rem;
+}
+
+.cta-banner p {
+  color: rgba(255,255,255,0.85);
+  font-size: 1.05rem;
+  margin-bottom: 2rem;
+  font-weight: 300;
+}
+
+.btn-white {
+  background: var(--white);
+  color: var(--dark);
+  padding: 1rem 2.5rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.btn-white:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+}
+
+/* CONTACT */
+.contact { padding: 5rem 1.5rem; background: var(--dark-lighter); }
+
+.contact-grid {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+
+.contact-card {
+  background: var(--dark-card);
+  border: 1px solid rgba(255,255,255,0.04);
+  border-radius: 10px;
+  padding: 2.5rem 2rem;
+}
+
+.contact-card h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.4rem;
+  letter-spacing: 1px;
+  color: var(--accent);
+  margin-bottom: 1.75rem;
+}
+
+.contact-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  align-items: flex-start;
+}
+
+.contact-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(255,107,43,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 1rem;
+}
+
+.contact-detail { flex: 1; }
+
+.contact-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--gray);
+  margin-bottom: 0.2rem;
+}
+
+.contact-value {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.contact-value a {
+  color: var(--light);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.contact-value a:hover { color: var(--accent); }
+
+.contact-form { display: flex; flex-direction: column; gap: 1rem; }
+
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+  width: 100%;
+  padding: 0.9rem 1.1rem;
+  background: var(--dark-lighter);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 4px;
+  color: var(--light);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  transition: border-color 0.3s;
+  -webkit-appearance: none;
+}
+
+.contact-form input:focus,
+.contact-form select:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.contact-form textarea { height: 100px; resize: vertical; }
+
+.contact-form select option { background: var(--dark-card); }
+
+/* FOOTER */
+footer {
+  background: var(--dark-card);
+  border-top: 1px solid rgba(255,255,255,0.04);
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+}
+
+.footer-brand {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.2rem;
+  color: var(--accent);
+  letter-spacing: 2px;
+  margin-bottom: 0.5rem;
+}
+
+footer p {
+  font-size: 0.8rem;
+  color: var(--gray);
+}
+
+/* RESPONSIVE */
+@media (min-width: 640px) {
+  .services-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 768px) {
+  .about-wrapper { grid-template-columns: 1fr 1fr; }
+  .about-visual { height: 420px; }
+  .contact-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (min-width: 1024px) {
+  .services-grid { grid-template-columns: repeat(3, 1fr); }
+  .menu-toggle { display: none; }
+  .nav-links { display: flex !important; }
+  nav { padding: 0.75rem 3rem; }
+}
+
+@media (max-width: 1023px) {
+  .menu-toggle { display: block; }
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(11,11,15,0.98);
+    flex-direction: column;
+    padding: 1.5rem;
+    gap: 1rem;
+    border-bottom: 1px solid rgba(255,107,43,0.1);
+  }
+  .nav-links.open { display: flex; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-brand">Total Fitness</a>
+  <button class="menu-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">&#9776;</button>
+  <div class="nav-links">
+    <a href="#services">Programs</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+    <a href="tel:8123739992" style="color:var(--accent);font-weight:600;">(812) 373-9992</a>
+    <a href="#contact" class="btn btn-primary" style="padding:0.5rem 1.2rem;font-size:0.75rem;">Start Today</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-tag">Serving Columbus Since 1998</div>
+    <h1>Your Fitness<br><span>Starts Here</span></h1>
+    <p>Columbus, Indiana's community gym for over 26 years. Real equipment, real training, real results. No contracts, no gimmicks -- just a place to put in the work.</p>
+    <div class="hero-ctas">
+      <a href="#contact" class="btn btn-primary">Start Your Membership</a>
+      <a href="#services" class="btn btn-outline">See Programs</a>
+    </div>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <span class="hero-meta-number">26+</span>
+        <span class="hero-meta-label">Years Strong</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-number">1000s</span>
+        <span class="hero-meta-label">Members Served</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-number">24/7</span>
+        <span class="hero-meta-label">Commitment</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-header">
+    <div class="section-label">Programs & Services</div>
+    <div class="section-title">Everything You Need to Train</div>
+    <div class="section-subtitle">Whether you're just getting started or chasing a new PR, we have the equipment and support to get you there.</div>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-number">01</div>
+      <h3>Gym Memberships</h3>
+      <p>Affordable monthly plans with full access to our facility. No long-term contracts -- join month to month and train on your schedule.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-number">02</div>
+      <h3>Personal Training</h3>
+      <p>One-on-one training with certified professionals. Custom programs built around your goals, your schedule, and your fitness level.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-number">03</div>
+      <h3>Group Fitness Classes</h3>
+      <p>High-energy group sessions that keep you motivated. From strength circuits to cardio blasts -- there's a class for everyone.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-number">04</div>
+      <h3>Cardio Equipment</h3>
+      <p>Full floor of treadmills, ellipticals, bikes, and rowers. Stay in the zone with modern equipment and plenty of machines to go around.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-number">05</div>
+      <h3>Free Weights</h3>
+      <p>Dumbbells, barbells, racks, and benches. Everything you need for serious strength training in a well-maintained weight room.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-number">06</div>
+      <h3>Nutrition Guidance</h3>
+      <p>Training is only half the equation. Get guidance on fueling your body the right way to match your goals -- lose fat, build muscle, or both.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-wrapper">
+    <div class="about-visual">
+      <div class="about-visual-text">26+</div>
+    </div>
+    <div class="about-content">
+      <h2>Columbus' Gym <span>Since 1998</span></h2>
+      <p>Total Fitness of Columbus isn't a franchise, and it isn't a fad. For more than 26 years, we've been the gym where Columbus comes to train -- locals helping locals get stronger, healthier, and more confident.</p>
+      <p>We believe fitness should be accessible. That means fair pricing, no long-term contracts, and a welcoming environment for every experience level -- from first-timers to competitive athletes.</p>
+      <ul class="feature-list">
+        <li>Locally owned and operated for 26+ years</li>
+        <li>No long-term contracts or hidden fees</li>
+        <li>Certified personal trainers on staff</li>
+        <li>Clean, well-maintained facility</li>
+        <li>Welcoming to all fitness levels</li>
+        <li>Convenient Columbus location</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section class="cta-banner">
+  <h2>Ready to Make a Change?</h2>
+  <p>Your first step is the hardest. Walk through our doors and we'll handle the rest.</p>
+  <a href="#contact" class="btn-white">Get Started Today</a>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="section-header">
+    <div class="section-label">Get Started</div>
+    <div class="section-title">Visit Us or Reach Out</div>
+    <div class="section-subtitle">Stop by for a tour, or send us a message. We'll get back to you within 24 hours.</div>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-card">
+      <h3>Contact Info</h3>
+      <div class="contact-row">
+        <div class="contact-icon">&#9742;</div>
+        <div class="contact-detail">
+          <div class="contact-label">Phone</div>
+          <div class="contact-value"><a href="tel:8123739992">(812) 373-9992</a></div>
+        </div>
+      </div>
+      <div class="contact-row">
+        <div class="contact-icon">&#9993;</div>
+        <div class="contact-detail">
+          <div class="contact-label">Email</div>
+          <div class="contact-value"><a href="mailto:info@totalfitnessofcolumbus.net">info@totalfitnessofcolumbus.net</a></div>
+        </div>
+      </div>
+      <div class="contact-row">
+        <div class="contact-icon">&#9872;</div>
+        <div class="contact-detail">
+          <div class="contact-label">Location</div>
+          <div class="contact-value">Columbus, IN</div>
+        </div>
+      </div>
+      <div class="contact-row">
+        <div class="contact-icon">&#9200;</div>
+        <div class="contact-detail">
+          <div class="contact-label">Hours</div>
+          <div class="contact-value">Mon - Fri: 5:00 AM - 9:00 PM<br>Sat: 7:00 AM - 5:00 PM<br>Sun: Closed</div>
+        </div>
+      </div>
+    </div>
+    <div class="contact-card">
+      <h3>Get Membership Info</h3>
+      <form class="contact-form" onsubmit="event.preventDefault()">
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Email Address" required>
+        <input type="tel" placeholder="Phone Number">
+        <select>
+          <option value="">I'm interested in...</option>
+          <option>General Membership</option>
+          <option>Personal Training</option>
+          <option>Group Fitness Classes</option>
+          <option>Just Looking for Info</option>
+        </select>
+        <textarea placeholder="Questions or comments?"></textarea>
+        <button type="submit" class="btn btn-primary" style="width:100%;text-align:center;">Send Message</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Total Fitness of Columbus</div>
+  <p>Columbus, IN &bull; (812) 373-9992 &bull; info@totalfitnessofcolumbus.net</p>
+  <p style="margin-top:0.5rem;">Proudly serving Columbus since 1998</p>
+</footer>
+
+</body>
+</html>

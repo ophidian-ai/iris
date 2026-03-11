@@ -1,6 +1,6 @@
 ---
 name: clickup
-description: Manage ClickUp tasks, lists, and projects for OphidianAI
+description: Manage ClickUp tasks, lists, and projects for OphidianAI. Use when Eric says "check my tasks", "create a task", "what's on my plate in ClickUp", "update task status", or when any workflow needs task tracking. Also used by morning-coffee for daily task summaries.
 ---
 
 # ClickUp
@@ -47,6 +47,9 @@ echo '{"name":"Task name","description":"Details","priority":2,"dueDate":"2026-0
 
 # Update a task
 echo '{"status":"in progress","priority":1}' | node .claude/skills/clickup/scripts/clickup.js update <taskId>
+
+# Delete a task
+node .claude/skills/clickup/scripts/clickup.js delete <taskId>
 ```
 
 ### Priority levels
