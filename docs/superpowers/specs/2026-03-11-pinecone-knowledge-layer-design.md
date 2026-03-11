@@ -93,13 +93,13 @@ Each skill calls a shared indexing procedure at the end of its workflow. The pro
 
 ```json
 {
-  "id": "<namespace>/<relative-path>",
+  "_id": "<namespace>/<relative-path>",
   "text": "<content to embed>",
   "source_file": "<relative file path>",
   "department": "<revenue|operations|engineering|marketing>",
   "created_date": "<ISO date>",
   "updated_date": "<ISO date>",
-  "tags": "<comma-separated tags>"
+  "tags": ["<tag1>", "<tag2>"]
 }
 ```
 
