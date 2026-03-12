@@ -35,7 +35,7 @@ updated: 2026-03-10
 
 ## Related
 
-- [[bloomin-acres]]
-- [[report-generation]]
-- [[web-builder-skill]]
-- [[launch-and-maintenance]]
+- `projects/bloomin-acres.md`
+- `tools/report-generation.md`
+- `tools/web-builder-skill.md`
+- `operations/launch-and-maintenance.md`

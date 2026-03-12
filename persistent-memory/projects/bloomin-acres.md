@@ -25,7 +25,7 @@ updated: 2026-03-10
 
 ## Related
 
-- [[ophidianai-website]]
-- [[report-generation]]
-- [[web-builder-skill]]
-- [[launch-and-maintenance]]
+- `projects/ophidianai-website.md`
+- `tools/report-generation.md`
+- `tools/web-builder-skill.md`
+- `operations/launch-and-maintenance.md`

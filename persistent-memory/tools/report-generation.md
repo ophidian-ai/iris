@@ -63,6 +63,16 @@ node engineering/tools/generate-report-pdf.mjs \
 - **Footer:** "OPHIDIANAI -- CONFIDENTIAL" left, "PAGE X" right
 - **Font:** System sans-serif. 14px body, 1.6 line-height
 - **Page size:** US Letter with print backgrounds enabled
+- **PDF margins:** Use Puppeteer margin options (not CSS) for consistent page margins:
+  - `top: '1in'`, `bottom: '1in'`, `left: '0.5in'`, `right: '0.5in'`
+  - Use `displayHeaderFooter: true` with teal line templates for header/footer rules
+  - Adjust HTML padding to complement (reduce content padding since margins handle spacing)
+- **Page breaks:** ALWAYS include page break controls in HTML templates:
+  - Add `.page-break { page-break-before: always; }` CSS class
+  - Apply `break-inside: avoid` to cards, tables, payment boxes, footers
+  - Place explicit `page-break` class on major section boundaries
+  - After generating PDF, verify each page visually -- no content should bleed across page boundaries
+  - Remove section dividers that precede a page break (redundant)
 
 ## Report Sections (in order)
 
@@ -85,6 +95,6 @@ node engineering/tools/generate-report-pdf.mjs \
 
 ## Related
 
-- [[bloomin-acres]]
-- [[ophidianai-website]]
-- [[pricing-and-services]]
+- `projects/bloomin-acres.md`
+- `projects/ophidianai-website.md`
+- `operations/pricing-and-services.md`

@@ -99,13 +99,13 @@ All meaningful decisions are logged in `operations/decisions/log.md`. This file 
 
 ## Memory
 
-Iris maintains persistent memory in the Obsidian vault at `persistent-memory/`.
+Iris maintains persistent memory in `persistent-memory/`.
 
 ### Reading Memory
 
 1. Read `persistent-memory/_index.md` to see what's stored
 2. Read specific notes as needed based on the current task
-3. Follow `[[wikilinks]]` to find related context
+3. Follow related links at the bottom of each note to find connected context
 
 ### Writing Memory
 

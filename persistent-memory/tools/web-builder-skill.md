@@ -22,6 +22,6 @@ updated: 2026-03-10
 
 ## Related
 
-- [[ophidianai-website]]
-- [[bloomin-acres]]
-- [[launch-and-maintenance]]
+- `projects/ophidianai-website.md`
+- `projects/bloomin-acres.md`
+- `operations/launch-and-maintenance.md`

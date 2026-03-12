@@ -39,10 +39,6 @@ shared/archives/deprecated-gmail-skill/scripts/token.json
 # Client projects (each has its own git repo)
 projects/active-projects/*/
 
-# Obsidian (workspace changes on every open)
-persistent-memory/.obsidian/workspace.json
-persistent-memory/.obsidian/workspace-mobile.json
-
 # OS
 .DS_Store
 Thumbs.db

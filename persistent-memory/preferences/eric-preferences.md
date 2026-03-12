@@ -33,5 +33,5 @@ updated: 2026-03-10
 
 ## Related
 
-- [[outreach-system]]
-- [[email-rules]]
+- `operations/outreach-system.md`
+- `operations/email-rules.md`

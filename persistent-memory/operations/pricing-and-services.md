@@ -75,6 +75,6 @@ Full reference: `operations/references/pricing-structure.md`
 
 ## Related
 
-- [[prospect-management]]
-- [[client-agreements]]
-- [[report-generation]]
+- `operations/prospect-management.md`
+- `operations/client-agreements.md`
+- `tools/report-generation.md`

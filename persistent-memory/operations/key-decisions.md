@@ -33,6 +33,6 @@ Full decision log: `operations/decisions/log.md` (append-only, format: `[YYYY-MM
 
 ## Related
 
-- [[pricing-and-services]]
-- [[client-agreements]]
-- [[outreach-system]]
+- `operations/pricing-and-services.md`
+- `operations/client-agreements.md`
+- `operations/outreach-system.md`

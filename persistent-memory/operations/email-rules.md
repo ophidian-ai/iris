@@ -22,7 +22,7 @@ updated: 2026-03-10
 
 ## Related
 
-- [[gws-cli]]
-- [[prospect-pipeline]]
-- [[outreach-system]]
-- [[eric-preferences]]
+- `tools/gws-cli.md`
+- `operations/prospect-pipeline.md`
+- `operations/outreach-system.md`
+- `preferences/eric-preferences.md`
