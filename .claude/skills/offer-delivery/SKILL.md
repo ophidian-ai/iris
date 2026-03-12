@@ -35,7 +35,7 @@ This skill covers the "Offer Delivered" and "Suggest Call" steps in a single tou
 
 Determine which free item was promised in the original cold email. Check:
 
-1. The original outreach email in `revenue/lead-generation/prospects/[business-name]/outreach/`
+1. The original outreach email in `sales/lead-generation/prospects/[business-name]/outreach/`
 2. The niche offer templates at `operations/references/niche-offer-templates.md`
 3. The explicit input if provided
 
@@ -68,7 +68,7 @@ All inline-generated deliverables must use OphidianAI branding:
 - Logo: base64-encoded from `shared/brand-assets/logo_icon_40.png`
 - Clean, modern layout. No clutter.
 
-Save the deliverable to `revenue/lead-generation/prospects/[business-name]/outreach/offer-deliverable.pdf`.
+Save the deliverable to `sales/lead-generation/prospects/[business-name]/outreach/offer-deliverable.pdf`.
 
 ### Step 3: Write the Delivery Email
 
@@ -101,7 +101,7 @@ Body (under 80 words):
 - Brand colors in accents (teal links, dark background header/footer if applicable)
 
 Save the delivery email HTML to:
-`revenue/lead-generation/prospects/[business-name]/outreach/offer-delivery.html`
+`sales/lead-generation/prospects/[business-name]/outreach/offer-delivery.html`
 
 ### Step 4: Test Send
 
@@ -125,7 +125,7 @@ After Eric approves the test, send the live email to the prospect using the same
 
 ### Step 6: Update Tracker
 
-Update `revenue/lead-generation/prospect-tracker.md`:
+Update `sales/lead-generation/prospect-tracker.md`:
 
 - Set status to **Offer Delivered**
 - Set the date to today
@@ -133,8 +133,8 @@ Update `revenue/lead-generation/prospect-tracker.md`:
 
 ## Output
 
-- Deliverable PDF saved to `revenue/lead-generation/prospects/[business-name]/outreach/offer-deliverable.pdf`
-- Delivery email HTML saved to `revenue/lead-generation/prospects/[business-name]/outreach/offer-delivery.html`
+- Deliverable PDF saved to `sales/lead-generation/prospects/[business-name]/outreach/offer-deliverable.pdf`
+- Delivery email HTML saved to `sales/lead-generation/prospects/[business-name]/outreach/offer-delivery.html`
 - Email sent (test first, then live)
 - Prospect tracker updated to "Offer Delivered"
 
@@ -185,7 +185,7 @@ Parameters:
   records: [{
     "_id": "outreach/<prospect-slug>/offer-delivery",
     "text": "<outcome summary -- what was offered, whether accepted, what was delivered>",
-    "source_file": "revenue/lead-generation/prospects/<slug>/outreach/offer-delivery.md",
+    "source_file": "sales/lead-generation/prospects/<slug>/outreach/offer-delivery.md",
     "department": "revenue",
     "created_date": "<today>",
     "updated_date": "<today>",

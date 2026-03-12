@@ -31,13 +31,13 @@ gws sheets +read --spreadsheet '1FJOPS3ABR2BQtFOn4cUAGLZzIYukKbPozK_t_m7Dwg0' --
 # For each prospect email from the sheet:
 gws gmail users messages list --params '{"userId":"me","q":"from:<prospect-email> newer_than:7d","maxResults":5}'
 ```
-Build the prospect email JSON array by reading the **Google Sheet pipeline** (Sheet ID: `1FJOPS3ABR2BQtFOn4cUAGLZzIYukKbPozK_t_m7Dwg0`, column C) and extracting all email addresses. Fall back to `revenue/lead-generation/prospect-tracker.md` if the sheet is unavailable.
+Build the prospect email JSON array by reading the **Google Sheet pipeline** (Sheet ID: `1FJOPS3ABR2BQtFOn4cUAGLZzIYukKbPozK_t_m7Dwg0`, column C) and extracting all email addresses. Fall back to `sales/lead-generation/prospect-tracker.md` if the sheet is unavailable.
 
 **Cold Email Reply Tracking:**
 
 Cross-reference prospect replies with the template rotation tracker to update performance data:
 
-1. Read `revenue/lead-generation/template-rotation.md`
+1. Read `sales/lead-generation/template-rotation.md`
 2. For each prospect reply detected above, check if the prospect name matches a "Last Prospect" entry in the rotation tracker
 3. If a match is found and the template's Replies count hasn't already been incremented for this prospect:
    - Increment the Replies column for that template
@@ -51,8 +51,8 @@ Cross-reference prospect replies with the template rotation tracker to update pe
 
 Check for recent pipeline activity to include in the briefing:
 
-1. Read `revenue/lead-generation/staged-emails.json` (if it exists) -- note how many emails are staged and waiting
-2. Read `revenue/lead-generation/template-rotation.md` -- pull the Performance Summary for the briefing
+1. Read `sales/lead-generation/staged-emails.json` (if it exists) -- note how many emails are staged and waiting
+2. Read `sales/lead-generation/template-rotation.md` -- pull the Performance Summary for the briefing
 3. Include in the terminal summary:
    - `Staged emails: X waiting to send` (if any)
    - `Template performance: [best template] at [X]% reply rate` (if any data)
@@ -70,8 +70,8 @@ Check all known list IDs: Backlog (901711710045), Project 1 (901711707665), Proj
 
 **File reads (parallel):**
 
-- Read `revenue/lead-generation/prospect-tracker.md`
-- Read each prospect's `revenue/lead-generation/prospects/[slug]/README.md` (needed for pipeline value breakdowns)
+- Read `sales/lead-generation/prospect-tracker.md`
+- Read each prospect's `sales/lead-generation/prospects/[slug]/README.md` (needed for pipeline value breakdowns)
 - Read `marketing/activity-log.md`
 - Read `engineering/projects/bloomin-acres/README.md` (and any other project READMEs)
 - Read `iris/saved-conversations/` directory (check if any files exist)
@@ -205,7 +205,7 @@ Categories: PIPELINE, FOLLOW-UP, OUTREACH, TASKS, MARKETING, REVENUE, AI-INTEL
      1. **Main row:** Business name, status badge, days in stage, follow-up date (add `.overdue` class if past due), and est. value in a `.price-cell`.
      2. **Breakdown row:** A `<tr class="value-breakdown-row">` with a single `<td colspan="5">` containing a `.value-breakdown` div. Inside it:
         - A `.value-breakdown-label` reading "VALUE BASIS"
-        - A `.value-breakdown-items` div with `.value-breakdown-item` entries explaining the estimate: pricing tier (e.g., "Professional tier"), page count, key features driving the price (e.g., booking integration, SEO, e-commerce). Pull this from the prospect's README.md in `revenue/lead-generation/prospects/[slug]/README.md` -- look at Project Scope and any pricing notes.
+        - A `.value-breakdown-items` div with `.value-breakdown-item` entries explaining the estimate: pricing tier (e.g., "Professional tier"), page count, key features driving the price (e.g., booking integration, SEO, e-commerce). Pull this from the prospect's README.md in `sales/lead-generation/prospects/[slug]/README.md` -- look at Project Scope and any pricing notes.
    - `{{CALENDAR_CONTENT}}` -- `.cal-day-label` for "TODAY" and "TOMORROW", with `.cal-item` entries. If no events for a given day, show `.empty` with "No events scheduled." under that day label. If no events at all, show a single `.empty` with "No events scheduled for today."
    - `{{PROJECTS_CONTENT}}` -- `.project-item` divs for each active project.
    - `{{TASKS_CONTENT}}` -- Table with task name, status, due date. Or `.empty` if none.

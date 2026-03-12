@@ -198,12 +198,12 @@ Use outcome language in all findings. No jargon.
 
 1. Read the HTML template at `operations/templates/seo-audit.html`
 2. Replace all `{{PLACEHOLDER}}` variables with audit data
-3. Save the populated HTML to `revenue/lead-generation/prospects/[business-name]/outreach/seo-audit.html`
+3. Save the populated HTML to `sales/lead-generation/prospects/[business-name]/outreach/seo-audit.html`
 
 ### Step 4: Convert to PDF
 
 ```bash
-npx playwright chromium revenue/lead-generation/prospects/[business-name]/outreach/seo-audit.html --pdf revenue/lead-generation/prospects/[business-name]/outreach/seo-audit.pdf
+npx playwright chromium sales/lead-generation/prospects/[business-name]/outreach/seo-audit.html --pdf sales/lead-generation/prospects/[business-name]/outreach/seo-audit.pdf
 ```
 
 ### Step 5: Summary
@@ -215,8 +215,8 @@ Output a brief summary of findings for use in the cold email or follow-up:
 
 ## Output Files
 
-- `revenue/lead-generation/prospects/[business-name]/outreach/seo-audit.html`
-- `revenue/lead-generation/prospects/[business-name]/outreach/seo-audit.pdf`
+- `sales/lead-generation/prospects/[business-name]/outreach/seo-audit.html`
+- `sales/lead-generation/prospects/[business-name]/outreach/seo-audit.pdf`
 ```
 
 **Step 2: Commit**
@@ -561,7 +561,7 @@ git commit -m "Add SEO-specific cold email templates with revenue-impact framing
 ## Task 7: Update Pipeline Tracking
 
 **Files:**
-- Modify: `revenue/lead-generation/prospect-tracker.md`
+- Modify: `sales/lead-generation/prospect-tracker.md`
 
 **Step 1: Add new pipeline stages and service type column**
 
@@ -577,7 +577,7 @@ Add a "Service" column to the Pipeline table after "Industry" with values: Websi
 **Step 2: Commit**
 
 ```bash
-git add revenue/lead-generation/prospect-tracker.md
+git add sales/lead-generation/prospect-tracker.md
 git commit -m "Add SEO pipeline stages and service type column to prospect tracker"
 ```
 

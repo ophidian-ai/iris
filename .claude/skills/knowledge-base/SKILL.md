@@ -167,9 +167,9 @@ Use results as context injected into your reasoning. Do not show raw results to 
 
 | Namespace | Source Glob |
 |---|---|
-| `prospects` | `revenue/lead-generation/prospects/*/README.md`, `revenue/lead-generation/prospects/*/research/technical-audit.md`, `revenue/lead-generation/prospects/*/research/score-card.md` |
-| `outreach` | `revenue/lead-generation/prospects/*/outreach/*.txt` |
-| `operations` | `operations/references/sops/*.md`, `operations/references/pricing-structure.md`, `operations/references/niche-offer-templates.md`, `operations/templates/*.md`, `revenue/lead-generation/lead-sources.md` |
+| `prospects` | `sales/lead-generation/prospects/*/README.md`, `sales/lead-generation/prospects/*/research/technical-audit.md`, `sales/lead-generation/prospects/*/research/score-card.md` |
+| `outreach` | `sales/lead-generation/prospects/*/outreach/*.txt` |
+| `operations` | `operations/references/sops/*.md`, `operations/references/pricing-structure.md`, `operations/references/niche-offer-templates.md`, `operations/templates/*.md`, `sales/lead-generation/lead-sources.md` |
 | `decisions` | `operations/decisions/log.md` (split by `###` entry, use date as chunk ID) |
 | `agent-memory` | `persistent-memory/**/*.md` (exclude `_index.md`) |
 | `research` | `.firecrawl/cold-leads/*.md`, `.firecrawl/prospect-research/*.md` (skip `.json` files) |

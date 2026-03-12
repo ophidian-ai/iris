@@ -30,7 +30,7 @@ If a current site URL is provided:
 2. Extract: business name, services, hours, phone, address, any about/mission text
 3. Note their current brand colors and logo (if findable)
 
-If no URL, use whatever info is available from the prospect's research folder at `revenue/lead-generation/prospects/<name>/research/`.
+If no URL, use whatever info is available from the prospect's research folder at `sales/lead-generation/prospects/<name>/research/`.
 
 ### Step 2: Get Design Inspiration
 
@@ -61,7 +61,7 @@ Create a single-file HTML page (`index.html`) with:
 
 ### Step 4: Save and Screenshot
 
-1. Save the mockup to `revenue/lead-generation/prospects/<name>/mockup/index.html`
+1. Save the mockup to `sales/lead-generation/prospects/<name>/mockup/index.html`
 2. Take screenshots using Playwright:
 
 ```bash
@@ -71,9 +71,9 @@ const { chromium } = require('playwright');
   const browser = await chromium.launch();
   const page = await browser.newPage();
   await page.setViewportSize({ width: 1440, height: 900 });
-  await page.goto('file:///c:/Claude Code/OphidianAI/revenue/lead-generation/prospects/<name>/mockup/index.html', { waitUntil: 'networkidle' });
-  await page.screenshot({ path: 'c:/Claude Code/OphidianAI/revenue/lead-generation/prospects/<name>/mockup/screenshot.png', fullPage: true });
-  await page.screenshot({ path: 'c:/Claude Code/OphidianAI/revenue/lead-generation/prospects/<name>/mockup/screenshot-hero.png' });
+  await page.goto('file:///c:/Claude Code/OphidianAI/sales/lead-generation/prospects/<name>/mockup/index.html', { waitUntil: 'networkidle' });
+  await page.screenshot({ path: 'c:/Claude Code/OphidianAI/sales/lead-generation/prospects/<name>/mockup/screenshot.png', fullPage: true });
+  await page.screenshot({ path: 'c:/Claude Code/OphidianAI/sales/lead-generation/prospects/<name>/mockup/screenshot-hero.png' });
   await browser.close();
   console.log('Screenshots captured');
 })();

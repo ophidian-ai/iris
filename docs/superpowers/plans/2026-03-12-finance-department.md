@@ -600,11 +600,11 @@ To:
 
 Change line 144 (find the line starting with "Revenue owns lead generation"):
 ```
-Revenue owns lead generation and the prospect pipeline (not project delivery -- that's Engineering). Prospect pipeline lives in `revenue/lead-generation/`. The single source of truth for pipeline status is `revenue/lead-generation/prospect-tracker.md`.
+Revenue owns lead generation and the prospect pipeline (not project delivery -- that's Engineering). Prospect pipeline lives in `sales/lead-generation/`. The single source of truth for pipeline status is `sales/lead-generation/prospect-tracker.md`.
 ```
 To:
 ```
-Sales owns lead generation and the prospect pipeline (not project delivery -- that's Engineering). Prospect pipeline lives in `revenue/lead-generation/`. The single source of truth for pipeline status is `revenue/lead-generation/prospect-tracker.md`.
+Sales owns lead generation and the prospect pipeline (not project delivery -- that's Engineering). Prospect pipeline lives in `sales/lead-generation/`. The single source of truth for pipeline status is `sales/lead-generation/prospect-tracker.md`.
 ```
 
 Note: The `revenue/` data directory path stays unchanged per the spec.

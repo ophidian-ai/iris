@@ -10,10 +10,10 @@ if (!(Test-Path $LogDir)) { New-Item -ItemType Directory -Path $LogDir -Force | 
 $Prompt = @"
 Review the prospect pipeline for follow-up actions needed today.
 
-1. Read revenue/lead-generation/prospect-tracker.md
+1. Read sales/lead-generation/prospect-tracker.md
 2. Check each prospect's last contact date and follow-up schedule
 3. Identify any prospects that are overdue for follow-up or have follow-ups due today
-4. Check if any outreach emails were sent that haven't received responses (check the prospect folders in revenue/lead-generation/prospects/ for sent emails)
+4. Check if any outreach emails were sent that haven't received responses (check the prospect folders in sales/lead-generation/prospects/ for sent emails)
 5. For Bloomin' Acres specifically, check the project status and flag anything that needs Eric's attention
 
 Write a brief action summary to: operations/automation/logs/pipeline-summary-$(Get-Date -Format 'yyyy-MM-dd').md

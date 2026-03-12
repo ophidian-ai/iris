@@ -66,7 +66,7 @@ Use outcome language in all findings. No jargon.
    - `{{ISSUES_TABLE}}` -- HTML table rows with Area, Finding, Severity badge, Impact
    - `{{QUICK_WINS}}` -- HTML list items with highest-impact fixes
    - `{{KEYWORD_GAPS}}` -- HTML list items with search terms they're missing
-3. Save the populated HTML to `revenue/lead-generation/prospects/[business-name]/outreach/seo-audit.html`
+3. Save the populated HTML to `sales/lead-generation/prospects/[business-name]/outreach/seo-audit.html`
 
 ### Step 4: Convert to PDF
 
@@ -78,8 +78,8 @@ const { chromium } = require('playwright');
 (async () => {
   const browser = await chromium.launch();
   const page = await browser.newPage();
-  await page.goto('file:///c:/Claude Code/OphidianAI/revenue/lead-generation/prospects/[business-name]/outreach/seo-audit.html', { waitUntil: 'networkidle' });
-  await page.pdf({ path: 'c:/Claude Code/OphidianAI/revenue/lead-generation/prospects/[business-name]/outreach/seo-audit.pdf', format: 'Letter', printBackground: true });
+  await page.goto('file:///c:/Claude Code/OphidianAI/sales/lead-generation/prospects/[business-name]/outreach/seo-audit.html', { waitUntil: 'networkidle' });
+  await page.pdf({ path: 'c:/Claude Code/OphidianAI/sales/lead-generation/prospects/[business-name]/outreach/seo-audit.pdf', format: 'Letter', printBackground: true });
   await browser.close();
   console.log('PDF generated');
 })();
@@ -95,8 +95,8 @@ Output a brief summary for use in cold email or follow-up:
 
 ## Output Files
 
-- `revenue/lead-generation/prospects/[business-name]/outreach/seo-audit.html`
-- `revenue/lead-generation/prospects/[business-name]/outreach/seo-audit.pdf`
+- `sales/lead-generation/prospects/[business-name]/outreach/seo-audit.html`
+- `sales/lead-generation/prospects/[business-name]/outreach/seo-audit.pdf`
 
 ## Knowledge Base
 

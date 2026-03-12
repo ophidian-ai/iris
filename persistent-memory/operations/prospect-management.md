@@ -21,7 +21,7 @@ Niche offers reference: `operations/references/niche-offer-templates.md`
 
 ## Prospect Folder Structure
 
-Each prospect gets: `revenue/lead-generation/prospects/[business-slug]/`
+Each prospect gets: `sales/lead-generation/prospects/[business-slug]/`
 
 Standard layout:
 

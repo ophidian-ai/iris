@@ -53,18 +53,18 @@ After research is complete:
 
 1. **Create prospect folders** -- For each viable prospect (top 3 minimum), create:
    ```
-   revenue/lead-generation/prospects/[business-name-slug]/
-   revenue/lead-generation/prospects/[business-name-slug]/research/
-   revenue/lead-generation/prospects/[business-name-slug]/outreach/
+   sales/lead-generation/prospects/[business-name-slug]/
+   sales/lead-generation/prospects/[business-name-slug]/research/
+   sales/lead-generation/prospects/[business-name-slug]/outreach/
    ```
 
 2. **Save research summary** -- Write findings to:
    ```
-   revenue/lead-generation/prospects/[business-name-slug]/research/initial-research.md
+   sales/lead-generation/prospects/[business-name-slug]/research/initial-research.md
    ```
    Include: business name, URL, location, industry, issues found, opportunity type, contact info, and source.
 
-3. **Update prospect tracker** -- Append each new prospect to the **Google Sheet pipeline** (Sheet ID: `1FJOPS3ABR2BQtFOn4cUAGLZzIYukKbPozK_t_m7Dwg0`) with status "New Lead" and basic info. Also update `revenue/lead-generation/prospect-tracker.md` as backup.
+3. **Update prospect tracker** -- Append each new prospect to the **Google Sheet pipeline** (Sheet ID: `1FJOPS3ABR2BQtFOn4cUAGLZzIYukKbPozK_t_m7Dwg0`) with status "New Lead" and basic info. Also update `sales/lead-generation/prospect-tracker.md` as backup.
 
 4. **Suggest next step** -- For hot prospects, recommend running `prospect-scoring` to qualify them before outreach.
 
@@ -80,7 +80,7 @@ After research is complete:
 
 ## Knowledge Base
 
-After saving research to `revenue/lead-generation/prospects/[slug]/research/initial-research.md`, index it:
+After saving research to `sales/lead-generation/prospects/[slug]/research/initial-research.md`, index it:
 
 1. Read the saved research file content
 2. Upsert to Pinecone:
@@ -93,7 +93,7 @@ Parameters:
   records: [{
     "_id": "research/<prospect-slug>/initial-research",
     "text": "<research file content>",
-    "source_file": "revenue/lead-generation/prospects/<slug>/research/initial-research.md",
+    "source_file": "sales/lead-generation/prospects/<slug>/research/initial-research.md",
     "department": "revenue",
     "created_date": "<today>",
     "updated_date": "<today>",

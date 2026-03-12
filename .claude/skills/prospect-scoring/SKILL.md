@@ -131,7 +131,7 @@ Based on scoring, recommend one or more:
 5. **Recommend** -- Service type and pricing tier.
 6. **Flag** -- Note any disqualifiers.
 7. **Save** -- Write score card to prospect folder.
-8. **Update tracker** -- Write Score and Tier to the **Google Sheet pipeline** (Sheet ID: `1FJOPS3ABR2BQtFOn4cUAGLZzIYukKbPozK_t_m7Dwg0`). Also update `revenue/lead-generation/prospect-tracker.md` as backup.
+8. **Update tracker** -- Write Score and Tier to the **Google Sheet pipeline** (Sheet ID: `1FJOPS3ABR2BQtFOn4cUAGLZzIYukKbPozK_t_m7Dwg0`). Also update `sales/lead-generation/prospect-tracker.md` as backup.
 
 Total time target: **under 2 minutes per prospect.**
 
@@ -139,7 +139,7 @@ Total time target: **under 2 minutes per prospect.**
 
 ### Score Card
 
-Save to: `revenue/lead-generation/prospects/[business-name]/research/score-card.md`
+Save to: `sales/lead-generation/prospects/[business-name]/research/score-card.md`
 
 Create the prospect folder if it doesn't exist.
 
@@ -221,7 +221,7 @@ Parameters:
   records: [{
     "_id": "prospects/<prospect-slug>/research/score-card",
     "text": "<score card content>",
-    "source_file": "revenue/lead-generation/prospects/<slug>/research/score-card.md",
+    "source_file": "sales/lead-generation/prospects/<slug>/research/score-card.md",
     "department": "revenue",
     "created_date": "<today>",
     "updated_date": "<today>",
@@ -229,13 +229,13 @@ Parameters:
   }]
 ```
 
-2. If `revenue/lead-generation/prospects/<slug>/README.md` exists, also upsert it:
+2. If `sales/lead-generation/prospects/<slug>/README.md` exists, also upsert it:
 
 ```
   records: [{
     "_id": "prospects/<prospect-slug>/README",
     "text": "<README content>",
-    "source_file": "revenue/lead-generation/prospects/<slug>/README.md",
+    "source_file": "sales/lead-generation/prospects/<slug>/README.md",
     ...same metadata pattern...
   }]
 ```

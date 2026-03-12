@@ -44,7 +44,7 @@ If replying to a thread, match the `from` field of the most recent sent message 
 
 ### Step 3: Check Prospect Context
 
-If the sender might be a prospect, check for a matching folder in `revenue/lead-generation/prospects/`. Also check `revenue/lead-generation/prospect-tracker.md` for their name or email.
+If the sender might be a prospect, check for a matching folder in `sales/lead-generation/prospects/`. Also check `sales/lead-generation/prospect-tracker.md` for their name or email.
 
 If found, read their research and outreach history to inform the reply -- reference past conversations, what was offered, and where they are in the pipeline.
 
@@ -87,7 +87,7 @@ echo '{"to":"recipient@example.com","subject":"Re: Topic","html":"<p>Reply</p>",
 - If multiple topics are covered in the original email, address each one clearly (use line breaks, not bullet points in the email body unless appropriate).
 - Always suggest a next step when relevant (schedule a call, send a link, confirm a date, etc.).
 - Always confirm with Eric before sending.
-- If the sender is a prospect, update `revenue/lead-generation/prospect-tracker.md` with the interaction.
+- If the sender is a prospect, update `sales/lead-generation/prospect-tracker.md` with the interaction.
 
 ## Example
 

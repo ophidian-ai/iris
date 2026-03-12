@@ -23,7 +23,7 @@ When a prospect replies to outreach and wants to learn more, or when Eric says "
 - **Timeline preference** -- If the prospect mentioned urgency or flexibility
 - **Notes** -- Pain points, what they care about, assessment findings, conversation context
 
-Pull missing details from `revenue/lead-generation/prospects/[business-name]/` research files and assessment.
+Pull missing details from `sales/lead-generation/prospects/[business-name]/` research files and assessment.
 
 ## Proposal Structure
 
@@ -75,7 +75,7 @@ The HTML document contains these sections in order:
 
 ## Output
 
-1. **HTML proposal** -- Save to `revenue/lead-generation/prospects/[business-name]/outreach/proposal.html`
+1. **HTML proposal** -- Save to `sales/lead-generation/prospects/[business-name]/outreach/proposal.html`
 
 2. **PDF conversion** -- Convert HTML to PDF using Playwright:
    ```bash
@@ -84,8 +84,8 @@ The HTML document contains these sections in order:
    (async () => {
      const browser = await chromium.launch();
      const page = await browser.newPage();
-     await page.goto('file:///c:/Claude Code/OphidianAI/revenue/lead-generation/prospects/[business-name]/outreach/proposal.html', { waitUntil: 'networkidle' });
-     await page.pdf({ path: 'c:/Claude Code/OphidianAI/revenue/lead-generation/prospects/[business-name]/outreach/proposal.pdf', format: 'Letter', printBackground: true });
+     await page.goto('file:///c:/Claude Code/OphidianAI/sales/lead-generation/prospects/[business-name]/outreach/proposal.html', { waitUntil: 'networkidle' });
+     await page.pdf({ path: 'c:/Claude Code/OphidianAI/sales/lead-generation/prospects/[business-name]/outreach/proposal.pdf', format: 'Letter', printBackground: true });
      await browser.close();
      console.log('PDF generated');
    })();
@@ -98,7 +98,7 @@ The HTML document contains these sections in order:
    ```
    **Always test-send to eric.lefler@ophidianai.com first.**
 
-4. **Update tracker** -- Set prospect status to "Proposal Sent" in `revenue/lead-generation/prospect-tracker.md`.
+4. **Update tracker** -- Set prospect status to "Proposal Sent" in `sales/lead-generation/prospect-tracker.md`.
 
 ## Checklist Before Sending
 
@@ -142,7 +142,7 @@ Parameters:
   records: [{
     "_id": "prospects/<prospect-slug>/proposal",
     "text": "<proposal summary -- scope, pricing tier, services included, timeline>",
-    "source_file": "revenue/lead-generation/prospects/<slug>/proposal.md",
+    "source_file": "sales/lead-generation/prospects/<slug>/proposal.md",
     "department": "revenue",
     "created_date": "<today>",
     "updated_date": "<today>",

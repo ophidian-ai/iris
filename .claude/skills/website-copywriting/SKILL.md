@@ -78,7 +78,7 @@ For each page, generate:
 Save generated copy based on context:
 
 - **Client project (web-builder):** `engineering/projects/[project-name]/docs/copy/[page-name].md`
-- **Prospect (pre-sale mockup):** `revenue/lead-generation/prospects/[business-name]/research/website-copy.md`
+- **Prospect (pre-sale mockup):** `sales/lead-generation/prospects/[business-name]/research/website-copy.md`
 - **Standalone request:** Output directly in conversation unless Eric specifies a file path.
 
 When called from the web-builder skill, the copy should be formatted ready to drop into React component props (plain text strings, not markdown).

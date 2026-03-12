@@ -231,9 +231,9 @@ Use results as context injected into your reasoning. Do not show raw results to 
 
 | Namespace | Source Glob |
 |---|---|
-| `prospects` | `revenue/lead-generation/prospects/*/README.md`, `revenue/lead-generation/prospects/*/research/technical-audit.md`, `revenue/lead-generation/prospects/*/research/score-card.md` |
-| `outreach` | `revenue/lead-generation/prospects/*/outreach/*.txt` |
-| `operations` | `operations/references/sops/*.md`, `operations/references/pricing-structure.md`, `operations/references/niche-offer-templates.md`, `operations/templates/*.md`, `revenue/lead-generation/lead-sources.md` |
+| `prospects` | `sales/lead-generation/prospects/*/README.md`, `sales/lead-generation/prospects/*/research/technical-audit.md`, `sales/lead-generation/prospects/*/research/score-card.md` |
+| `outreach` | `sales/lead-generation/prospects/*/outreach/*.txt` |
+| `operations` | `operations/references/sops/*.md`, `operations/references/pricing-structure.md`, `operations/references/niche-offer-templates.md`, `operations/templates/*.md`, `sales/lead-generation/lead-sources.md` |
 | `decisions` | `operations/decisions/log.md` (split by `###` entry, use date as chunk ID) |
 | `agent-memory` | `persistent-memory/**/*.md` (exclude `_index.md` and `.obsidian/`) |
 | `research` | `.firecrawl/cold-leads/*.md`, `.firecrawl/prospect-research/*.md` (skip `.json` files) |
@@ -360,7 +360,7 @@ Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>"
 
 ```bash
 # Find all README.md, technical-audit.md, and score-card.md files
-find revenue/lead-generation/prospects -name "README.md" -o -name "technical-audit.md" -o -name "score-card.md" 2>/dev/null
+find sales/lead-generation/prospects -name "README.md" -o -name "technical-audit.md" -o -name "score-card.md" 2>/dev/null
 ```
 
 - [ ] **Step 2: For each file, read content, build record, upsert**
@@ -395,7 +395,7 @@ Expected: `prospects` namespace shows record count matching files indexed.
 - [ ] **Step 1: Glob outreach files**
 
 ```bash
-find revenue/lead-generation/prospects -path "*/outreach/*.txt" 2>/dev/null
+find sales/lead-generation/prospects -path "*/outreach/*.txt" 2>/dev/null
 ```
 
 - [ ] **Step 2: For each file, read, build record, upsert**
@@ -419,7 +419,7 @@ Check `describe-index-stats` for `outreach` namespace.
 - [ ] **Step 1: Glob operations source files**
 
 ```bash
-ls operations/references/sops/*.md operations/references/pricing-structure.md operations/references/niche-offer-templates.md operations/templates/*.md revenue/lead-generation/lead-sources.md 2>/dev/null
+ls operations/references/sops/*.md operations/references/pricing-structure.md operations/references/niche-offer-templates.md operations/templates/*.md sales/lead-generation/lead-sources.md 2>/dev/null
 ```
 
 - [ ] **Step 2: For each file, read, build record, upsert**
@@ -565,7 +565,7 @@ Add at the end of `.claude/skills/business-research/SKILL.md`:
 
 ## Knowledge Base
 
-After saving research to `revenue/lead-generation/prospects/[slug]/research/initial-research.md`, index it:
+After saving research to `sales/lead-generation/prospects/[slug]/research/initial-research.md`, index it:
 
 1. Read the saved research file content
 2. Upsert to Pinecone:
@@ -578,7 +578,7 @@ Parameters:
   records: [{
     "_id": "research/<prospect-slug>/initial-research",
     "text": "<research file content>",
-    "source_file": "revenue/lead-generation/prospects/<slug>/research/initial-research.md",
+    "source_file": "sales/lead-generation/prospects/<slug>/research/initial-research.md",
     "department": "revenue",
     "created_date": "<today>",
     "updated_date": "<today>",
@@ -629,7 +629,7 @@ Parameters:
   records: [{
     "_id": "prospects/<prospect-slug>/research/score-card",
     "text": "<score card content>",
-    "source_file": "revenue/lead-generation/prospects/<slug>/research/score-card.md",
+    "source_file": "sales/lead-generation/prospects/<slug>/research/score-card.md",
     "department": "revenue",
     "created_date": "<today>",
     "updated_date": "<today>",
@@ -637,13 +637,13 @@ Parameters:
   }]
 ```
 
-2. If `revenue/lead-generation/prospects/<slug>/README.md` exists, also upsert it:
+2. If `sales/lead-generation/prospects/<slug>/README.md` exists, also upsert it:
 
 ```
   records: [{
     "_id": "prospects/<prospect-slug>/README",
     "text": "<README content>",
-    "source_file": "revenue/lead-generation/prospects/<slug>/README.md",
+    "source_file": "sales/lead-generation/prospects/<slug>/README.md",
     ...same metadata pattern...
   }]
 ```
@@ -677,7 +677,7 @@ Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>"
 
 ## Knowledge Base
 
-After drafting the cold email and saving to `revenue/lead-generation/prospects/[slug]/outreach/`, index it:
+After drafting the cold email and saving to `sales/lead-generation/prospects/[slug]/outreach/`, index it:
 
 1. Upsert the email:
 
@@ -689,7 +689,7 @@ Parameters:
   records: [{
     "_id": "outreach/<prospect-slug>/<email-filename-without-ext>",
     "text": "<email content>",
-    "source_file": "revenue/lead-generation/prospects/<slug>/outreach/<filename>",
+    "source_file": "sales/lead-generation/prospects/<slug>/outreach/<filename>",
     "department": "revenue",
     "created_date": "<today>",
     "updated_date": "<today>",
@@ -738,7 +738,7 @@ Parameters:
   records: [{
     "_id": "outreach/<prospect-slug>/<followup-filename-without-ext>",
     "text": "<follow-up email content>",
-    "source_file": "revenue/lead-generation/prospects/<slug>/outreach/<filename>",
+    "source_file": "sales/lead-generation/prospects/<slug>/outreach/<filename>",
     "department": "revenue",
     "created_date": "<today>",
     "updated_date": "<today>",
@@ -787,7 +787,7 @@ Parameters:
   records: [{
     "_id": "outreach/<prospect-slug>/offer-delivery",
     "text": "<outcome summary -- what was offered, whether accepted, what was delivered>",
-    "source_file": "revenue/lead-generation/prospects/<slug>/outreach/offer-delivery.md",
+    "source_file": "sales/lead-generation/prospects/<slug>/outreach/offer-delivery.md",
     "department": "revenue",
     "created_date": "<today>",
     "updated_date": "<today>",
@@ -836,7 +836,7 @@ Parameters:
   records: [{
     "_id": "prospects/<prospect-slug>/proposal",
     "text": "<proposal summary -- scope, pricing tier, services included, timeline>",
-    "source_file": "revenue/lead-generation/prospects/<slug>/proposal.md",
+    "source_file": "sales/lead-generation/prospects/<slug>/proposal.md",
     "department": "revenue",
     "created_date": "<today>",
     "updated_date": "<today>",
