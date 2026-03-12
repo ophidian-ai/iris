@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OphidianAI Pre-Proposal - Point of Hope Apostolic Church</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Courier+Prime&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #333;
+  line-height: 1.6;
+  background: #fff;
+  margin: 0;
+}
+
+.header {
+  background: linear-gradient(135deg, #0D1B2A 0%, #1A2332 100%);
+  padding: 48px 40px 32px;
+  border-bottom: 4px solid #0DB1B2;
+  text-align: center;
+}
+
+.header-logo { font-size: 28px; font-weight: 700; color: #fff; letter-spacing: 1px; margin-bottom: 8px; }
+.header-logo .ai { color: #39FF14; }
+.header-tagline { font-family: 'Courier Prime', 'Courier New', monospace; font-size: 13px; color: rgba(255,255,255,0.5); letter-spacing: 3px; text-transform: uppercase; }
+.header-divider { width: 60px; height: 2px; background: #0DB1B2; margin: 20px auto; }
+.header-title { font-size: 16px; font-weight: 400; color: rgba(255,255,255,0.8); margin-top: 8px; }
+.header-title strong { color: #fff; font-weight: 600; }
+.header-subtitle { font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 4px; font-style: italic; }
+
+.content { padding: 24px 40px; }
+.section { margin-bottom: 24px; }
+.section-divider { height: 2px; background: linear-gradient(90deg, #0DB1B2, #39FF14); margin: 24px 0; border-radius: 2px; }
+
+h2 { font-size: 18px; font-weight: 700; color: #0D1B2A; margin-bottom: 12px; letter-spacing: -0.3px; }
+h3 { font-size: 15px; font-weight: 600; color: #0D1B2A; margin-bottom: 10px; }
+p { margin-bottom: 10px; font-size: 14px; color: #444; }
+
+ul { list-style: none; padding: 0; margin-bottom: 10px; }
+ul li { padding: 4px 0 4px 20px; position: relative; font-size: 14px; color: #444; }
+ul li::before { content: ''; position: absolute; left: 0; top: 12px; width: 7px; height: 7px; background: #0DB1B2; border-radius: 50%; }
+
+/* Option Cards */
+.options-grid { display: flex; gap: 20px; margin: 20px 0; }
+
+.option-card {
+  flex: 1;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 18px;
+  position: relative;
+}
+
+.option-card.recommended {
+  border-color: #0DB1B2;
+  box-shadow: 0 4px 16px rgba(13, 177, 178, 0.15);
+}
+
+.option-badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #0DB1B2;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 14px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.option-name { font-size: 16px; font-weight: 700; color: #0D1B2A; margin-bottom: 2px; }
+.option-tagline { font-size: 12px; color: #888; margin-bottom: 10px; }
+
+.option-price {
+  font-size: 24px;
+  font-weight: 700;
+  color: #0D1B2A;
+  margin-bottom: 2px;
+}
+
+.option-price-note { font-size: 11px; color: #999; margin-bottom: 12px; }
+.option-price .original { font-size: 16px; color: #bbb; text-decoration: line-through; margin-right: 8px; font-weight: 400; }
+
+.option-features { list-style: none; padding: 0; margin: 0; }
+.option-features li {
+  padding: 3px 0 3px 20px;
+  position: relative;
+  font-size: 12px;
+  color: #555;
+}
+
+.option-features li::before {
+  content: '\2713';
+  position: absolute;
+  left: 0;
+  color: #0DB1B2;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.option-features li.highlight { color: #0D1B2A; font-weight: 600; }
+.option-features li.extra { color: #0DB1B2; font-weight: 500; }
+
+/* Comparison Table */
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 12px 0;
+  font-size: 13px;
+}
+
+.compare-table th {
+  background: #0D1B2A;
+  color: #fff;
+  font-weight: 600;
+  padding: 7px 12px;
+  text-align: left;
+  font-size: 12px;
+}
+
+.compare-table th:not(:first-child) { text-align: center; }
+
+.compare-table td {
+  padding: 6px 12px;
+  border-bottom: 1px solid #eee;
+  color: #444;
+}
+
+.compare-table td:not(:first-child) { text-align: center; }
+.compare-table .check { color: #0DB1B2; font-weight: 700; font-size: 16px; }
+.compare-table .dash { color: #ddd; }
+
+/* Timeline */
+.timeline-item { display: flex; gap: 12px; margin-bottom: 8px; align-items: flex-start; }
+.timeline-number { width: 24px; height: 24px; background: #0DB1B2; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; }
+.timeline-text { font-size: 13px; color: #444; padding-top: 2px; }
+.timeline-text strong { color: #0D1B2A; }
+
+/* Payment */
+.payment-box { background: #f0fafa; border: 1px solid #d0eded; border-radius: 8px; padding: 14px; margin: 12px 0; }
+.payment-box h3 { font-size: 14px; font-weight: 600; color: #0D1B2A; margin-bottom: 8px; }
+.payment-box table { width: 100%; font-size: 13px; border-collapse: collapse; }
+.payment-box td { padding: 6px 0; border-bottom: 1px solid #d0eded; color: #444; }
+.payment-box tr:last-child td { border-bottom: none; }
+.payment-label { font-size: 13px; font-weight: 600; color: #0D1B2A; margin-bottom: 8px; }
+
+/* Next Steps */
+.next-steps { background: linear-gradient(135deg, #0D1B2A 0%, #1A2332 100%); border-radius: 12px; padding: 24px; color: #fff; }
+.next-steps h2 { color: #fff; margin-bottom: 14px; }
+.next-steps ol { list-style: none; counter-reset: steps; padding: 0; }
+.next-steps ol li { counter-increment: steps; padding: 6px 0 6px 32px; position: relative; font-size: 13px; color: rgba(255,255,255,0.85); }
+.next-steps ol li::before { content: counter(steps); position: absolute; left: 0; top: 6px; width: 22px; height: 22px; background: #0DB1B2; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; }
+
+.footer { background: linear-gradient(135deg, #0D1B2A 0%, #1A2332 100%); padding: 24px 40px 48px; border-top: 4px solid #0DB1B2; }
+.signature { color: rgba(255,255,255,0.9); font-size: 15px; margin-bottom: 24px; }
+.signature strong { display: block; font-size: 16px; color: #fff; }
+.signature span { color: rgba(255,255,255,0.6); font-size: 13px; }
+.footer-brand { text-align: center; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); }
+.footer-brand .logo { font-size: 18px; font-weight: 700; color: #fff; }
+.footer-brand .logo .ai { color: #39FF14; }
+.footer-brand .tagline { font-family: 'Courier Prime', monospace; font-size: 11px; color: rgba(255,255,255,0.4); letter-spacing: 2px; text-transform: uppercase; margin-top: 4px; }
+
+.terms { font-size: 12px; color: #999; line-height: 1.6; margin-top: 24px; padding-top: 24px; border-top: 1px solid #eee; }
+.terms h3 { font-size: 13px; font-weight: 600; color: #666; margin-bottom: 8px; }
+
+@media print {
+  body { max-width: 100%; }
+  .content { padding: 24px 40px; }
+  .option-card { break-inside: avoid; }
+  .payment-box { break-inside: avoid; }
+  .timeline-item { break-inside: avoid; }
+  .next-steps { break-inside: avoid; }
+  .footer { break-inside: avoid; }
+  .terms { break-inside: avoid; }
+  .section-divider { break-after: auto; }
+}
+
+/* Page break hints for PDF generation */
+.page-break { page-break-before: always; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-logo">Ophidian<span class="ai">AI</span></div>
+  <div class="header-tagline">Intelligence. Engineered.</div>
+  <div class="header-divider"></div>
+  <div class="header-title">Website Pre-Proposal for<br><strong>Point of Hope Apostolic Church</strong></div>
+  <div class="header-subtitle">Two approaches to your new online presence</div>
+</div>
+
+<div class="content">
+
+  <!-- INTRODUCTION -->
+  <div class="section">
+    <h2>Hello, Pastor Gossage</h2>
+    <p>Steve Stock connected us with Point of Hope, and we're grateful for the introduction. After reviewing your current website, we've put together two options for building a modern, mobile-friendly site that reflects the spirit of your church and makes it easy for visitors to find you and get connected.</p>
+    <p>We want you to have a clear picture of what each approach includes so you can choose the one that fits best. Both options include our referral discount (from Steve) and our religious institution discount.</p>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- WHAT WE FOUND -->
+  <div class="section">
+    <h2>What We Found</h2>
+    <p>Your current website at pointofhopechurch.com has served its purpose, but there are several issues turning visitors away:</p>
+    <ul>
+      <li><strong>Not mobile-responsive</strong> -- The site does not adapt to phones or tablets. Over 60% of web traffic now comes from mobile devices.</li>
+      <li><strong>Broken functionality</strong> -- JavaScript errors and mixed content warnings are degrading the user experience.</li>
+      <li><strong>Dead links</strong> -- Several "Read More" buttons link to nowhere.</li>
+      <li><strong>No Facebook integration</strong> -- Despite an active social media presence, there is no connection between your Facebook page and website.</li>
+      <li><strong>No pastor or leadership section</strong> -- Visitors cannot easily learn about who leads the church.</li>
+      <li><strong>Hard to find on Google</strong> -- No SEO setup means people searching "church near me" in your area are less likely to find you.</li>
+    </ul>
+  </div>
+
+  <!-- YOUR OPTIONS -->
+  <div class="section page-break">
+    <h2>Your Options</h2>
+    <p>We've put together two approaches. Both solve the core issues above. The difference is in depth, SEO, and how much room you have to grow.</p>
+
+    <div class="options-grid">
+      <!-- OPTION A: STARTER -->
+      <div class="option-card">
+        <div class="option-name">Web Starter</div>
+        <div class="option-tagline">Clean, focused, single-page</div>
+        <div class="option-price"><span class="original">$2,200</span>$1,200</div>
+        <div class="option-price-note">After $1,000 in discounts</div>
+        <ul class="option-features">
+          <li>Single-page scrollable design</li>
+          <li>All 9 sections (hero, about, services, pastor, ministries, etc.)</li>
+          <li>Mobile-responsive layout</li>
+          <li>Facebook feed integration</li>
+          <li>Google Maps embed</li>
+          <li>Click-to-call phone links</li>
+          <li>Basic SEO (meta tags, titles)</li>
+          <li>2 rounds of design revisions</li>
+          <li>1-2 week delivery</li>
+        </ul>
+      </div>
+
+      <!-- OPTION B: PROFESSIONAL -->
+      <div class="option-card recommended">
+        <div class="option-badge">Recommended</div>
+        <div class="option-name">Web Professional</div>
+        <div class="option-tagline">Full site with SEO and growth tools</div>
+        <div class="option-price"><span class="original">$3,500</span>$2,500</div>
+        <div class="option-price-note">After $1,000 in discounts</div>
+        <ul class="option-features">
+          <li class="highlight">Up to 10 dedicated pages</li>
+          <li>Dedicated pages for each ministry</li>
+          <li>Punto de Esperanza gets its own page</li>
+          <li>Mobile-responsive layout</li>
+          <li>Facebook feed integration</li>
+          <li>Google Maps embed</li>
+          <li>Click-to-call phone links</li>
+          <li class="extra">Full SEO (schema markup, sitemap, robots.txt)</li>
+          <li class="extra">Google Business Profile setup</li>
+          <li class="extra">AI-assisted copywriting for all pages</li>
+          <li class="extra">Google Analytics + Search Console</li>
+          <li class="extra">Unlimited design revisions</li>
+          <li>2-3 week delivery</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPARISON -->
+  <div class="section page-break">
+    <h2>Side-by-Side Comparison</h2>
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th>Starter</th>
+          <th>Professional</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Pages</td>
+          <td>1 (scrollable)</td>
+          <td>Up to 10</td>
+        </tr>
+        <tr>
+          <td>Mobile-responsive</td>
+          <td><span class="check">&check;</span></td>
+          <td><span class="check">&check;</span></td>
+        </tr>
+        <tr>
+          <td>Facebook integration</td>
+          <td><span class="check">&check;</span></td>
+          <td><span class="check">&check;</span></td>
+        </tr>
+        <tr>
+          <td>Google Maps</td>
+          <td><span class="check">&check;</span></td>
+          <td><span class="check">&check;</span></td>
+        </tr>
+        <tr>
+          <td>Basic SEO (meta tags, titles)</td>
+          <td><span class="check">&check;</span></td>
+          <td><span class="check">&check;</span></td>
+        </tr>
+        <tr>
+          <td>Full SEO (schema, sitemap, robots.txt)</td>
+          <td><span class="dash">&mdash;</span></td>
+          <td><span class="check">&check;</span></td>
+        </tr>
+        <tr>
+          <td>Google Business Profile setup</td>
+          <td><span class="dash">&mdash;</span></td>
+          <td><span class="check">&check;</span></td>
+        </tr>
+        <tr>
+          <td>Google Analytics + Search Console</td>
+          <td><span class="dash">&mdash;</span></td>
+          <td><span class="check">&check;</span></td>
+        </tr>
+        <tr>
+          <td>AI-assisted copywriting</td>
+          <td><span class="dash">&mdash;</span></td>
+          <td><span class="check">&check;</span></td>
+        </tr>
+        <tr>
+          <td>Dedicated ministry pages</td>
+          <td><span class="dash">&mdash;</span></td>
+          <td><span class="check">&check;</span></td>
+        </tr>
+        <tr>
+          <td>Punto de Esperanza page</td>
+          <td>Section on main page</td>
+          <td>Full dedicated page</td>
+        </tr>
+        <tr>
+          <td>Design revisions</td>
+          <td>2 rounds</td>
+          <td>Unlimited</td>
+        </tr>
+        <tr>
+          <td>Delivery</td>
+          <td>1-2 weeks</td>
+          <td>2-3 weeks</td>
+        </tr>
+        <tr>
+          <td><strong>Price (after discounts)</strong></td>
+          <td><strong>$1,200</strong></td>
+          <td><strong>$2,500</strong></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- WHY PROFESSIONAL -->
+  <div class="section">
+    <h2>Why We Recommend Professional</h2>
+    <p>Either option is a massive upgrade over your current site. But for a church with as much going on as Point of Hope, the Professional approach gives you meaningful advantages:</p>
+    <ul>
+      <li><strong>Google Business Profile</strong> -- When someone searches "church near me" or "apostolic church Indianapolis," your Google listing is what shows up first. We set up and optimize your profile so people find you.</li>
+      <li><strong>Dedicated ministry pages</strong> -- Punto de Esperanza, youth ministry, Sunday School, and outreach each get their own space to tell their story instead of sharing a single scroll section.</li>
+      <li><strong>Analytics</strong> -- You'll be able to see how many people visit your site, where they come from, and what they're looking for. This helps you understand your community's online behavior.</li>
+      <li><strong>Unlimited revisions</strong> -- Churches often involve multiple stakeholders. With unlimited revisions, you can gather input from leadership without worrying about a revision cap.</li>
+      <li><strong>AI-assisted copywriting</strong> -- We write all your page content for you using AI tools, so you don't have to worry about what to say on each page. You review and approve, we handle the writing.</li>
+    </ul>
+    <p style="font-size: 14px; color: #666;">At $2,500 after discounts, the Professional option is $1,300 more than Starter but includes tools and setup that would cost significantly more if added later.</p>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- PAYMENT -->
+  <div class="section">
+    <h2>Payment</h2>
+    <p>Both options follow the same payment structure. No hidden fees, no surprises.</p>
+
+    <div class="payment-box">
+      <div class="payment-label">Web Starter -- $1,200</div>
+      <table>
+        <tr>
+          <td><strong>Deposit (50%)</strong></td>
+          <td style="text-align: right;">$600 -- due before work begins</td>
+        </tr>
+        <tr>
+          <td><strong>Final Payment (50%)</strong></td>
+          <td style="text-align: right;">$600 -- due at delivery</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="payment-box">
+      <div class="payment-label">Web Professional -- $2,500</div>
+      <table>
+        <tr>
+          <td><strong>Deposit (40%)</strong></td>
+          <td style="text-align: right;">$1,000 -- due before work begins</td>
+        </tr>
+        <tr>
+          <td><strong>Midpoint (30%)</strong></td>
+          <td style="text-align: right;">$750 -- due at design approval</td>
+        </tr>
+        <tr>
+          <td><strong>Final Payment (30%)</strong></td>
+          <td style="text-align: right;">$750 -- due at delivery</td>
+        </tr>
+      </table>
+    </div>
+
+    <p style="font-size: 13px; color: #666; margin-top: 12px;">Monthly maintenance ($100/mo for hosting, SSL, security, and minor updates) is waived for Point of Hope as a religious institution.</p>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- HOW WE WORK -->
+  <div class="section">
+    <h2>How We Work</h2>
+    <div class="timeline-item">
+      <div class="timeline-number">1</div>
+      <div class="timeline-text"><strong>Discovery</strong> -- We gather your content, photos, logo, and any specific goals or preferences you have for the site.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-number">2</div>
+      <div class="timeline-text"><strong>Design</strong> -- We present a homepage mockup using your green and gold branding for review and feedback.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-number">3</div>
+      <div class="timeline-text"><strong>Build</strong> -- Full site development with mobile-responsive design, fast loading, and all agreed-upon features.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-number">4</div>
+      <div class="timeline-text"><strong>Review</strong> -- You review the site and request any changes. Starter includes 2 revision rounds; Professional includes unlimited.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-number">5</div>
+      <div class="timeline-text"><strong>Launch</strong> -- We go live, finalize SEO setup, and hand off everything to you with documentation.</div>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- NEXT STEPS -->
+  <div class="next-steps">
+    <h2>Next Steps</h2>
+    <ol>
+      <li><strong>Let us know which option interests you</strong> -- Starter or Professional. We're happy to answer any questions about either.</li>
+      <li><strong>We'll send a formal proposal</strong> with your chosen option, ready to review and sign online.</li>
+      <li><strong>Work begins within 2 business days</strong> of receiving the deposit and content.</li>
+    </ol>
+  </div>
+
+  <!-- TERMS -->
+  <div class="terms">
+    <h3>Note</h3>
+    <p>This is a pre-proposal to help you evaluate your options. A formal proposal with full terms will be provided once you've selected your preferred approach. Pricing is valid for 30 days. Both options include the $500 referral discount (Steve Stock) and $500 religious institution discount.</p>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="signature">
+    <strong>Eric Lefler</strong>
+    Founder, OphidianAI<br>
+    <span>eric.lefler@ophidianai.com | Columbus, IN</span>
+  </div>
+  <div class="footer-brand">
+    <div class="logo">Ophidian<span class="ai">AI</span></div>
+    <div class="tagline">Intelligence. Engineered.</div>
+  </div>
+</div>
+
+</body>
+</html>
