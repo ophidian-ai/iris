@@ -1659,7 +1659,7 @@ Process pending Iris tasks queued by the server-side onboarding pipeline.
 - Create `point-of-contact/contact.md` from template
 
 ### `tracker_update`
-- Update `revenue/lead-generation/prospect-tracker.md` -- set status to "Closed Won"
+- Update `sales/lead-generation/prospect-tracker.md` -- set status to "Closed Won"
 - Update Google Sheet via GWS CLI if applicable
 
 ### `decision_log`

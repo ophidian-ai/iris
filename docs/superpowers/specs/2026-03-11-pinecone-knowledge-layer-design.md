@@ -176,9 +176,9 @@ One-time script to index all existing data.
 
 | Namespace | Source | Estimated Records |
 |---|---|---|
-| `prospects` | `revenue/lead-generation/prospects/*/README.md`, `*/research/technical-audit.md`, `*/research/score-card.md` | ~60 |
-| `outreach` | `revenue/lead-generation/prospects/*/outreach/*.txt` | ~40 |
-| `operations` | `operations/references/sops/*.md`, `operations/references/pricing-structure.md`, `operations/references/niche-offer-templates.md`, `operations/templates/*.md`, `revenue/lead-generation/lead-sources.md` | ~20 |
+| `prospects` | `sales/lead-generation/prospects/*/README.md`, `*/research/technical-audit.md`, `*/research/score-card.md` | ~60 |
+| `outreach` | `sales/lead-generation/prospects/*/outreach/*.txt` | ~40 |
+| `operations` | `operations/references/sops/*.md`, `operations/references/pricing-structure.md`, `operations/references/niche-offer-templates.md`, `operations/templates/*.md`, `sales/lead-generation/lead-sources.md` | ~20 |
 | `decisions` | `operations/decisions/log.md` (split by entry) | ~10 |
 | `agent-memory` | `persistent-memory/**/*.md` (excluding _index.md and .obsidian/) | ~14 |
 | `research` | `.firecrawl/cold-leads/*.md`, `.firecrawl/prospect-research/*.md` (skip JSON) | ~50 |

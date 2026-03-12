@@ -63,7 +63,7 @@ shared/                         -- Cross-department resources
 | `context/` | `iris/context/` |
 | `saved-conversations/` | `iris/saved-conversations/` |
 | `reports/briefings/` | `iris/reports/briefings/` |
-| `lead-generation/` | `revenue/lead-generation/` |
+| `lead-generation/` | `sales/lead-generation/` |
 | `projects/active-projects/` | `revenue/projects/active/` |
 | `marketing/` | `marketing/content/` |
 | `decisions/` | `operations/decisions/` |

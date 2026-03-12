@@ -184,7 +184,18 @@ ul li::before { content: ''; position: absolute; left: 0; top: 12px; width: 7px;
 }
 
 /* Page break hints for PDF generation */
-.page-break { page-break-before: always; }
+.page-break { page-break-before: always; padding-top: 0.5in; }
+
+/* Last page: flex layout pushes footer to bottom */
+.last-page {
+  page-break-before: always;
+  padding-top: 0.5in;
+  min-height: 11in;
+  display: flex;
+  flex-direction: column;
+}
+.last-page-content { flex: 0 0 auto; padding: 0 40px; }
+.last-page .footer { margin-top: auto; }
 </style>
 </head>
 <body>
@@ -360,10 +371,8 @@ ul li::before { content: ''; position: absolute; left: 0; top: 12px; width: 7px;
     </table>
   </div>
 
-  <div class="section-divider"></div>
-
   <!-- WHY PROFESSIONAL -->
-  <div class="section">
+  <div class="section page-break">
     <h2>Why We Recommend Professional</h2>
     <p>Either option is a massive upgrade over your current site. But for a church with as much going on as Point of Hope, the Professional approach gives you meaningful advantages:</p>
     <ul>
@@ -375,8 +384,6 @@ ul li::before { content: ''; position: absolute; left: 0; top: 12px; width: 7px;
     </ul>
     <p style="font-size: 14px; color: #666;">At $2,500 after discounts, the Professional option is $1,300 more than Starter but includes tools and setup that would cost significantly more if added later.</p>
   </div>
-
-  <div class="section-divider"></div>
 
   <!-- PAYMENT -->
   <div class="section">
@@ -418,63 +425,67 @@ ul li::before { content: ''; position: absolute; left: 0; top: 12px; width: 7px;
     <p style="font-size: 13px; color: #666; margin-top: 12px;">Monthly maintenance ($100/mo for hosting, SSL, security, and minor updates) is waived for Point of Hope as a religious institution.</p>
   </div>
 
-  <div class="section-divider"></div>
-
-  <!-- HOW WE WORK -->
-  <div class="section">
-    <h2>How We Work</h2>
-    <div class="timeline-item">
-      <div class="timeline-number">1</div>
-      <div class="timeline-text"><strong>Discovery</strong> -- We gather your content, photos, logo, and any specific goals or preferences you have for the site.</div>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-number">2</div>
-      <div class="timeline-text"><strong>Design</strong> -- We present a homepage mockup using your green and gold branding for review and feedback.</div>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-number">3</div>
-      <div class="timeline-text"><strong>Build</strong> -- Full site development with mobile-responsive design, fast loading, and all agreed-upon features.</div>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-number">4</div>
-      <div class="timeline-text"><strong>Review</strong> -- You review the site and request any changes. Starter includes 2 revision rounds; Professional includes unlimited.</div>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-number">5</div>
-      <div class="timeline-text"><strong>Launch</strong> -- We go live, finalize SEO setup, and hand off everything to you with documentation.</div>
-    </div>
-  </div>
-
-  <div class="section-divider"></div>
-
-  <!-- NEXT STEPS -->
-  <div class="next-steps">
-    <h2>Next Steps</h2>
-    <ol>
-      <li><strong>Let us know which option interests you</strong> -- Starter or Professional. We're happy to answer any questions about either.</li>
-      <li><strong>We'll send a formal proposal</strong> with your chosen option, ready to review and sign online.</li>
-      <li><strong>Work begins within 2 business days</strong> of receiving the deposit and content.</li>
-    </ol>
-  </div>
-
-  <!-- TERMS -->
-  <div class="terms">
-    <h3>Note</h3>
-    <p>This is a pre-proposal to help you evaluate your options. A formal proposal with full terms will be provided once you've selected your preferred approach. Pricing is valid for 30 days. Both options include the $500 referral discount (Steve Stock) and $500 religious institution discount.</p>
-  </div>
 
 </div>
 
-<!-- FOOTER -->
-<div class="footer">
-  <div class="signature">
-    <strong>Eric Lefler</strong>
-    Founder, OphidianAI<br>
-    <span>eric.lefler@ophidianai.com | Columbus, IN</span>
+<!-- LAST PAGE: flex container pushes footer to bottom -->
+<div class="last-page">
+  <div class="last-page-content">
+    <!-- HOW WE WORK -->
+    <div class="section">
+      <h2>How We Work</h2>
+      <div class="timeline-item">
+        <div class="timeline-number">1</div>
+        <div class="timeline-text"><strong>Discovery</strong> -- We gather your content, photos, logo, and any specific goals or preferences you have for the site.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-number">2</div>
+        <div class="timeline-text"><strong>Design</strong> -- We present a homepage mockup using your green and gold branding for review and feedback.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-number">3</div>
+        <div class="timeline-text"><strong>Build</strong> -- Full site development with mobile-responsive design, fast loading, and all agreed-upon features.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-number">4</div>
+        <div class="timeline-text"><strong>Review</strong> -- You review the site and request any changes. Starter includes 2 revision rounds; Professional includes unlimited.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-number">5</div>
+        <div class="timeline-text"><strong>Launch</strong> -- We go live, finalize SEO setup, and hand off everything to you with documentation.</div>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- NEXT STEPS -->
+    <div class="next-steps">
+      <h2>Next Steps</h2>
+      <ol>
+        <li><strong>Let us know which option interests you</strong> -- Starter or Professional. We're happy to answer any questions about either.</li>
+        <li><strong>We'll send a formal proposal</strong> with your chosen option, ready to review and sign online.</li>
+        <li><strong>Work begins within 2 business days</strong> of receiving the deposit and content.</li>
+      </ol>
+    </div>
+
+    <!-- TERMS -->
+    <div class="terms">
+      <h3>Note</h3>
+      <p>This is a pre-proposal to help you evaluate your options. A formal proposal with full terms will be provided once you've selected your preferred approach. Pricing is valid for 30 days. Both options include the $500 referral discount (Steve Stock) and $500 religious institution discount.</p>
+    </div>
   </div>
-  <div class="footer-brand">
-    <div class="logo">Ophidian<span class="ai">AI</span></div>
-    <div class="tagline">Intelligence. Engineered.</div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="signature">
+      <strong>Eric Lefler</strong>
+      Founder, OphidianAI<br>
+      <span>eric.lefler@ophidianai.com | Columbus, IN</span>
+    </div>
+    <div class="footer-brand">
+      <div class="logo">Ophidian<span class="ai">AI</span></div>
+      <div class="tagline">Intelligence. Engineered.</div>
+    </div>
   </div>
 </div>
 

@@ -146,7 +146,7 @@ node .claude/skills/gws-cli/scripts/send_staged.js
 node .claude/skills/gws-cli/scripts/send_staged.js --spacing 180
 ```
 
-Staging manifest: `revenue/lead-generation/staged-emails.json`
+Staging manifest: `sales/lead-generation/staged-emails.json`
 
 ### Check Prospect Replies
 

@@ -42,7 +42,7 @@ Each stage updates ClickUp and reports progress. If a stage fails for a specific
 **Process:**
 1. Use Firecrawl to search for businesses matching criteria
 2. For each business found, quick-evaluate their web presence
-3. Create prospect folders in `revenue/lead-generation/prospects/`
+3. Create prospect folders in `sales/lead-generation/prospects/`
 4. Save research summaries to each prospect's `research/initial-research.md`
 
 **ClickUp update:**
@@ -86,12 +86,12 @@ echo '{"name":"Outreach Pipeline: Scoring Complete","description":"Scored [X] le
 **Skill used:** `cold-email-outreach`
 
 **Process:**
-1. Read `revenue/lead-generation/template-rotation.md` to determine which templates are due
+1. Read `sales/lead-generation/template-rotation.md` to determine which templates are due
 2. Identify each prospect's type: Website, SEO, or Hybrid
 3. For SEO/Hybrid prospects: run competitive search first (Firecrawl search for "[service] in [city]")
 4. Pick the least-recently-used template within that category
 5. Draft the email following all cold email rules (plain text, under 80 words, 7th-grade level, no links)
-6. Save to `revenue/lead-generation/prospects/[slug]/outreach/cold-email.txt` and `cold-email.json`
+6. Save to `sales/lead-generation/prospects/[slug]/outreach/cold-email.txt` and `cold-email.json`
 7. Update template rotation tracker with the template used
 
 **ClickUp update:**
@@ -114,9 +114,9 @@ echo '{"name":"Outreach Pipeline: Drafts Ready","description":"Drafted [X] cold 
 **Process:**
 1. For each drafted email JSON file:
    ```bash
-   cat revenue/lead-generation/prospects/[slug]/outreach/cold-email.json | node .claude/skills/gws-cli/scripts/stage_email.js
+   cat sales/lead-generation/prospects/[slug]/outreach/cold-email.json | node .claude/skills/gws-cli/scripts/stage_email.js
    ```
-2. Each call creates a Gmail draft and adds to the staging manifest at `revenue/lead-generation/staged-emails.json`
+2. Each call creates a Gmail draft and adds to the staging manifest at `sales/lead-generation/staged-emails.json`
 3. Update Google Sheet pipeline: set status to "Outreach Staged" for each prospect
 
 **ClickUp update:**

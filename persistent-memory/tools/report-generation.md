@@ -10,7 +10,7 @@ triggers:
   - puppeteer
   - brand style
 created: 2026-03-10
-updated: 2026-03-10
+updated: 2026-03-11
 ---
 
 # Report Generation
@@ -68,11 +68,32 @@ node engineering/tools/generate-report-pdf.mjs \
   - Use `displayHeaderFooter: true` with teal line templates for header/footer rules
   - Adjust HTML padding to complement (reduce content padding since margins handle spacing)
 - **Page breaks:** ALWAYS include page break controls in HTML templates:
-  - Add `.page-break { page-break-before: always; }` CSS class
+  - Add `.page-break { page-break-before: always; padding-top: 0.5in; }` CSS class
   - Apply `break-inside: avoid` to cards, tables, payment boxes, footers
   - Place explicit `page-break` class on major section boundaries
   - After generating PDF, verify each page visually -- no content should bleed across page boundaries
   - Remove section dividers that precede a page break (redundant)
+- **Footer flush to page bottom (last page):**
+  - Do NOT use dynamic JS spacer calculations -- viewport positions don't account for CSS page breaks, so the math is always wrong
+  - Do NOT use `min-height` + flexbox on wrappers that span multiple pages -- Puppeteer breaks the container across pages, creating blank pages
+  - DO use a flex container scoped to only the last page's content:
+    ```css
+    .last-page {
+      page-break-before: always;
+      padding-top: 0.5in;
+      min-height: 11in;       /* exactly one Letter page */
+      display: flex;
+      flex-direction: column;
+    }
+    .last-page-content { flex: 0 0 auto; padding: 0 40px; }
+    .last-page .footer { margin-top: auto; }
+    ```
+  - The key: `min-height: 11in` works because the last page content is short enough to fit on one page. The flex layout pushes the footer to the bottom naturally.
+  - Move the footer OUT of `.content` and INTO `.last-page` so it participates in the flex layout
+- **Zero-margin PDF for full-bleed headers/footers:**
+  - Set Puppeteer margins to `{ top: 0, bottom: 0, left: 0, right: 0 }`
+  - Handle all spacing in CSS (padding on `.content`, `padding-top: 0.5in` on `.page-break`)
+  - Header and footer divs extend edge-to-edge with no clipping
 
 ## Report Sections (in order)
 

@@ -48,7 +48,7 @@ Automation setup: `operations/automation/outreach-scheduler.md`
 
 ## Template Rotation
 
-- Tracker: `revenue/lead-generation/template-rotation.md`
+- Tracker: `sales/lead-generation/template-rotation.md`
 - Three categories: Website (W1-W4), SEO (S1-S4), Hybrid (H1-H4)
 - Always pick least-recently-used within category
 - Never send same template to two prospects in same batch
@@ -63,6 +63,7 @@ Automation setup: `operations/automation/outreach-scheduler.md`
 - Keep warmup running during active campaigns
 - DNS required: SPF, DKIM, DMARC records
 - Target: 95%+ inbox placement before cold outreach
+- **Current status:** Warming up. No follow-ups or new cold outreach until after 2026-03-19.
 
 ## Lead Sources
 
@@ -76,7 +77,7 @@ Automation setup: `operations/automation/outreach-scheduler.md`
 
 - Emails staged as drafts -- never auto-sent
 - Eric always reviews before sending
-- Staged manifest: `revenue/lead-generation/staged-emails.json`
+- Staged manifest: `sales/lead-generation/staged-emails.json`
 - Pipeline fails gracefully with ClickUp notification
 
 ## Related

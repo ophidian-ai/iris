@@ -11,14 +11,14 @@
  * The script:
  *   1. Builds the MIME message
  *   2. Creates a Gmail draft via gws cli
- *   3. Appends to the staging manifest at revenue/lead-generation/staged-emails.json
+ *   3. Appends to the staging manifest at sales/lead-generation/staged-emails.json
  */
 
 const { execFileSync } = require("child_process");
 const fs = require("fs");
 const path = require("path");
 
-const MANIFEST_PATH = path.resolve(__dirname, "../../../revenue/lead-generation/staged-emails.json");
+const MANIFEST_PATH = path.resolve(__dirname, "../../../sales/lead-generation/staged-emails.json");
 
 function buildRawMessage({ to, cc, from, subject, body, html, inReplyTo, references }) {
   const contentType = html ? 'text/html; charset="UTF-8"' : 'text/plain; charset="UTF-8"';

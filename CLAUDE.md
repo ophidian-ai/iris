@@ -93,7 +93,8 @@ Iris (Chief of Staff) coordinates all agents from `.claude/agents/iris/AGENT.md`
 The project is organized by department:
 
 - `iris/` -- Context files, saved conversations, daily briefing reports
-- `revenue/` -- Lead generation and prospect pipeline
+- `sales/` -- Lead generation and prospect pipeline
+- `finance/` -- Expense tracking, invoicing, tax records, financial reports
 - `marketing/` -- Content drafts, social media, blog articles
 - `engineering/` -- Client delivery build shop: active projects, dev tools, references, templates, specs
 - `operations/` -- Decisions, SOPs, templates, references, reports
@@ -147,10 +148,10 @@ Memory + context files + decision log = Iris gets smarter over time without re-e
 
 ## Lead Generation
 
-Sales owns lead generation and the prospect pipeline (not project delivery -- that's Engineering). Prospect pipeline lives in `revenue/lead-generation/`. The single source of truth for pipeline status is `revenue/lead-generation/prospect-tracker.md`.
+Sales owns lead generation and the prospect pipeline (not project delivery -- that's Engineering). Prospect pipeline lives in `sales/lead-generation/`. The single source of truth for pipeline status is `sales/lead-generation/prospect-tracker.md`.
 
-- `revenue/lead-generation/prospects/` -- Individual prospect folders with research, mockups, outreach emails, and assessments
-- `revenue/lead-generation/prospect-tracker.md` -- Pipeline table with status, dates, and follow-up schedule
+- `sales/lead-generation/prospects/` -- Individual prospect folders with research, mockups, outreach emails, and assessments
+- `sales/lead-generation/prospect-tracker.md` -- Pipeline table with status, dates, and follow-up schedule
 
 ## Projects
 

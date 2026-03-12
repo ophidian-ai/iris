@@ -118,12 +118,12 @@ Generate a **plain text** email. No HTML.
 
 Save the email content to:
 ```
-revenue/lead-generation/prospects/[business-name]/outreach/cold-email.txt
+sales/lead-generation/prospects/[business-name]/outreach/cold-email.txt
 ```
 
 Also save the send-ready JSON to:
 ```
-revenue/lead-generation/prospects/[business-name]/outreach/cold-email.json
+sales/lead-generation/prospects/[business-name]/outreach/cold-email.json
 ```
 
 The JSON uses `body` (not `html`) to ensure plain text sending. Include `prospect` and `template` for tracking:
@@ -145,10 +145,10 @@ Cold emails are **staged as Gmail drafts**, not sent immediately. Eric reviews t
 
 After writing the JSON file, stage it as a Gmail draft:
 ```bash
-cat revenue/lead-generation/prospects/[business-name]/outreach/cold-email.json | node .claude/skills/gws-cli/scripts/stage_email.js
+cat sales/lead-generation/prospects/[business-name]/outreach/cold-email.json | node .claude/skills/gws-cli/scripts/stage_email.js
 ```
 
-This creates a draft in Eric's Gmail and adds it to the staging manifest at `revenue/lead-generation/staged-emails.json`.
+This creates a draft in Eric's Gmail and adds it to the staging manifest at `sales/lead-generation/staged-emails.json`.
 
 ### Step 2: Repeat for All Prospects
 
@@ -178,15 +178,15 @@ node .claude/skills/gws-cli/scripts/send_staged.js --dry-run
 ### Step 5: Post-Send Updates
 
 After sending, update:
-- **Template rotation tracker** (`revenue/lead-generation/template-rotation.md`) -- date, count, prospect
+- **Template rotation tracker** (`sales/lead-generation/template-rotation.md`) -- date, count, prospect
 - **Google Sheet pipeline** (Sheet ID: `1FJOPS3ABR2BQtFOn4cUAGLZzIYukKbPozK_t_m7Dwg0`) -- set Status to "Outreach Sent", write Outreach Date
-- **Prospect tracker backup** (`revenue/lead-generation/prospect-tracker.md`)
+- **Prospect tracker backup** (`sales/lead-generation/prospect-tracker.md`)
 
 ## Direct Send (Override)
 
 If Eric wants to skip staging and send immediately:
 ```bash
-cat revenue/lead-generation/prospects/[business-name]/outreach/cold-email.json | node .claude/skills/gws-cli/scripts/build_raw_email.js | gws gmail users messages send --params '{"userId":"me"}' --json @-
+cat sales/lead-generation/prospects/[business-name]/outreach/cold-email.json | node .claude/skills/gws-cli/scripts/build_raw_email.js | gws gmail users messages send --params '{"userId":"me"}' --json @-
 ```
 
 Only use direct send when Eric explicitly asks for it.
@@ -230,7 +230,7 @@ Templates are organized by prospect type: Website (W1-W4), SEO (S1-S4), and Hybr
 
 ### How Rotation Works
 
-1. Before drafting, read `revenue/lead-generation/template-rotation.md`
+1. Before drafting, read `sales/lead-generation/template-rotation.md`
 2. Identify the prospect type: **Website**, **SEO**, or **Hybrid**
 3. Pick the template with the oldest "Last Used" date within that category
 4. Draft the email using that template's pattern
@@ -566,7 +566,7 @@ The offer for SEO prospects is always a competitive positioning report:
 
 ## Knowledge Base
 
-After drafting the cold email and saving to `revenue/lead-generation/prospects/[slug]/outreach/`, index it:
+After drafting the cold email and saving to `sales/lead-generation/prospects/[slug]/outreach/`, index it:
 
 1. Upsert the email:
 
@@ -578,7 +578,7 @@ Parameters:
   records: [{
     "_id": "outreach/<prospect-slug>/<email-filename-without-ext>",
     "text": "<email content>",
-    "source_file": "revenue/lead-generation/prospects/<slug>/outreach/<filename>",
+    "source_file": "sales/lead-generation/prospects/<slug>/outreach/<filename>",
     "department": "revenue",
     "created_date": "<today>",
     "updated_date": "<today>",

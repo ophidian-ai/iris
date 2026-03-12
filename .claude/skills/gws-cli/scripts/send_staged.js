@@ -2,7 +2,7 @@
  * send_staged.js
  *
  * Sends all staged cold email drafts from the manifest with spacing between sends.
- * Reads revenue/lead-generation/staged-emails.json, sends each draft, and clears the manifest.
+ * Reads sales/lead-generation/staged-emails.json, sends each draft, and clears the manifest.
  *
  * Usage:
  *   node send_staged.js                  # Send all staged emails (5min spacing)
@@ -15,7 +15,7 @@ const { execFileSync } = require("child_process");
 const fs = require("fs");
 const path = require("path");
 
-const MANIFEST_PATH = path.resolve(__dirname, "../../../revenue/lead-generation/staged-emails.json");
+const MANIFEST_PATH = path.resolve(__dirname, "../../../sales/lead-generation/staged-emails.json");
 const DEFAULT_SPACING_SEC = 300; // 5 minutes
 
 function loadManifest() {

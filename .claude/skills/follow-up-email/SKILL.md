@@ -63,14 +63,14 @@ Generate an HTML email using the OphidianAI branded template:
 
 Save the HTML file to:
 ```
-revenue/lead-generation/prospects/[business-name]/outreach/follow-up-[number].html
+sales/lead-generation/prospects/[business-name]/outreach/follow-up-[number].html
 ```
 
 ## Sending
 
 1. Write a JSON file with `to`, `subject`, `html`, and `threadId` fields:
    ```
-   revenue/lead-generation/prospects/[business-name]/outreach/follow-up-[number].json
+   sales/lead-generation/prospects/[business-name]/outreach/follow-up-[number].json
    ```
 
 2. Send a test email first (use `to: eric.lefler@ophidianai.com`):
@@ -80,10 +80,10 @@ revenue/lead-generation/prospects/[business-name]/outreach/follow-up-[number].ht
 
 3. After Eric confirms, update the JSON with the prospect's email and send:
    ```bash
-   cat revenue/lead-generation/prospects/[business-name]/outreach/follow-up-[number].json | node .claude/skills/gws-cli/scripts/build_raw_email.js | gws gmail users messages send --params '{"userId":"me"}' --json @-
+   cat sales/lead-generation/prospects/[business-name]/outreach/follow-up-[number].json | node .claude/skills/gws-cli/scripts/build_raw_email.js | gws gmail users messages send --params '{"userId":"me"}' --json @-
    ```
 
-4. Update the **Google Sheet pipeline** (Sheet ID: `1FJOPS3ABR2BQtFOn4cUAGLZzIYukKbPozK_t_m7Dwg0`) -- set Status to "Follow-Up Sent", write the FU date in the appropriate column (O for FU1, P for FU2, Q for FU3). Also update `revenue/lead-generation/prospect-tracker.md` as backup.
+4. Update the **Google Sheet pipeline** (Sheet ID: `1FJOPS3ABR2BQtFOn4cUAGLZzIYukKbPozK_t_m7Dwg0`) -- set Status to "Follow-Up Sent", write the FU date in the appropriate column (O for FU1, P for FU2, Q for FU3). Also update `sales/lead-generation/prospect-tracker.md` as backup.
 
 ### Getting the threadId
 
@@ -136,7 +136,7 @@ Parameters:
   records: [{
     "_id": "outreach/<prospect-slug>/<followup-filename-without-ext>",
     "text": "<follow-up email content>",
-    "source_file": "revenue/lead-generation/prospects/<slug>/outreach/<filename>",
+    "source_file": "sales/lead-generation/prospects/<slug>/outreach/<filename>",
     "department": "revenue",
     "created_date": "<today>",
     "updated_date": "<today>",

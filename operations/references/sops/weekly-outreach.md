@@ -13,7 +13,7 @@ Standard operating procedure for the weekly cold outreach cycle. Run every week 
 | Wednesday | Send staged batch             | 8-10 AM | `node .claude/skills/gws-cli/scripts/send_staged.js` |
 | Thursday  | Check for replies             | Morning | Morning coffee flags prospect replies    |
 | Thursday  | Deliver offers to responders  | Morning | `/offer-delivery` for each reply         |
-| Friday    | Review template performance   | Morning | Check `revenue/lead-generation/template-rotation.md` |
+| Friday    | Review template performance   | Morning | Check `sales/lead-generation/template-rotation.md` |
 | Friday    | Plan follow-ups for next week | Afternoon| `/follow-up-email` for non-responders    |
 
 ## Volume Targets
@@ -48,7 +48,7 @@ This chains research, scoring, drafting, and staging automatically.
 3. For SEO/hybrid prospects, the skill runs a competitive search first
 4. Each email is staged as a Gmail draft (not sent)
 5. Review all drafts in Gmail -- edit anything that doesn't sound right
-6. All emails saved to `revenue/lead-generation/prospects/[slug]/outreach/`
+6. All emails saved to `sales/lead-generation/prospects/[slug]/outreach/`
 
 ## Wednesday: Send
 
@@ -76,7 +76,7 @@ This chains research, scoring, drafting, and staging automatically.
 
 ## Friday: Review and Plan
 
-1. Check template performance in `revenue/lead-generation/template-rotation.md`
+1. Check template performance in `sales/lead-generation/template-rotation.md`
    - Which templates are getting replies?
    - Any template with 10+ sends and 0 replies needs replacement
 2. Check pipeline for prospects approaching follow-up windows:
