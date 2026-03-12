@@ -85,6 +85,37 @@ gws gmail +triage --query '"receipt" OR "invoice" OR "payment confirmation" newe
 
 If new receipts are found, run the expense-tracker skill's extract and log steps (Steps 2-4 from `.claude/skills/expense-tracker/SKILL.md`). Include a one-liner in the briefing if expenses were logged. If none found, skip silently.
 
+**Knowledge Base -- Context Enrichment:**
+
+Query Pinecone for context relevant to today's briefing. Run these in parallel with other Step 1 data gathering:
+
+1. Recent decisions:
+```
+Tool: mcp__plugin_pinecone_pinecone__search-records
+Parameters:
+  name: "ophidianai-kb"
+  namespace: "decisions"
+  query.inputs.text: "recent business decisions priorities"
+  query.topK: 3
+```
+
+2. Hot prospects (if any prospects have status "Replied" or "Follow-Up Due"):
+```
+Tool: mcp__plugin_pinecone_pinecone__search-records
+Parameters:
+  name: "ophidianai-kb"
+  namespace: "outreach"
+  query.inputs.text: "<prospect name> outreach history"
+  query.topK: 3
+```
+
+3. Use retrieved context to enrich the Recommendations section (Step 4). For example:
+   - If a decision about pricing was made recently, factor it into proposal recommendations
+   - If outreach history shows a pattern (e.g., certain industries respond better), mention it
+   - If a prospect's full history is available, provide richer follow-up recommendations
+
+If Pinecone is unavailable, skip silently. The briefing must never fail because of a knowledge base query.
+
 **AI News -- Firecrawl:**
 Use the Firecrawl skill to search for 2-3 of these topics (rotate daily):
 
