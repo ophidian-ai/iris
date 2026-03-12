@@ -16,6 +16,7 @@ updated: 2026-03-10
 - [[gws-cli]] -- Google Workspace CLI: auth, APIs, skill location, expense sheet ID
 - [[web-builder-skill]] -- Web builder: 6-phase pipeline, section library approach
 - [[report-generation]] -- PDF reports: shared generator, templates, brand style, section order
+- [[pinecone-knowledge-layer]] -- Pinecone index config, namespaces, skill location, stale record policy
 
 ## Operations
 
