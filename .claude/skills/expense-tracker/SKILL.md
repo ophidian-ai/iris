@@ -1,6 +1,6 @@
 ---
 name: expense-tracker
-description: Scan Gmail for receipts, invoices, and subscription confirmations, then log expenses to Google Sheets for tax deduction tracking. Use when Eric says "check for receipts", "log expenses", "review spending", "tax prep", "what am I paying for", or during daily/monthly/year-end financial reviews. Also triggers during morning coffee for new receipt detection.
+description: Scan Gmail for receipts, invoices, and subscription confirmations, then log expenses to Google Sheets for tax deduction tracking. Invoked by the Accounting & Tax agent (Finance department). Do not invoke directly -- use the Accounting & Tax agent for expense-related tasks.
 ---
 
 # Expense Tracker

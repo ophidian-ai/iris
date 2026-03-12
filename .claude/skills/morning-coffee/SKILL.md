@@ -85,6 +85,26 @@ gws gmail +triage --query '"receipt" OR "invoice" OR "payment confirmation" newe
 
 If new receipts are found, run the expense-tracker skill's extract and log steps (Steps 2-4 from `.claude/skills/expense-tracker/SKILL.md`). Include a one-liner in the briefing if expenses were logged. If none found, skip silently.
 
+**Financial Pulse (CFO):**
+
+Pull financial data from Google Sheets for the Financial Pulse section:
+
+```bash
+# Read Revenue tab for outstanding invoices
+gws sheets +read --spreadsheet '1pnf3ZUbBdWlTit_u69_S82t5Fg9gshQ2ja1yLrzrhbo' --range 'Revenue!A:I' --format json
+
+# Read Expenses tab for burn rate
+gws sheets +read --spreadsheet '1pnf3ZUbBdWlTit_u69_S82t5Fg9gshQ2ja1yLrzrhbo' --range 'Expenses!A:J' --format json
+```
+
+From the data, compute:
+- **Burn rate:** Sum of recurring monthly expenses from the Expenses tab
+- **Outstanding invoices:** Count and total where Status != "Paid" in Revenue tab
+- **Tax deadlines:** Check if any of these dates are within 30 days: April 15, June 15, September 15, January 15
+- **Cash position:** Total revenue (Paid invoices) minus total expenses (only show if revenue exists)
+
+If no revenue data exists yet, show burn rate and tax deadlines only. Skip the section entirely if no financial data has changed since last briefing.
+
 **Knowledge Base -- Context Enrichment:**
 
 Query Pinecone for context relevant to today's briefing. Run these in parallel with other Step 1 data gathering:
@@ -236,6 +256,7 @@ Inbox: {{UNREAD_COUNT}} unread{{REPLY_ALERT}}
 Calendar: {{EVENT_COUNT}} events today
 Tasks: {{TASKS_DUE}} due today, {{TASKS_OVERDUE}} overdue
 Outreach: {{STAGED_COUNT}} staged | {{TEMPLATE_PERFORMANCE}}
+Finance: ${{BURN_RATE}}/mo burn | {{OUTSTANDING_INVOICES}} outstanding{{TAX_DEADLINE_ALERT}}
 
 PDF saved to iris/reports/briefings/{{YYYY-MM-DD}}.pdf
 Email sent to eric.lefler@ophidianai.com

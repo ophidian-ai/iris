@@ -53,7 +53,7 @@ Skills are built organically as recurring workflows emerge. Don't create skills 
 
 Specialized agents organized by department. Invoke by name or by describing what you need.
 
-**Revenue Department** (`.claude/agents/revenue/`)
+**Sales Department** (`.claude/agents/sales/`)
 
 - **Sales Agent** -- Lead research, cold outreach, follow-ups, pipeline
 - **Onboarding Agent** -- Prospect lifecycle (research through handoff)
@@ -69,7 +69,13 @@ Specialized agents organized by department. Invoke by name or by describing what
 
 **Operations Department** (`.claude/agents/operations/`)
 
-- **Ops Agent** -- Project tracking, invoicing, proposals, SOPs, decision logging
+- **Ops Agent** -- Project tracking, proposals, SOPs, decision logging
+
+**Finance Department** (`.claude/agents/finance/`)
+
+- **CFO Agent** -- Financial oversight, cash flow, pricing analysis, budget planning
+- **Financial Ops Agent** -- Client invoicing, payment tracking, revenue logging
+- **Accounting & Tax Agent** -- Expense tracking, tax categorization, P&L, estimated taxes
 
 Agent definitions live in `.claude/agents/<department>/<agent>/AGENT.md`.
 Iris (Chief of Staff) coordinates all agents from `.claude/agents/iris/AGENT.md`.
@@ -141,7 +147,7 @@ Memory + context files + decision log = Iris gets smarter over time without re-e
 
 ## Lead Generation
 
-Revenue owns lead generation and the prospect pipeline (not project delivery -- that's Engineering). Prospect pipeline lives in `revenue/lead-generation/`. The single source of truth for pipeline status is `revenue/lead-generation/prospect-tracker.md`.
+Sales owns lead generation and the prospect pipeline (not project delivery -- that's Engineering). Prospect pipeline lives in `revenue/lead-generation/`. The single source of truth for pipeline status is `revenue/lead-generation/prospect-tracker.md`.
 
 - `revenue/lead-generation/prospects/` -- Individual prospect folders with research, mockups, outreach emails, and assessments
 - `revenue/lead-generation/prospect-tracker.md` -- Pipeline table with status, dates, and follow-up schedule
