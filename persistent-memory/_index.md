@@ -1,34 +1,34 @@
 ---
 tags:
   - system
-updated: 2026-03-10
+updated: 2026-03-11
 ---
 
-# Memory Vault Index
+# Persistent Memory Index
 
 ## Projects
 
-- [[ophidianai-website]] -- OphidianAI website + Iris repo: Next.js 15, Vercel, submodules, brand colors
-- [[bloomin-acres]] -- Bloomin' Acres: sourdough/produce site, Vercel, submodule workflow
+- `projects/ophidianai-website.md` -- OphidianAI website + Iris repo: Next.js 15, Vercel, submodules, brand colors
+- `projects/bloomin-acres.md` -- Bloomin' Acres: sourdough/produce site, Vercel, submodule workflow
 
 ## Tools
 
-- [[gws-cli]] -- Google Workspace CLI: auth, APIs, skill location, expense sheet ID
-- [[web-builder-skill]] -- Web builder: 6-phase pipeline, section library approach
-- [[report-generation]] -- PDF reports: shared generator, templates, brand style, section order
-- [[pinecone-knowledge-layer]] -- Pinecone index config, namespaces, skill location, stale record policy
+- `tools/gws-cli.md` -- Google Workspace CLI: auth, APIs, skill location, expense sheet ID
+- `tools/web-builder-skill.md` -- Web builder: 6-phase pipeline, section library approach
+- `tools/report-generation.md` -- PDF reports: shared generator, templates, brand style, section order
+- `tools/pinecone-knowledge-layer.md` -- Pinecone index config, namespaces, skill location, stale record policy
 
 ## Operations
 
-- [[email-rules]] -- Who sends from which address, thread matching rules
-- [[prospect-pipeline]] -- Google Sheet IDs, tabs, GWS CLI workarounds
-- [[pricing-and-services]] -- Service tiers, pricing, add-ons, margins, burn rate
-- [[client-agreements]] -- IP, payment terms, attribution, handoff deliverables
-- [[outreach-system]] -- Weekly cadence, volume targets, template rotation, warmup, lead sources
-- [[prospect-management]] -- Folder structure, scoring tiers, niche offers, pipeline statuses
-- [[launch-and-maintenance]] -- Go-live checklist, technical requirements, monthly maintenance
-- [[key-decisions]] -- Recent business decisions, department boundaries
+- `operations/email-rules.md` -- Who sends from which address, thread matching rules
+- `operations/prospect-pipeline.md` -- Google Sheet IDs, tabs, GWS CLI workarounds
+- `operations/pricing-and-services.md` -- Service tiers, pricing, add-ons, margins, burn rate
+- `operations/client-agreements.md` -- IP, payment terms, attribution, handoff deliverables
+- `operations/outreach-system.md` -- Weekly cadence, volume targets, template rotation, warmup, lead sources
+- `operations/prospect-management.md` -- Folder structure, scoring tiers, niche offers, pipeline statuses
+- `operations/launch-and-maintenance.md` -- Go-live checklist, technical requirements, monthly maintenance
+- `operations/key-decisions.md` -- Recent business decisions, department boundaries
 
 ## Preferences
 
-- [[eric-preferences]] -- Communication style, tool preferences, workspace conventions
+- `preferences/eric-preferences.md` -- Communication style, tool preferences, workspace conventions

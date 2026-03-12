@@ -23,7 +23,7 @@ updated: 2026-03-10
 
 ## Related
 
-- [[gws-cli]]
-- [[email-rules]]
-- [[prospect-management]]
-- [[outreach-system]]
+- `tools/gws-cli.md`
+- `operations/email-rules.md`
+- `operations/prospect-management.md`
+- `operations/outreach-system.md`

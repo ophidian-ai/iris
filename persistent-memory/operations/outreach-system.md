@@ -81,7 +81,7 @@ Automation setup: `operations/automation/outreach-scheduler.md`
 
 ## Related
 
-- [[prospect-management]]
-- [[email-rules]]
-- [[gws-cli]]
-- [[eric-preferences]]
+- `operations/prospect-management.md`
+- `operations/email-rules.md`
+- `tools/gws-cli.md`
+- `preferences/eric-preferences.md`

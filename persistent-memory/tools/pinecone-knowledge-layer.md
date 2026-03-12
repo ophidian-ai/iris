@@ -10,6 +10,7 @@ updated: 2026-03-11
 - **Namespaces:** prospects, outreach, operations, decisions, agent-memory, research, projects
 - **Skill:** `.claude/skills/knowledge-base/SKILL.md`
 - **Spec:** `docs/superpowers/specs/2026-03-11-pinecone-knowledge-layer-design.md`
+- **API Reference:** `operations/references/pinecone-reference.md` -- MCP tool signatures, filter ops, deletion patterns, doc links, context7 IDs
 - **Tier:** Free tier (100K vectors, 2GB). Upgrade when revenue justifies.
 - **API key:** In `.env` as `PINECONE_API_KEY`
 - **Auto-indexing:** Skills index data after producing it. See each skill's "Knowledge Base" section.
@@ -17,5 +18,5 @@ updated: 2026-03-11
 
 ## Related
 
-- [[web-builder-skill]] -- indexes project READMEs
-- [[prospect-pipeline]] -- prospects and outreach namespaces
+- `tools/web-builder-skill.md` -- indexes project READMEs
+- `operations/prospect-pipeline.md` -- prospects and outreach namespaces

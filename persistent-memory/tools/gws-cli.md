@@ -27,6 +27,6 @@ updated: 2026-03-10
 
 ## Related
 
-- [[email-rules]]
-- [[prospect-pipeline]]
-- [[outreach-system]]
+- `operations/email-rules.md`
+- `operations/prospect-pipeline.md`
+- `operations/outreach-system.md`

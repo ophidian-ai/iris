@@ -20,6 +20,9 @@ Unified vector knowledge layer for OphidianAI. Indexes data as skills produce it
 - **Embedding model:** `multilingual-e5-large` (integrated -- Pinecone embeds automatically)
 - **Field map:** `text` field is embedded. All other fields are searchable metadata.
 - **Design spec:** `docs/superpowers/specs/2026-03-11-pinecone-knowledge-layer-design.md`
+- **API reference:** `operations/references/pinecone-reference.md` -- MCP tool signatures, filter operators, deletion patterns, doc links, context7 IDs
+- **Latest docs:** Query context7 with library ID `/llmstxt/pinecone_io_llms-full_txt` before using unfamiliar Pinecone features
+- **All tool docs:** `operations/references/tool-documentation-index.md` -- context7 library IDs for every tool we use
 
 ## Namespaces
 
@@ -107,7 +110,7 @@ When creating or updating any file in `operations/references/sops/`, index it:
 
 ### Persistent Memory
 
-When creating or updating any note in `persistent-memory/` (except `_index.md` and `.obsidian/`), index it:
+When creating or updating any note in `persistent-memory/` (except `_index.md`), index it:
 
 - `_id`: `agent-memory/<relative-path-without-ext>` (e.g., `agent-memory/projects/bloomin-acres`)
 - `text`: note content (excluding frontmatter)
@@ -168,7 +171,7 @@ Use results as context injected into your reasoning. Do not show raw results to 
 | `outreach` | `revenue/lead-generation/prospects/*/outreach/*.txt` |
 | `operations` | `operations/references/sops/*.md`, `operations/references/pricing-structure.md`, `operations/references/niche-offer-templates.md`, `operations/templates/*.md`, `revenue/lead-generation/lead-sources.md` |
 | `decisions` | `operations/decisions/log.md` (split by `###` entry, use date as chunk ID) |
-| `agent-memory` | `persistent-memory/**/*.md` (exclude `_index.md` and `.obsidian/`) |
+| `agent-memory` | `persistent-memory/**/*.md` (exclude `_index.md`) |
 | `research` | `.firecrawl/cold-leads/*.md`, `.firecrawl/prospect-research/*.md` (skip `.json` files) |
 | `projects` | `engineering/projects/*/README.md`, `docs/superpowers/specs/*.md` |
 

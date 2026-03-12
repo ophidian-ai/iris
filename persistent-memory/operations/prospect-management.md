@@ -71,6 +71,6 @@ New Lead -> Researching -> Outreach Sent -> Follow-Up Sent -> Replied -> Offer D
 
 ## Related
 
-- [[prospect-pipeline]]
-- [[outreach-system]]
-- [[pricing-and-services]]
+- `operations/prospect-pipeline.md`
+- `operations/outreach-system.md`
+- `operations/pricing-and-services.md`

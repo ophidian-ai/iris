@@ -52,8 +52,8 @@ GBP setup SOP: `operations/references/sops/google-business-setup.md`
 
 ## Related
 
-- [[client-agreements]]
-- [[pricing-and-services]]
-- [[ophidianai-website]]
-- [[bloomin-acres]]
-- [[web-builder-skill]]
+- `operations/client-agreements.md`
+- `operations/pricing-and-services.md`
+- `projects/ophidianai-website.md`
+- `projects/bloomin-acres.md`
+- `tools/web-builder-skill.md`

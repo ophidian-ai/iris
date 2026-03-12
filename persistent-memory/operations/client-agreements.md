@@ -43,5 +43,5 @@ Handoff template: `operations/templates/client-handoff.md`
 
 ## Related
 
-- [[pricing-and-services]]
-- [[launch-and-maintenance]]
+- `operations/pricing-and-services.md`
+- `operations/launch-and-maintenance.md`
