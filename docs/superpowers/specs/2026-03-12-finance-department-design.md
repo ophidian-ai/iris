@@ -39,6 +39,8 @@ The existing `.claude/agents/revenue/` department is renamed to `.claude/agents/
 
 All references to "Revenue" as a department name updated across: CLAUDE.md, Iris AGENT.md, and any agent files.
 
+**Important:** Only `.claude/agents/revenue/` is renamed to `.claude/agents/sales/`. The `revenue/` data directory (lead generation, prospect tracker) is unchanged.
+
 ## Agent Specifications
 
 ### CFO Agent
@@ -83,7 +85,7 @@ All references to "Revenue" as a department name updated across: CLAUDE.md, Iris
   1. Expense tracking -- absorbs the existing expense-tracker skill. Scan Gmail for receipts, log to Google Sheets
   2. Tax categorization -- map every expense to the correct IRS Schedule C line
   3. Quarterly estimated taxes -- calculate estimated tax payments based on revenue minus deductions, remind Eric before deadlines (April 15, June 15, Sept 15, Jan 15)
-  4. P&L statements -- generate monthly profit & loss from revenue (Financial Ops data) and expenses
+  4. P&L statements -- generate monthly profit & loss by reading both the Revenue tab (Financial Ops) and Expenses tab. Accounting owns producing the P&L document; CFO reviews and references it in financial summaries
   5. Deduction optimization -- flag potential deductions Eric might be missing (home office, mileage, equipment)
   6. Year-end tax prep -- compile annual summary with totals by IRS category, flagged items for CPA review
   7. Financial tracker maintenance -- keep `operations/financial-tracker.md` current with burn rate, recurring/one-time expenses
@@ -121,12 +123,14 @@ Gmail receipts (automatic scanning)
 
 ### Morning Coffee
 
-CFO contributes a "Financial Pulse" section to the daily briefing:
+CFO contributes a "Financial Pulse" section to the daily briefing. Data is pulled from the Google Sheets expense/revenue tabs via GWS CLI during the morning coffee run. If no revenue data exists yet, show burn rate and tax deadlines only. Skip the section entirely if no financial data has changed since last briefing.
 
-- Current burn rate
-- Outstanding invoices (count and total)
+Contents:
+
+- Current burn rate (from Expenses tab)
+- Outstanding invoices -- count and total (from Revenue tab, where Status != "Paid")
 - Upcoming tax deadlines (within 30 days)
-- Cash position (if revenue exists)
+- Cash position (revenue minus expenses, only shown when revenue exists)
 
 ### Expense Tracker Skill
 
@@ -136,10 +140,18 @@ No changes to the skill itself. The Accounting & Tax agent becomes its primary u
 
 `operations/financial-tracker.md` continues to exist. Accounting & Tax agent keeps it updated. CFO reads it for summaries.
 
+### Expense Tracker Skill Trigger Routing
+
+The expense-tracker skill's frontmatter triggers ("check for receipts", "log expenses", etc.) overlap with the Accounting & Tax agent's triggers. To resolve: the skill is only invoked by the Accounting & Tax agent, never directly by Iris. Update the skill's frontmatter description to note: "Invoked by the Accounting & Tax agent. Do not invoke directly."
+
 ### Changes to Existing Agents
 
-- **Iris AGENT.md:** Add Finance > CFO to delegation rules. Update delegation line for financial tasks. Update Revenue references to Sales.
-- **Ops AGENT.md:** Remove invoicing from responsibilities. Keep proposals. Add handoff note: "Once a client signs, hand off to Finance > Financial Ops for invoicing and payment tracking."
+- **Iris AGENT.md:** Update delegation rules:
+  - Change: "Invoicing, proposals, SOPs, project tracking: Delegate to Operations > Ops Agent"
+  - To: "Proposals, SOPs, project tracking: Delegate to Operations > Ops Agent"
+  - Add: "Invoicing, payment tracking, expenses, taxes, financial reporting: Delegate to Finance > CFO Agent"
+  - Rename all "Revenue" department references to "Sales"
+- **Ops AGENT.md:** Remove invoicing from responsibilities (line 23). Keep proposals. Add handoff note: "Once a client signs, hand off to Finance > Financial Ops for invoicing and payment tracking." Update "Receives from" (line 13) to: "Iris (admin tasks), Onboarding Agent (proposals)" -- remove "/invoicing".
 - **CLAUDE.md:** Update agent hierarchy section to reflect Sales rename and new Finance department.
 
 ## Google Sheets Structure
@@ -150,7 +162,7 @@ Single spreadsheet (`1pnf3ZUbBdWlTit_u69_S82t5Fg9gshQ2ja1yLrzrhbo`) with tabs:
 |---|---|---|
 | Expenses | Accounting & Tax | Receipt/expense logging with IRS categories |
 | Revenue | Financial Ops | Invoice and payment tracking |
-| Summary | CFO | Monthly P&L snapshot (auto-referenced from other tabs) |
+| Summary | CFO | Monthly P&L snapshot -- written by CFO agent during monthly review via GWS CLI, not formula-driven |
 
 ## Future: QuickBooks Online Migration
 
@@ -175,10 +187,12 @@ Documented in CFO AGENT.md as a deferred initiative.
 
 ## Files to Modify
 
-1. `.claude/agents/iris/AGENT.md` -- add Finance delegation, rename Revenue to Sales
-2. `.claude/agents/operations/ops/AGENT.md` -- remove invoicing, add handoff note
+1. `.claude/agents/iris/AGENT.md` -- add Finance delegation, rename Revenue to Sales, update delegation rules per spec
+2. `.claude/agents/operations/ops/AGENT.md` -- remove invoicing from responsibilities, update "Receives from" line, add handoff note
 3. `CLAUDE.md` -- update agent hierarchy, rename Revenue to Sales, add Finance department
 4. `iris/context/team.md` -- update agent team list
+5. `.claude/skills/expense-tracker/SKILL.md` -- update frontmatter to note skill is invoked by Accounting & Tax agent only
+6. `.claude/skills/morning-coffee/SKILL.md` -- add Financial Pulse section sourced from CFO agent
 
 ## Files to Move
 
