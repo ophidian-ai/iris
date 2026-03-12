@@ -170,3 +170,29 @@ Update `revenue/lead-generation/prospect-tracker.md`:
 - If the prospect asks a question in their reply instead of a clear "yes," answer their question first and redeliver the offer. Do not skip straight to the deliverable.
 - If the prospect replies with interest but asks for something different than what was offered, adapt. Deliver what they actually want.
 - Log the interaction in the prospect's folder for future reference.
+
+## Knowledge Base
+
+After delivering the offer and logging the outcome, index it:
+
+1. Upsert the outcome record:
+
+```
+Tool: mcp__plugin_pinecone_pinecone__upsert-records
+Parameters:
+  name: "ophidianai-kb"
+  namespace: "outreach"
+  records: [{
+    "_id": "outreach/<prospect-slug>/offer-delivery",
+    "text": "<outcome summary -- what was offered, whether accepted, what was delivered>",
+    "source_file": "revenue/lead-generation/prospects/<slug>/outreach/offer-delivery.md",
+    "department": "revenue",
+    "created_date": "<today>",
+    "updated_date": "<today>",
+    "tags": ["<industry>", "offer-delivery", "<outcome: accepted|declined>"]
+  }]
+```
+
+2. Log: `Indexed to knowledge base: outreach/<prospect-slug>/offer-delivery`
+
+If indexing fails, log the error and continue.

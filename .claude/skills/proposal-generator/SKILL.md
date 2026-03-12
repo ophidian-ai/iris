@@ -127,3 +127,29 @@ Every proposal must include:
 - Payment schedule with exact amounts
 - Terms and conditions
 - Data access disclosure (GA4/Search Console viewer access for OphidianAI)
+
+## Knowledge Base
+
+After generating the proposal, index a summary:
+
+1. Upsert the proposal summary:
+
+```
+Tool: mcp__plugin_pinecone_pinecone__upsert-records
+Parameters:
+  name: "ophidianai-kb"
+  namespace: "prospects"
+  records: [{
+    "_id": "prospects/<prospect-slug>/proposal",
+    "text": "<proposal summary -- scope, pricing tier, services included, timeline>",
+    "source_file": "revenue/lead-generation/prospects/<slug>/proposal.md",
+    "department": "revenue",
+    "created_date": "<today>",
+    "updated_date": "<today>",
+    "tags": ["<industry>", "<service-tier>", "proposal"]
+  }]
+```
+
+2. Log: `Indexed to knowledge base: prospects/<prospect-slug>/proposal`
+
+If indexing fails, log the error and continue.

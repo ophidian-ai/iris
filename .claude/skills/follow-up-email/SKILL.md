@@ -121,3 +121,29 @@ I know things get busy. If a website update isn't on your radar right now, no wo
 
 Eric Lefler
 OphidianAI
+
+## Knowledge Base
+
+After drafting the follow-up email and saving, index it:
+
+1. Upsert the follow-up:
+
+```
+Tool: mcp__plugin_pinecone_pinecone__upsert-records
+Parameters:
+  name: "ophidianai-kb"
+  namespace: "outreach"
+  records: [{
+    "_id": "outreach/<prospect-slug>/<followup-filename-without-ext>",
+    "text": "<follow-up email content>",
+    "source_file": "revenue/lead-generation/prospects/<slug>/outreach/<filename>",
+    "department": "revenue",
+    "created_date": "<today>",
+    "updated_date": "<today>",
+    "tags": ["<industry>", "follow-up", "sequence-<N>"]
+  }]
+```
+
+2. Log: `Indexed to knowledge base: outreach/<prospect-slug>/<filename>`
+
+If indexing fails, log the error and continue.
