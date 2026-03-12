@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Point of Hope Apostolic Church | Experience Pentecost</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --green-primary: #3f831c;
+  --green-dark: #2d6114;
+  --green-light: #e8f5e3;
+  --gold-primary: #f0b012;
+  --gold-dark: #c8920e;
+  --gold-light: #fef8e8;
+  --text-dark: #1a1a1a;
+  --text-body: #4a4a4a;
+  --text-light: #6b6b6b;
+  --white: #ffffff;
+  --off-white: #fafaf8;
+  --border: #e8e8e8;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--text-body);
+  line-height: 1.6;
+  background: var(--white);
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4 { font-family: 'Playfair Display', Georgia, serif; color: var(--text-dark); line-height: 1.2; }
+
+a { text-decoration: none; color: inherit; transition: color 0.3s; }
+
+img { max-width: 100%; height: auto; }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+/* ============================================
+   HEADER / NAVIGATION
+   ============================================ */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(255,255,255,0.97);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  transition: box-shadow 0.3s;
+}
+
+header.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.logo-icon {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, var(--green-primary), var(--green-dark));
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold-primary);
+  font-size: 24px;
+  font-weight: 900;
+  font-family: 'Playfair Display', serif;
+}
+
+.logo-text h1 {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--green-primary);
+  line-height: 1.1;
+}
+
+.logo-text span {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-light);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+nav { display: flex; align-items: center; gap: 8px; }
+
+nav a {
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-body);
+  border-radius: 8px;
+  transition: all 0.3s;
+}
+
+nav a:hover { color: var(--green-primary); background: var(--green-light); }
+
+.nav-cta {
+  background: var(--green-primary) !important;
+  color: var(--white) !important;
+  font-weight: 600 !important;
+  padding: 10px 20px !important;
+}
+
+.nav-cta:hover { background: var(--green-dark) !important; }
+
+.mobile-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.mobile-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--text-dark);
+  margin: 5px 0;
+  transition: all 0.3s;
+  border-radius: 2px;
+}
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(165deg, #1a3a0e 0%, #2d5a18 35%, #3f831c 70%, #4a9622 100%);
+  overflow: hidden;
+  padding-top: 80px;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(240,176,18,0.15) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(255,255,255,0.05) 0%, transparent 50%);
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: linear-gradient(to top, var(--white), transparent);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 60px 24px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.hero-badge {
+  display: inline-block;
+  padding: 8px 20px;
+  background: rgba(240,176,18,0.2);
+  border: 1px solid rgba(240,176,18,0.4);
+  border-radius: 100px;
+  color: var(--gold-primary);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 32px;
+}
+
+.hero h2 {
+  font-size: clamp(42px, 6vw, 72px);
+  font-weight: 900;
+  color: var(--white);
+  margin-bottom: 24px;
+  line-height: 1.05;
+}
+
+.hero h2 em {
+  font-style: italic;
+  color: var(--gold-primary);
+}
+
+.hero p {
+  font-size: 18px;
+  color: rgba(255,255,255,0.85);
+  max-width: 560px;
+  margin: 0 auto 40px;
+  line-height: 1.7;
+}
+
+.hero-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 32px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s;
+  border: none;
+  font-family: 'Inter', sans-serif;
+}
+
+.btn-gold {
+  background: var(--gold-primary);
+  color: var(--text-dark);
+}
+
+.btn-gold:hover { background: var(--gold-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(240,176,18,0.4); }
+
+.btn-outline {
+  background: transparent;
+  color: var(--white);
+  border: 2px solid rgba(255,255,255,0.3);
+}
+
+.btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,0.1); }
+
+.hero-info {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  margin-top: 60px;
+  padding-top: 40px;
+  border-top: 1px solid rgba(255,255,255,0.15);
+}
+
+.hero-info-item {
+  text-align: center;
+  color: rgba(255,255,255,0.9);
+}
+
+.hero-info-item strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gold-primary);
+  margin-bottom: 4px;
+}
+
+.hero-info-item span { font-size: 13px; }
+
+/* ============================================
+   SECTION STYLING
+   ============================================ */
+section { padding: 100px 0; }
+
+.section-label {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--green-primary);
+  margin-bottom: 16px;
+}
+
+.section-title {
+  font-size: clamp(32px, 4vw, 48px);
+  margin-bottom: 20px;
+}
+
+.section-subtitle {
+  font-size: 17px;
+  color: var(--text-light);
+  max-width: 600px;
+  line-height: 1.7;
+}
+
+/* ============================================
+   WELCOME / ABOUT
+   ============================================ */
+.welcome { background: var(--white); }
+
+.welcome-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.welcome-image {
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+  background: linear-gradient(135deg, var(--green-light), #d4edcf);
+}
+
+.welcome-image-inner {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--green-primary) 0%, var(--green-dark) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  font-size: 64px;
+  opacity: 0.9;
+}
+
+.welcome-image::after {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  right: -20px;
+  width: 120px;
+  height: 120px;
+  background: var(--gold-primary);
+  border-radius: 20px;
+  z-index: -1;
+}
+
+.welcome-text p {
+  font-size: 16px;
+  margin-bottom: 16px;
+  line-height: 1.8;
+}
+
+.welcome-verse {
+  margin-top: 32px;
+  padding: 24px;
+  background: var(--gold-light);
+  border-left: 4px solid var(--gold-primary);
+  border-radius: 0 12px 12px 0;
+  font-style: italic;
+  color: var(--text-dark);
+}
+
+.welcome-verse cite {
+  display: block;
+  margin-top: 8px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--gold-dark);
+}
+
+/* ============================================
+   SCHEDULE & EVENTS
+   ============================================ */
+.schedule { background: var(--off-white); }
+
+.schedule-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin-top: 60px;
+}
+
+.schedule-card {
+  background: var(--white);
+  border-radius: 20px;
+  padding: 40px;
+  border: 1px solid var(--border);
+  transition: all 0.3s;
+}
+
+.schedule-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.06); transform: translateY(-4px); }
+
+.schedule-card-icon {
+  width: 56px;
+  height: 56px;
+  background: var(--green-light);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.schedule-card h3 {
+  font-size: 22px;
+  margin-bottom: 8px;
+}
+
+.schedule-card .time {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--green-primary);
+  margin-bottom: 12px;
+}
+
+.schedule-card p {
+  font-size: 14px;
+  color: var(--text-light);
+  line-height: 1.7;
+}
+
+.fb-feed-section {
+  margin-top: 60px;
+  text-align: center;
+}
+
+.fb-feed-placeholder {
+  background: var(--white);
+  border: 2px dashed var(--border);
+  border-radius: 20px;
+  padding: 60px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.fb-feed-placeholder h4 {
+  font-size: 20px;
+  margin-bottom: 12px;
+  color: var(--text-dark);
+}
+
+.fb-feed-placeholder p {
+  font-size: 14px;
+  color: var(--text-light);
+  margin-bottom: 20px;
+}
+
+.fb-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: #1877F2;
+  color: var(--white);
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.3s;
+}
+
+.fb-link:hover { background: #1565c0; transform: translateY(-2px); }
+
+/* ============================================
+   ABOUT THE PASTOR
+   ============================================ */
+.pastor { background: var(--white); }
+
+.pastor-grid {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  gap: 80px;
+  align-items: center;
+  margin-top: 60px;
+}
+
+.pastor-photo {
+  aspect-ratio: 3/4;
+  background: linear-gradient(135deg, var(--green-light), #c8e6c0);
+  border-radius: 24px;
+  overflow: hidden;
+  position: relative;
+}
+
+.pastor-photo-inner {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, var(--green-primary) 0%, var(--green-dark) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.3);
+  font-size: 80px;
+}
+
+.pastor-photo::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  border: 2px solid var(--gold-primary);
+  border-radius: 30px;
+  z-index: -1;
+}
+
+.pastor-info h3 {
+  font-size: 36px;
+  margin-bottom: 8px;
+}
+
+.pastor-info .title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--gold-dark);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 24px;
+}
+
+.pastor-info p {
+  font-size: 16px;
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+
+.pastor-contact {
+  display: flex;
+  gap: 20px;
+  margin-top: 32px;
+}
+
+.pastor-contact a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-body);
+  transition: all 0.3s;
+}
+
+.pastor-contact a:hover { border-color: var(--green-primary); color: var(--green-primary); }
+
+/* ============================================
+   WHAT TO EXPECT
+   ============================================ */
+.expect { background: var(--off-white); }
+
+.expect-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-top: 60px;
+}
+
+.expect-card {
+  background: var(--white);
+  border-radius: 20px;
+  padding: 40px 32px;
+  border: 1px solid var(--border);
+  text-align: center;
+  transition: all 0.3s;
+}
+
+.expect-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,0.06); transform: translateY(-6px); }
+
+.expect-icon {
+  width: 72px;
+  height: 72px;
+  background: linear-gradient(135deg, var(--green-light), #d4edcf);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  margin: 0 auto 24px;
+}
+
+.expect-card h3 {
+  font-size: 20px;
+  margin-bottom: 12px;
+}
+
+.expect-card p {
+  font-size: 14px;
+  color: var(--text-light);
+  line-height: 1.7;
+}
+
+/* ============================================
+   MINISTRIES
+   ============================================ */
+.ministries { background: linear-gradient(165deg, #1a3a0e, #2d5a18, #3f831c); color: var(--white); }
+
+.ministries .section-label { color: var(--gold-primary); }
+.ministries .section-title { color: var(--white); }
+.ministries .section-subtitle { color: rgba(255,255,255,0.7); }
+
+.ministry-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 60px;
+}
+
+.ministry-card {
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 20px;
+  padding: 36px 28px;
+  transition: all 0.3s;
+}
+
+.ministry-card:hover { background: rgba(255,255,255,0.14); transform: translateY(-4px); }
+
+.ministry-card h3 {
+  font-size: 20px;
+  color: var(--white);
+  margin-bottom: 12px;
+}
+
+.ministry-card p {
+  font-size: 14px;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.7;
+}
+
+.ministry-icon {
+  font-size: 36px;
+  margin-bottom: 20px;
+  display: block;
+}
+
+/* ============================================
+   PUNTO DE ESPERANZA
+   ============================================ */
+.spanish { background: var(--white); }
+
+.spanish-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  margin-top: 60px;
+}
+
+.spanish-lang {
+  padding: 40px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+}
+
+.spanish-lang h3 {
+  font-size: 24px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.spanish-lang p { font-size: 15px; line-height: 1.8; margin-bottom: 12px; }
+
+.spanish-contact {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
+.spanish-contact p { font-size: 14px; margin-bottom: 4px; }
+.spanish-contact strong { color: var(--text-dark); }
+
+/* ============================================
+   LOCATION / CONTACT
+   ============================================ */
+.location { background: var(--off-white); }
+
+.location-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  margin-top: 60px;
+}
+
+.location-info h3 {
+  font-size: 28px;
+  margin-bottom: 24px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.contact-icon {
+  width: 48px;
+  height: 48px;
+  background: var(--green-light);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.contact-item strong {
+  display: block;
+  font-size: 14px;
+  color: var(--text-dark);
+  margin-bottom: 4px;
+}
+
+.contact-item span, .contact-item a {
+  font-size: 15px;
+  color: var(--text-body);
+}
+
+.contact-item a:hover { color: var(--green-primary); }
+
+.map-container {
+  border-radius: 20px;
+  overflow: hidden;
+  height: 100%;
+  min-height: 400px;
+  border: 1px solid var(--border);
+}
+
+.map-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  min-height: 400px;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+footer {
+  background: #111;
+  color: rgba(255,255,255,0.7);
+  padding: 60px 0 30px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 60px;
+  margin-bottom: 40px;
+}
+
+.footer-brand h3 {
+  font-size: 20px;
+  color: var(--white);
+  margin-bottom: 12px;
+}
+
+.footer-brand p { font-size: 14px; line-height: 1.7; max-width: 320px; }
+
+.footer-links h4 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--white);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+  font-family: 'Inter', sans-serif;
+}
+
+.footer-links a {
+  display: block;
+  font-size: 14px;
+  padding: 6px 0;
+  color: rgba(255,255,255,0.6);
+  transition: color 0.3s;
+}
+
+.footer-links a:hover { color: var(--gold-primary); }
+
+.social-links {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.social-link {
+  width: 40px;
+  height: 40px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: rgba(255,255,255,0.6);
+  transition: all 0.3s;
+}
+
+.social-link:hover { background: var(--green-primary); color: var(--white); }
+
+.footer-bottom {
+  padding-top: 30px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 1024px) {
+  .welcome-grid, .pastor-grid, .location-grid, .spanish-content { grid-template-columns: 1fr; gap: 40px; }
+  .pastor-grid { grid-template-columns: 1fr; }
+  .pastor-photo { max-width: 320px; }
+  .schedule-grid { grid-template-columns: 1fr 1fr; }
+  .ministry-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 768px) {
+  section { padding: 60px 0; }
+
+  nav { display: none; }
+  .mobile-toggle { display: block; }
+
+  nav.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 16px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  }
+
+  .hero-info { flex-direction: column; gap: 16px; }
+  .schedule-grid { grid-template-columns: 1fr; }
+  .expect-grid { grid-template-columns: 1fr; }
+  .ministry-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+  .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+  .pastor-contact { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header id="header">
+  <div class="header-inner">
+    <a href="#" class="logo-area">
+      <div class="logo-icon">+</div>
+      <div class="logo-text">
+        <h1>Point of Hope</h1>
+        <span>Apostolic Church</span>
+      </div>
+    </a>
+    <nav id="nav">
+      <a href="#welcome">About</a>
+      <a href="#schedule">Services</a>
+      <a href="#pastor">Pastor</a>
+      <a href="#expect">Visit Us</a>
+      <a href="#ministries">Ministries</a>
+      <a href="#espanol">En Espanol</a>
+      <a href="#location" class="nav-cta">Get Directions</a>
+    </nav>
+    <button class="mobile-toggle" onclick="document.getElementById('nav').classList.toggle('open')" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <div class="hero-badge">Welcome Home</div>
+    <h2>Experience<br><em>Pentecost</em></h2>
+    <p>A church dedicated to the Great Commission -- introducing and leading people to a closer relationship with Jesus Christ.</p>
+    <div class="hero-actions">
+      <a href="#schedule" class="btn btn-gold">Join Us This Sunday</a>
+      <a href="#expect" class="btn btn-outline">What to Expect</a>
+    </div>
+    <div class="hero-info">
+      <div class="hero-info-item">
+        <strong>Sunday School</strong>
+        <span>10:00 AM</span>
+      </div>
+      <div class="hero-info-item">
+        <strong>Sunday Worship</strong>
+        <span>11:00 AM</span>
+      </div>
+      <div class="hero-info-item">
+        <strong>Bible Study</strong>
+        <span>Thursday 7:00 PM</span>
+      </div>
+      <div class="hero-info-item">
+        <strong>Call Us</strong>
+        <span><a href="tel:3177821502" style="color: var(--white);">317-782-1502</a></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WELCOME / ABOUT -->
+<section class="welcome" id="welcome">
+  <div class="container">
+    <div class="welcome-grid">
+      <div class="welcome-image">
+        <div class="welcome-image-inner">&#10013;</div>
+      </div>
+      <div class="welcome-text">
+        <span class="section-label">Welcome</span>
+        <h2 class="section-title">Discover Your Personal<br>Hope at the Cross</h2>
+        <p>If you haven't yet chosen a church home, we invite you to our thriving, growing multi-cultural congregation. Experience dynamic worship centering on a loving Savior interested in humanity's well-being.</p>
+        <p>When you visit, you will experience anointed teaching and preaching, vibrant worship and praise, and practical ministries focused toward the family. Point of Hope is a place for you.</p>
+        <p>We are a community church with a world vision whose purpose is to stand for Biblical truth -- expanding our boundaries to reach beyond traditional Pentecostalism with a message of love, mercy, and forgiveness.</p>
+        <div class="welcome-verse">
+          "Repent, and be baptized every one of you in the name of Jesus Christ for the remission of sins, and ye shall receive the gift of the Holy Ghost."
+          <cite>Acts 2:38</cite>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCHEDULE & EVENTS -->
+<section class="schedule" id="schedule">
+  <div class="container">
+    <div style="text-align: center;">
+      <span class="section-label">Join Us</span>
+      <h2 class="section-title">Service Schedule</h2>
+      <p class="section-subtitle" style="margin: 0 auto;">We would love to see you at any of our services. Come as you are.</p>
+    </div>
+    <div class="schedule-grid">
+      <div class="schedule-card">
+        <div class="schedule-card-icon">&#9728;</div>
+        <h3>Sunday School</h3>
+        <div class="time">Sundays at 10:00 AM</div>
+        <p>Engaging Bible study for all ages. Our Sunday School program helps you grow in your understanding of God's Word in a welcoming, interactive setting.</p>
+      </div>
+      <div class="schedule-card">
+        <div class="schedule-card-icon">&#9829;</div>
+        <h3>Sunday Worship</h3>
+        <div class="time">Sundays at 11:00 AM</div>
+        <p>Our main worship service featuring anointed preaching, vibrant praise, and a welcoming atmosphere. Experience Pentecost in a powerful, life-changing way.</p>
+      </div>
+      <div class="schedule-card">
+        <div class="schedule-card-icon">&#9733;</div>
+        <h3>Mid-Week Bible Study</h3>
+        <div class="time">Thursdays at 7:00 PM</div>
+        <p>Dive deeper into Biblical truths with our mid-week study. We believe, teach, and preach the truth of the Bible separate from opinion and tradition.</p>
+      </div>
+      <div class="schedule-card">
+        <div class="schedule-card-icon">&#127758;</div>
+        <h3>Punto de Esperanza</h3>
+        <div class="time">Sundays at 2:30 PM</div>
+        <p>Our Spanish-language daughter church led by Rev. Alberto Calvillo. A vibrant Apostolic experience for our Spanish-speaking community.</p>
+      </div>
+    </div>
+
+    <div class="fb-feed-section">
+      <div class="fb-feed-placeholder">
+        <h4>Stay Connected on Facebook</h4>
+        <p>Follow us for the latest events, announcements, photos, and sermon highlights from Point of Hope.</p>
+        <a href="https://www.facebook.com/PointOfHopeApostolicChurch" target="_blank" class="fb-link">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          Follow Us on Facebook
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT THE PASTOR -->
+<section class="pastor" id="pastor">
+  <div class="container">
+    <span class="section-label">Leadership</span>
+    <h2 class="section-title">Meet Our Pastor</h2>
+    <div class="pastor-grid">
+      <div class="pastor-photo">
+        <div class="pastor-photo-inner">&#128100;</div>
+      </div>
+      <div class="pastor-info">
+        <h3>Rev. Stephen Gossage</h3>
+        <div class="title">Senior Pastor</div>
+        <p>Pastor Gossage leads Point of Hope Apostolic Church with a vision to be a 21st Century Apostolic Church -- one founded upon the belief that the Bible is the inspired, infallible Word of God.</p>
+        <p>Under his leadership, Point of Hope has grown into a thriving, multi-cultural congregation with a heart for the Great Commission. His passion is to share the Gospel of Jesus Christ with love, mercy, and compassion.</p>
+        <p>Point of Hope stands for Biblical truth while expanding boundaries to reach beyond traditional Pentecostalism -- with an inclusive gospel message: whosoever will, let him come.</p>
+        <div class="pastor-contact">
+          <a href="tel:3179191755">&#9742; (317) 919-1755</a>
+          <a href="mailto:PointofHopePastor@gmail.com">&#9993; Email Pastor Gossage</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT TO EXPECT -->
+<section class="expect" id="expect">
+  <div class="container">
+    <div style="text-align: center;">
+      <span class="section-label">Your First Visit</span>
+      <h2 class="section-title">What to Expect</h2>
+      <p class="section-subtitle" style="margin: 0 auto;">Visiting a new place for the first time can be intimidating. Here's what you can look forward to.</p>
+    </div>
+    <div class="expect-grid">
+      <div class="expect-card">
+        <div class="expect-icon">&#128588;</div>
+        <h3>Warm Welcome</h3>
+        <p>The most friendly church you've ever attended. People from all walks of life and faith who love their church. You'll meet smiling faces and find a community to live out your faith in real and relevant ways.</p>
+      </div>
+      <div class="expect-card">
+        <div class="expect-icon">&#127926;</div>
+        <h3>Passionate Worship</h3>
+        <p>The most passionate worship you've ever experienced. A living, moving, passionate God deserves vibrant and real response. Great music and the opportunity to participate as much as you like.</p>
+      </div>
+      <div class="expect-card">
+        <div class="expect-icon">&#128214;</div>
+        <h3>Relevant Teaching</h3>
+        <p>The most fresh and creative presentation of the message of Jesus. True to God's Word, but relevant to your life. If you feel lost, tired of running, or need a change of pace -- meet your new direction.</p>
+      </div>
+      <div class="expect-card">
+        <div class="expect-icon">&#128087;</div>
+        <h3>Come As You Are</h3>
+        <p>Some dress their "Sunday best," others wear casual weekend attire. Feel free to wear whatever you feel most comfortable worshipping in. No judgment, just community.</p>
+      </div>
+      <div class="expect-card">
+        <div class="expect-icon">&#128118;</div>
+        <h3>Kids Programs</h3>
+        <p>A thriving Sunday School "Super Church" program and exciting youth ministry. Your kids will have tons of fun while learning spiritual principles in age-appropriate settings.</p>
+      </div>
+      <div class="expect-card">
+        <div class="expect-icon">&#128218;</div>
+        <h3>Discipleship</h3>
+        <p>Four levels of discipleship classes: Encounter (Doctrine), Equip (Commitment), Engage (Ministry), and Empower (Leadership). A clear path for spiritual growth.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MINISTRIES -->
+<section class="ministries" id="ministries">
+  <div class="container">
+    <div style="text-align: center;">
+      <span class="section-label">Get Involved</span>
+      <h2 class="section-title">Ministries Geared<br>Towards the Family</h2>
+      <p class="section-subtitle" style="margin: 0 auto;">From children to adults, we have ministries designed to help every member of your family grow in faith.</p>
+    </div>
+    <div class="ministry-grid">
+      <div class="ministry-card">
+        <span class="ministry-icon">&#128214;</span>
+        <h3>Sunday School</h3>
+        <p>Engaging Bible study for all ages. Learn the foundational truths of Scripture in an interactive, welcoming environment.</p>
+      </div>
+      <div class="ministry-card">
+        <span class="ministry-icon">&#127926;</span>
+        <h3>Worship</h3>
+        <p>Dynamic worship services centering on a loving Savior. Experience anointed teaching, preaching, and vibrant praise.</p>
+      </div>
+      <div class="ministry-card">
+        <span class="ministry-icon">&#128102;</span>
+        <h3>Youth Ministry</h3>
+        <p>An exciting ministry that gathers regularly, helping young people discover their purpose and build lasting faith.</p>
+      </div>
+      <div class="ministry-card">
+        <span class="ministry-icon">&#128218;</span>
+        <h3>Discipleship Classes</h3>
+        <p>Four-level discipleship program: Encounter, Equip, Engage, and Empower. A structured path to spiritual maturity.</p>
+      </div>
+      <div class="ministry-card">
+        <span class="ministry-icon">&#127758;</span>
+        <h3>Punto de Esperanza</h3>
+        <p>Our Spanish-language daughter church, reaching our Hispanic community with the Apostolic message of hope.</p>
+      </div>
+      <div class="ministry-card">
+        <span class="ministry-icon">&#128149;</span>
+        <h3>Outreach</h3>
+        <p>Sharing the Gospel with love, mercy, and compassion. Helping the hurting, ministering to the misfits, loving the lost.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PUNTO DE ESPERANZA -->
+<section class="spanish" id="espanol">
+  <div class="container">
+    <div style="text-align: center;">
+      <span class="section-label">Ministerio en Espanol</span>
+      <h2 class="section-title">Punto de Esperanza</h2>
+    </div>
+    <div class="spanish-content">
+      <div class="spanish-lang">
+        <h3>Bienvenido</h3>
+        <p>Somos la Iglesia en espanol hermana de Point Of Hope Apostolic Church. Nuestra doctrina consiste con la Iglesia de ingles. Nosotros creemos en un solo Dios, Jesus en el unico nombre que bautizamos y en el unico nombre que puedes ser lleno del Espiritu Santo.</p>
+        <p>Nos gustaria conocerte en uno de nuestros servicios. Son bienvenidos a tener una experiencia en un servicio Pentecostal.</p>
+        <p><strong>Servicios: Domingos a las 2:30 PM</strong></p>
+        <div class="spanish-contact">
+          <p><strong>Rev. Alberto Calvillo</strong> -- Pastor</p>
+          <p>Telefono: <a href="tel:3177960061">(317) 796-0061</a></p>
+          <p>Email: <a href="mailto:PuntodeEsperanzaPastor@gmail.com">PuntodeEsperanzaPastor@gmail.com</a></p>
+        </div>
+      </div>
+      <div class="spanish-lang">
+        <h3>Welcome</h3>
+        <p>We are the Spanish daughter work of Point of Hope Apostolic Church. We are an Apostolic church in principle, practice, and power. Our doctrinal belief is consistent with our English-speaking church.</p>
+        <p>We believe in One God, Jesus' Name baptism, and Holy Ghost infilling. We would love to meet you in our services.</p>
+        <p><strong>Services: Sundays at 2:30 PM</strong></p>
+        <div class="spanish-contact">
+          <p><strong>Rev. Alberto Calvillo</strong> -- Pastor</p>
+          <p>Phone: <a href="tel:3177960061">(317) 796-0061</a></p>
+          <p>Email: <a href="mailto:PuntodeEsperanzaPastor@gmail.com">PuntodeEsperanzaPastor@gmail.com</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION & CONTACT -->
+<section class="location" id="location">
+  <div class="container">
+    <div class="location-grid">
+      <div class="location-info">
+        <span class="section-label">Find Us</span>
+        <h3>Visit Point of Hope</h3>
+        <div class="contact-item">
+          <div class="contact-icon">&#128205;</div>
+          <div>
+            <strong>Address</strong>
+            <span>5150 Shelbyville Road<br>Indianapolis, IN 46237</span>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">&#128222;</div>
+          <div>
+            <strong>Phone</strong>
+            <a href="tel:3177821502">317-782-1502</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">&#9993;</div>
+          <div>
+            <strong>Email</strong>
+            <a href="mailto:PointofHopePastor@gmail.com">PointofHopePastor@gmail.com</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">&#128337;</div>
+          <div>
+            <strong>Service Times</strong>
+            <span>Sunday School: 10:00 AM<br>Sunday Worship: 11:00 AM<br>Punto de Esperanza: 2:30 PM<br>Thursday Bible Study: 7:00 PM</span>
+          </div>
+        </div>
+        <div style="margin-top: 20px;">
+          <a href="https://www.facebook.com/PointOfHopeApostolicChurch" target="_blank" class="fb-link">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            Follow Us on Facebook
+          </a>
+        </div>
+      </div>
+      <div class="map-container">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3069.8!2d-86.08!3d39.68!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x886b59e7c7e0b7f1%3A0x0!2s5150+Shelbyville+Rd%2C+Indianapolis%2C+IN+46237!5e0!3m2!1sen!2sus!4v1" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>Point of Hope Apostolic Church</h3>
+        <p>A church dedicated to the Great Commission -- introducing and leading people to a closer relationship with Jesus Christ through love, mercy, and compassion.</p>
+        <div class="social-links">
+          <a href="https://www.facebook.com/PointOfHopeApostolicChurch" target="_blank" class="social-link" aria-label="Facebook">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="https://twitter.com/@SGossage" target="_blank" class="social-link" aria-label="Twitter">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <h4>Quick Links</h4>
+        <a href="#welcome">About Us</a>
+        <a href="#schedule">Service Times</a>
+        <a href="#pastor">Our Pastor</a>
+        <a href="#expect">What to Expect</a>
+        <a href="#ministries">Ministries</a>
+        <a href="#espanol">En Espanol</a>
+      </div>
+      <div class="footer-links">
+        <h4>Contact</h4>
+        <a href="tel:3177821502">317-782-1502</a>
+        <a href="mailto:PointofHopePastor@gmail.com">PointofHopePastor@gmail.com</a>
+        <a href="#location">5150 Shelbyville Road<br>Indianapolis, IN 46237</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Point of Hope Apostolic Church. All rights reserved.</span>
+      <span>A multi-cultural congregation with a world vision.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Header scroll effect
+window.addEventListener('scroll', () => {
+  document.getElementById('header').classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// Smooth scroll for nav links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      document.getElementById('nav').classList.remove('open');
+    }
+  });
+});
+</script>
+
+</body>
+</html>
