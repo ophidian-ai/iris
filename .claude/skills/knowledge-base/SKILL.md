@@ -79,6 +79,45 @@ If Pinecone is unavailable or the upsert fails:
 - Log the failure in your response: `Knowledge base indexing failed: <error>. Continuing without indexing.`
 - **Do NOT block the parent skill's output.** The file system is the source of truth. Indexing can be retried later via `/knowledge-base index <namespace>`.
 
+## Incremental Indexing Triggers
+
+These triggers apply to ANY session or agent, not just specific skills:
+
+### Decision Log
+
+When appending a new entry to `operations/decisions/log.md`, index the new entry immediately after writing it:
+
+- `_id`: `decisions/log#<date>` (e.g., `decisions/log#2026-03-11`)
+- `text`: the new entry text (heading + body)
+- `source_file`: `operations/decisions/log.md`
+- `department`: `operations`
+- `tags`: ["decision", "<relevant-department>"]
+- Namespace: `decisions`
+
+### SOP Updates
+
+When creating or updating any file in `operations/references/sops/`, index it:
+
+- `_id`: `operations/<relative-path-without-ext>` (e.g., `operations/references/sops/client-handoff`)
+- `text`: full SOP content
+- `source_file`: relative path
+- `department`: `operations`
+- `tags`: ["sop", "<topic>"]
+- Namespace: `operations`
+
+### Persistent Memory
+
+When creating or updating any note in `persistent-memory/` (except `_index.md` and `.obsidian/`), index it:
+
+- `_id`: `agent-memory/<relative-path-without-ext>` (e.g., `agent-memory/projects/bloomin-acres`)
+- `text`: note content (excluding frontmatter)
+- `source_file`: relative path
+- `department`: derive from folder
+- `tags`: extract from frontmatter `tags` field if present
+- Namespace: `agent-memory`
+
+These are not enforced by hooks -- they rely on agent discipline. Any agent that writes to these locations should follow the indexing procedure above.
+
 ## Query Procedure
 
 ### Scoped query (single namespace)
