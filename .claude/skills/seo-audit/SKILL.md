@@ -97,3 +97,29 @@ Output a brief summary for use in cold email or follow-up:
 
 - `revenue/lead-generation/prospects/[business-name]/outreach/seo-audit.html`
 - `revenue/lead-generation/prospects/[business-name]/outreach/seo-audit.pdf`
+
+## Knowledge Base
+
+After completing the SEO audit, index the findings summary:
+
+1. Upsert the audit summary:
+
+```
+Tool: mcp__plugin_pinecone_pinecone__upsert-records
+Parameters:
+  name: "ophidianai-kb"
+  namespace: "research"
+  records: [{
+    "_id": "research/<prospect-slug>/seo-audit",
+    "text": "<audit findings summary -- scores, key issues, recommendations>",
+    "source_file": "<path to audit output file>",
+    "department": "revenue",
+    "created_date": "<today>",
+    "updated_date": "<today>",
+    "tags": ["<industry>", "seo-audit", "<overall-score-tier>"]
+  }]
+```
+
+2. Log: `Indexed to knowledge base: research/<prospect-slug>/seo-audit`
+
+If indexing fails, log the error and continue.

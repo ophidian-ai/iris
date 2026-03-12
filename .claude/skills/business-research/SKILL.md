@@ -77,3 +77,30 @@ After research is complete:
 - If Eric specifies an industry, focus there. If not, cast a wide net across common business types.
 - Be honest about what you can and can't verify. Flag assumptions.
 - When no location is specified, default to the Columbus, Indiana area.
+
+## Knowledge Base
+
+After saving research to `revenue/lead-generation/prospects/[slug]/research/initial-research.md`, index it:
+
+1. Read the saved research file content
+2. Upsert to Pinecone:
+
+```
+Tool: mcp__plugin_pinecone_pinecone__upsert-records
+Parameters:
+  name: "ophidianai-kb"
+  namespace: "research"
+  records: [{
+    "_id": "research/<prospect-slug>/initial-research",
+    "text": "<research file content>",
+    "source_file": "revenue/lead-generation/prospects/<slug>/research/initial-research.md",
+    "department": "revenue",
+    "created_date": "<today>",
+    "updated_date": "<today>",
+    "tags": ["<industry>", "<location>", "prospect-research"]
+  }]
+```
+
+3. Log: `Indexed to knowledge base: research/<prospect-slug>/initial-research`
+
+If indexing fails, log the error and continue. Do not block research output.

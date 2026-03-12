@@ -206,3 +206,40 @@ Sorted by score, highest first.
 - **Always save the score card.** Even for Skips -- it prevents re-evaluating the same business later.
 - **Update the tracker.** If the prospect is already in the pipeline, update their tier.
 - **Batch when possible.** If Eric provides a list, score them all and output the comparison table.
+
+## Knowledge Base
+
+After generating the score card, index it (and the README if it exists):
+
+1. Upsert the score card:
+
+```
+Tool: mcp__plugin_pinecone_pinecone__upsert-records
+Parameters:
+  name: "ophidianai-kb"
+  namespace: "prospects"
+  records: [{
+    "_id": "prospects/<prospect-slug>/research/score-card",
+    "text": "<score card content>",
+    "source_file": "revenue/lead-generation/prospects/<slug>/research/score-card.md",
+    "department": "revenue",
+    "created_date": "<today>",
+    "updated_date": "<today>",
+    "tags": ["<industry>", "<tier>", "score-card"]
+  }]
+```
+
+2. If `revenue/lead-generation/prospects/<slug>/README.md` exists, also upsert it:
+
+```
+  records: [{
+    "_id": "prospects/<prospect-slug>/README",
+    "text": "<README content>",
+    "source_file": "revenue/lead-generation/prospects/<slug>/README.md",
+    ...same metadata pattern...
+  }]
+```
+
+3. Log: `Indexed to knowledge base: prospects/<prospect-slug>/research/score-card`
+
+If indexing fails, log the error and continue.

@@ -563,3 +563,29 @@ The offer for SEO prospects is always a competitive positioning report:
 
 - "I put together a short report showing where you stand vs your competitors and what's keeping you buried."
 - The deliverable is the SEO audit PDF (from the seo-audit skill)
+
+## Knowledge Base
+
+After drafting the cold email and saving to `revenue/lead-generation/prospects/[slug]/outreach/`, index it:
+
+1. Upsert the email:
+
+```
+Tool: mcp__plugin_pinecone_pinecone__upsert-records
+Parameters:
+  name: "ophidianai-kb"
+  namespace: "outreach"
+  records: [{
+    "_id": "outreach/<prospect-slug>/<email-filename-without-ext>",
+    "text": "<email content>",
+    "source_file": "revenue/lead-generation/prospects/<slug>/outreach/<filename>",
+    "department": "revenue",
+    "created_date": "<today>",
+    "updated_date": "<today>",
+    "tags": ["<industry>", "<template-name>", "cold-email"]
+  }]
+```
+
+2. Log: `Indexed to knowledge base: outreach/<prospect-slug>/<filename>`
+
+If indexing fails, log the error and continue.

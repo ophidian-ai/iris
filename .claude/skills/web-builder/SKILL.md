@@ -439,3 +439,29 @@ Every client website build must include these steps for the client portal:
 - [ ] Assign Stripe customer ID to client record
 - [ ] Set up maintenance subscription if applicable
 - [ ] Generate and send welcome email with portal login
+
+## Knowledge Base
+
+After completing a project phase, index the project README updates:
+
+1. Upsert the project README:
+
+```
+Tool: mcp__plugin_pinecone_pinecone__upsert-records
+Parameters:
+  name: "ophidianai-kb"
+  namespace: "projects"
+  records: [{
+    "_id": "projects/<project-slug>/README",
+    "text": "<README content>",
+    "source_file": "engineering/projects/<project-slug>/README.md",
+    "department": "engineering",
+    "created_date": "<today>",
+    "updated_date": "<today>",
+    "tags": ["<project-name>", "<tech-stack>", "project"]
+  }]
+```
+
+2. Log: `Indexed to knowledge base: projects/<project-slug>/README`
+
+If indexing fails, log the error and continue.
