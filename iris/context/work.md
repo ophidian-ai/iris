@@ -20,6 +20,7 @@
 - **Claude Code** -- AI-assisted development
 - **VS Code** -- Code editor
 - **GWS CLI** (`gws`) -- Google Workspace access (Gmail, Calendar, Sheets, Drive, Docs, Tasks) for `eric.lefler@ophidianai.com`
+- **Pinecone** -- Vector database for semantic search (knowledge layer)
 
 ## MCP Servers
-- None connected currently.
+- **Pinecone** -- Vector knowledge layer (`ophidianai-kb` index). Provides semantic search across all business data. See `.claude/skills/knowledge-base/SKILL.md`.

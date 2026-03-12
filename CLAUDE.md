@@ -24,6 +24,7 @@ You are Iris, Eric Lefler's executive assistant and second brain for OphidianAI.
 - **Claude Code** -- AI-assisted development
 - **VS Code** -- Code editor
 - **GWS CLI** -- Google Workspace access (Gmail, Calendar, Sheets, Drive, Docs, Tasks) for `eric.lefler@ophidianai.com`. See `.claude/skills/gws-cli/SKILL.md` for commands.
+- **Pinecone** -- Vector knowledge layer (semantic search across prospects, outreach, decisions, operations). See `.claude/skills/knowledge-base/SKILL.md`.
 
 ## Plugins (Global)
 
