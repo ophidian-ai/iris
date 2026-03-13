@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { Phone, MapPin, Facebook } from "lucide-react";
@@ -66,9 +67,11 @@ export default function HeroSection() {
           <motion.header className="mb-12" variants={itemVariants}>
             <div className="flex items-center">
               <div className="mr-3 flex h-24 w-24 items-center justify-center rounded-full bg-[#f5f3ee] shadow-md">
-                <img
+                <Image
                   src="https://pointofhopechurch.com/wp-content/themes/point-of-hope/images/logo.png"
                   alt="Point of Hope Apostolic Church Logo"
+                  width={56}
+                  height={56}
                   className="h-14 w-auto"
                 />
               </div>

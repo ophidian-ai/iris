@@ -265,6 +265,8 @@
   .status-badge.replied { color: #39FF14; background: rgba(57, 255, 20, 0.1); }
   .status-badge.closed-won { color: #39FF14; background: rgba(57, 255, 20, 0.15); }
   .status-badge.closed-lost { color: rgba(232, 237, 242, 0.4); background: rgba(232, 237, 242, 0.05); }
+  .status-badge.new-lead { color: #E8EDF2; background: rgba(232, 237, 242, 0.08); }
+  .status-badge.staged { color: #A78BFA; background: rgba(167, 139, 250, 0.1); }
 
   .price-cell {
     font-family: 'Space Mono', monospace;
@@ -541,6 +543,44 @@
     color: #00D1B2;
   }
 
+  .finance-grid {
+    display: flex;
+    gap: 14px;
+    margin-top: 6px;
+  }
+
+  .finance-box {
+    flex: 1;
+    background: rgba(13, 14, 20, 0.8);
+    border: 1px solid rgba(0, 209, 178, 0.12);
+    border-radius: 8px;
+    padding: 10px 14px;
+    text-align: center;
+  }
+
+  .finance-box h4 {
+    font-size: 8px;
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(232, 237, 242, 0.4);
+    margin-bottom: 4px;
+  }
+
+  .finance-value {
+    font-family: 'Space Mono', monospace;
+    font-size: 16px;
+    font-weight: 700;
+    color: #FF6B35;
+  }
+
+  .finance-detail {
+    font-size: 8px;
+    color: rgba(232, 237, 242, 0.35);
+    margin-top: 2px;
+  }
+
   .footer {
     position: absolute;
     bottom: 24px;
@@ -616,7 +656,7 @@
       </div>
     </div>
     <div class="header-right">
-      <div class="header-date">MARCH 12, 2026</div>
+      <div class="header-date">MARCH 13, 2026</div>
       <div class="header-label">Morning Coffee</div>
     </div>
   </div>
@@ -625,7 +665,7 @@
   <div class="stats-bar">
     <div class="stat-card highlight">
       <div class="stat-label">Pipeline Value</div>
-      <div class="stat-value">$15,200</div>
+      <div class="stat-value">$54,700</div>
       <div class="stat-sub">potential</div>
     </div>
     <div class="stat-card">
@@ -635,12 +675,12 @@
     </div>
     <div class="stat-card">
       <div class="stat-label">Active Prospects</div>
-      <div class="stat-value">5</div>
+      <div class="stat-value">19</div>
       <div class="stat-sub">in pipeline</div>
     </div>
     <div class="stat-card">
       <div class="stat-label">Last Outreach</div>
-      <div class="stat-value">1</div>
+      <div class="stat-value">2</div>
       <div class="stat-sub">days ago</div>
     </div>
   </div>
@@ -671,102 +711,61 @@
       </thead>
       <tbody>
         <tr>
-          <td>Columbus Massage Center</td>
-          <td><span class="status-badge outreach">Outreach Sent</span></td>
-          <td>6</td>
-          <td class="overdue">Mar 10 (2d overdue)</td>
-          <td class="price-cell">$3,500</td>
-        </tr>
-        <tr class="value-breakdown-row">
-          <td colspan="5">
-            <div class="value-breakdown">
-              <div class="value-breakdown-label">VALUE BASIS</div>
-              <div class="value-breakdown-items">
-                <div class="value-breakdown-item"><span>Professional tier</span> -- Basic rebuild</div>
-                <div class="value-breakdown-item"><span>7+ pages</span> -- Services, team, booking, gift cards</div>
-                <div class="value-breakdown-item"><span>Vagaro booking</span> integration</div>
-                <div class="value-breakdown-item"><span>Gift card</span> e-commerce</div>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td>SAK Automotive</td>
-          <td><span class="status-badge outreach">Outreach Sent</span></td>
-          <td>6</td>
-          <td class="overdue">Mar 10 (2d overdue)</td>
-          <td class="price-cell">$3,500</td>
-        </tr>
-        <tr class="value-breakdown-row">
-          <td colspan="5">
-            <div class="value-breakdown">
-              <div class="value-breakdown-label">VALUE BASIS</div>
-              <div class="value-breakdown-items">
-                <div class="value-breakdown-item"><span>Standard tier</span> -- Website + booking</div>
-                <div class="value-breakdown-item"><span>5-7 pages</span> -- Services, contact, reviews</div>
-                <div class="value-breakdown-item"><span>Online booking</span> integration</div>
-                <div class="value-breakdown-item"><span>Google Reviews</span> live feed</div>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
           <td>Point of Hope Church</td>
           <td><span class="status-badge outreach">Outreach Sent</span></td>
-          <td>1</td>
+          <td>2</td>
           <td>Mar 19</td>
           <td class="price-cell">$1,200</td>
         </tr>
-        <tr class="value-breakdown-row">
-          <td colspan="5">
-            <div class="value-breakdown">
-              <div class="value-breakdown-label">VALUE BASIS</div>
-              <div class="value-breakdown-items">
-                <div class="value-breakdown-item"><span>Starter tier</span> -- Church/referral rate</div>
-                <div class="value-breakdown-item"><span>Single page</span> -- Landing page redesign</div>
-                <div class="value-breakdown-item"><span>Facebook feed</span> integration</div>
-                <div class="value-breakdown-item"><span>Warm lead</span> via Steve Stock referral</div>
-              </div>
-            </div>
-          </td>
-        </tr>
+        <tr class="value-breakdown-row"><td colspan="5"><div class="value-breakdown"><div class="value-breakdown-label">VALUE BASIS</div><div class="value-breakdown-items"><div class="value-breakdown-item"><span>Starter tier</span> $1,200</div><div class="value-breakdown-item">Warm referral via Steve Stock</div><div class="value-breakdown-item">Two options offered: Starter $1,200 / Professional $2,500</div></div></div></td></tr>
         <tr>
-          <td>Nano's Car Detailing</td>
-          <td><span class="status-badge followup">Researching</span></td>
+          <td>Columbus Massage Center</td>
+          <td><span class="status-badge outreach">Outreach Sent</span></td>
+          <td>7</td>
+          <td class="overdue">Mar 10 (overdue)</td>
+          <td class="price-cell">$3,500</td>
+        </tr>
+        <tr class="value-breakdown-row"><td colspan="5"><div class="value-breakdown"><div class="value-breakdown-label">VALUE BASIS</div><div class="value-breakdown-items"><div class="value-breakdown-item"><span>Professional tier</span></div><div class="value-breakdown-item">Website + assessment PDF sent</div></div></div></td></tr>
+        <tr>
+          <td>SAK Automotive</td>
+          <td><span class="status-badge outreach">Outreach Sent</span></td>
+          <td>7</td>
+          <td class="overdue">Mar 10 (overdue)</td>
+          <td class="price-cell">$3,500</td>
+        </tr>
+        <tr class="value-breakdown-row"><td colspan="5"><div class="value-breakdown"><div class="value-breakdown-label">VALUE BASIS</div><div class="value-breakdown-items"><div class="value-breakdown-item"><span>Professional tier</span></div><div class="value-breakdown-item">Website + assessment PDF sent</div></div></div></td></tr>
+        <tr>
+          <td>Nanos Car Detailing</td>
+          <td><span class="status-badge staged">Staged</span></td>
           <td>--</td>
           <td>--</td>
           <td class="price-cell">$3,500</td>
-        </tr>
-        <tr class="value-breakdown-row">
-          <td colspan="5">
-            <div class="value-breakdown">
-              <div class="value-breakdown-label">VALUE BASIS</div>
-              <div class="value-breakdown-items">
-                <div class="value-breakdown-item"><span>Professional tier</span> -- Full rebuild</div>
-                <div class="value-breakdown-item"><span>12+ yr business</span>, 118 reviews</div>
-                <div class="value-breakdown-item"><span>Hibu template</span> with lorem ipsum (easy win)</div>
-              </div>
-            </div>
-          </td>
         </tr>
         <tr>
           <td>Total Fitness of Columbus</td>
-          <td><span class="status-badge followup">Researching</span></td>
+          <td><span class="status-badge staged">Staged</span></td>
           <td>--</td>
           <td>--</td>
           <td class="price-cell">$3,500</td>
         </tr>
-        <tr class="value-breakdown-row">
-          <td colspan="5">
-            <div class="value-breakdown">
-              <div class="value-breakdown-label">VALUE BASIS</div>
-              <div class="value-breakdown-items">
-                <div class="value-breakdown-item"><span>Professional tier</span> -- WordPress rebuild</div>
-                <div class="value-breakdown-item"><span>26+ yr gym</span>, dated WordPress</div>
-                <div class="value-breakdown-item"><span>Online signup</span> needed, dev URLs leaking</div>
-              </div>
-            </div>
-          </td>
+        <tr>
+          <td>Voelz Body Shop</td>
+          <td><span class="status-badge staged">Staged</span></td>
+          <td>--</td>
+          <td>--</td>
+          <td class="price-cell">$3,500</td>
+        </tr>
+        <tr>
+          <td>Expressions Ink Tattoo</td>
+          <td><span class="status-badge staged">Staged</span></td>
+          <td>--</td>
+          <td>--</td>
+          <td class="price-cell">$3,500</td>
+        </tr>
+        <tr>
+          <td>+ 11 more prospects</td>
+          <td colspan="3" style="color: rgba(232,237,242,0.4); font-size: 10px;">5 New Leads, 6 Outreach Staged</td>
+          <td class="price-cell">$33,500</td>
         </tr>
       </tbody>
     </table>
@@ -777,7 +776,7 @@
     <div class="section-title">
       <div class="dot"></div> Calendar
     </div>
-    <div class="empty">Calendar unavailable -- API error (insufficient auth scopes).</div>
+    <div class="empty">Calendar unavailable -- API scopes not configured.</div>
   </div>
 
   <div class="footer">
@@ -797,7 +796,7 @@
       </div>
     </div>
     <div class="header-right">
-      <div class="header-date">MARCH 12, 2026</div>
+      <div class="header-date">MARCH 13, 2026</div>
       <div class="header-label">Morning Coffee</div>
     </div>
   </div>
@@ -810,9 +809,9 @@
     <div class="project-item">
       <div>
         <div class="project-name">Bloomin' Acres</div>
-        <div class="project-detail">Sourdough &amp; fresh produce website -- Active</div>
+        <div class="project-detail">Sourdough &amp; fresh produce website -- In progress</div>
       </div>
-      <div class="project-status">IN PROGRESS</div>
+      <div class="project-status">BUILD</div>
     </div>
   </div>
 
@@ -820,9 +819,9 @@
   <div class="section">
     <div class="section-title">
       <div class="dot"></div> Tasks
-      <div class="count">API unavailable</div>
+      <div class="count">unavailable</div>
     </div>
-    <div class="empty">Tasks unavailable -- API error (CLICKUP_API_TOKEN not configured).</div>
+    <div class="empty">Tasks unavailable -- ClickUp API token not configured.</div>
   </div>
 
   <!-- Revenue Tracker -->
@@ -838,8 +837,32 @@
       </div>
       <div class="revenue-box">
         <h3>Potential Pipeline</h3>
-        <div class="revenue-amount">$15,200</div>
-        <div class="revenue-detail">5 active prospects</div>
+        <div class="revenue-amount">$54,700</div>
+        <div class="revenue-detail">19 active prospects</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Financial Pulse -->
+  <div class="section">
+    <div class="section-title">
+      <div class="dot"></div> Financial Pulse
+    </div>
+    <div class="finance-grid">
+      <div class="finance-box">
+        <h4>Burn Rate</h4>
+        <div class="finance-value">$149/mo</div>
+        <div class="finance-detail">GWS $18 + Cloudflare $10 + Claude $100 + Warmbox $20</div>
+      </div>
+      <div class="finance-box">
+        <h4>Next Tax Deadline</h4>
+        <div class="finance-value">Apr 15</div>
+        <div class="finance-detail">Q1 estimated taxes -- 33 days</div>
+      </div>
+      <div class="finance-box">
+        <h4>Outstanding</h4>
+        <div class="finance-value">$0</div>
+        <div class="finance-detail">No invoices sent</div>
       </div>
     </div>
   </div>
@@ -879,19 +902,14 @@
       <div class="dot"></div> AI Intel
     </div>
     <div class="intel-item">
-      <div class="intel-headline">Claude Code Adds Native MCP Server Management</div>
-      <div class="intel-source">Anthropic / Releasebot</div>
-      <div class="intel-analysis">New /mcp dialog lets you manage servers, reconnect, and handle OAuth without leaving chat. MCP Tool Search now enables lazy loading, cutting context usage by ~95%. Directly relevant -- OphidianAI runs multiple MCP servers. This reduces token overhead and improves session stability.</div>
+      <div class="intel-headline">Claude Code: Memory Leak Fix, Model Overrides, Windows RTL Fix</div>
+      <div class="intel-source">GitHub / Anthropic</div>
+      <div class="intel-analysis">Claude Code shipped fixes for streaming memory leaks and Windows-specific bugs (RTL text, LSP URIs). New modelOverrides setting lets you map model picker entries to custom providers. Direct benefit: more stable long sessions and better Windows experience for OphidianAI's dev workflow.</div>
     </div>
     <div class="intel-item">
-      <div class="intel-headline">AI Website Builders Accelerating Fastest Among SMBs</div>
-      <div class="intel-source">Veza Digital / DesignRush</div>
-      <div class="intel-analysis">Tools like Wix AI and Webflow AI are lowering the barrier for SMBs to build sites cheaply. This is both competition and opportunity -- OphidianAI's value prop needs to emphasize what AI builders can't do: custom integrations, booking systems, and hands-on strategy.</div>
-    </div>
-    <div class="intel-item">
-      <div class="intel-headline">Human-Centric Design Emerging as Counter-Movement</div>
-      <div class="intel-source">Abstract Technology Group / Crawford</div>
-      <div class="intel-analysis">Growing trend toward "AI as tool, not crutch" in web design. Clients want sites that feel human-crafted. This plays to OphidianAI's strengths -- custom mockups and hands-on design differentiate from cookie-cutter AI builders.</div>
+      <div class="intel-headline">AI Agencies in 2026: From Task Execution to Growth Partnerships</div>
+      <div class="intel-source">Seven Figure Agency / Forrester</div>
+      <div class="intel-analysis">Agencies polarizing into three tiers: task-based, efficiency-driven, and strategic growth partners. Gartner predicts 40% of enterprise apps will embed AI agents by end of 2026. Opportunity: position OphidianAI as a strategic partner (not just a website vendor) by bundling AI integrations with web builds.</div>
     </div>
   </div>
 
@@ -901,11 +919,11 @@
       <div class="dot"></div> Today's Priorities
     </div>
     <ol class="rec-list">
-      <li><span class="rec-tag">FOLLOW-UP</span> Columbus Massage Center and SAK Automotive follow-ups are 2 days overdue (due Mar 10). Send follow-up emails today -- $7,000 combined pipeline value at risk.</li>
-      <li><span class="rec-tag">PIPELINE</span> 13 cold emails are still staged as Gmail drafts from Mar 10. Review and send them before they go stale -- includes 11 new outreach and 2 follow-ups.</li>
-      <li><span class="rec-tag">OUTREACH</span> Nano's Car Detailing and Total Fitness are stuck in "Researching." Complete research and send outreach to keep the pipeline moving.</li>
-      <li><span class="rec-tag">REVENUE</span> Zero actualized revenue. Point of Hope Church is the warmest lead (referral, pre-proposal sent yesterday). Monitor for a reply and be ready to close.</li>
-      <li><span class="rec-tag">MARKETING</span> No social media or blog activity on record. Even one post per week builds credibility. Run /social-content to batch a week of posts.</li>
+      <li><span class="rec-tag">FOLLOW-UP</span> Columbus Massage Center and SAK Automotive follow-ups are 3 days overdue (due Mar 10). Send follow-up emails today -- 13 staged drafts include FU1 templates for both.</li>
+      <li><span class="rec-tag">OUTREACH</span> 13 cold emails are staged as Gmail drafts and ready to send. Review and fire them off to activate the pipeline -- these cover 11 new prospects plus 2 follow-ups.</li>
+      <li><span class="rec-tag">PIPELINE</span> Point of Hope Church (warm referral) was contacted Mar 11. Follow-up due Mar 19. No action needed today, but keep this one warm -- warm leads close at higher rates.</li>
+      <li><span class="rec-tag">REVENUE</span> Zero revenue with $149/mo burn rate. Every week without a close costs ~$37. Focus energy on the 3 prospects with outreach sent -- they are closest to converting.</li>
+      <li><span class="rec-tag">MARKETING</span> No social media or blog activity logged. Even one post per week builds visibility. Consider a quick launch post or a before/after web design showcase.</li>
     </ol>
   </div>
 
