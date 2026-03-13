@@ -3,13 +3,13 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
-import { Globe, Phone, MapPin, Facebook } from "lucide-react";
+import { Phone, MapPin, Facebook } from "lucide-react";
 
 const contactItems = [
   {
-    icon: Globe,
-    label: "pointofhopechurch.com",
-    href: "https://pointofhopechurch.com",
+    icon: Facebook,
+    label: "PointOfHopeApostolicChurch",
+    href: "https://www.facebook.com/PointOfHopeApostolicChurch",
   },
   {
     icon: Phone,
@@ -65,7 +65,7 @@ export default function HeroSection() {
           {/* Logo */}
           <motion.header className="mb-12" variants={itemVariants}>
             <div className="flex items-center">
-              <div className="mr-3 flex h-20 w-20 items-center justify-center rounded-full bg-[#f5f3ee] shadow-md">
+              <div className="mr-3 flex h-24 w-24 items-center justify-center rounded-full bg-[#f5f3ee] shadow-md">
                 <img
                   src="https://pointofhopechurch.com/wp-content/themes/point-of-hope/images/logo.png"
                   alt="Point of Hope Apostolic Church Logo"
@@ -152,8 +152,8 @@ export default function HeroSection() {
               <a
                 key={item.label}
                 href={item.href}
-                target={item.icon === Globe ? "_blank" : undefined}
-                rel={item.icon === Globe ? "noopener noreferrer" : undefined}
+                target={item.icon === Facebook ? "_blank" : undefined}
+                rel={item.icon === Facebook ? "noopener noreferrer" : undefined}
                 className="flex items-center transition-colors hover:opacity-80"
                 style={{ color: "#a8a5a0" }}
               >

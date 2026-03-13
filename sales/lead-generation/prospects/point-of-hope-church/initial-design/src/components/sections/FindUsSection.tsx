@@ -185,7 +185,7 @@ export default function FindUsSection() {
               {/* Right: Map */}
               <div className="overflow-hidden rounded-xl shadow-md">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3069.5!2d-86.08!3d39.7!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2z5150+Shelbyville+Road+Indianapolis+IN+46237!5e0!3m2!1sen!2sus!4v1"
+                  src="https://maps.google.com/maps?q=Point+of+Hope+Apostolic+Church+5150+Shelbyville+Road+Indianapolis+IN+46237&t=&z=15&ie=UTF8&iwloc=&output=embed"
                   width="100%"
                   height="350"
                   style={{ border: 0 }}

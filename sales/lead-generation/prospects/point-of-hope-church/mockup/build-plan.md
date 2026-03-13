@@ -3236,4 +3236,8 @@ Steps to integrate
 1. This is going to be a separate section on the website with all of Ponte de Esperanzas' contact information, service information, location, and pastor information .
 2. We're going to potentially do their own page, separate, but we will link that to the main page.
 
-We will build this out once they make that decision. 
+We will build this out once they make that decision.
+
+## Pre-Launch Notes
+
+- **Google Maps Embed**: Currently using the keyless `output=embed` approach for the "Find Us" map iframe. Before going live, set up a Google Maps Embed API key (free, no usage limits) restricted to the production domain. Use the `/maps/embed/v1/place?key=...` format for reliable place resolution and a cleaner embed. Create the key in Google Cloud Console > Maps Embed API.
