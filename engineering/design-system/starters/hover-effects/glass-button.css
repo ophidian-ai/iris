@@ -1,0 +1,144 @@
+/**
+ * ============================================================
+ * Starter: Glass Button CSS
+ * ============================================================
+ * Pattern:  Frosted-glass pill button with shimmer sweep on hover
+ * Source:   OphidianAI globals.css (.glass-button-wrap, .glass-button)
+ *
+ * Customize:
+ *   --glass-accent       The accent color (rgb triplet, e.g. 57, 255, 20).
+ *                         Used to derive all other values below.
+ *   --glass-bg           Button background tint. Default rgba(var(--glass-accent), 0.08).
+ *   --glass-border       Border color. Default rgba(var(--glass-accent), 0.25).
+ *   --glass-highlight    Top-left gradient highlight. Default rgba(var(--glass-accent), 0.15).
+ *   --glass-shadow       Hover glow shadow color. Default rgba(var(--glass-accent), 0.3).
+ *   --glass-text         Text color. Default rgb(var(--glass-accent)).
+ *
+ * Reference: engineering/design-system/starters/hover-effects/glass-button.tsx
+ * ============================================================
+ */
+
+/* -- Custom properties ---------------------------------------- */
+
+.glass-button-wrap {
+  /* Set --glass-accent to your brand color as an RGB triplet */
+  --glass-accent: 57, 255, 20;
+
+  --glass-bg: rgba(var(--glass-accent), 0.08);
+  --glass-border: rgba(var(--glass-accent), 0.25);
+  --glass-highlight: rgba(var(--glass-accent), 0.15);
+  --glass-shadow: rgba(var(--glass-accent), 0.3);
+  --glass-text: rgb(var(--glass-accent));
+
+  position: relative;
+  display: inline-flex;
+}
+
+/* -- Base button ---------------------------------------------- */
+
+.glass-button {
+  position: relative;
+  z-index: 1;
+  border: 1px solid var(--glass-border);
+  background: linear-gradient(
+    135deg,
+    var(--glass-highlight) 0%,
+    var(--glass-bg) 50%,
+    rgba(var(--glass-accent), 0.03) 100%
+  );
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border-radius: 9999px;
+  color: var(--glass-text);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+/* Top-left white sheen */
+.glass-button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(255, 255, 255, 0.04) 40%,
+    transparent 60%
+  );
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+/* Shimmer sweep */
+.glass-button::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(var(--glass-accent), 0.15) 50%,
+    transparent 100%
+  );
+  transition: left 0.5s ease;
+  pointer-events: none;
+}
+
+.glass-button:hover::after {
+  left: 100%;
+}
+
+/* -- Hover state ---------------------------------------------- */
+
+.glass-button:hover {
+  border-color: rgba(var(--glass-accent), 0.45);
+  background: linear-gradient(
+    135deg,
+    rgba(var(--glass-accent), 0.2) 0%,
+    rgba(var(--glass-accent), 0.1) 50%,
+    rgba(var(--glass-accent), 0.05) 100%
+  );
+  box-shadow: 0 0 20px rgba(var(--glass-accent), 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* -- Active state --------------------------------------------- */
+
+.glass-button:active {
+  transform: scale(0.97);
+  border-color: rgba(var(--glass-accent), 0.5);
+}
+
+/* -- Text ----------------------------------------------------- */
+
+.glass-button-text {
+  position: relative;
+  z-index: 2;
+  text-shadow: 0 0 20px rgba(var(--glass-accent), 0.3);
+}
+
+/* -- Shadow blob ---------------------------------------------- */
+
+.glass-button-shadow {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0;
+  background: radial-gradient(
+    ellipse at center,
+    var(--glass-shadow) 0%,
+    transparent 70%
+  );
+  filter: blur(16px);
+  transform: translateY(6px);
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.glass-button-wrap:hover .glass-button-shadow {
+  opacity: 0.6;
+}

@@ -46,11 +46,13 @@ Certain phases contain independent tasks that should be parallelized using `suba
 | Phase | Parallelizable? | Sub-Agent Split |
 |-------|----------------|-----------------|
 | 1. Discovery | No | Conversational -- requires human input sequentially |
+| 1.5 Creative Research & Brief | No | Sequential -- depends on Discovery output, feeds into Scaffold |
 | 2. Scaffold | No | Sequential foundation -- everything else depends on this |
 | 3. Design System | **Yes** | 3 agents: (1) Base UI components, (2) Layout components (Nav, Footer, PageWrapper), (3) Global styles + CSS custom properties |
 | 4. Page Building | **Partial** | Home page first (sequential, defines patterns). Then remaining pages in parallel batches of 2-3 agents per batch |
 | 5. Integration | **Yes** | Up to 4 agents: (1) Stripe checkout, (2) Contact form + email, (3) Blog/MDX setup, (4) SEO + Analytics |
 | 6. QA & Deploy | **Partial** | Screenshots + Lighthouse can run in parallel. Deploy is sequential. |
+| 6.5 Post-Build Harvest | No | Optional. Extract new patterns to design system library. |
 
 ### Rules for Sub-Agent Dispatch
 
@@ -122,6 +124,49 @@ Ask these questions one at a time. Use multiple choice where possible.
 
 ---
 
+## Phase 1.5: Creative Research & Brief
+
+**Goal:** Research design trends, match patterns from the design system library, and produce an actionable creative brief that guides all visual decisions for the build.
+
+**Sub-agents:** None. Sequential -- depends on Discovery output.
+
+### Steps
+
+1. **Invoke creative research skill:**
+   - Run `.claude/skills/creative-research/SKILL.md`
+   - Input: `docs/site-brief.md`
+   - Output: `docs/creative-research.md`
+
+2. **Generate creative brief:**
+   - Read: `docs/site-brief.md` + `docs/creative-research.md` + `engineering/design-system/_catalog.md` + relevant pattern docs from `engineering/design-system/patterns/`
+   - Produce `docs/creative-brief.md` covering:
+     - Creative direction (mood, energy, personality)
+     - Animation strategy (framework, triggers, performance budget, per-element plan)
+     - Background treatment (technique, pattern reference, reduced-motion fallback)
+     - Typography pairings with rationale
+     - Extended color treatment (overlays, accent glows, tinted shadows, selection color)
+     - Section layout approach (per-section layout assignments)
+     - Hover/interaction micro-patterns (per-element effects)
+     - Divider strategy
+     - Dependencies to install
+     - Glass/depth effects plan
+
+3. **Approval gate:**
+   - **Auto-approve** when: client's industry has been built before, mood matches a prior project, all recommended patterns are from the existing library
+   - **Require Eric's approval** when: new industry, 2+ new untested techniques, advanced dependencies not used before, tight budget/timeline
+   - If approval required: present one-paragraph summary + full brief. Eric approves, gives feedback (revise and re-present), or says "start over" (re-run research). Max 3 revision rounds.
+
+**Output:** `docs/creative-brief.md` (approved)
+
+**Checkpoint -- Creative Brief Audit:**
+- [ ] `docs/creative-research.md` exists and has content (or "research unavailable" note)
+- [ ] `docs/creative-brief.md` exists and follows the template schema
+- [ ] Every animation/background/hover entry references a pattern doc or documents a new technique
+- [ ] Dependencies list is complete (no unlisted packages)
+- [ ] Approval status is set (auto-approved or Eric-approved)
+
+---
+
 ## Phase 2: Project Scaffold
 
 **Goal:** Create a working Next.js project configured with the client's brand.
@@ -153,6 +198,8 @@ Ask these questions one at a time. Use multiple choice where possible.
    - Core: `next`, `react`, `react-dom`, `typescript`, `tailwindcss`
    - Dev tools: `puppeteer`, `sharp`
    - Integrations (as needed): `@stripe/stripe-js`, `stripe`, `@vercel/analytics`
+8. **Install creative dependencies** from `docs/creative-brief.md` Dependencies section (e.g., `motion`, `@paper-design/shaders-react`)
+9. **Copy starter components** from `engineering/design-system/starters/` as listed in the creative brief into the project's `src/components/` directory
 
 **Output:** Working project that runs on `localhost:3000`
 
@@ -167,7 +214,7 @@ Ask these questions one at a time. Use multiple choice where possible.
 **Sub-agents:** Yes -- dispatch 3 agents in parallel:
 - **Agent 1 (UI Components):** Build all base components in `src/components/ui/` -- Button, Card, Input, Badge, Container, Heading, Text, Icon
 - **Agent 2 (Layout Components):** Build NavMain, FooterMain, PageWrapper in `src/components/layout/`
-- **Agent 3 (Global Styles):** Set up `src/styles/globals.css` with CSS custom properties, typography scale, animation utilities, and grain/texture overlays
+- **Agent 3 (Global Styles):** Set up `src/styles/globals.css` using `docs/creative-brief.md` as the design specification. Implement CSS custom properties, typography scale, animation keyframes and utilities, glass/grain/texture overlays, hover state patterns, and color treatments -- all per the creative brief. Reference pattern docs in `engineering/design-system/patterns/` for implementation details
 
 Each agent gets a distinct directory scope. No file conflicts.
 
@@ -239,6 +286,7 @@ Each agent gets a single page. Content generation can be delegated to the `websi
 
 ### Process (per page)
 
+0. **Check creative brief:** Before selecting sections, read the Section Layout Approach and Animation Strategy from `docs/creative-brief.md`. Apply the specified layout pattern, animation, and hover effects to each section as built.
 1. **Select sections:** Ask which sections this page needs from the library
 2. **Order sections:** Confirm the section arrangement
 3. **Content:** Either:
@@ -346,6 +394,23 @@ Reference: `operations/references/sops/seo-full-setup.md`
 
 ---
 
+## Phase 6.5: Post-Build Harvest (Optional)
+
+**Goal:** Extract new creative techniques from this project back into the design system pattern library.
+
+**Sub-agents:** None. Sequential.
+
+After QA completes and the site is deployed:
+
+1. Invoke `.claude/skills/post-build-harvest/SKILL.md`
+2. Review the harvest report
+3. Eric confirms which patterns to add to the library
+4. New patterns and starters are committed to `engineering/design-system/`
+
+This phase is optional but strongly recommended. The pattern library grows with every project, making future builds faster and more creative.
+
+---
+
 ## Audit Checkpoints
 
 Audits run at the end of each phase and at key transition points. Each audit produces a structured report and blocks progress until issues are resolved.
@@ -354,6 +419,7 @@ Audits run at the end of each phase and at key transition points. Each audit pro
 
 | Trigger | Audit Type |
 |---------|-----------|
+| End of Phase 1.5 (Creative Brief) | **Creative Brief Audit** -- creative-research.md and creative-brief.md exist, brief follows template schema, all technique references valid, dependencies listed, approval status set |
 | End of Phase 2 (Scaffold) | **Foundation Audit** -- dev server runs, folder structure correct, Tailwind config matches brand, vercel.json headers present |
 | End of Phase 3 (Design System) | **Component Audit** -- all planned components render without errors, barrel exports work, no TypeScript errors, consistent prop patterns |
 | After Home page (Phase 4) | **Pattern Audit** -- visual consistency, section composition works, responsive at all breakpoints, content is real (no lorem ipsum) |
@@ -422,6 +488,9 @@ Do not advance to the next phase until the follow-up is complete and all CRITICA
 | SEO Setup | `operations/references/sops/seo-full-setup.md` | SEO implementation |
 | Monitoring | `operations/references/sops/monitoring-setup.md` | Post-launch monitoring |
 | Brand Assets | `shared/brand-assets/` | Logo, brand guide |
+| Creative Research | `.claude/skills/creative-research/SKILL.md` | Design trend research for Phase 1.5 |
+| Post-Build Harvest | `.claude/skills/post-build-harvest/SKILL.md` | Extract patterns after build |
+| Design System Library | `engineering/design-system/README.md` | Pattern reference library |
 
 ## Portal Integration Checklist
 
