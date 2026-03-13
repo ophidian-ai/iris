@@ -82,6 +82,7 @@ Iris (Chief of Staff) coordinates all agents from `.claude/agents/iris/AGENT.md`
 
 ### Workflow Skills
 
+- **Calendar sync** -- `.claude/skills/calendar-sync/` -- Sync milestones, follow-ups, deadlines to Google Calendar. Runs during morning coffee. Triggered by `/calendar-sync` or "Commit this to my calendar".
 - **Cold email outreach** -- `.claude/skills/cold-email-outreach/` -- Draft outreach emails to potential clients
 - **Email response** -- `.claude/skills/email-response/` -- Draft replies to incoming emails
 - **Business research** -- `.claude/skills/business-research/` -- Find businesses with outdated websites or service opportunities

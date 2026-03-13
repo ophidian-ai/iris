@@ -73,8 +73,39 @@ Check all known list IDs: Backlog (901711710045), Project 1 (901711707665), Proj
 - Read `sales/lead-generation/prospect-tracker.md`
 - Read each prospect's `sales/lead-generation/prospects/[slug]/README.md` (needed for pipeline value breakdowns)
 - Read `marketing/activity-log.md`
-- Read `engineering/projects/bloomin-acres/README.md` (and any other project READMEs)
 - Read `iris/saved-conversations/` directory (check if any files exist)
+
+**Active Projects -- Supabase:**
+
+Query the OphidianAI Supabase project (ID: `minlcytryamfmisftlqu`) for active projects with their client info and milestone progress:
+
+```sql
+SELECT p.name AS project_name, p.phase, p.estimated_completion,
+       c.company_name AS client_name,
+       COUNT(pm.id) AS total_milestones,
+       COUNT(pm.completed_at) AS completed_milestones
+FROM projects p
+JOIN clients c ON c.id = p.client_id
+LEFT JOIN project_milestones pm ON pm.project_id = p.id
+WHERE p.status = 'active'
+GROUP BY p.id, p.name, p.phase, p.estimated_completion, c.company_name
+ORDER BY p.created_at ASC;
+```
+
+Use this data to populate `{{PROJECTS_CONTENT}}`. For each project, generate:
+```html
+<div class="project-item">
+  <div>
+    <div class="project-name">[project_name]</div>
+    <div class="project-detail">[client_name] -- [completed_milestones]/[total_milestones] milestones complete</div>
+  </div>
+  <div class="project-status">[phase]</div>
+</div>
+```
+
+If the estimated_completion date is set, append it to project-detail: ` -- Est. [date]`
+
+If no active projects exist, use: `<div class="empty">No active projects.</div>`
 
 **Expense Receipts -- Quick Scan:**
 Run a lightweight receipt check for new expenses since last scan:
@@ -207,7 +238,7 @@ Categories: PIPELINE, FOLLOW-UP, OUTREACH, TASKS, MARKETING, REVENUE, AI-INTEL
         - A `.value-breakdown-label` reading "VALUE BASIS"
         - A `.value-breakdown-items` div with `.value-breakdown-item` entries explaining the estimate: pricing tier (e.g., "Professional tier"), page count, key features driving the price (e.g., booking integration, SEO, e-commerce). Pull this from the prospect's README.md in `sales/lead-generation/prospects/[slug]/README.md` -- look at Project Scope and any pricing notes.
    - `{{CALENDAR_CONTENT}}` -- `.cal-day-label` for "TODAY" and "TOMORROW", with `.cal-item` entries. If no events for a given day, show `.empty` with "No events scheduled." under that day label. If no events at all, show a single `.empty` with "No events scheduled for today."
-   - `{{PROJECTS_CONTENT}}` -- `.project-item` divs for each active project.
+   - `{{PROJECTS_CONTENT}}` -- Built from the Supabase active projects query (see Step 1). Each project gets a `.project-item` div showing name, client, milestone progress, and current phase.
    - `{{TASKS_CONTENT}}` -- Table with task name, status, due date. Or `.empty` if none.
    - `{{AI_INTEL_CONTENT}}` -- `.intel-item` divs with headline, source, and analysis.
    - `{{RECOMMENDATIONS}}` -- `<li>` items with rec-tag spans.
@@ -255,6 +286,7 @@ Prospects: {{ACTIVE_PROSPECTS}} active | {{OUTREACH_DAYS}} days since last outre
 Inbox: {{UNREAD_COUNT}} unread{{REPLY_ALERT}}
 Calendar: {{EVENT_COUNT}} events today
 Tasks: {{TASKS_DUE}} due today, {{TASKS_OVERDUE}} overdue
+Projects: {{ACTIVE_PROJECT_COUNT}} active -- {{ACTIVE_PROJECT_SUMMARY}}
 Outreach: {{STAGED_COUNT}} staged | {{TEMPLATE_PERFORMANCE}}
 Finance: ${{BURN_RATE}}/mo burn | {{OUTSTANDING_INVOICES}} outstanding{{TAX_DEADLINE_ALERT}}
 
@@ -263,12 +295,27 @@ Email sent to eric.lefler@ophidianai.com
 ```
 
 If any prospect replied, add to `{{REPLY_ALERT}}`: ` | PROSPECT REPLY from [name]`
+- `{{ACTIVE_PROJECT_COUNT}}`: Number of active projects from the Supabase query
+- `{{ACTIVE_PROJECT_SUMMARY}}`: Comma-separated list of "[project name] ([phase])" for each active project
 - `{{STAGED_COUNT}}`: Number of emails in `staged-emails.json`, or "0 staged" if none/file missing
 - `{{TEMPLATE_PERFORMANCE}}`: Best performing template and rate (e.g., "best: W2 at 33%"), or "no data yet" if no sends
 
 If the email failed, replace the "Email sent" line with: `Email failed: [error reason]`
 
-### Step 9: Pending Onboarding Tasks
+### Step 9: Calendar Sync
+
+Run the calendar sync skill (`.claude/skills/calendar-sync/SKILL.md`). Reuse the Supabase milestone data and prospect pipeline data already gathered in Step 1 -- no duplicate queries.
+
+- Create/update `[OAI]` events for upcoming milestones, follow-ups, and deadlines
+- Remove events for completed milestones or closed prospects
+- On Sundays: run the weekly review (suggest missing items to Eric for approval)
+
+Add to the terminal summary line:
+```
+Calendar: {{SYNC_CREATED}} synced | {{UPCOMING_WEEK}} upcoming this week
+```
+
+### Step 10: Pending Onboarding Tasks
 
 Query `pending_iris_tasks` via Supabase MCP:
 
@@ -284,7 +331,7 @@ If results exist, include in briefing under "Action Required":
 - List each task type and retry count
 - Invoke client-onboarding skill to process them
 
-### Step 10: Saved Conversations Check
+### Step 11: Saved Conversations Check
 
 Check `iris/saved-conversations/` for any `.md` files.
 
