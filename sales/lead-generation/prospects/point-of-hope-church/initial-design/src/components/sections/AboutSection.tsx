@@ -32,7 +32,7 @@ const beliefs = [
 
 export default function AboutSection() {
   return (
-    <section id="about" className="bg-white/35 backdrop-blur-sm py-20 md:py-28">
+    <section id="about" className="bg-white/25 backdrop-blur-sm py-20 md:py-28">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         {/* Heading */}
         <div className="mb-16 text-center">
@@ -57,7 +57,7 @@ export default function AboutSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.15 }}
-            className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-[#535250]"
+            className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-[#2d2b28]"
             style={{ fontFamily: "var(--font-inter)" }}
           >
             Point of Hope Apostolic Church is a welcoming community of faith
@@ -98,7 +98,7 @@ export default function AboutSection() {
                 {belief.title}
               </h4>
               <p
-                className="text-sm leading-relaxed text-[#535250]"
+                className="text-sm leading-relaxed text-[#2d2b28]"
                 style={{ fontFamily: "var(--font-inter)" }}
               >
                 {belief.description}

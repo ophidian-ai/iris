@@ -12,6 +12,7 @@ const navLinks = [
   { label: "Events", href: "#events" },
   { label: "Meet the Team", href: "#team" },
   { label: "What to Expect", href: "#expect" },
+  { label: "Stay Connected", href: "#social" },
   { label: "Find Us", href: "#findus" },
 ] as const;
 
