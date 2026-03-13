@@ -1,0 +1,77 @@
+/**
+ * ============================================================
+ * Starter: Glass Card CSS
+ * ============================================================
+ * Pattern:  Frosted-glass card with backdrop blur and subtle border
+ * Source:   OphidianAI globals.css (.glass, .glow-border)
+ *
+ * Customize:
+ *   --glass-card-bg          Background color with alpha. Default rgba(22, 32, 50, 0.6).
+ *   --glass-card-blur        Backdrop blur radius. Default 12px.
+ *   --glass-card-border      Border color. Default rgba(255, 255, 255, 0.06).
+ *   --glass-card-radius      Border radius. Default 12px.
+ *   --glass-card-glow-from   Glow border gradient start color.
+ *   --glass-card-glow-to     Glow border gradient end color.
+ *   --glass-card-glow-opacity  Max opacity of glow border on hover. Default 0.5.
+ *
+ * Usage:
+ *   <div class="glass-card">...</div>
+ *   <div class="glass-card glass-card-glow">...</div>  (adds hover glow border)
+ *
+ * Reference: engineering/design-system/starters/hover-effects/glow-card.css
+ *            (for the mouse-tracking variant)
+ * ============================================================
+ */
+
+/* -- Custom properties ---------------------------------------- */
+
+.glass-card {
+  --glass-card-bg: rgba(22, 32, 50, 0.6);
+  --glass-card-blur: 12px;
+  --glass-card-border: rgba(255, 255, 255, 0.06);
+  --glass-card-radius: 12px;
+  --glass-card-glow-from: #6366f1;
+  --glass-card-glow-to: #06b6d4;
+  --glass-card-glow-opacity: 0.5;
+}
+
+/* -- Base glass ----------------------------------------------- */
+
+.glass-card {
+  background: var(--glass-card-bg);
+  -webkit-backdrop-filter: blur(var(--glass-card-blur));
+  backdrop-filter: blur(var(--glass-card-blur));
+  border: 1px solid var(--glass-card-border);
+  border-radius: var(--glass-card-radius);
+}
+
+/* -- Glow border modifier ------------------------------------- */
+
+.glass-card-glow {
+  position: relative;
+}
+
+.glass-card-glow::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    var(--glass-card-glow-from),
+    var(--glass-card-glow-to)
+  );
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.glass-card-glow:hover::after {
+  opacity: var(--glass-card-glow-opacity);
+}
+
+/* When used inside a glow-card, hide the static border so the
+   mouse-tracking glow shows through instead. */
+.glow-card .glass-card {
+  border-color: transparent;
+}
