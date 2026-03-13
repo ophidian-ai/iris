@@ -114,15 +114,22 @@ export default function SocialSection() {
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.6 }}
             className="font-[family-name:var(--font-playfair)] text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl"
-            style={{ color: "#2d6114" }}
+            style={{ color: "#1a1a1a" }}
           >
             Stay Connected
           </motion.h2>
+          <motion.div
+            initial={{ opacity: 0, scaleX: 0 }}
+            whileInView={{ opacity: 1, scaleX: 1 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="mx-auto mt-4 h-1 w-20 bg-[#f0b012]"
+          />
           <motion.p
             initial={{ opacity: 0, y: 14 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.6, delay: 0.15 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
             className="mx-auto mt-4 max-w-xl text-lg"
             style={{ color: "#535250" }}
           >
@@ -172,7 +179,7 @@ export default function SocialSection() {
           <div
             ref={scrollRef}
             onScroll={updateScrollState}
-            className="-mx-4 flex gap-6 overflow-x-auto px-4 pb-4 scrollbar-none"
+            className="-mx-4 -mt-4 flex gap-6 overflow-x-auto px-4 pt-8 pb-8 scrollbar-none"
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           >
             {posts.map((post, i) => (
