@@ -98,7 +98,7 @@ export default function WhatToExpectSection() {
             whileInView={{ opacity: 1, scaleX: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="mx-auto mt-4 h-1 w-20 bg-[#3f831c]"
+            className="mx-auto mt-4 h-1 w-20 bg-[#f0b012]"
           />
           <motion.p
             initial={{ opacity: 0, y: 16 }}

@@ -451,11 +451,18 @@ export default function EventsSection() {
           >
             Upcoming Events
           </motion.h2>
+          <motion.div
+            initial={{ opacity: 0, scaleX: 0 }}
+            whileInView={{ opacity: 1, scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="mx-auto mt-4 h-1 w-20 bg-[#f0b012]"
+          />
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
+            transition={{ duration: 0.5, delay: 0.15 }}
             className="mt-4 text-lg text-[#535250]"
           >
             Join us for worship and fellowship
