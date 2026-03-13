@@ -80,7 +80,7 @@ function TiltCard({
 
 export default function WhatToExpectSection() {
   return (
-    <section id="expect" className="bg-white/35 backdrop-blur-sm py-20 md:py-28">
+    <section id="expect" className="bg-white/25 backdrop-blur-sm py-20 md:py-28">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         {/* Heading */}
         <div className="mb-14 text-center">
@@ -105,7 +105,7 @@ export default function WhatToExpectSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.15 }}
-            className="mt-4 text-lg text-[#535250]"
+            className="mt-4 text-lg text-[#2d2b28]"
             style={{ fontFamily: "var(--font-inter)" }}
           >
             Your first visit should feel like coming home
@@ -129,7 +129,7 @@ export default function WhatToExpectSection() {
                     {item.title}
                   </h3>
                   <p
-                    className="text-sm leading-relaxed text-[#535250]"
+                    className="text-sm leading-relaxed text-[#2d2b28]"
                     style={{ fontFamily: "var(--font-inter)" }}
                   >
                     {item.description}

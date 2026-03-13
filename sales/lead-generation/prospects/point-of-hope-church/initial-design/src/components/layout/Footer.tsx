@@ -7,6 +7,7 @@ const quickLinks = [
   { label: "Events", href: "#events" },
   { label: "Meet the Team", href: "#team" },
   { label: "What to Expect", href: "#expect" },
+  { label: "Stay Connected", href: "#social" },
   { label: "Find Us", href: "#findus" },
 ];
 
@@ -105,12 +106,13 @@ export default function Footer() {
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="h-4 w-4 flex-shrink-0 text-[#3f831c]" />
-                <span
-                  className="text-sm text-gray-400"
+                <a
+                  href="mailto:pointofhopeministries@gmail.com"
+                  className="text-sm text-gray-400 transition-colors hover:text-[#3f831c]"
                   style={{ fontFamily: "var(--font-inter)" }}
                 >
-                  Contact us on Facebook
-                </span>
+                  pointofhopeministries@gmail.com
+                </a>
               </div>
             </div>
           </div>

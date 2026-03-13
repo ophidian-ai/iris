@@ -104,7 +104,7 @@ export default function SocialSection() {
   }
 
   return (
-    <section className="bg-white/35 backdrop-blur-sm py-20 md:py-28">
+    <section id="social" className="bg-[#f5f3ee]/20 backdrop-blur-sm py-20 md:py-28 -mt-px">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-12 text-center">
@@ -131,7 +131,7 @@ export default function SocialSection() {
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="mx-auto mt-4 max-w-xl text-lg"
-            style={{ color: "#535250" }}
+            style={{ color: "#2d2b28" }}
           >
             Follow us on Facebook for the latest updates
           </motion.p>
@@ -164,13 +164,13 @@ export default function SocialSection() {
           {/* Fade edges */}
           <div
             className={cn(
-              "pointer-events-none absolute left-0 top-0 z-10 h-full w-16 bg-gradient-to-r from-white/35 to-transparent transition-opacity",
+              "pointer-events-none absolute left-0 top-0 z-10 h-full w-16 bg-gradient-to-r from-[#f5f3ee]/20 to-transparent transition-opacity",
               !canScrollLeft && "opacity-0"
             )}
           />
           <div
             className={cn(
-              "pointer-events-none absolute right-0 top-0 z-10 h-full w-16 bg-gradient-to-l from-white/35 to-transparent transition-opacity",
+              "pointer-events-none absolute right-0 top-0 z-10 h-full w-16 bg-gradient-to-l from-[#f5f3ee]/20 to-transparent transition-opacity",
               !canScrollRight && "opacity-0"
             )}
           />
@@ -222,7 +222,7 @@ export default function SocialSection() {
                       className="h-3.5 w-3.5"
                       style={{ color: "#1877F2" }}
                     />
-                    <span style={{ color: "#535250" }}>Facebook</span>
+                    <span style={{ color: "#2d2b28" }}>Facebook</span>
                   </div>
                 </div>
 
@@ -230,21 +230,21 @@ export default function SocialSection() {
                 <div className="p-5">
                   <p
                     className="line-clamp-3 text-sm leading-relaxed"
-                    style={{ color: "#535250" }}
+                    style={{ color: "#2d2b28" }}
                   >
                     {post.text}
                   </p>
                   <div className="mt-4 flex items-center justify-between">
                     <time
                       className="text-xs"
-                      style={{ color: "#535250", opacity: 0.7 }}
+                      style={{ color: "#2d2b28", opacity: 0.7 }}
                       dateTime={post.date}
                     >
                       {post.date}
                     </time>
                     <div
                       className="flex items-center gap-3 text-xs"
-                      style={{ color: "#535250", opacity: 0.7 }}
+                      style={{ color: "#2d2b28", opacity: 0.7 }}
                     >
                       <span className="flex items-center gap-1">
                         <Heart className="h-3.5 w-3.5" />

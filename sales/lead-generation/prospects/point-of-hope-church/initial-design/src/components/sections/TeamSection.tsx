@@ -35,7 +35,7 @@ export default function TeamSection() {
   };
 
   return (
-    <section id="team" className="bg-[#f5f3ee]/30 backdrop-blur-sm py-20 md:py-28">
+    <section id="team" className="bg-[#f5f3ee]/20 backdrop-blur-sm py-20 md:py-28">
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         {/* Heading */}
         <div className="mb-14 text-center">
@@ -112,13 +112,13 @@ export default function TeamSection() {
                   {teamMembers[active].name}
                 </h3>
                 <p
-                  className="text-sm font-medium text-[#3f831c]"
+                  className="text-sm font-medium text-[#f0b012]"
                   style={{ fontFamily: "var(--font-inter)" }}
                 >
                   {teamMembers[active].title}
                 </p>
                 <p
-                  className="mt-8 text-lg leading-relaxed text-[#535250]"
+                  className="mt-8 text-lg leading-relaxed text-[#2d2b28]"
                   style={{ fontFamily: "var(--font-inter)" }}
                 >
                   {teamMembers[active].bio}

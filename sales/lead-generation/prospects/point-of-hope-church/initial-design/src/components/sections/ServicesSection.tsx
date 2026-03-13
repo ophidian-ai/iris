@@ -29,7 +29,7 @@ const services = [
 
 export default function ServicesSection() {
   return (
-    <section id="services" className="bg-[#f5f3ee]/30 backdrop-blur-sm py-20 md:py-28">
+    <section id="services" className="bg-[#f5f3ee]/20 backdrop-blur-sm py-20 md:py-28">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         {/* Heading */}
         <div className="mb-14 text-center">
@@ -54,7 +54,7 @@ export default function ServicesSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.15 }}
-            className="mt-4 text-lg text-[#535250]"
+            className="mt-4 text-lg text-[#2d2b28]"
             style={{ fontFamily: "var(--font-inter)" }}
           >
             Join us throughout the week for worship, prayer, and fellowship
@@ -88,7 +88,7 @@ export default function ServicesSection() {
                 {service.time}
               </p>
               <p
-                className="text-sm leading-relaxed text-[#535250]"
+                className="text-sm leading-relaxed text-[#2d2b28]"
                 style={{ fontFamily: "var(--font-inter)" }}
               >
                 {service.description}
@@ -103,7 +103,7 @@ export default function ServicesSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="mt-12 flex items-center justify-center gap-2 text-center text-sm text-[#535250]"
+          className="mt-12 flex items-center justify-center gap-2 text-center text-sm text-[#2d2b28]"
           style={{ fontFamily: "var(--font-inter)" }}
         >
           <MapPin className="h-4 w-4 text-[#3f831c]" />

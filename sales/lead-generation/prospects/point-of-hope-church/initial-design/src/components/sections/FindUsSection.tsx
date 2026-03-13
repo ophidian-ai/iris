@@ -90,7 +90,7 @@ function AnimatedBorderCard({ children }: { children: React.ReactNode }) {
 
 export default function FindUsSection() {
   return (
-    <section id="findus" className="bg-[#f5f3ee]/30 backdrop-blur-sm py-20 md:py-28">
+    <section id="findus" className="bg-white/25 backdrop-blur-sm py-20 md:py-28">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         {/* Heading */}
         <div className="mb-14 text-center">
@@ -134,7 +134,7 @@ export default function FindUsSection() {
                     <MapPin className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#3f831c]" />
                     <div style={{ fontFamily: "var(--font-inter)" }}>
                       <p className="font-medium text-[#1a1a1a]">Address</p>
-                      <p className="text-sm text-[#535250]">
+                      <p className="text-sm text-[#2d2b28]">
                         5150 Shelbyville Road
                         <br />
                         Indianapolis, IN 46237
@@ -148,7 +148,7 @@ export default function FindUsSection() {
                       <p className="font-medium text-[#1a1a1a]">Phone</p>
                       <a
                         href="tel:3177821502"
-                        className="text-sm text-[#535250] hover:text-[#3f831c] transition-colors"
+                        className="text-sm text-[#2d2b28] hover:text-[#3f831c] transition-colors"
                       >
                         317-782-1502
                       </a>
@@ -161,7 +161,7 @@ export default function FindUsSection() {
                       <p className="font-medium text-[#1a1a1a]">
                         Service Times
                       </p>
-                      <div className="text-sm text-[#535250]">
+                      <div className="text-sm text-[#2d2b28]">
                         <p>Sunday Worship: 10:00 AM</p>
                         <p>Tuesday Prayer: 6:00 PM</p>
                         <p>Wednesday Bible Study: 7:00 PM</p>

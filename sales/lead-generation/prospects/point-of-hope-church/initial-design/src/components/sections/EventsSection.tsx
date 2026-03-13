@@ -152,13 +152,13 @@ function EventCard({
         <button
           onClick={onClose}
           aria-label="Close"
-          className="shrink-0 rounded-full p-1 text-[#535250] transition hover:bg-[#e8f5e3] hover:text-[#3f831c]"
+          className="shrink-0 rounded-full p-1 text-[#2d2b28] transition hover:bg-[#e8f5e3] hover:text-[#3f831c]"
         >
           <X size={16} />
         </button>
       </div>
 
-      <div className="space-y-2 text-sm text-[#535250]">
+      <div className="space-y-2 text-sm text-[#2d2b28]">
         <div className="flex items-center gap-2">
           <Clock size={14} className="text-[#3f831c]" />
           <span>
@@ -264,7 +264,7 @@ function CalendarGrid({
                     ? "bg-[#3f831c] text-white"
                     : isSelected
                     ? "text-[#1a1a1a]"
-                    : "text-[#535250]"
+                    : "text-[#2d2b28]"
                 )}
               >
                 {day}
@@ -320,7 +320,7 @@ function MobileEventList({ year, month }: { year: number; month: number }) {
   return (
     <div className="space-y-3">
       {daysWithEvents.length === 0 && (
-        <p className="py-8 text-center text-sm text-[#535250]">
+        <p className="py-8 text-center text-sm text-[#2d2b28]">
           No events this month.
         </p>
       )}
@@ -348,7 +348,7 @@ function MobileEventList({ year, month }: { year: number; month: number }) {
                 {formatDate(date)}
               </span>
             </div>
-            <span className="text-xs text-[#535250]">
+            <span className="text-xs text-[#2d2b28]">
               {events.length} event{events.length > 1 ? "s" : ""}
             </span>
           </button>
@@ -373,7 +373,7 @@ function MobileEventList({ year, month }: { year: number; month: number }) {
                       >
                         {event.name}
                       </div>
-                      <div className="space-y-1.5 text-sm text-[#535250]">
+                      <div className="space-y-1.5 text-sm text-[#2d2b28]">
                         <div className="flex items-center gap-2">
                           <Clock size={13} className="text-[#3f831c]" />
                           <span>
@@ -438,7 +438,7 @@ export default function EventsSection() {
   );
 
   return (
-    <section id="events" className="bg-white/35 backdrop-blur-sm py-20 md:py-28">
+    <section id="events" className="bg-white/25 backdrop-blur-sm py-20 md:py-28">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         {/* Heading */}
         <div className="mb-12 text-center">
@@ -463,7 +463,7 @@ export default function EventsSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.15 }}
-            className="mt-4 text-lg text-[#535250]"
+            className="mt-4 text-lg text-[#2d2b28]"
           >
             Join us for worship and fellowship
           </motion.p>
@@ -480,7 +480,7 @@ export default function EventsSection() {
           <button
             onClick={() => navigate(-1)}
             aria-label="Previous month"
-            className="rounded-full border border-[#3f831c]/20 p-2 text-[#3f831c] transition hover:bg-[#e8f5e3]"
+            className="rounded-full border border-[#f0b012]/30 p-2 text-[#f0b012] transition hover:bg-[#f0b012]/10"
           >
             <ChevronLeft size={20} />
           </button>
@@ -490,7 +490,7 @@ export default function EventsSection() {
           <button
             onClick={() => navigate(1)}
             aria-label="Next month"
-            className="rounded-full border border-[#3f831c]/20 p-2 text-[#3f831c] transition hover:bg-[#e8f5e3]"
+            className="rounded-full border border-[#f0b012]/30 p-2 text-[#f0b012] transition hover:bg-[#f0b012]/10"
           >
             <ChevronRight size={20} />
           </button>
@@ -552,7 +552,7 @@ export default function EventsSection() {
         </AnimatePresence>
 
         {/* Legend */}
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-[#535250]">
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-[#2d2b28]">
           <div className="flex items-center gap-1.5">
             <span className="h-2.5 w-2.5 rounded-full bg-[#3f831c]" />
             Worship &amp; Bible Study
