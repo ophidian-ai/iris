@@ -168,6 +168,90 @@ Use this to determine which tier fits:
 
 ---
 
+## Social Media Management
+
+### Social Essentials -- $250/mo
+
+**Best for:** Businesses that need a consistent social presence without a big time investment.
+
+**Scope:**
+
+- Platforms: Facebook + Instagram + Google Business Profile
+- 8 posts/month (2/week) on FB/IG + 4 GBP posts/month
+- Content types: text posts, single-image posts
+- AI-generated content, reviewed and approved by Eric
+- 1 round of revisions per batch
+- Basic monthly metrics report
+- 3-month minimum commitment
+
+**When to recommend:** Business has no social presence or posts sporadically. They want consistency without doing it themselves.
+
+---
+
+### Social Growth -- $450/mo
+
+**Best for:** Businesses that want to actively grow their audience and drive engagement.
+
+**Scope:**
+
+- Platforms: Facebook + Instagram + TikTok + Google Business Profile
+- 12-16 posts/month (3-4/week) on FB/IG, 4-8 TikToks/month, 4 GBP posts/month
+- Content types: text, images, carousels, Stories, Reel/TikTok scripts
+- 1 engagement post per week (poll, question, callout)
+- Basic community management (comments/DMs monitored 1x/week)
+- 2 rounds of revisions per batch
+- Shared content calendar
+- Detailed monthly report with strategy note
+- 3-month minimum commitment
+
+**When to recommend:** Business is active on social but inconsistent, or wants to add TikTok. They want growth, not just presence.
+
+---
+
+### Social Pro -- $700/mo
+
+**Best for:** Businesses that want a full-service social media presence across multiple platforms.
+
+**Scope:**
+
+- Platforms: Facebook + Instagram + TikTok + Google Business Profile + 1 additional (LinkedIn or Pinterest)
+- 16-20 posts/month (4-5/week) on FB/IG, 8-12 TikToks/month, 4 GBP posts/month, 4-8 posts on additional platform
+- All content types including advanced Reel/TikTok scripts and Story sequences
+- Active community management (comments/DMs monitored 2-3x/week)
+- Unlimited revisions (within reason)
+- Shared content calendar
+- Multi-platform monthly report + optional 15-min strategy call
+- 3-month minimum commitment
+
+**When to recommend:** Business wants maximum social reach and engagement across all relevant platforms. Professional services (LinkedIn) or visual businesses (Pinterest) that need platform-specific content.
+
+---
+
+### Social Media Add-Ons
+
+| Add-On | Price |
+| --- | --- |
+| Additional platform (LinkedIn, Pinterest, or TikTok) | +$100/mo |
+| Extra posts beyond tier | $15/post |
+| Boosted post management | $50/mo + ad spend |
+| Content photography session (local only) | $150/session |
+| Holiday/seasonal campaign (4-6 posts) | $75-$150 one-time |
+| Community management upgrade (for Essentials) | +$75/mo |
+
+---
+
+### Social Media Bundle Pricing
+
+Discount for combining with website services:
+
+| Bundle | Components | Bundle Price |
+| --- | --- | --- |
+| Online Presence Starter | Starter website + Social Essentials + Maintenance | $2,200 + $300/mo (save $50/mo) |
+| Growth Package | Professional website + Social Growth + Maintenance | $3,500 + $475/mo (save $75/mo) |
+| Full Digital | Professional website + Social Pro + SEO Growth + Maintenance | $3,500 + $900/mo (save $150/mo) |
+
+---
+
 ## Cost to Deliver (Internal)
 
 | Expense                            | Cost           |
@@ -179,7 +263,12 @@ Use this to determine which tier fits:
 | Eric's time per maintenance client  | ~1-2 hrs/mo    |
 | Eric's time per SEO Cleanup client  | ~3-5 hrs       |
 | Eric's time per SEO Growth client   | ~3-4 hrs/mo    |
+| Eric's time per Social Essentials   | ~2 hrs/mo      |
+| Eric's time per Social Growth       | ~4 hrs/mo      |
+| Eric's time per Social Pro          | ~6 hrs/mo      |
 
 **Margin per maintenance client:** ~$79-$129/mo after hosting costs.
+
+**Margin per social media client:** ~$225-$675/mo (no incremental tool costs -- Meta Business Suite, Canva, GBP are free).
 
 **Break-even on Claude Pro:** 2 clients on maintenance.

@@ -58,11 +58,26 @@ Full reference: `operations/references/pricing-structure.md`
 - Cleanup: $400-$600 (advisory) or $800-$1,200 (done-for-you)
 - Growth retainer: $200-$250/mo (Standard) or $300-$350/mo (Premium), 3-month minimum
 
+## Social Media Management
+
+| Tier | Price | Platforms | Posts/Month |
+|---|---|---|---|
+| Essentials | $250/mo | FB + IG + GBP | ~12 |
+| Growth | $450/mo | FB + IG + TikTok + GBP | ~20-28 |
+| Pro | $700/mo | FB + IG + TikTok + GBP + 1 more | ~32-44 |
+
+- 3-month minimum commitment on all tiers
+- Add-ons: extra platform +$100/mo, extra posts $15/post, boosted post mgmt $50/mo + ad spend
+- Bundles with website services save $50-$150/mo
+- Clients link accounts via OAuth portal (one-time setup per platform)
+- Pending Meta Business Verification approval
+
 ## Margins
 
 - Cost to deliver: Vercel ~$20/mo per client, domain ~$1/mo
 - Claude Pro: $100/mo fixed overhead
 - Margin: ~$79-$129/mo per maintenance client
+- Social media margin: ~$225-$675/mo (no incremental tool costs)
 - Break-even on Claude Pro: 2 clients on maintenance
 
 ## Monthly Burn Rate (as of 2026-03-07)

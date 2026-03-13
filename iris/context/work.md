@@ -8,6 +8,8 @@
 
 ## Services
 - **Client websites** -- Design and build websites for small businesses. This is the current primary offering.
+- **Social media management** -- AI-driven social media posting and management for clients across FB, IG, TikTok, GBP, LinkedIn, Pinterest. Three tiers: Essentials ($250/mo), Growth ($450/mo), Pro ($700/mo). Pending Meta Business Verification approval.
+- **SEO services** -- Free audits (lead magnet), one-time cleanup ($400-$1,200), monthly growth retainer ($200-$350/mo).
 - **AI integrations** -- Custom AI tools and integrations for clients (planned/emerging).
 - **AI services** -- Broader AI consulting and implementation (planned/emerging).
 
