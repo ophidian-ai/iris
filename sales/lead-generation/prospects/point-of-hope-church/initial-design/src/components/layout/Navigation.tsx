@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
@@ -123,9 +124,11 @@ export default function Navigation() {
                   onClick={(e) => handleClick(e, "#hero")}
                   className="flex items-center gap-2 flex-shrink-0"
                 >
-                  <img
+                  <Image
                     src="https://pointofhopechurch.com/wp-content/themes/point-of-hope/images/logo.png"
                     alt="Point of Hope"
+                    width={32}
+                    height={32}
                     className="h-8 w-auto"
                   />
                   <span

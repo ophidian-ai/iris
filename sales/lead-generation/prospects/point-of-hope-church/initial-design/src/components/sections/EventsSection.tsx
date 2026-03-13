@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useCallback } from "react";
+import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, Clock, MapPin, Calendar, X } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -91,7 +91,8 @@ function googleCalendarUrl(date: Date, event: CalendarEvent): string {
 
   const parseTime = (timeStr: string): { h: number; m: number } => {
     const [time, meridiem] = timeStr.split(" ");
-    let [h, m] = time.split(":").map(Number);
+    const [rawH, m] = time.split(":").map(Number);
+    let h = rawH;
     if (meridiem === "PM" && h !== 12) h += 12;
     if (meridiem === "AM" && h === 12) h = 0;
     return { h, m };
@@ -427,15 +428,12 @@ export default function EventsSection() {
     { month: "long", year: "numeric" }
   );
 
-  const navigate = useCallback(
-    (direction: -1 | 1) => {
-      setSelectedDay(null);
-      const newDate = new Date(currentYear, currentMonth + direction, 1);
-      setCurrentMonth(newDate.getMonth());
-      setCurrentYear(newDate.getFullYear());
-    },
-    [currentMonth, currentYear]
-  );
+  const navigate = (direction: -1 | 1) => {
+    setSelectedDay(null);
+    const newDate = new Date(currentYear, currentMonth + direction, 1);
+    setCurrentMonth(newDate.getMonth());
+    setCurrentYear(newDate.getFullYear());
+  };
 
   return (
     <section id="events" className="bg-white/25 backdrop-blur-sm py-20 md:py-28">
