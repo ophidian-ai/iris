@@ -2,12 +2,13 @@
 import { business } from "../../data/business";
 ---
 
-<section class="scroll-scrub-container relative noise-overlay" id="hero-scrub">
-  <div class="sticky top-0 h-screen w-full overflow-hidden">
-    <!-- Scroll-scrubbed video background -->
+<section class="relative noise-overlay" id="hero">
+  <div class="relative h-screen w-full overflow-hidden">
+    <!-- Autoplay video background -->
     <video
-      id="scrub-video"
       muted
+      autoplay
+      loop
       playsinline
       preload="auto"
       poster="/images/hero.jpg"
@@ -16,8 +17,8 @@ import { business } from "../../data/business";
       <source src="/videos/hero-scrub.mp4" type="video/mp4" />
     </video>
 
-    <!-- Dynamic overlay (fades 70% -> 35% on scroll via JS) -->
-    <div id="hero-overlay" class="absolute inset-0 bg-black/70 transition-opacity duration-100"></div>
+    <!-- Dark overlay -->
+    <div class="absolute inset-0 bg-black/60"></div>
 
     <!-- Gradient vignettes -->
     <div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>

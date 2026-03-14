@@ -63,12 +63,6 @@ body {
   background: var(--color-primary);
 }
 
-/* ── Scroll-scrub hero ── */
-.scroll-scrub-container {
-  height: 300vh;
-  position: relative;
-}
-
 /* ── Scroll animations ── */
 .fade-in {
   opacity: 0;
@@ -316,9 +310,6 @@ body {
 
 /* ── Reduced motion ── */
 @media (prefers-reduced-motion: reduce) {
-  .scroll-scrub-container {
-    height: auto;
-  }
   .fade-in, .slide-left, .slide-right, .scale-reveal, .clip-reveal {
     opacity: 1;
     transform: none;
