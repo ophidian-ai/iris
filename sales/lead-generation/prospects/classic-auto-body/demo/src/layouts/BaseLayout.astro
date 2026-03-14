@@ -30,7 +30,7 @@ const { title, description, fonts } = Astro.props;
           transform: none !important;
           clip-path: none !important;
         }
-        .scroll-scrub-container { height: auto !important; }
+        /* no-op placeholder for noscript */
       </style>
     </noscript>
 
@@ -50,34 +50,6 @@ const { title, description, fonts } = Astro.props;
       document
         .querySelectorAll(".fade-in, .slide-left, .slide-right, .scale-reveal, .clip-reveal")
         .forEach((el) => animObserver.observe(el));
-
-      // ── Scroll-scrub video hero ──
-      const scrubVideo = document.getElementById("scrub-video") as HTMLVideoElement | null;
-      const scrubContainer = document.getElementById("hero-scrub");
-      const heroOverlay = document.getElementById("hero-overlay");
-
-      if (scrubVideo && scrubContainer) {
-        scrubVideo.pause();
-
-        const updateScrub = () => {
-          const rect = scrubContainer.getBoundingClientRect();
-          const scrollProgress = Math.max(0, Math.min(1,
-            -rect.top / (rect.height - window.innerHeight)
-          ));
-
-          if (scrubVideo.duration) {
-            scrubVideo.currentTime = scrollProgress * scrubVideo.duration;
-          }
-
-          if (heroOverlay) {
-            const opacity = 0.7 - (scrollProgress * 0.35);
-            heroOverlay.style.opacity = String(Math.max(0.35, opacity));
-          }
-        };
-
-        window.addEventListener("scroll", updateScrub, { passive: true });
-        updateScrub();
-      }
 
       // ── 3D tilt cards ──
       document.querySelectorAll<HTMLElement>(".tilt-card").forEach((card) => {

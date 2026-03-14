@@ -69,9 +69,9 @@ const phoneLink = `tel:${phone.replace(/[^0-9+]/g, "")}`;
 </nav>
 
 <script>
-  // Show nav after scrolling past hero scrub section
+  // Show nav after scrolling past hero section
   const nav = document.getElementById("main-nav");
-  const heroScrub = document.getElementById("hero-scrub");
+  const heroScrub = document.getElementById("hero");
 
   if (nav && heroScrub) {
     const observer = new IntersectionObserver(
