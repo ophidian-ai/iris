@@ -93,10 +93,8 @@ The HTML document contains these sections in order:
    ```
 
 3. **Send via Gmail** -- Use the GWS CLI with the PDF attached:
-   ```bash
-   echo '{"to":"prospect@email.com","subject":"OphidianAI Proposal for [Business Name]","html":"<p>Hi [Name],</p><p>Thanks for your interest. Attached is a proposal outlining what we can build for [Business Name].</p><p>Happy to answer any questions or hop on a quick call.</p><p>Eric Lefler<br>OphidianAI</p>","attachments":[{"filename":"OphidianAI-Proposal-[Business].pdf","path":"absolute/path/to/proposal.pdf","mimeType":"application/pdf"}]}' | node .claude/skills/gws-cli/scripts/build_raw_email.js | gws gmail users messages send --params '{"userId":"me"}' --json @-
-   ```
-   **Always test-send to eric.lefler@ophidianai.com first.**
+   **Always stage as a Gmail draft.** Eric will inspect and send on his own timeline.
+   Use `gws gmail users drafts create` to create the draft.
 
 4. **Update tracker** -- Set prospect status to "Proposal Sent" in `sales/lead-generation/prospect-tracker.md`.
 
@@ -106,8 +104,7 @@ The HTML document contains these sections in order:
 - [ ] All pages and features listed match what was discussed
 - [ ] Assessment findings are accurately referenced
 - [ ] PDF renders correctly (check formatting, page breaks)
-- [ ] Test email sent to Eric first
-- [ ] Eric approved the proposal
+- [ ] Staged as Gmail draft for Eric to review and send
 
 ## Payment Schedule Rules
 

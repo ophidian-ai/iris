@@ -1,0 +1,11 @@
+[Unit]
+Description=Iris Expense Scan
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=eric
+WorkingDirectory=/home/eric/OphidianAI
+ExecStart=/opt/iris/scripts/expense-scan.sh
+TimeoutStartSec=300

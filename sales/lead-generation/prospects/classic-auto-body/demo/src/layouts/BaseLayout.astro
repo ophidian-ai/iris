@@ -1,0 +1,45 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  fonts?: string;
+}
+
+const { title, description, fonts } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    {fonts && <link rel="preconnect" href="https://fonts.googleapis.com" />}
+    {fonts && <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />}
+    {fonts && <link href={fonts} rel="stylesheet" />}
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body class="font-body">
+    <slot />
+    <script>
+      // Intersection Observer for scroll animations
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+
+      document
+        .querySelectorAll(".fade-in, .slide-left, .slide-right, .scale-reveal")
+        .forEach((el) => {
+          observer.observe(el);
+        });
+    </script>
+  </body>
+</html>

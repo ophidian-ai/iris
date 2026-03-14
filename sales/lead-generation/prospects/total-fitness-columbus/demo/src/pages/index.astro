@@ -1,0 +1,58 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navigation from "../components/layout/Navigation.astro";
+import Footer from "../components/layout/Footer.astro";
+import HeroSection from "../components/sections/HeroSection.astro";
+import MarqueeStrip from "../components/sections/MarqueeStrip.astro";
+import FacilitiesSection from "../components/sections/FacilitiesSection.astro";
+import ServicesSection from "../components/sections/ServicesSection.astro";
+import StatsRings from "../components/sections/StatsRings.astro";
+import AboutSection from "../components/sections/AboutSection.astro";
+import CTABanner from "../components/sections/CTABanner.astro";
+import ContactSection from "../components/sections/ContactSection.astro";
+import { business } from "../data/business";
+import "../styles/global.css";
+
+const navSections = [
+  { id: "facilities", label: "Facilities" },
+  { id: "services", label: "Programs" },
+  { id: "about", label: "About" },
+  { id: "contact", label: "Contact" },
+];
+
+const fullAddress = business.address.street
+  ? `${business.address.street}, ${business.address.city}, ${business.address.state} ${business.address.zip}`
+  : `${business.address.city}, ${business.address.state} ${business.address.zip}`;
+
+const fontsUrl = "https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap";
+---
+
+<BaseLayout
+  title={`${business.name} | ${business.tagline}`}
+  description={`${business.name} - ${business.tagline}. Locally owned gym in ${business.address.city}, ${business.address.state}. No contracts, certified trainers, 26+ years of service.`}
+  fonts={fontsUrl}
+>
+  <Navigation businessName={business.name} sections={navSections} />
+
+  <HeroSection />
+  <MarqueeStrip />
+  <FacilitiesSection />
+  <ServicesSection />
+  <StatsRings />
+  <AboutSection />
+  <CTABanner />
+  <ContactSection />
+
+  <Footer
+    businessName={business.name}
+    phone={business.phone}
+    address={fullAddress}
+    email={business.email}
+  >
+    {business.hours.map((h) => (
+      <p class="text-sm text-muted">
+        <span class="font-medium text-foreground">{h.day}:</span> {h.time}
+      </p>
+    ))}
+  </Footer>
+</BaseLayout>

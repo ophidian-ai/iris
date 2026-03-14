@@ -1,0 +1,85 @@
+---
+/**
+ * Sticky scroll about -- image pins on left while text scrolls on right.
+ * Creates a storytelling effect unique to this demo.
+ */
+import { business } from "../../data/business";
+---
+
+<section id="about" class="bg-background">
+  <div class="mx-auto max-w-7xl px-6 lg:px-12">
+    <div class="grid grid-cols-1 lg:grid-cols-2 lg:gap-16">
+      <!-- Left: Sticky image (pins while text scrolls) -->
+      <div class="relative hidden lg:block">
+        <div class="sticky top-0 flex h-screen items-center py-12">
+          <div class="img-hover relative w-full">
+            <img
+              src="/images/about.jpg"
+              alt="Expressions Ink Tattoo Studio"
+              class="h-[70vh] w-full object-cover"
+              loading="lazy"
+            />
+            <!-- Red accent corner -->
+            <div class="absolute -bottom-3 -right-3 h-24 w-24 border-b-2 border-r-2 border-primary"></div>
+            <div class="absolute -left-3 -top-3 h-24 w-24 border-l-2 border-t-2 border-primary"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Scrolling text blocks -->
+      <div class="py-24 lg:py-32">
+        <!-- Mobile-only image -->
+        <div class="mb-12 lg:hidden">
+          <img
+            src="/images/about.jpg"
+            alt="Expressions Ink Tattoo Studio"
+            class="h-64 w-full object-cover"
+            loading="lazy"
+          />
+        </div>
+
+        <!-- Block 1: Who We Are -->
+        <div class="fade-in mb-20">
+          <span class="font-display text-sm tracking-[0.4em] text-primary uppercase">The Studio</span>
+          <h2 class="mt-3 font-display text-5xl tracking-wider text-foreground uppercase sm:text-6xl">
+            About Us
+          </h2>
+          <div class="mt-6 h-px w-16 bg-primary"></div>
+          <p class="mt-8 max-w-md text-lg leading-relaxed text-muted">
+            At Expressions Ink Tattoo, every piece of art we create is 100% custom. We don't do cookie-cutter flash off the wall -- we sit down with you, hear your story, and design something that's yours and yours alone.
+          </p>
+        </div>
+
+        <!-- Block 2: Our Approach -->
+        <div class="fade-in mb-20">
+          <h3 class="font-display text-3xl tracking-wider text-foreground uppercase">Our Approach</h3>
+          <p class="mt-4 max-w-md leading-relaxed text-muted">
+            Located in Columbus, Indiana, we've built our reputation on quality craftsmanship, a clean and welcoming studio, and the kind of attention to detail that keeps clients coming back. Walk-ins are always welcome.
+          </p>
+        </div>
+
+        <!-- Block 3: Stats -->
+        <div class="fade-in mb-20">
+          <div class="flex flex-wrap gap-10">
+            {business.stats?.map((stat) => (
+              <div>
+                <p class="font-display text-6xl tracking-wider text-primary">{stat.value}</p>
+                <p class="mt-1 font-display text-xs tracking-[0.3em] text-muted uppercase">{stat.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Block 4: Review -->
+        <div class="fade-in border-l-2 border-primary pl-8">
+          <p class="text-lg italic leading-relaxed text-foreground/80">
+            "{business.reviews?.[0]?.text}"
+          </p>
+          <p class="mt-4 font-display text-sm tracking-widest text-primary uppercase">
+            -- {business.reviews?.[0]?.author}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

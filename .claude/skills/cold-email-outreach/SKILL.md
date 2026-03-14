@@ -224,9 +224,79 @@ Before sending cold outreach, verify:
 
 See `operations/references/sops/email-warmup.md` for full setup details.
 
+## Follow-Up Strategy: Two-Touch Maximum
+
+Data from 2026 cold email research shows diminishing returns after the second touch:
+
+- **1st follow-up:** +49% reply boost (always send this)
+- **2nd follow-up:** Marginal benefit -- only if content angle is different
+- **3rd follow-up:** -20% response rate (hurts more than helps)
+- **4th follow-up:** -55% response rate (actively damages deliverability)
+
+**The rule:** Initial email + one follow-up bump. If no response, recycle the prospect into a different campaign with a completely different angle (different template category). Never send 4+ emails to the same prospect.
+
+See `follow-up-email` skill for follow-up drafting.
+
+## Microtargeting Over Volume
+
+Campaigns targeting under 50 recipients get **5.8% reply rate** vs 2.1% for 1,000+ recipient campaigns. Build campaigns around 25-50 people per micro-niche.
+
+- Use narrow filters: job title, location, employee count, industry
+- Create one campaign that feels personalized for everyone on the list
+- Quality > quantity: 50 well-targeted emails outperform 500 generic ones
+- See `operations/references/cold-email-playbook.md` for full strategy
+
+## Creative Ideas Template (CI1)
+
+The "3 creative ideas" format is the best-performing cold email format at **85 contacts per opportunity** (2x better than standard templates). Use when you have enough knowledge about the prospect's business to offer specific, actionable ideas.
+
+**When to use:** After research reveals 3+ specific improvements or opportunities for the prospect. Works across all prospect types.
+
+**Structure:**
+
+```
+Subject: some ideas for [business name]
+
+Hi [first name],
+
+I had some ideas about how we could [specific outcome] for [business name].
+
+1. [Specific problem + your solution, tied to their business]
+2. [Different angle they might care about]
+3. [Third creative idea with different use case]
+
+Let me know if any of these resonate.
+
+Eric Lefler
+OphidianAI
+
+P.S. If [alternative] isn't the focus right now, maybe we could [totally different idea].
+```
+
+**Example:**
+
+Subject: some ideas for tailwaggers
+
+Hi Sarah,
+
+I had some ideas about how we could get more pet parents booking with Tailwaggers.
+
+1. Your site doesn't show up when people search "dog grooming Columbus" -- a few quick fixes and you'd be competing with PetSmart for those searches.
+2. An online booking system so people can schedule at 10pm when they're thinking about it instead of having to call during business hours.
+3. A "before and after" gallery showing your best grooms -- this builds trust instantly and gives people a reason to pick you over cheaper options.
+
+Let me know if any of these resonate.
+
+Eric Lefler
+OphidianAI
+
+P.S. If the website isn't the priority right now, I noticed your Google Business Profile could use some love too -- happy to show you what I mean.
+
+---
+
 ## Template Rotation
 
-Templates are organized by prospect type: Website (W1-W4), SEO (S1-S4), and Hybrid (H1-H4). All templates focus on money left on the table or bringing more customers. All are written at a 7th-grade reading level. Under 80 words.
+Templates are organized by prospect type: Website (W1-W4), SEO (S1-S4), Hybrid (H1-H4), and Creative Ideas (CI1). All templates focus on money left on the table or bringing more customers. All are written at a 7th-grade reading level. Under 80 words (CI1 can be slightly longer due to the 3-idea format).
 
 ### How Rotation Works
 

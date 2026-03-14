@@ -1,0 +1,76 @@
+---
+/**
+ * Visual repair process -- numbered steps with connecting line.
+ * Unique to Voelz. No other demo has this pattern.
+ */
+
+const steps = [
+  {
+    number: "01",
+    title: "Free Assessment",
+    description: "Bring your vehicle in or call for a no-obligation estimate. We'll document the damage and provide a detailed repair plan.",
+  },
+  {
+    number: "02",
+    title: "Insurance Coordination",
+    description: "We work directly with all major insurance companies, handling the paperwork and approvals so you don't have to.",
+  },
+  {
+    number: "03",
+    title: "Expert Repair",
+    description: "Our I-CAR certified technicians restore your vehicle using factory-spec equipment, premium materials, and 40+ years of expertise.",
+  },
+  {
+    number: "04",
+    title: "Quality Inspection",
+    description: "Every repair undergoes a thorough multi-point inspection before delivery, ensuring the work meets our exacting standards.",
+  },
+];
+---
+
+<section class="diagonal-top bg-surface py-24">
+  <div class="mx-auto max-w-7xl px-6 lg:px-12">
+    <div class="grid grid-cols-1 gap-16 lg:grid-cols-2">
+      <!-- Left: Section text + image -->
+      <div class="fade-in">
+        <span class="font-display text-xs font-bold uppercase tracking-[0.25em] text-primary">How It Works</span>
+        <h2 class="accent-line mt-3 font-display text-4xl font-bold text-foreground md:text-5xl">
+          Our Repair Process
+        </h2>
+        <p class="mt-6 max-w-md leading-relaxed text-muted">
+          From the moment you walk in to the day you drive away, we keep you informed and in control. No surprises, no hidden fees.
+        </p>
+
+        <!-- Large image -->
+        <div class="img-zoom mt-10 overflow-hidden rounded-2xl">
+          <img
+            src="/images/mechanics.jpg"
+            alt="Mechanics working in the shop"
+            class="aspect-[4/3] w-full object-cover"
+            loading="lazy"
+          />
+        </div>
+      </div>
+
+      <!-- Right: Steps with vertical connector -->
+      <div class="relative flex flex-col gap-10 pt-4 lg:pt-16">
+        <!-- Vertical line -->
+        <div class="absolute bottom-0 left-5 top-20 w-px bg-border lg:top-24"></div>
+
+        {steps.map((step) => (
+          <div class="fade-in relative flex gap-6 pl-2">
+            <!-- Number circle -->
+            <div class="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-navy font-display text-sm font-bold text-primary">
+              {step.number}
+            </div>
+
+            <div>
+              <h3 class="font-display text-lg font-bold text-foreground">{step.title}</h3>
+              <p class="mt-2 leading-relaxed text-muted">{step.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,39 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navigation from "../components/layout/Navigation.astro";
+import Footer from "../components/layout/Footer.astro";
+import { business } from "../data/business";
+import "../styles/global.css";
+
+// Define nav sections -- customize per demo
+const navSections = [
+  { id: "services", label: "Services" },
+  { id: "about", label: "About" },
+  { id: "reviews", label: "Reviews" },
+  { id: "contact", label: "Contact" },
+];
+
+const fullAddress = `${business.address.street}, ${business.address.city}, ${business.address.state} ${business.address.zip}`;
+---
+
+<BaseLayout
+  title={`${business.name} | ${business.tagline}`}
+  description={`${business.name} - ${business.tagline}. Located in ${business.address.city}, ${business.address.state}.`}
+>
+  <Navigation businessName={business.name} sections={navSections} />
+
+  <!-- Add section components here -->
+
+  <Footer
+    businessName={business.name}
+    phone={business.phone}
+    address={fullAddress}
+    email={business.email}
+  >
+    {business.hours.map((h) => (
+      <p class="text-sm text-muted-light">
+        <span class="font-medium text-surface">{h.day}:</span> {h.time}
+      </p>
+    ))}
+  </Footer>
+</BaseLayout>

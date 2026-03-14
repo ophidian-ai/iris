@@ -1,0 +1,47 @@
+---
+import { business } from "../../data/business";
+
+const trustItems = [
+  { icon: "calendar", value: "18+", label: "Years Experience" },
+  { icon: "star", value: "#1", label: "Voted Pet Groomer" },
+  { icon: "heart", value: "272+", label: "Happy Reviews" },
+  { icon: "clock", value: "Walk-Ins", label: "Welcome" },
+];
+---
+
+<!-- Trust strip with wave transitions -->
+<section class="relative">
+  <!-- Top wave: cream into teal -->
+  <div class="wave-divider bg-primary">
+    <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0,0 L0,30 C360,80 720,0 1080,50 C1260,70 1380,40 1440,30 L1440,0 Z" fill="#FDF8F0"/>
+    </svg>
+  </div>
+
+  <!-- Teal trust content -->
+  <div class="bg-primary py-10 md:py-14">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="fade-in grid grid-cols-2 gap-6 md:grid-cols-4 md:gap-8">
+        {trustItems.map((item) => (
+          <div class="text-center">
+            <div class="font-display text-4xl font-bold text-white md:text-5xl">
+              {item.value}
+            </div>
+            <div class="mt-2 text-sm font-medium uppercase tracking-wider text-white/70">
+              {item.label}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom wave: teal into cream -->
+  <div class="wave-divider" style="margin-top: -1px;">
+    <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0,0 C360,70 720,-10 1080,40 C1260,60 1380,20 1440,0 L1440,80 L0,80 Z" fill="#2A9D8F"/>
+      <path d="M0,80 L1440,80 L1440,80 L0,80 Z" fill="#FDF8F0"/>
+      <path d="M0,30 C360,80 720,10 1080,60 C1260,75 1380,45 1440,30 L1440,80 L0,80 Z" fill="#FDF8F0"/>
+    </svg>
+  </div>
+</section>

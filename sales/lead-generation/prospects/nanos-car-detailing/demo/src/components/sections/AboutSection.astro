@@ -1,0 +1,62 @@
+---
+import { business } from "../../data/business";
+---
+
+<section id="about" class="py-24 sm:py-32 overflow-hidden">
+  <div class="mx-auto max-w-7xl px-6 sm:px-12 lg:px-20">
+    <div class="flex flex-col gap-16 lg:flex-row lg:items-center lg:gap-20">
+
+      <!-- Left: Magazine-style overlapping images -->
+      <div class="slide-left relative w-full lg:w-1/2" style="min-height: 520px;">
+        <img
+          src="/images/detail-lambo.jpg"
+          alt="Luxury car detailing"
+          class="absolute top-0 left-0 w-[78%] h-[75%] object-cover shadow-2xl"
+        />
+        <img
+          src="/images/detail-polish.jpg"
+          alt="Polishing work"
+          class="absolute bottom-0 right-0 w-[55%] h-[58%] object-cover border-2 border-primary shadow-2xl"
+        />
+      </div>
+
+      <!-- Right: Text content -->
+      <div class="slide-right w-full lg:w-1/2">
+        <!-- Gold accent line -->
+        <div class="mb-6 h-16 w-px bg-primary"></div>
+
+        <span class="font-display text-sm uppercase tracking-[0.3em] text-primary">About Us</span>
+        <h2 class="font-display mt-3 text-4xl font-bold uppercase tracking-wide text-foreground sm:text-5xl">
+          12 Years of<br />Trusted Service
+        </h2>
+
+        <p class="mt-8 leading-relaxed text-muted">
+          Since 2012, Nano's Car Detailing has been Columbus, Indiana's go-to
+          destination for premium automotive care. As a family-owned business, we
+          treat every vehicle like our own -- delivering meticulous results that
+          keep our customers coming back.
+        </p>
+
+        <p class="mt-4 leading-relaxed text-muted">
+          We proudly serve our community in both English and Spanish, and we're honored
+          to be BBB Accredited and a 2023 Readers' Choice Award winner. We also offer
+          a 5% discount for seniors and military members.
+        </p>
+
+        <!-- Stats as large standalone numbers -->
+        <div class="mt-12 flex gap-14">
+          {business.stats?.map((stat) => (
+            <div>
+              <div class="font-display text-5xl font-bold text-primary gold-glow">
+                {stat.value}
+              </div>
+              <div class="mt-2 text-xs uppercase tracking-[0.2em] text-muted">
+                {stat.label}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

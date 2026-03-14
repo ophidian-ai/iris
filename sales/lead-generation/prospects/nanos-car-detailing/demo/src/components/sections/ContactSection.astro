@@ -1,0 +1,133 @@
+---
+import { business } from "../../data/business";
+
+const fullAddress = `${business.address.street}, ${business.address.city}, ${business.address.state} ${business.address.zip}`;
+---
+
+<section id="contact" class="py-24 sm:py-32 bg-background">
+  <div class="mx-auto max-w-7xl px-6 sm:px-12 lg:px-20">
+    <!-- Section label -->
+    <div class="mb-16 fade-in">
+      <span class="font-display text-sm uppercase tracking-[0.3em] text-primary">Get in Touch</span>
+      <h2 class="font-display mt-3 text-4xl font-bold uppercase tracking-wide text-foreground sm:text-5xl">
+        Contact
+      </h2>
+    </div>
+
+    <!-- Asymmetric layout: 1/3 info + 2/3 form -->
+    <div class="flex flex-col gap-12 lg:flex-row lg:gap-0">
+
+      <!-- Left: Contact info (1/3) -->
+      <div class="slide-left w-full border-l-2 border-primary pl-8 lg:w-1/3 lg:pr-12">
+        <div class="space-y-10">
+          <!-- Phone -->
+          <div>
+            <h3 class="font-display text-xs uppercase tracking-[0.3em] text-primary">Call</h3>
+            <a
+              href={`tel:${business.phone.replace(/[^0-9+]/g, "")}`}
+              class="mt-2 block text-lg text-foreground transition-colors hover:text-primary"
+            >
+              {business.phone}
+            </a>
+          </div>
+
+          <!-- Text -->
+          <div>
+            <h3 class="font-display text-xs uppercase tracking-[0.3em] text-primary">Text</h3>
+            <a
+              href={`sms:${business.textPhone.replace(/[^0-9+]/g, "")}`}
+              class="mt-2 block text-lg text-foreground transition-colors hover:text-primary"
+            >
+              {business.textPhone}
+            </a>
+          </div>
+
+          <!-- Address -->
+          <div>
+            <h3 class="font-display text-xs uppercase tracking-[0.3em] text-primary">Visit</h3>
+            <p class="mt-2 text-lg text-foreground">{fullAddress}</p>
+          </div>
+
+          <!-- Hours -->
+          <div>
+            <h3 class="font-display text-xs uppercase tracking-[0.3em] text-primary">Hours</h3>
+            <div class="mt-2 space-y-1">
+              {business.hours.map((h) => (
+                <p class="text-foreground">
+                  <span class="text-muted">{h.day}:</span> {h.time}
+                </p>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Form (2/3) with underline inputs on black -->
+      <div class="slide-right w-full lg:w-2/3 lg:pl-12">
+        <form class="space-y-8">
+          <h3 class="font-display text-xl font-semibold uppercase tracking-wider text-foreground">
+            Request a Quote
+          </h3>
+
+          <div class="grid grid-cols-1 gap-8 sm:grid-cols-2">
+            <div>
+              <label for="name" class="mb-2 block font-display text-xs uppercase tracking-[0.2em] text-muted">Name</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                class="input-underline"
+                placeholder="Your name"
+              />
+            </div>
+
+            <div>
+              <label for="phone" class="mb-2 block font-display text-xs uppercase tracking-[0.2em] text-muted">Phone</label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                class="input-underline"
+                placeholder="(555) 000-0000"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label for="vehicle" class="mb-2 block font-display text-xs uppercase tracking-[0.2em] text-muted">Vehicle</label>
+            <input
+              type="text"
+              id="vehicle"
+              name="vehicle"
+              class="input-underline"
+              placeholder="Year, make, model"
+            />
+          </div>
+
+          <div>
+            <label for="message" class="mb-2 block font-display text-xs uppercase tracking-[0.2em] text-muted">Details</label>
+            <textarea
+              id="message"
+              name="message"
+              rows="3"
+              class="input-underline resize-none"
+              placeholder="Tell us about the service you need..."
+            ></textarea>
+          </div>
+
+          <button
+            type="submit"
+            class="border border-primary px-12 py-4 font-display text-sm font-semibold uppercase tracking-widest text-primary transition-all duration-300 hover:bg-primary hover:text-background"
+          >
+            Get My Quote
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gold line separator to footer -->
+  <div class="mx-auto mt-24 max-w-7xl px-6 sm:px-12 lg:px-20">
+    <div class="gold-line"></div>
+  </div>
+</section>

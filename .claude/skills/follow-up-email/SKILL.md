@@ -73,15 +73,8 @@ sales/lead-generation/prospects/[business-name]/outreach/follow-up-[number].html
    sales/lead-generation/prospects/[business-name]/outreach/follow-up-[number].json
    ```
 
-2. Send a test email first (use `to: eric.lefler@ophidianai.com`):
-   ```bash
-   cat follow-up-test.json | node .claude/skills/gws-cli/scripts/build_raw_email.js | gws gmail users messages send --params '{"userId":"me"}' --json @-
-   ```
-
-3. After Eric confirms, update the JSON with the prospect's email and send:
-   ```bash
-   cat sales/lead-generation/prospects/[business-name]/outreach/follow-up-[number].json | node .claude/skills/gws-cli/scripts/build_raw_email.js | gws gmail users messages send --params '{"userId":"me"}' --json @-
-   ```
+2. **Stage as a Gmail draft.** Eric will inspect and send on his own timeline.
+   Use `gws gmail users drafts create` to create the draft with the prospect's email as the recipient.
 
 4. Update the **Google Sheet pipeline** (Sheet ID: `1FJOPS3ABR2BQtFOn4cUAGLZzIYukKbPozK_t_m7Dwg0`) -- set Status to "Follow-Up Sent", write the FU date in the appropriate column (O for FU1, P for FU2, Q for FU3). Also update `sales/lead-generation/prospect-tracker.md` as backup.
 

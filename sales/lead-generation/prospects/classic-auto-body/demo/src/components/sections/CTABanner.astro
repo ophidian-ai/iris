@@ -1,0 +1,22 @@
+---
+import { business } from "../../data/business";
+
+const phoneLink = `tel:${business.phone.replace(/[^0-9+]/g, "")}`;
+---
+
+<section class="bg-primary py-16">
+  <div class="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+    <h2 class="font-display mb-4 text-3xl font-bold uppercase text-white md:text-4xl">
+      Ready to Restore Your Vehicle?
+    </h2>
+    <p class="mb-8 text-lg text-white/80">
+      Get a free estimate today. We work with all insurance companies.
+    </p>
+    <a
+      href={phoneLink}
+      class="inline-block rounded-lg bg-white px-8 py-4 text-lg font-bold text-primary transition-colors hover:bg-gray-100"
+    >
+      Call {business.phone}
+    </a>
+  </div>
+</section>

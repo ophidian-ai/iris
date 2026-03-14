@@ -1,0 +1,9 @@
+[Unit]
+Description=Iris Weekly Review -- Friday 4:00 PM ET
+
+[Timer]
+OnCalendar=Fri *-*-* 16:00:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target

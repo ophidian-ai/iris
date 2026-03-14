@@ -1,0 +1,96 @@
+---
+interface Props {
+  businessName: string;
+  sections: { id: string; label: string }[];
+}
+
+const { businessName, sections } = Astro.props;
+---
+
+<nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 -translate-y-full opacity-0">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <div class="flex h-16 items-center justify-between rounded-b-2xl bg-surface/80 px-6 shadow-lg backdrop-blur-md">
+      <a href="#" class="font-display text-lg font-bold uppercase tracking-wide text-foreground">{businessName}</a>
+
+      <!-- Desktop nav -->
+      <div class="hidden items-center gap-6 md:flex">
+        {sections.map((section) => (
+          <a
+            href={`#${section.id}`}
+            class="text-sm font-medium text-muted transition-colors hover:text-primary"
+          >
+            {section.label}
+          </a>
+        ))}
+      </div>
+
+      <!-- Mobile hamburger -->
+      <button
+        id="mobile-toggle"
+        class="flex flex-col gap-1.5 md:hidden"
+        aria-label="Toggle menu"
+      >
+        <span class="block h-0.5 w-6 bg-foreground transition-transform" />
+        <span class="block h-0.5 w-6 bg-foreground transition-opacity" />
+        <span class="block h-0.5 w-6 bg-foreground transition-transform" />
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="hidden md:hidden">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col gap-2 rounded-b-2xl bg-surface/95 px-6 py-4 shadow-lg backdrop-blur-md">
+        {sections.map((section) => (
+          <a
+            href={`#${section.id}`}
+            class="mobile-link rounded-lg px-3 py-2 text-sm font-medium text-muted transition-colors hover:bg-primary/10 hover:text-primary"
+          >
+            {section.label}
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  // Show nav after scrolling past hero
+  const nav = document.getElementById("main-nav");
+  const hero = document.querySelector("section");
+
+  if (nav && hero) {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) {
+          nav.classList.remove("-translate-y-full", "opacity-0");
+        } else {
+          nav.classList.add("-translate-y-full", "opacity-0");
+        }
+      },
+      { threshold: 0.2 }
+    );
+    observer.observe(hero);
+  }
+
+  // Mobile toggle
+  const toggle = document.getElementById("mobile-toggle");
+  const menu = document.getElementById("mobile-menu");
+
+  toggle?.addEventListener("click", () => {
+    menu?.classList.toggle("hidden");
+    const spans = toggle.querySelectorAll("span");
+    spans[0]?.classList.toggle("translate-y-2");
+    spans[0]?.classList.toggle("rotate-45");
+    spans[1]?.classList.toggle("opacity-0");
+    spans[2]?.classList.toggle("-translate-y-2");
+    spans[2]?.classList.toggle("-rotate-45");
+  });
+
+  // Close mobile menu on link click
+  document.querySelectorAll(".mobile-link").forEach((link) => {
+    link.addEventListener("click", () => {
+      menu?.classList.add("hidden");
+    });
+  });
+</script>

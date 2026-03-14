@@ -1,0 +1,74 @@
+---
+import { business } from "../../data/business";
+---
+
+<section id="about" class="bg-background py-24">
+  <div class="mx-auto max-w-7xl px-6 lg:px-12">
+    <div class="grid grid-cols-1 gap-16 lg:grid-cols-5">
+      <!-- Left: Overlapping images (3 columns) -->
+      <div class="slide-left relative lg:col-span-3">
+        <div class="grid grid-cols-12 gap-4">
+          <!-- Large main image -->
+          <div class="img-zoom col-span-8 overflow-hidden rounded-2xl">
+            <img
+              src="/images/shop-2.jpg"
+              alt="Voelz Body Shop team"
+              class="aspect-[4/3] w-full object-cover"
+              loading="lazy"
+            />
+          </div>
+          <!-- Smaller accent image offset down -->
+          <div class="img-zoom col-span-4 mt-12 overflow-hidden rounded-2xl">
+            <img
+              src="/images/painting.jpg"
+              alt="Auto painting in progress"
+              class="aspect-[3/4] w-full object-cover"
+              loading="lazy"
+            />
+          </div>
+        </div>
+        <!-- Floating badge -->
+        <div class="absolute -bottom-6 left-8 rounded-xl bg-navy px-6 py-4 shadow-xl">
+          <p class="font-display text-3xl font-extrabold text-primary">40+</p>
+          <p class="text-xs text-gray-300">Years of Excellence</p>
+        </div>
+      </div>
+
+      <!-- Right: Text content (2 columns) -->
+      <div class="fade-in flex flex-col justify-center lg:col-span-2">
+        <span class="font-display text-xs font-bold uppercase tracking-[0.25em] text-primary">About Us</span>
+        <h2 class="accent-line mt-3 font-display text-3xl font-bold text-foreground md:text-4xl">
+          Family-Owned,<br />Community Trusted
+        </h2>
+
+        <p class="mt-8 leading-relaxed text-muted">
+          For over four decades, Jeff and Gloria Voelz have built their reputation on honest work and exceptional results. What started as a small family shop in 1980 has become one of Columbus, Indiana's most trusted names in collision repair.
+        </p>
+
+        <p class="mt-4 leading-relaxed text-muted">
+          Our I-CAR Gold Class certification -- the industry's highest training standard -- means your vehicle is in expert hands. We combine old-school craftsmanship with modern technology to deliver results you can see and feel.
+        </p>
+
+        <!-- Quick facts -->
+        <div class="mt-10 grid grid-cols-2 gap-4">
+          <div class="rounded-lg bg-surface p-4">
+            <p class="font-display text-lg font-bold text-foreground">I-CAR Gold</p>
+            <p class="text-xs text-muted">Highest Certification</p>
+          </div>
+          <div class="rounded-lg bg-surface p-4">
+            <p class="font-display text-lg font-bold text-foreground">BBB A+</p>
+            <p class="text-xs text-muted">Accredited Business</p>
+          </div>
+          <div class="rounded-lg bg-surface p-4">
+            <p class="font-display text-lg font-bold text-foreground">All Major</p>
+            <p class="text-xs text-muted">Insurance Accepted</p>
+          </div>
+          <div class="rounded-lg bg-surface p-4">
+            <p class="font-display text-lg font-bold text-foreground">Family</p>
+            <p class="text-xs text-muted">Owned & Operated</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

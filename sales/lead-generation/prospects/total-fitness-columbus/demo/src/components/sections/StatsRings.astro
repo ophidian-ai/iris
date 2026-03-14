@@ -1,0 +1,67 @@
+---
+const stats = [
+  { value: "26", suffix: "+", label: "Years Strong", percent: 100 },
+  { value: "1000", suffix: "s", label: "Members Served", percent: 95 },
+  { value: "35", suffix: "+", label: "Weekly Classes", percent: 70 },
+  { value: "100", suffix: "%", label: "Commitment", percent: 100 },
+];
+
+const size = 140;
+const strokeWidth = 4;
+const radius = (size - strokeWidth) / 2;
+const circumference = 2 * Math.PI * radius;
+---
+
+<section class="relative overflow-hidden bg-background py-24">
+  <!-- Subtle grid pattern -->
+  <div class="absolute inset-0 opacity-[0.02]" style="background-image: linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 60px 60px;"></div>
+
+  <div class="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <div class="mb-16 text-center fade-in">
+      <span class="text-sm font-semibold tracking-widest text-primary uppercase">By The Numbers</span>
+      <h2 class="mt-3 font-display text-5xl tracking-wide text-foreground md:text-6xl">
+        THE <span class="text-primary">RESULTS</span> SPEAK
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-2 gap-8 md:grid-cols-4 stagger">
+      {stats.map((stat) => {
+        const offset = circumference - (stat.percent / 100) * circumference;
+        return (
+          <div class="ring-animate scale-reveal flex flex-col items-center text-center" style={`--ring-circumference: ${circumference}; --ring-offset: ${offset};`}>
+            <div class="relative">
+              <svg width={size} height={size} class="rotate-[-90deg]">
+                {/* Background ring */}
+                <circle
+                  cx={size / 2}
+                  cy={size / 2}
+                  r={radius}
+                  fill="none"
+                  stroke="rgba(255,255,255,0.06)"
+                  stroke-width={strokeWidth}
+                />
+                {/* Filled ring */}
+                <circle
+                  class="ring-fill"
+                  cx={size / 2}
+                  cy={size / 2}
+                  r={radius}
+                  fill="none"
+                  stroke="var(--color-primary)"
+                  stroke-width={strokeWidth}
+                  stroke-linecap="round"
+                />
+              </svg>
+              {/* Number in center */}
+              <div class="absolute inset-0 flex items-center justify-center">
+                <span class="font-display text-4xl text-foreground count-up" data-target={stat.value}>{stat.value}</span>
+                <span class="font-display text-2xl text-primary">{stat.suffix}</span>
+              </div>
+            </div>
+            <p class="mt-4 text-xs font-semibold uppercase tracking-widest text-muted">{stat.label}</p>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</section>

@@ -139,6 +139,7 @@ Ask these questions one at a time. Use multiple choice where possible.
 
 2. **Generate creative brief:**
    - Read: `docs/site-brief.md` + `docs/creative-research.md` + `engineering/design-system/_catalog.md` + relevant pattern docs from `engineering/design-system/patterns/`
+   - Also read: `engineering/references/design-philosophy-2026.md` (2026 trend philosophy), `engineering/references/ai-website-workflow.md` (conversion structure, prompting strategies)
    - Produce `docs/creative-brief.md` covering:
      - Creative direction (mood, energy, personality)
      - Animation strategy (framework, triggers, performance budget, per-element plan)
@@ -150,6 +151,10 @@ Ask these questions one at a time. Use multiple choice where possible.
      - Divider strategy
      - Dependencies to install
      - Glass/depth effects plan
+     - **Conversion structure** (map sections to: Hook > Promise > Value Details > Proof > CTA)
+     - **"Star of the show"** -- identify the ONE visual element that makes visitors stop (seeded from brand/story, not random)
+     - **Visual rhyming plan** -- how the star's shapes/colors repeat across the site
+     - **Hero tier recommendation** -- Bronze/Silver/Gold/Platinum (see `scroll-stopping-hero` skill)
 
 3. **Approval gate:**
    - **Auto-approve** when: client's industry has been built before, mood matches a prior project, all recommended patterns are from the existing library
@@ -316,13 +321,15 @@ Build in this order (highest conversion impact first):
 
 ## Phase 5: Integration
 
-**Goal:** Wire up the features selected in Discovery.
+**Goal:** Wire up the features selected in Discovery, plus premium add-ons.
 
-**Sub-agents:** Yes -- dispatch up to 4 agents in parallel. Each integration touches distinct files:
+**Sub-agents:** Yes -- dispatch up to 6 agents in parallel. Each integration touches distinct files:
 - **Agent 1 (Payments):** Stripe checkout -- `src/app/api/stripe/`, pricing page components
 - **Agent 2 (Forms):** Contact form server action -- `src/app/api/contact/`, ContactForm section
 - **Agent 3 (Blog):** MDX setup -- `src/content/`, `src/app/blog/`, BlogPostGrid, BlogPostContent
 - **Agent 4 (SEO + Analytics):** Metadata API, `sitemap.ts`, `robots.ts`, JSON-LD, Vercel Analytics in root layout
+- **Agent 5 (Scroll-Stopping Hero):** If premium build, invoke `scroll-stopping-hero` skill for video hero section
+- **Agent 6 (AI Chatbot/Lead Capture):** If client wants lead automation, invoke `chatbot-integration` skill
 
 ### Integration Reference
 

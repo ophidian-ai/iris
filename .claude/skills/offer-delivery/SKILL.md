@@ -103,25 +103,17 @@ Body (under 80 words):
 Save the delivery email HTML to:
 `sales/lead-generation/prospects/[business-name]/outreach/offer-delivery.html`
 
-### Step 4: Test Send
+### Step 4: Stage as Gmail Draft
 
-Send the email with attachment to `eric.lefler@ophidianai.com` first using the GWS CLI:
-```bash
-echo '{"to":"eric.lefler@ophidianai.com","subject":"[Subject]","html":"[HTML body]","attachments":[{"path":"path/to/deliverable.pdf","filename":"deliverable.pdf","mimeType":"application/pdf"}]}' | node .claude/skills/gws-cli/scripts/build_raw_email.js | gws gmail users messages send --params '{"userId":"me"}' --json @-
-```
+**Always stage as a Gmail draft.** Eric will inspect and send on his own timeline.
+Use `gws gmail users drafts create` to create the draft with the prospect's email as the recipient.
 
-Verify:
+Verify before staging:
 
 - Email body renders correctly (HTML formatting, logo, colors)
-- Attachment is included and opens properly
+- Attachment is included
 - Subject line is correct
 - Body is under 80 words
-
-Do not proceed to live send until Eric confirms the test looks good.
-
-### Step 5: Send to Prospect
-
-After Eric approves the test, send the live email to the prospect using the same GWS CLI send command.
 
 ### Step 6: Update Tracker
 

@@ -1,0 +1,47 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navigation from "../components/layout/Navigation.astro";
+import Footer from "../components/layout/Footer.astro";
+import HeroSection from "../components/sections/HeroSection.astro";
+import ServicesSection from "../components/sections/ServicesSection.astro";
+import StatsSection from "../components/sections/StatsSection.astro";
+import ReviewsSection from "../components/sections/ReviewsSection.astro";
+import ContactSection from "../components/sections/ContactSection.astro";
+import { business } from "../data/business";
+import "../styles/global.css";
+
+const navSections = [
+  { id: "services", label: "Services" },
+  { id: "reviews", label: "Reviews" },
+  { id: "contact", label: "Contact" },
+];
+
+const fullAddress = `${business.address.street}, ${business.address.city}, ${business.address.state} ${business.address.zip}`;
+---
+
+<BaseLayout
+  title={`${business.name} | ${business.tagline}`}
+  description={`${business.name} - ${business.tagline}. Located in ${business.address.city}, ${business.address.state}.`}
+  fonts="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap"
+>
+  <Navigation businessName={business.name} sections={navSections} />
+
+  <HeroSection />
+  <ServicesSection />
+  <StatsSection />
+  <ReviewsSection />
+  <ContactSection />
+
+  <Footer
+    businessName={business.name}
+    phone={business.phone}
+    address={fullAddress}
+    email={business.email}
+  >
+    {business.hours.map((h) => (
+      <p class="text-sm text-muted">
+        <span class="font-medium text-foreground/80">{h.day}:</span> {h.time}
+      </p>
+    ))}
+  </Footer>
+</BaseLayout>
