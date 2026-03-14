@@ -150,6 +150,30 @@
 
 ---
 
+## AI Agent Integration (Vercel AI SDK v6)
+
+For e-commerce or service sites that need an AI shopping/booking assistant:
+
+### Agent Kit Pattern
+
+- Use `createAgentUIStreamResponse` from Vercel AI SDK v6 for tool-calling agents
+- Define agent in `lib/ai/shopping-agent.ts` with base instructions and tools
+- Tools access real data (orders, products, recommendations) via typed functions
+- Agent streams UI responses back to a chat component
+
+### Headless CMS Options
+
+- **Sanity Studio** -- Embedded CMS with real-time editing, structured content, GROQ queries
+- **Payload CMS** -- TypeScript-first, self-hosted option
+- Both integrate cleanly with Next.js App Router and server components
+
+### State Management
+
+- **Zustand** for client-side cart/UI state (lightweight, no boilerplate)
+- Server state via server actions + React Query or SWR for cache invalidation
+
+---
+
 ## Tools Ecosystem
 
 | Tool | Purpose |
