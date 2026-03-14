@@ -1,0 +1,55 @@
+---
+/**
+ * Masonry portfolio -- CSS columns, not a uniform grid.
+ * Varying heights create an organic, art-gallery feel.
+ * Placed immediately after hero because the work IS the product.
+ */
+
+const portfolioItems = [
+  { image: "/images/tattoo-1.jpg", category: "Custom Piece", aspect: "aspect-[3/4]" },
+  { image: "/images/tattoo-2.jpg", category: "Cover-Up", aspect: "aspect-[4/5]" },
+  { image: "/images/tattoo-3.jpg", category: "Fine Line", aspect: "aspect-[1/1]" },
+  { image: "/images/tattoo-4.jpg", category: "Black & Gray", aspect: "aspect-[3/4]" },
+  { image: "/images/tattoo-5.jpg", category: "Color Work", aspect: "aspect-[4/3]" },
+  { image: "/images/tattoo-6.jpg", category: "Custom Design", aspect: "aspect-[3/4]" },
+];
+---
+
+<section id="portfolio" class="bg-background py-24">
+  <div class="mx-auto max-w-7xl px-6 lg:px-12">
+    <!-- Header: left-aligned, not centered -->
+    <div class="mb-16 flex items-end justify-between">
+      <div class="slide-left">
+        <span class="font-display text-sm tracking-[0.4em] text-primary uppercase">Our Work</span>
+        <h2 class="mt-2 font-display text-6xl tracking-wider text-foreground uppercase sm:text-7xl">
+          Portfolio
+        </h2>
+      </div>
+      <div class="slide-right hidden sm:block">
+        <p class="max-w-xs text-right text-sm text-muted">
+          Every piece is 100% custom. No flash, no templates -- just your story brought to life.
+        </p>
+      </div>
+    </div>
+
+    <!-- Masonry grid -->
+    <div class="masonry">
+      {portfolioItems.map((item) => (
+        <div class="img-hover scale-reveal group relative cursor-pointer">
+          <img
+            src={item.image}
+            alt={item.category}
+            class={`w-full object-cover ${item.aspect}`}
+            loading="lazy"
+          />
+          <!-- Hover: red tint + category label -->
+          <div class="absolute inset-0 flex items-end bg-gradient-to-t from-primary/80 via-primary/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+            <span class="p-4 font-display text-lg tracking-widest text-foreground uppercase">
+              {item.category}
+            </span>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,131 @@
+@import "tailwindcss";
+
+/* Brand tokens */
+@theme inline {
+  --color-primary: #2A9D8F;
+  --color-primary-light: #3AB8A8;
+  --color-accent: #D4785C;
+  --color-background: #FDF8F0;
+  --color-surface: #FFFFFF;
+  --color-foreground: #2D2926;
+  --color-muted: #8A7E76;
+  --color-muted-light: #8A7E76;
+  --color-border: rgba(42,157,143,0.12);
+  --font-display: "Quicksand", sans-serif;
+  --font-body: "Nunito", sans-serif;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Base body */
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scroll animation base */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Slide animations */
+.slide-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+.slide-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.slide-right {
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+.slide-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Scale reveal */
+.scale-reveal {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.scale-reveal.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Dot pattern background */
+.dot-pattern {
+  background-image: radial-gradient(circle, var(--color-primary) 1.5px, transparent 1.5px);
+  background-size: 20px 20px;
+  opacity: 0.08;
+}
+
+/* Stagger children */
+.stagger > .fade-in:nth-child(1) { transition-delay: 0ms; }
+.stagger > .fade-in:nth-child(2) { transition-delay: 100ms; }
+.stagger > .fade-in:nth-child(3) { transition-delay: 200ms; }
+.stagger > .fade-in:nth-child(4) { transition-delay: 300ms; }
+.stagger > .fade-in:nth-child(5) { transition-delay: 400ms; }
+.stagger > .fade-in:nth-child(6) { transition-delay: 500ms; }
+
+/* Staggered grid offset -- right column drops down */
+.stagger-grid .stagger-offset {
+  margin-top: 2.5rem;
+}
+
+@media (max-width: 639px) {
+  .stagger-grid .stagger-offset {
+    margin-top: 0;
+  }
+}
+
+/* SVG wave sections sit flush */
+.wave-divider {
+  display: block;
+  width: 100%;
+  line-height: 0;
+}
+
+.wave-divider svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Review carousel dots */
+.review-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+}
+
+/* Paw print decoration */
+.paw-decoration {
+  position: absolute;
+  opacity: 0.06;
+  pointer-events: none;
+}

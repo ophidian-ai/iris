@@ -1,0 +1,43 @@
+---
+import { business } from "../../data/business";
+---
+
+<section id="services" class="relative py-24 sm:py-32">
+  <div class="px-6 sm:px-12 lg:px-20">
+    <!-- Section label -->
+    <div class="mb-12 fade-in">
+      <span class="font-display text-sm uppercase tracking-[0.3em] text-primary">What We Do</span>
+      <h2 class="font-display mt-3 text-4xl font-bold uppercase tracking-wide text-foreground sm:text-5xl">
+        Services
+      </h2>
+    </div>
+
+    <!-- Horizontal scroll strip -->
+    <div class="relative">
+      <div class="h-scroll stagger">
+        {business.services.map((service, i) => {
+          const num = String(i + 1).padStart(2, "0");
+          return (
+            <div class="fade-in flex w-72 flex-col justify-between border-b-2 border-primary/30 bg-surface/50 p-8 sm:w-80 transition-all duration-300 hover:border-primary hover:bg-surface gold-glow-box"
+                 style="min-height: 340px;">
+              <!-- Large number -->
+              <div>
+                <span class="font-display text-6xl font-bold text-primary/20">{num}</span>
+                <h3 class="font-display mt-4 text-2xl font-semibold uppercase tracking-wide text-foreground">
+                  {service.name}
+                </h3>
+                <p class="mt-4 text-sm leading-relaxed text-muted">
+                  {service.description}
+                </p>
+              </div>
+              <!-- Gold bottom accent already via border -->
+            </div>
+          );
+        })}
+      </div>
+
+      <!-- Right-edge fade hint -->
+      <div class="pointer-events-none absolute right-0 top-0 h-full w-24 bg-gradient-to-l from-background to-transparent"></div>
+    </div>
+  </div>
+</section>

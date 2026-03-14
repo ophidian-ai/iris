@@ -1,0 +1,130 @@
+---
+/**
+ * Full-width dark contact with image accent strip.
+ * Form on left, info + image on right.
+ * Different from the standard 2-col info/form split.
+ */
+import { business } from "../../data/business";
+---
+
+<section id="contact" class="bg-surface py-24">
+  <div class="mx-auto max-w-7xl px-6 lg:px-12">
+    <!-- Header -->
+    <div class="fade-in mb-16">
+      <span class="font-display text-sm tracking-[0.4em] text-primary uppercase">Get Inked</span>
+      <h2 class="mt-2 font-display text-6xl tracking-wider text-foreground uppercase sm:text-7xl">
+        Contact
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 gap-12 lg:grid-cols-12">
+      <!-- Left: Form (wider) -->
+      <div class="fade-in lg:col-span-7">
+        <form class="space-y-6" onsubmit="event.preventDefault();">
+          <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+            <div>
+              <label for="name" class="mb-2 block font-display text-xs tracking-widest text-muted uppercase">
+                Your Name
+              </label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                class="w-full border-b border-border bg-transparent px-0 py-3 text-foreground placeholder-muted/50 focus:border-primary focus:outline-none transition-colors"
+                placeholder="John Doe"
+              />
+            </div>
+            <div>
+              <label for="phone" class="mb-2 block font-display text-xs tracking-widest text-muted uppercase">
+                Phone
+              </label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                class="w-full border-b border-border bg-transparent px-0 py-3 text-foreground placeholder-muted/50 focus:border-primary focus:outline-none transition-colors"
+                placeholder="(555) 000-0000"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label for="email" class="mb-2 block font-display text-xs tracking-widest text-muted uppercase">
+              Email
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="w-full border-b border-border bg-transparent px-0 py-3 text-foreground placeholder-muted/50 focus:border-primary focus:outline-none transition-colors"
+              placeholder="john@example.com"
+            />
+          </div>
+
+          <div>
+            <label for="message" class="mb-2 block font-display text-xs tracking-widest text-muted uppercase">
+              Tell Us About Your Idea
+            </label>
+            <textarea
+              id="message"
+              name="message"
+              rows="5"
+              class="w-full resize-none border-b border-border bg-transparent px-0 py-3 text-foreground placeholder-muted/50 focus:border-primary focus:outline-none transition-colors"
+              placeholder="Describe the tattoo you have in mind, placement, size, style preferences..."
+            ></textarea>
+          </div>
+
+          <button
+            type="submit"
+            class="glow-hover w-full bg-primary py-4 font-display text-lg tracking-widest text-foreground uppercase transition-all hover:bg-primary-light sm:w-auto sm:px-16"
+          >
+            Send Message
+          </button>
+        </form>
+      </div>
+
+      <!-- Right: Info + accent image -->
+      <div class="slide-right lg:col-span-5">
+        <!-- Info blocks stacked vertically -->
+        <div class="mb-10 space-y-8">
+          <div>
+            <p class="font-display text-xs tracking-[0.3em] text-primary uppercase">Phone</p>
+            <a href={`tel:${business.phone.replace(/[^0-9+]/g, "")}`} class="mt-1 block text-lg text-foreground transition-colors hover:text-primary">
+              {business.phone}
+            </a>
+          </div>
+          <div>
+            <p class="font-display text-xs tracking-[0.3em] text-primary uppercase">Email</p>
+            <a href={`mailto:${business.email}`} class="mt-1 block text-lg text-foreground transition-colors hover:text-primary">
+              {business.email}
+            </a>
+          </div>
+          <div>
+            <p class="font-display text-xs tracking-[0.3em] text-primary uppercase">Location</p>
+            <p class="mt-1 text-lg text-foreground">Columbus, Indiana</p>
+          </div>
+          <div>
+            <p class="font-display text-xs tracking-[0.3em] text-primary uppercase">Walk-Ins</p>
+            <p class="mt-1 text-lg text-foreground">Always Welcome</p>
+          </div>
+        </div>
+
+        <!-- Cash only callout -->
+        <div class="border-l-2 border-accent bg-accent/5 py-4 pl-6">
+          <p class="font-display text-sm tracking-wider text-accent uppercase">Cash Only</p>
+          <p class="mt-1 text-sm text-muted">ATM available nearby for your convenience.</p>
+        </div>
+
+        <!-- Accent image -->
+        <div class="img-hover mt-8 hidden lg:block">
+          <img
+            src="/images/tattoo-4.jpg"
+            alt="Black and gray tattoo detail"
+            class="aspect-[16/9] w-full object-cover"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,50 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navigation from "../components/layout/Navigation.astro";
+import Footer from "../components/layout/Footer.astro";
+import HeroSection from "../components/sections/HeroSection.astro";
+import TrustStrip from "../components/sections/TrustStrip.astro";
+import ServicesSection from "../components/sections/ServicesSection.astro";
+import AboutSection from "../components/sections/AboutSection.astro";
+import ReviewsSection from "../components/sections/ReviewsSection.astro";
+import ContactSection from "../components/sections/ContactSection.astro";
+import { business } from "../data/business";
+import "../styles/global.css";
+
+const navSections = [
+  { id: "services", label: "Services" },
+  { id: "about", label: "About" },
+  { id: "reviews", label: "Reviews" },
+  { id: "contact", label: "Contact" },
+];
+
+const fullAddress = `${business.address.street}, ${business.address.city}, ${business.address.state} ${business.address.zip}`;
+const fontsUrl = "https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&family=Quicksand:wght@400;500;600;700&display=swap";
+---
+
+<BaseLayout
+  title={`${business.name} | ${business.tagline}`}
+  description={`${business.name} - ${business.tagline}. Professional dog grooming in ${business.address.city}, ${business.address.state}. Call ${business.phone}.`}
+  fonts={fontsUrl}
+>
+  <Navigation businessName={business.name} sections={navSections} />
+
+  <HeroSection />
+  <TrustStrip />
+  <ServicesSection />
+  <AboutSection />
+  <ReviewsSection />
+  <ContactSection />
+
+  <Footer
+    businessName={business.name}
+    phone={business.phone}
+    address={fullAddress}
+  >
+    {business.hours.map((h) => (
+      <p class="text-sm text-white/60">
+        <span class="font-medium text-white/80">{h.day}:</span> {h.time}
+      </p>
+    ))}
+  </Footer>
+</BaseLayout>

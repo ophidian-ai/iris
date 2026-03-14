@@ -12,7 +12,7 @@ triggers:
   - hot lead
   - warm lead
 created: 2026-03-10
-updated: 2026-03-10
+updated: 2026-03-13
 ---
 
 # Prospect Management
@@ -31,6 +31,7 @@ Standard layout:
 - `outreach/cold-email.json` + `cold-email.txt` -- Outreach email
 - `outreach/follow-up-1.json` + `follow-up-1.txt` -- Follow-ups
 - `mockup/index.html` -- Self-contained pitch mockup (no external deps)
+- `demo/` -- Live demo site (Next.js project, deployed to Vercel). Every prospect gets a deployable demo, not just a screenshot.
 
 ## Scoring Tiers (out of 25)
 

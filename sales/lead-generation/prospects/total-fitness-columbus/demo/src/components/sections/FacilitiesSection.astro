@@ -1,0 +1,99 @@
+---
+const facilities = [
+  {
+    id: "weights",
+    title: "Weight Room",
+    description: "Full dumbbell racks, barbells, benches, squat racks, and plate-loaded machines. Everything you need for serious strength training.",
+    image: "/images/gym-weights.jpg",
+  },
+  {
+    id: "cardio",
+    title: "Cardio Floor",
+    description: "State-of-the-art treadmills, ellipticals, bikes, and rowers. Keep your heart rate up and the calories burning.",
+    image: "/images/gym-interior.jpg",
+  },
+  {
+    id: "studio",
+    title: "Group Studio",
+    description: "High-energy group classes from HIIT to yoga. Build community while you build strength in our dedicated studio space.",
+    image: "/images/group-class.jpg",
+  },
+];
+---
+
+<section id="facilities" class="bg-background py-24">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <!-- Header -->
+    <div class="mb-10 fade-in">
+      <span class="text-sm font-semibold tracking-widest text-primary uppercase">Our Space</span>
+      <h2 class="mt-3 font-display text-5xl tracking-wide text-foreground md:text-6xl">
+        THE <span class="text-primary">FACILITY</span>
+      </h2>
+    </div>
+
+    <!-- Horizontal tab bar -->
+    <div class="flex gap-1 mb-0" id="facility-tabs">
+      {facilities.map((f, i) => (
+        <button
+          class={`facility-tab flex-1 py-4 px-6 font-display text-lg md:text-xl tracking-widest text-center transition-all border-b-2 ${i === 0 ? 'border-primary text-foreground bg-surface' : 'border-transparent text-muted hover:text-foreground hover:bg-surface/50'}`}
+          data-facility={f.id}
+        >
+          {f.title}
+        </button>
+      ))}
+    </div>
+
+    <!-- Gallery panels -->
+    <div class="relative overflow-hidden rounded-b-xl" id="facility-panels" style="min-height: 500px;">
+      {facilities.map((f, i) => (
+        <div
+          class={`facility-slide ${i === 0 ? 'active' : ''}`}
+          data-facility-panel={f.id}
+        >
+          <div class="relative w-full h-[500px] md:h-[600px]">
+            <img
+              src={f.image}
+              alt={f.title}
+              class="absolute inset-0 w-full h-full object-cover"
+              loading="lazy"
+            />
+            <!-- Dark overlay for text readability -->
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+            <!-- Text overlay at bottom -->
+            <div class="absolute bottom-0 left-0 right-0 p-8 md:p-12">
+              <span class="font-display text-8xl text-primary/20 leading-none select-none">{String(i + 1).padStart(2, "0")}</span>
+              <h3 class="font-display -mt-6 text-4xl md:text-5xl tracking-wide text-white">{f.title}</h3>
+              <p class="mt-3 max-w-lg text-lg text-white/70">{f.description}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  const tabs = document.querySelectorAll<HTMLButtonElement>('.facility-tab');
+  const panels = document.querySelectorAll<HTMLDivElement>('[data-facility-panel]');
+
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const target = tab.getAttribute('data-facility');
+
+      tabs.forEach((t) => {
+        t.classList.remove('border-primary', 'text-foreground', 'bg-surface');
+        t.classList.add('border-transparent', 'text-muted');
+      });
+      tab.classList.add('border-primary', 'text-foreground', 'bg-surface');
+      tab.classList.remove('border-transparent', 'text-muted');
+
+      panels.forEach((panel) => {
+        if (panel.getAttribute('data-facility-panel') === target) {
+          panel.classList.add('active');
+        } else {
+          panel.classList.remove('active');
+        }
+      });
+    });
+  });
+</script>

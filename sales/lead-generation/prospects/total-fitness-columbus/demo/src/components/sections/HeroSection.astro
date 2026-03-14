@@ -1,0 +1,86 @@
+---
+import { business } from "../../data/business";
+---
+
+<section id="hero" class="relative min-h-screen flex items-end overflow-hidden">
+  <!-- Video Background -->
+  <video
+    autoplay
+    muted
+    loop
+    playsinline
+    class="absolute inset-0 h-full w-full object-cover"
+    poster="/images/hero.jpg"
+  >
+    <source src="/videos/hero.mp4" type="video/mp4" />
+  </video>
+
+  <!-- Gradient overlay: dark at bottom -->
+  <div class="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent"></div>
+
+  <!-- Diagonal red stripe overlay -->
+  <div class="absolute inset-0 overflow-hidden pointer-events-none">
+    <div class="absolute top-0 right-0 w-[200%] h-[300px] md:h-[400px] bg-primary/15 origin-top-right -rotate-[8deg] translate-x-[20%] -translate-y-[30%]"></div>
+    <div class="absolute top-0 right-0 w-[200%] h-[6px] bg-primary origin-top-right -rotate-[8deg] translate-x-[20%] translate-y-[250px] md:translate-y-[350px]"></div>
+  </div>
+
+  <!-- Content pinned to bottom -->
+  <div class="relative z-10 w-full pb-16 pt-48">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 items-end gap-12 lg:grid-cols-12">
+        <!-- Left: massive title with stroke text effect -->
+        <div class="lg:col-span-7">
+          <div class="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5">
+            <div class="h-2 w-2 rounded-full bg-primary animate-pulse"></div>
+            <span class="text-xs font-semibold tracking-widest text-primary uppercase">Since 1998</span>
+          </div>
+
+          <h1 class="font-display leading-[0.85] tracking-wide" style="font-size: clamp(4rem, 10vw, 10rem);">
+            <span class="text-stroke">YOUR</span><br />
+            <span class="text-foreground">FITNESS</span><br />
+            <span class="text-primary">STARTS</span><br />
+            <span class="text-stroke">HERE</span>
+          </h1>
+        </div>
+
+        <!-- Right: description + CTA stacked -->
+        <div class="lg:col-span-5 lg:pb-4">
+          <p class="max-w-sm text-lg leading-relaxed text-muted">
+            26+ years of helping Columbus get stronger. No contracts, no gimmicks -- just results backed by certified trainers.
+          </p>
+
+          <div class="mt-8 flex flex-wrap gap-4">
+            <a
+              href="#contact"
+              class="group inline-flex items-center gap-2 rounded-lg bg-primary px-8 py-4 font-semibold text-white transition-all hover:bg-primary-light hover:shadow-lg hover:shadow-primary/25"
+            >
+              Start Your Journey
+              <svg class="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+            <a
+              href={`tel:${business.phone.replace(/[^0-9+]/g, "")}`}
+              class="inline-flex items-center gap-2 rounded-lg border border-foreground/20 px-8 py-4 font-semibold text-foreground transition-all hover:border-primary hover:text-primary"
+            >
+              <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+              </svg>
+              {business.phone}
+            </a>
+          </div>
+
+          <!-- Stat pills row -->
+          <div class="mt-10 flex gap-6 border-t border-foreground/10 pt-6">
+            {business.stats?.map((stat) => (
+              <div class="text-center">
+                <div class="font-display text-3xl text-primary">{stat.value}</div>
+                <div class="text-[10px] font-semibold text-muted uppercase tracking-widest">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

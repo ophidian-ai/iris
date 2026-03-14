@@ -1,0 +1,11 @@
+[Unit]
+Description=Iris Morning Coffee Briefing
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=eric
+WorkingDirectory=/home/eric/OphidianAI
+ExecStart=/opt/iris/scripts/morning-coffee.sh
+TimeoutStartSec=600

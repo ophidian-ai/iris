@@ -1,0 +1,23 @@
+---
+// Full-bleed photo strip with gold gradient overlay
+---
+
+<section class="relative overflow-hidden" style="height: 400px;">
+  <img
+    src="/images/detail-clean.jpg"
+    alt="Pristine car finish"
+    class="absolute inset-0 h-full w-full object-cover"
+  />
+  <!-- Gold gradient overlay -->
+  <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-primary/20"></div>
+
+  <!-- Large magazine-ad text -->
+  <div class="relative z-10 flex h-full items-center px-6 sm:px-12 lg:px-20">
+    <div class="fade-in">
+      <h2 class="font-display text-4xl font-bold uppercase tracking-wide text-foreground sm:text-5xl lg:text-6xl gold-glow">
+        Your Car Deserves<br />the Best.
+      </h2>
+      <div class="mt-6 h-px w-24 bg-primary"></div>
+    </div>
+  </div>
+</section>

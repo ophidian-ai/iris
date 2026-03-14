@@ -1,0 +1,76 @@
+---
+import { business } from "../../data/business";
+---
+
+<section id="hero" class="relative min-h-screen overflow-hidden">
+  <!-- Video background with diagonal clip -->
+  <div class="absolute inset-0">
+    <video
+      autoplay
+      muted
+      loop
+      playsinline
+      poster="/images/hero.jpg"
+      class="absolute inset-0 h-full w-full object-cover"
+    >
+      <source src="/videos/hero.mp4" type="video/mp4" />
+    </video>
+    <div class="absolute inset-0 bg-background/70"></div>
+  </div>
+
+  <!-- Asymmetric layout: oversized text left, stats right -->
+  <div class="relative z-10 mx-auto flex min-h-screen max-w-7xl items-end px-6 pb-20 pt-32 lg:items-center lg:px-12 lg:pb-0">
+    <div class="grid w-full grid-cols-1 gap-8 lg:grid-cols-12">
+      <!-- Left: Oversized typography bleeding off edge -->
+      <div class="lg:col-span-8">
+        <!-- Tagline -->
+        <div class="mb-6 flex items-center gap-4">
+          <span class="h-px w-12 bg-primary"></span>
+          <span class="font-display text-sm tracking-[0.4em] text-primary uppercase">Custom Tattoo Artistry</span>
+        </div>
+
+        <!-- Massive display heading - intentionally oversized -->
+        <h1 class="font-display text-[clamp(4rem,12vw,11rem)] leading-[0.85] tracking-wider text-foreground uppercase">
+          YOUR<br />
+          <span class="text-primary">STORY</span><br />
+          YOUR<br />
+          <span class="text-primary">SKIN</span>
+        </h1>
+
+        <!-- CTA below title -->
+        <div class="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
+          <a
+            href="#contact"
+            class="glow-hover inline-block bg-primary px-10 py-4 font-display text-lg tracking-widest text-foreground uppercase transition-all hover:bg-primary-light"
+          >
+            Book Your Session
+          </a>
+          <a
+            href={`tel:${business.phone.replace(/[^0-9+]/g, "")}`}
+            class="font-display text-2xl tracking-wider text-foreground/60 transition-colors hover:text-primary"
+          >
+            {business.phone}
+          </a>
+        </div>
+      </div>
+
+      <!-- Right: Vertical stats strip (desktop) -->
+      <div class="hidden lg:col-span-4 lg:flex lg:flex-col lg:items-end lg:justify-end lg:gap-8 lg:pb-8">
+        {business.stats?.map((stat) => (
+          <div class="text-right">
+            <p class="font-display text-5xl tracking-wider text-primary">{stat.value}</p>
+            <p class="font-display text-xs tracking-[0.3em] text-muted uppercase">{stat.label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Scan lines overlay -->
+  <div class="scan-lines pointer-events-none absolute inset-0 z-20"></div>
+
+  <!-- Scroll line -->
+  <div class="absolute bottom-6 left-1/2 z-10 -translate-x-1/2">
+    <div class="h-12 w-px bg-gradient-to-b from-transparent to-muted/40"></div>
+  </div>
+</section>

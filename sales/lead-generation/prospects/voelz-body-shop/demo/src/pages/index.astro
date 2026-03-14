@@ -1,0 +1,70 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navigation from "../components/layout/Navigation.astro";
+import HeroSection from "../components/sections/HeroSection.astro";
+import HeritageTimeline from "../components/sections/HeritageTimeline.astro";
+import ServicesSection from "../components/sections/ServicesSection.astro";
+import ProcessSection from "../components/sections/ProcessSection.astro";
+import TestimonialSection from "../components/sections/TestimonialSection.astro";
+import AboutSection from "../components/sections/AboutSection.astro";
+import CTAStripe from "../components/sections/CTAStripe.astro";
+import ContactSection from "../components/sections/ContactSection.astro";
+import { business } from "../data/business";
+import "../styles/global.css";
+
+const navSections = [
+  { id: "services", label: "Services" },
+  { id: "about", label: "About" },
+  { id: "contact", label: "Contact" },
+];
+
+const fullAddress = `${business.address.street}, ${business.address.city}, ${business.address.state} ${business.address.zip}`;
+const fontsUrl = "https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Open+Sans:wght@300;400;500;600&display=swap";
+---
+
+<BaseLayout
+  title={`${business.name} | ${business.tagline}`}
+  description={`${business.name} - ${business.tagline}. Family-owned collision repair in ${business.address.city}, ${business.address.state} since 1980.`}
+  fonts={fontsUrl}
+>
+  <Navigation businessName={business.name} sections={navSections} />
+
+  <HeroSection />
+  <HeritageTimeline />
+  <ServicesSection />
+  <ProcessSection />
+  <TestimonialSection />
+  <AboutSection />
+  <CTAStripe />
+  <ContactSection />
+
+  <footer class="bg-navy-dark py-12 text-white">
+    <div class="mx-auto max-w-7xl px-6 lg:px-12">
+      <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+        <div>
+          <h3 class="mb-3 font-display text-lg font-bold text-white">{business.name}</h3>
+          <p class="text-sm text-gray-400">{fullAddress}</p>
+          <p class="mt-2 text-sm text-gray-400">Family-owned since 1980</p>
+        </div>
+        <div>
+          <h3 class="mb-3 font-display text-lg font-bold text-white">Contact</h3>
+          <p class="text-sm text-gray-400">
+            <a href={`tel:${business.phone.replace(/[^0-9+]/g, "")}`} class="transition-colors hover:text-primary">{business.phone}</a>
+          </p>
+          <p class="mt-1 text-sm text-gray-400">
+            <a href={`mailto:${business.email}`} class="transition-colors hover:text-primary">{business.email}</a>
+          </p>
+        </div>
+        <div>
+          <h3 class="mb-3 font-display text-lg font-bold text-white">Certifications</h3>
+          <p class="text-sm text-gray-400">I-CAR Gold Class Certified</p>
+          <p class="mt-1 text-sm text-gray-400">BBB Accredited Business</p>
+          <p class="mt-1 text-sm text-gray-400">All Insurance Companies Accepted</p>
+        </div>
+      </div>
+      <div class="mt-10 border-t border-white/10 pt-6 text-center text-xs text-gray-500">
+        &copy; {new Date().getFullYear()} {business.name} All rights reserved.
+      </div>
+    </div>
+  </footer>
+</BaseLayout>

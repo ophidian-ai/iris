@@ -1,0 +1,26 @@
+---
+import { business } from "../../data/business";
+---
+
+<footer class="bg-surface py-16 border-t border-border">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <div class="text-center">
+      <h3 class="font-display text-4xl tracking-widest text-foreground uppercase mb-4">
+        EXPRESSIONS <span class="text-primary">INK</span> TATTOO
+      </h3>
+      <a
+        href={`tel:${business.phone.replace(/[^0-9+]/g, "")}`}
+        class="font-display text-2xl tracking-wider text-muted transition-colors hover:text-primary"
+      >
+        {business.phone}
+      </a>
+      <p class="mt-4 font-display text-lg tracking-widest text-accent uppercase">
+        Cash Only &mdash; Walk-Ins Welcome
+      </p>
+    </div>
+
+    <div class="mt-12 border-t border-border pt-6 text-center text-xs text-muted">
+      &copy; {new Date().getFullYear()} {business.name}. All rights reserved.
+    </div>
+  </div>
+</footer>

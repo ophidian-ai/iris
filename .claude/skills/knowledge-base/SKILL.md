@@ -34,7 +34,8 @@ Unified vector knowledge layer for OphidianAI. Indexes data as skills produce it
 | `decisions` | Individual decision log entries |
 | `agent-memory` | Persistent memory vault notes, cross-session learnings |
 | `research` | Firecrawl research, prospect research, SEO audits |
-| `projects` | Project READMEs, design specs, tech decisions |
+| `projects` | Project READMEs, design specs, tech decisions, demo site architectures |
+| `design-patterns` | UI component patterns, animation techniques, 3D effects, layout recipes |
 
 ## Indexing Procedure
 
@@ -173,7 +174,8 @@ Use results as context injected into your reasoning. Do not show raw results to 
 | `decisions` | `operations/decisions/log.md` (split by `###` entry, use date as chunk ID) |
 | `agent-memory` | `persistent-memory/**/*.md` (exclude `_index.md`) |
 | `research` | `.firecrawl/cold-leads/*.md`, `.firecrawl/prospect-research/*.md` (skip `.json` files) |
-| `projects` | `engineering/projects/*/README.md`, `docs/superpowers/specs/*.md` |
+| `projects` | `engineering/projects/*/README.md`, `docs/superpowers/specs/*.md`, `sales/lead-generation/prospects/*/demo/src/data/business.ts`, `sales/lead-generation/prospects/*/demo/docs/creative-research.md` |
+| `design-patterns` | `engineering/references/ui-component-patterns.md`, `engineering/references/3d-website-techniques.md`, `engineering/design-system/patterns/*.md` |
 
 ### Process
 

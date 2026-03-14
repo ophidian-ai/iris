@@ -1,7 +1,8 @@
 # Cloud-Hosted Persistent Iris -- Implementation Plan
 
-**Status:** Deferred (2026-03-12)
-**Reason:** Pre-revenue stage doesn't justify the implementation time investment. Revisit when pipeline activity increases or revenue exceeds burn rate.
+**Status:** Superseded (2026-03-13)
+**Superseded by:** `iris/plans/2026-03-13-vps-cloud-environment.md` -- VPS with Claude Code CLI replaces the edge functions approach. Full remote dev access + autonomous Iris with zero skill reimplementation.
+**Previous status:** Deferred (2026-03-12) -- Pre-revenue stage doesn't justify the implementation time investment.
 
 ---
 

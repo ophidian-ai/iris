@@ -1,0 +1,39 @@
+---
+/**
+ * Full-width cinematic testimonial with photo background.
+ * Single impactful quote -- not a card carousel.
+ */
+---
+
+<section class="relative overflow-hidden py-32">
+  <!-- Background image -->
+  <div class="absolute inset-0">
+    <img
+      src="/images/shop-1.jpg"
+      alt="Voelz Body Shop"
+      class="h-full w-full object-cover"
+      loading="lazy"
+    />
+    <div class="absolute inset-0 bg-navy/85"></div>
+  </div>
+
+  <!-- Content -->
+  <div class="relative z-10 mx-auto max-w-4xl px-6 text-center lg:px-12">
+    <div class="scale-reveal">
+      <!-- Large quote mark -->
+      <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto mb-8 h-12 w-12 text-primary/60" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151C7.546 6.068 5.983 8.789 5.983 11H10v10H0z" />
+      </svg>
+
+      <blockquote class="font-display text-2xl font-medium leading-relaxed text-white md:text-3xl lg:text-4xl">
+        They did an outstanding job on my car after a bad accident. You can't even tell it was ever damaged. Honest, fair, and they kept me updated every step of the way.
+      </blockquote>
+
+      <div class="mt-10">
+        <div class="mx-auto h-px w-16 bg-primary"></div>
+        <p class="mt-6 font-display text-sm font-bold uppercase tracking-wider text-primary">Satisfied Customer</p>
+        <p class="mt-1 text-sm text-gray-400">Yelp Review</p>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,41 @@
+---
+const topItems = [
+  "NO CONTRACTS",
+  "CERTIFIED TRAINERS",
+  "26+ YEARS",
+  "GROUP FITNESS",
+  "PERSONAL TRAINING",
+];
+const bottomItems = [
+  "CARDIO LAB",
+  "FREE WEIGHTS",
+  "ALL FITNESS LEVELS",
+  "LOCALLY OWNED",
+  "RESULTS DRIVEN",
+];
+---
+
+<div class="overflow-hidden bg-primary">
+  <!-- Row 1: scrolls left -->
+  <div class="py-3 border-b border-white/10">
+    <div class="marquee-track">
+      {[...topItems, ...topItems, ...topItems, ...topItems].map((item) => (
+        <span class="flex items-center whitespace-nowrap px-8">
+          <span class="font-display text-xl tracking-widest text-white/90 md:text-2xl">{item}</span>
+          <span class="ml-8 h-2 w-2 rotate-45 bg-white/40"></span>
+        </span>
+      ))}
+    </div>
+  </div>
+  <!-- Row 2: scrolls right (reverse) -->
+  <div class="py-3">
+    <div class="marquee-track-reverse">
+      {[...bottomItems, ...bottomItems, ...bottomItems, ...bottomItems].map((item) => (
+        <span class="flex items-center whitespace-nowrap px-8">
+          <span class="font-display text-xl tracking-widest text-white/60 md:text-2xl">{item}</span>
+          <span class="ml-8 h-2 w-2 rotate-45 bg-white/20"></span>
+        </span>
+      ))}
+    </div>
+  </div>
+</div>

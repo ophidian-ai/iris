@@ -1,0 +1,79 @@
+---
+import { business } from "../../data/business";
+
+const bentoItems = [
+  {
+    service: business.services[1], // Auto Painting
+    image: "/images/service-painting.jpg",
+    class: "bento-feature",
+  },
+  {
+    service: business.services[0], // Collision Repair
+    image: null,
+    class: "",
+  },
+  {
+    service: business.services[2], // Frame Straightening
+    image: null,
+    class: "",
+  },
+  {
+    service: business.services[3], // Dent Removal
+    image: "/images/service-mechanic.jpg",
+    class: "bento-wide",
+  },
+];
+---
+
+<section id="services" class="py-24">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <!-- Minimal section label, left-aligned -->
+    <div class="slide-left mb-10">
+      <p class="font-display text-sm font-medium uppercase tracking-[0.3em] text-primary">What We Do</p>
+      <h2 class="font-display mt-2 text-4xl font-bold uppercase tracking-wide text-foreground md:text-5xl">
+        Our Services
+      </h2>
+    </div>
+
+    <!-- Bento grid -->
+    <div class="bento-grid stagger">
+      {bentoItems.map((item) => (
+        <div
+          class={`scale-reveal img-zoom group relative overflow-hidden rounded-xl ${item.class}`}
+          style={item.image
+            ? `min-height: ${item.class === 'bento-feature' ? '420px' : '200px'};`
+            : `min-height: 200px;`}
+        >
+          {/* Background: photo or gradient */}
+          {item.image ? (
+            <img
+              src={item.image}
+              alt={item.service.name}
+              class="absolute inset-0 h-full w-full object-cover"
+            />
+          ) : (
+            <div class="absolute inset-0 bg-gradient-to-br from-surface to-background"></div>
+          )}
+
+          {/* Dark overlay */}
+          <div class={`absolute inset-0 ${item.image ? 'bg-black/55 group-hover:bg-black/45' : 'bg-transparent'} transition-colors duration-300`}></div>
+
+          {/* Border for non-image cards */}
+          {!item.image && (
+            <div class="absolute inset-0 rounded-xl border border-border"></div>
+          )}
+
+          {/* Content */}
+          <div class="relative z-10 flex h-full flex-col justify-end p-6">
+            <h3 class="font-display mb-2 text-2xl font-bold uppercase text-white">
+              {item.service.name}
+            </h3>
+            <p class={`text-sm leading-relaxed ${item.image ? 'text-gray-200' : 'text-muted'} max-w-md`}>
+              {item.service.description}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,110 @@
+---
+import { business } from "../../data/business";
+
+const serviceImages = [
+  "/images/gym-weights.jpg",
+  "/images/trainer.jpg",
+  "/images/group-class.jpg",
+  "/images/gym-cardio.jpg",
+  "/images/dumbbells.jpg",
+  "/images/stretching.jpg",
+];
+---
+
+<section id="services" class="bg-surface py-24">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <!-- Header -->
+    <div class="mb-14 fade-in">
+      <span class="text-sm font-semibold tracking-widest text-primary uppercase">What We Offer</span>
+      <h2 class="mt-3 font-display text-5xl tracking-wide text-foreground md:text-6xl">
+        OUR <span class="text-primary">PROGRAMS</span>
+      </h2>
+    </div>
+
+    <!-- Accordion -->
+    <div class="space-y-0 border-t border-border" id="services-accordion">
+      {business.services.map((service, i) => (
+        <div class="border-b border-border" data-accordion-item>
+          <!-- Accordion header -->
+          <button
+            class="accordion-trigger flex w-full items-center justify-between py-6 md:py-8 text-left transition-colors hover:text-primary group"
+            data-accordion-trigger
+          >
+            <div class="flex items-center gap-4 md:gap-8">
+              <span class="font-display text-3xl md:text-5xl text-primary/30 group-hover:text-primary/60 transition-colors">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <span class="font-display text-2xl md:text-3xl tracking-wide text-foreground">
+                {service.name}
+              </span>
+            </div>
+            <div class="flex-shrink-0 ml-4">
+              <div class="accordion-icon relative h-6 w-6">
+                <span class="absolute top-1/2 left-0 w-6 h-[2px] bg-foreground transition-transform -translate-y-1/2"></span>
+                <span class="accordion-vertical absolute top-1/2 left-0 w-6 h-[2px] bg-foreground transition-transform -translate-y-1/2 rotate-90"></span>
+              </div>
+            </div>
+          </button>
+
+          <!-- Accordion content -->
+          <div class="accordion-panel" data-accordion-panel>
+            <div class="grid grid-cols-1 gap-8 md:grid-cols-2 items-center pb-10">
+              <!-- Image -->
+              <div class="overflow-hidden rounded-xl img-zoom aspect-[4/3]">
+                <img
+                  src={serviceImages[i] || serviceImages[0]}
+                  alt={service.name}
+                  class="h-full w-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+              <!-- Text -->
+              <div>
+                <p class="text-lg leading-relaxed text-muted">{service.description}</p>
+                <a
+                  href="#contact"
+                  class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary transition-colors hover:text-primary-light"
+                >
+                  Get Started
+                  <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  const triggers = document.querySelectorAll<HTMLButtonElement>('[data-accordion-trigger]');
+
+  triggers.forEach((trigger) => {
+    trigger.addEventListener('click', () => {
+      const item = trigger.closest('[data-accordion-item]');
+      const panel = item?.querySelector<HTMLDivElement>('[data-accordion-panel]');
+      if (!panel) return;
+
+      const isOpen = panel.classList.contains('open');
+
+      // Close all panels
+      document.querySelectorAll<HTMLDivElement>('[data-accordion-panel]').forEach((p) => {
+        p.classList.remove('open');
+        p.style.maxHeight = '0px';
+        const icon = p.closest('[data-accordion-item]')?.querySelector('.accordion-vertical');
+        if (icon) icon.style.transform = 'translateY(-50%) rotate(90deg)';
+      });
+
+      // Open clicked panel if it was closed
+      if (!isOpen) {
+        panel.classList.add('open');
+        panel.style.maxHeight = panel.scrollHeight + 'px';
+        const icon = item?.querySelector<HTMLSpanElement>('.accordion-vertical');
+        if (icon) icon.style.transform = 'translateY(-50%) rotate(0deg)';
+      }
+    });
+  });
+</script>

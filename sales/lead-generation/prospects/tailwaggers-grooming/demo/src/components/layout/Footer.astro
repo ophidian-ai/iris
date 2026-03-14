@@ -1,0 +1,40 @@
+---
+interface Props {
+  businessName: string;
+  phone: string;
+  address: string;
+  email?: string;
+}
+
+const { businessName, phone, address, email } = Astro.props;
+const year = new Date().getFullYear();
+---
+
+<footer class="py-12 text-white/90" style="background-color: #5C4033;">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+      <div>
+        <h3 class="mb-3 text-lg font-bold text-primary">{businessName}</h3>
+        <p class="text-sm text-white/60">{address}</p>
+      </div>
+      <div>
+        <h3 class="mb-3 text-lg font-bold">Contact</h3>
+        <p class="text-sm text-white/60">
+          <a href={`tel:${phone.replace(/[^0-9+]/g, "")}`} class="transition-colors hover:text-primary">{phone}</a>
+        </p>
+        {email && (
+          <p class="mt-1 text-sm text-white/60">
+            <a href={`mailto:${email}`} class="transition-colors hover:text-primary">{email}</a>
+          </p>
+        )}
+      </div>
+      <div>
+        <h3 class="mb-3 text-lg font-bold">Hours</h3>
+        <slot />
+      </div>
+    </div>
+    <div class="mt-10 border-t border-white/10 pt-6 text-center text-xs text-white/40">
+      &copy; {year} {businessName}. All rights reserved.
+    </div>
+  </div>
+</footer>
