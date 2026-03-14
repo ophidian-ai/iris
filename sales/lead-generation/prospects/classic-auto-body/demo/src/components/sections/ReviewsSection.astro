@@ -1,49 +1,50 @@
 ---
 import { business } from "../../data/business";
-
-const rotations = ["-2deg", "0deg", "2deg"];
-const offsets = ["0px", "-20px", "-40px"];
 ---
 
-<section id="reviews" class="overflow-hidden py-24">
-  <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-    <!-- Section label, right-aligned for variety -->
-    <div class="slide-right mb-14 text-right">
-      <p class="font-display text-sm font-medium uppercase tracking-[0.3em] text-primary">Testimonials</p>
-      <h2 class="font-display mt-2 text-4xl font-bold uppercase tracking-wide text-foreground md:text-5xl">
-        What They Say
+<section id="reviews" class="relative overflow-hidden py-28">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <!-- Section header -->
+    <div class="mb-16 text-center fade-in">
+      <span class="section-label">Testimonials</span>
+      <h2 class="font-display mt-4 text-4xl font-bold uppercase tracking-tight text-foreground md:text-6xl">
+        What Our Customers Say
       </h2>
+      <p class="mx-auto mt-4 max-w-md text-muted">
+        75+ five-star reviews. 100% recommendation rate. Don't take our word for it.
+      </p>
     </div>
 
-    <!-- Overlapping card stack -->
-    <div class="flex flex-col items-center gap-6 md:flex-row md:items-start md:justify-center md:gap-0">
+    <!-- Review cards grid -->
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-3 stagger">
       {business.reviews.map((review, i) => (
-        <div
-          class="review-card scale-reveal w-full max-w-sm rounded-xl border border-border bg-surface p-8 shadow-xl md:w-80"
-          style={`transform: rotate(${rotations[i]}); margin-left: ${i > 0 ? '-24px' : '0'}; z-index: ${i === 1 ? 3 : i === 0 ? 1 : 2};`}
-        >
-          {/* Stars */}
+        <div class="review-card scale-reveal rounded-xl border border-border bg-surface p-8">
+          <!-- Stars -->
           <div class="mb-5 flex gap-1">
             {Array.from({ length: review.rating }).map(() => (
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary" fill="currentColor" viewBox="0 0 20 20">
+              <svg class="h-4 w-4 text-primary" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
               </svg>
             ))}
           </div>
 
-          {/* Quote */}
-          <p class="mb-6 leading-relaxed text-foreground/90 italic">
-            "{review.text}"
+          <!-- Large quote mark -->
+          <div class="font-display -mb-2 text-5xl leading-none text-primary/20">"</div>
+
+          <!-- Quote text -->
+          <p class="mb-6 leading-relaxed text-foreground/85">
+            {review.text}
           </p>
 
-          {/* Author */}
-          <div class="flex items-center gap-3">
-            <div class="flex h-10 w-10 items-center justify-center rounded-full bg-primary/20 text-sm font-bold text-primary">
+          <!-- Author -->
+          <div class="flex items-center gap-3 border-t border-border pt-5">
+            <div class="flex h-10 w-10 items-center justify-center rounded-full bg-primary/15 font-display text-sm font-bold text-primary">
               {review.author.charAt(0)}
             </div>
-            <p class="text-sm font-semibold text-muted">
-              {review.author}
-            </p>
+            <div>
+              <p class="text-sm font-semibold text-foreground">{review.author}</p>
+              <p class="text-xs text-muted">Verified Customer</p>
+            </div>
           </div>
         </div>
       ))}

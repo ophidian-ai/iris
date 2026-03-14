@@ -1,76 +1,58 @@
 ---
 import { business } from "../../data/business";
 
-const bentoItems = [
-  {
-    service: business.services[1], // Auto Painting
-    image: "/images/service-painting.jpg",
-    class: "bento-feature",
-  },
-  {
-    service: business.services[0], // Collision Repair
-    image: null,
-    class: "",
-  },
-  {
-    service: business.services[2], // Frame Straightening
-    image: null,
-    class: "",
-  },
-  {
-    service: business.services[3], // Dent Removal
-    image: "/images/service-mechanic.jpg",
-    class: "bento-wide",
-  },
+const services = [
+  { ...business.services[0], image: "/images/service-collision.jpg", icon: "M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" },
+  { ...business.services[1], image: "/images/service-painting.jpg", icon: "M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" },
+  { ...business.services[2], image: "/images/service-engine.jpg", icon: "M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z M15 12a3 3 0 11-6 0 3 3 0 016 0z" },
+  { ...business.services[3], image: "/images/service-detail.jpg", icon: "M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" },
 ];
 ---
 
-<section id="services" class="py-24">
+<section id="services" class="relative py-28 noise-overlay">
   <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-    <!-- Minimal section label, left-aligned -->
-    <div class="slide-left mb-10">
-      <p class="font-display text-sm font-medium uppercase tracking-[0.3em] text-primary">What We Do</p>
-      <h2 class="font-display mt-2 text-4xl font-bold uppercase tracking-wide text-foreground md:text-5xl">
+    <!-- Section header -->
+    <div class="mb-16 slide-left">
+      <span class="section-label">What We Do</span>
+      <h2 class="font-display mt-4 text-4xl font-bold uppercase tracking-tight text-foreground md:text-6xl">
         Our Services
       </h2>
     </div>
 
-    <!-- Bento grid -->
-    <div class="bento-grid stagger">
-      {bentoItems.map((item) => (
-        <div
-          class={`scale-reveal img-zoom group relative overflow-hidden rounded-xl ${item.class}`}
-          style={item.image
-            ? `min-height: ${item.class === 'bento-feature' ? '420px' : '200px'};`
-            : `min-height: 200px;`}
-        >
-          {/* Background: photo or gradient */}
-          {item.image ? (
-            <img
-              src={item.image}
-              alt={item.service.name}
-              class="absolute inset-0 h-full w-full object-cover"
-            />
-          ) : (
-            <div class="absolute inset-0 bg-gradient-to-br from-surface to-background"></div>
-          )}
+    <!-- 3D tilt service cards -->
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 stagger">
+      {services.map((service) => (
+        <div class="tilt-card scale-reveal">
+          <div class="tilt-card-inner group relative overflow-hidden rounded-xl border border-border bg-surface">
+            <!-- Image top -->
+            <div class="img-zoom relative h-52 overflow-hidden">
+              <img
+                src={service.image}
+                alt={service.name}
+                class="h-full w-full object-cover"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-surface via-surface/20 to-transparent"></div>
 
-          {/* Dark overlay */}
-          <div class={`absolute inset-0 ${item.image ? 'bg-black/55 group-hover:bg-black/45' : 'bg-transparent'} transition-colors duration-300`}></div>
+              <!-- Icon overlay -->
+              <div class="absolute bottom-4 left-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/90 shadow-lg shadow-primary/20">
+                <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d={service.icon} />
+                </svg>
+              </div>
+            </div>
 
-          {/* Border for non-image cards */}
-          {!item.image && (
-            <div class="absolute inset-0 rounded-xl border border-border"></div>
-          )}
+            <!-- Content -->
+            <div class="p-6">
+              <h3 class="font-display mb-2 text-xl font-bold uppercase tracking-wide text-foreground">
+                {service.name}
+              </h3>
+              <p class="text-sm leading-relaxed text-muted">
+                {service.description}
+              </p>
+            </div>
 
-          {/* Content */}
-          <div class="relative z-10 flex h-full flex-col justify-end p-6">
-            <h3 class="font-display mb-2 text-2xl font-bold uppercase text-white">
-              {item.service.name}
-            </h3>
-            <p class={`text-sm leading-relaxed ${item.image ? 'text-gray-200' : 'text-muted'} max-w-md`}>
-              {item.service.description}
-            </p>
+            <!-- Hover accent bar -->
+            <div class="absolute bottom-0 left-0 h-[2px] w-0 bg-gradient-to-r from-primary to-accent transition-all duration-500 group-hover:w-full"></div>
           </div>
         </div>
       ))}
