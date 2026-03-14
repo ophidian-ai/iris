@@ -1,45 +1,55 @@
 ---
 const stats = [
-  { value: "10+", label: "Years" },
-  { value: "75+", label: "Reviews" },
-  { value: "100%", label: "Recommended" },
-  { value: "Family", label: "Owned" },
+  { value: 10, suffix: "+", label: "Years in Business" },
+  { value: 75, suffix: "+", label: "Customer Reviews" },
+  { value: 100, suffix: "%", label: "Recommended" },
 ];
 ---
 
-<section class="stats-ribbon">
-  <!-- Video background -->
-  <video
-    autoplay
-    muted
-    loop
-    playsinline
-    poster="/images/service-painting.jpg"
-  >
-    <source src="/videos/hero.mp4" type="video/mp4" />
-  </video>
+<section class="relative overflow-hidden py-20">
+  <!-- Gradient background instead of video for performance -->
+  <div class="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary to-primary-light/90"></div>
 
-  <!-- Dark overlay -->
-  <div class="absolute inset-0 z-[1] bg-primary/85"></div>
+  <!-- Noise texture -->
+  <div class="absolute inset-0 noise-overlay"></div>
 
-  <!-- Stats content -->
-  <div class="relative z-[2] py-10">
+  <!-- Divider glow top -->
+  <div class="divider-glow absolute top-0 left-0 right-0"></div>
+
+  <!-- Content -->
+  <div class="relative z-10">
     <div class="mx-auto flex max-w-5xl flex-wrap items-center justify-center gap-0">
       {stats.map((stat, i) => (
         <div class="flex items-center">
-          <div class="fade-in px-8 py-4 text-center md:px-12">
-            <div class="font-display text-4xl font-bold text-white md:text-5xl">
-              {stat.value}
+          <div class="px-10 py-6 text-center md:px-16 fade-in">
+            <div class="font-display text-5xl font-bold text-white md:text-6xl">
+              <span
+                class="stat-counter"
+                data-target={stat.value}
+                data-suffix={stat.suffix}
+              >
+                0{stat.suffix}
+              </span>
             </div>
-            <div class="mt-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/70">
+            <div class="mt-2 text-xs font-semibold uppercase tracking-[0.25em] text-white/60">
               {stat.label}
             </div>
           </div>
           {i < stats.length - 1 && (
-            <div class="hidden h-10 w-px bg-white/25 md:block"></div>
+            <div class="hidden h-12 w-px bg-white/20 md:block"></div>
           )}
         </div>
       ))}
     </div>
+
+    <!-- Family owned badge -->
+    <div class="mt-6 text-center fade-in">
+      <span class="inline-block rounded-full border border-white/20 px-6 py-2 font-display text-xs uppercase tracking-[0.3em] text-white/70">
+        Family Owned & Operated
+      </span>
+    </div>
   </div>
+
+  <!-- Divider glow bottom -->
+  <div class="divider-glow absolute bottom-0 left-0 right-0"></div>
 </section>

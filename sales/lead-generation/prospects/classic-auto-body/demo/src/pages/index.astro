@@ -4,9 +4,11 @@ import Navigation from "../components/layout/Navigation.astro";
 import Footer from "../components/layout/Footer.astro";
 import HeroSection from "../components/sections/HeroSection.astro";
 import ServicesSection from "../components/sections/ServicesSection.astro";
+import ProcessSection from "../components/sections/ProcessSection.astro";
 import StatsSection from "../components/sections/StatsSection.astro";
 import ReviewsSection from "../components/sections/ReviewsSection.astro";
 import ContactSection from "../components/sections/ContactSection.astro";
+import CTABanner from "../components/sections/CTABanner.astro";
 import { business } from "../data/business";
 import "../styles/global.css";
 
@@ -21,15 +23,17 @@ const fullAddress = `${business.address.street}, ${business.address.city}, ${bus
 
 <BaseLayout
   title={`${business.name} | ${business.tagline}`}
-  description={`${business.name} - ${business.tagline}. Located in ${business.address.city}, ${business.address.state}.`}
+  description={`${business.name} - ${business.tagline}. Professional collision repair, auto painting, frame straightening, and dent removal in ${business.address.city}, ${business.address.state}. Call ${business.phone} for a free estimate.`}
   fonts="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap"
 >
-  <Navigation businessName={business.name} sections={navSections} />
+  <Navigation businessName={business.name} phone={business.phone} sections={navSections} />
 
   <HeroSection />
   <ServicesSection />
+  <ProcessSection />
   <StatsSection />
   <ReviewsSection />
+  <CTABanner />
   <ContactSection />
 
   <Footer

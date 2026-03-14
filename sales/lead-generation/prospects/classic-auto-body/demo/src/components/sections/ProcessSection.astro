@@ -1,0 +1,116 @@
+---
+const steps = [
+  {
+    number: "01",
+    title: "Assess",
+    description: "We inspect every inch of damage, document it, and coordinate directly with your insurance company.",
+    icon: "M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4",
+  },
+  {
+    number: "02",
+    title: "Estimate",
+    description: "You get a detailed, transparent estimate -- no hidden fees, no surprises. We explain every line item.",
+    icon: "M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z",
+  },
+  {
+    number: "03",
+    title: "Repair",
+    description: "Our technicians restore your vehicle to pre-accident condition using factory-match materials and precision tools.",
+    icon: "M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z M15 12a3 3 0 11-6 0 3 3 0 016 0z",
+  },
+  {
+    number: "04",
+    title: "Deliver",
+    description: "Your vehicle is returned looking brand new, backed by our quality guarantee. You won't believe the difference.",
+    icon: "M5 13l4 4L19 7",
+  },
+];
+---
+
+<section class="relative py-28 overflow-hidden">
+  <!-- Subtle background gradient -->
+  <div class="absolute inset-0 bg-gradient-to-b from-background via-surface/30 to-background"></div>
+
+  <div class="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <!-- Section header -->
+    <div class="mb-20 text-center fade-in">
+      <span class="section-label">How It Works</span>
+      <h2 class="font-display mt-4 text-4xl font-bold uppercase tracking-tight text-foreground md:text-6xl">
+        Our Process
+      </h2>
+    </div>
+
+    <!-- Desktop timeline -->
+    <div class="timeline-container hidden md:block">
+      <div class="relative">
+        <!-- Timeline base line -->
+        <div class="timeline-line">
+          <div class="timeline-line-fill"></div>
+        </div>
+
+        <!-- Steps -->
+        <div class="relative flex justify-between">
+          {steps.map((step) => (
+            <div class="flex w-1/4 flex-col items-center px-4 fade-in">
+              <!-- Dot -->
+              <div class="timeline-dot mb-6"></div>
+
+              <!-- Icon -->
+              <div class="mb-4 flex h-14 w-14 items-center justify-center rounded-xl border border-border bg-surface">
+                <svg class="h-7 w-7 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d={step.icon} />
+                </svg>
+              </div>
+
+              <!-- Number + title -->
+              <span class="font-display text-xs tracking-[0.2em] text-primary">{step.number}</span>
+              <h3 class="font-display mt-1 text-xl font-bold uppercase tracking-wide text-foreground">
+                {step.title}
+              </h3>
+
+              <!-- Description -->
+              <p class="mt-3 text-center text-sm leading-relaxed text-muted">
+                {step.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile vertical timeline -->
+    <div class="timeline-container md:hidden">
+      <div class="relative pl-10">
+        <!-- Vertical line -->
+        <div class="timeline-line">
+          <div class="timeline-line-fill"></div>
+        </div>
+
+        <div class="space-y-12">
+          {steps.map((step) => (
+            <div class="relative fade-in">
+              <!-- Dot (positioned on the line) -->
+              <div class="timeline-dot absolute -left-10 top-1" style="left: calc(-10px - 0.5rem + 1px)"></div>
+
+              <!-- Content -->
+              <div class="rounded-xl border border-border bg-surface p-6">
+                <div class="mb-3 flex items-center gap-3">
+                  <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
+                    <svg class="h-5 w-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                      <path stroke-linecap="round" stroke-linejoin="round" d={step.icon} />
+                    </svg>
+                  </div>
+                  <div>
+                    <span class="font-display text-xs tracking-[0.2em] text-primary">{step.number}</span>
+                    <h3 class="font-display text-lg font-bold uppercase text-foreground">{step.title}</h3>
+                  </div>
+                </div>
+                <p class="text-sm leading-relaxed text-muted">{step.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
