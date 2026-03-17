@@ -75,7 +75,7 @@ The HTML document contains these sections in order:
 
 ## Output
 
-1. **HTML proposal** -- Save to `sales/lead-generation/prospects/[business-name]/outreach/proposal.html`
+1. **HTML proposal** -- Save to `sales/lead-generation/prospects/[business-name]/proposal/proposal-v1.html` (or `proposal-v2.html`, etc. for revisions). For backward compatibility, also save to `sales/lead-generation/prospects/[business-name]/outreach/proposal.html` on v1.
 
 2. **PDF conversion** -- Convert HTML to PDF using Playwright:
    ```bash
@@ -84,8 +84,8 @@ The HTML document contains these sections in order:
    (async () => {
      const browser = await chromium.launch();
      const page = await browser.newPage();
-     await page.goto('file:///c:/Claude Code/OphidianAI/sales/lead-generation/prospects/[business-name]/outreach/proposal.html', { waitUntil: 'networkidle' });
-     await page.pdf({ path: 'c:/Claude Code/OphidianAI/sales/lead-generation/prospects/[business-name]/outreach/proposal.pdf', format: 'Letter', printBackground: true });
+     await page.goto('file:///c:/Claude Code/OphidianAI/sales/lead-generation/prospects/[business-name]/proposal/proposal-v1.html', { waitUntil: 'networkidle' });
+     await page.pdf({ path: 'c:/Claude Code/OphidianAI/sales/lead-generation/prospects/[business-name]/proposal/proposal-v1.pdf', format: 'Letter', printBackground: true });
      await browser.close();
      console.log('PDF generated');
    })();
@@ -124,6 +124,65 @@ Every proposal must include:
 - Payment schedule with exact amounts
 - Terms and conditions
 - Data access disclosure (GA4/Search Console viewer access for OphidianAI)
+
+## Proposal Revisions
+
+When a prospect requests changes or Eric wants to adjust the offer, generate a revised proposal.
+
+### Revision Workflow
+
+1. **Accept feedback** -- Eric provides what the prospect wants changed. Feedback categories:
+   - Price (too high, wants discount, different payment terms)
+   - Scope (add/remove pages or features)
+   - Timeline (faster delivery, phased rollout)
+   - Payment terms (different split, milestone-based)
+2. **Generate revised proposal** -- Apply the feedback to the existing proposal and produce a new version.
+3. **Save with version number** -- Each revision is saved as `proposal-v1.pdf`, `proposal-v2.pdf`, etc. in `sales/lead-generation/prospects/[slug]/proposal/`.
+   - First proposal (original) is `proposal-v1.pdf` and `proposal-v1.html`.
+   - Each subsequent revision increments the version number.
+4. **Update tracker** -- Note the revision in `sales/lead-generation/prospect-tracker.md`.
+
+### Version Metadata
+
+Every revised proposal includes a metadata block (HTML comment at the top of the HTML file):
+
+```html
+<!--
+  Proposal Version: v2
+  Previous Version: v1
+  Changes: Reduced scope from 6 pages to 4, lowered price from $3,500 to $2,800
+  Feedback: "Price is too high for our budget right now"
+  Generated: 2026-03-17
+-->
+```
+
+### Clarifying Questions
+
+Before revising, draft clarifying questions for Eric to review and send to the prospect. Do NOT auto-send.
+
+Example questions:
+- "What budget range works for your business?"
+- "Would a phased approach work -- start with [smaller scope] and add [larger scope] later?"
+- "Are there specific features you'd prioritize if we adjusted the scope?"
+- "Would a different payment schedule (e.g., monthly installments) help?"
+
+Save draft questions to `sales/lead-generation/prospects/[slug]/proposal/clarifying-questions.md` for Eric to review.
+
+### Negotiation Loop
+
+After 3 rejected or revised proposals for the same prospect, flag Eric:
+
+> "This is the 3rd proposal revision for [Business]. Consider: continue negotiating, offer Quick Launch package ($1,500-$2,000), or close the negotiation."
+
+This flag appears in the terminal output and is logged in the prospect's folder at `sales/lead-generation/prospects/[slug]/proposal/negotiation-notes.md`.
+
+### Revision Rules
+
+- Preserve all branding, styling, and structure from the original proposal.
+- Only change sections affected by the feedback.
+- Always reference what changed from the previous version in the metadata block.
+- Previous versions are never overwritten -- each version is a separate file.
+- Update the Pinecone knowledge base record with the latest version info.
 
 ## Knowledge Base
 
