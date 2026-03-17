@@ -12,7 +12,7 @@ This system serves OphidianAI first, then scales to client offerings through sha
 
 ## Goals
 
-- Post every 2 days across FB, IG, LinkedIn, TikTok (~7 posts per bi-weekly batch)
+- Post every 2 days across FB, IG, LinkedIn, TikTok (exactly 7 posts per bi-weekly batch -- days 1, 3, 5, 7, 9, 11, 13 of the 14-day window)
 - Generate post copy adapted per platform from a single core message
 - Route image generation to the right tool per content type (Playwright, Excalidraw, Nano Banana 2, Pexels)
 - Automate scheduling via direct platform APIs (no third-party scheduler)
@@ -23,11 +23,11 @@ This system serves OphidianAI first, then scales to client offerings through sha
 
 ### Pipeline Flow
 
-```
+```text
 TRIGGER (bi-weekly cron or manual /social-content)
     |
 ORCHESTRATOR (.claude/skills/social-content/)
-    - Determines date range (next 2 weeks, ~7 posts)
+    - Determines date range (next 2 weeks, 7 posts)
     - Rotates across 6 content pillars
     - Generates copy per post, adapts per platform
     - Assigns image pipeline per post type
@@ -51,7 +51,7 @@ PLATFORM SCHEDULER (.claude/skills/social-scheduler/)
 ### Module Breakdown
 
 | Module | Location | Type | Reused by Client Skill |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | social-content (orchestrator) | `.claude/skills/social-content/` | Skill (SKILL.md) | No -- client version has its own |
 | social-image-gen (image router) | `.claude/skills/social-image-gen/` | Skill + scripts | Yes |
 | social-scheduler (platform APIs) | `.claude/skills/social-scheduler/` | Skill + scripts | Yes |
@@ -76,7 +76,7 @@ Overhauled SKILL.md replacing the current social-content skill.
 ### Content Pillars (6)
 
 | Pillar | What It Covers | Primary Image Source |
-|---|---|---|
+| --- | --- | --- |
 | Proof of Work | Before/after website transformations, client wins, results | Playwright compositor |
 | AI Education | "How AI workflows help your business", chatbot demos, automation explainers | Excalidraw diagrams |
 | Website Tips | "3 reasons your website is losing customers", mobile-first, speed tips | Nano Banana or Pexels |
@@ -91,15 +91,16 @@ One post per batch must be an **engagement post** (poll, question, or local call
 Each post generates 4 variants from a single core message:
 
 | Platform | Copy Length | Tone | Format Notes |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | Facebook | 50-150 words | Casual-professional | Short paragraphs, lead with most interesting line |
-| Instagram | Visual-first | Approachable | Carousel (3-5 slides) or Reel script, 5-8 hashtags |
+| Instagram | Visual-first | Approachable | Carousel (3-5 slides), Reel script, or Story (1-3 frames with interaction elements), 5-8 hashtags |
 | LinkedIn | 100-300 words | Professional-first | Lead with insight, 3-5 hashtags at end only |
-| TikTok | Script under 60s | Hook-first | Hook in first 2 seconds, note voiceover vs on-camera |
+| TikTok | Script under 60s | Hook-first | Hook in first 2 seconds, note voiceover vs on-camera. Scheduler sends script to TikTok inbox for manual recording/publish (upgrade to direct video post when app approved). |
 
 ### Posting Schedule
 
 Every 2 days. Best posting windows (ET):
+
 - Weekdays: 7-9 AM, 12-1 PM, or 5-7 PM
 - Varies by platform -- orchestrator assigns optimal time per platform per post
 
@@ -120,33 +121,43 @@ Every 2 days. Best posting windows (ET):
       "scheduledDate": "2026-03-17",
       "imageSource": "nanoBanana",
       "imagePrompt": "Frustrated small business owner looking at laptop showing outdated website, warm lighting, professional setting",
-      "imagePath": null,
       "platforms": {
         "facebook": {
           "copy": "...",
           "hashtags": ["#ColumbusIndiana", "..."],
           "scheduledTime": "12:00 ET",
-          "contentType": "text-post"
+          "contentType": "text-post",
+          "imagePath": null,
+          "altText": "Description of image for accessibility"
         },
         "instagram": {
           "copy": "...",
           "hashtags": ["#ColumbusIndiana", "..."],
           "scheduledTime": "12:00 ET",
           "contentType": "carousel",
-          "slides": ["..."]
+          "imagePath": null,
+          "altText": "Description of image for accessibility",
+          "slides": [
+            { "text": "Slide 1 hook text", "imagePath": null },
+            { "text": "Slide 2 content", "imagePath": null },
+            { "text": "Slide 3 CTA", "imagePath": null }
+          ]
         },
         "linkedin": {
           "copy": "...",
           "hashtags": ["#SmallBusiness", "..."],
           "scheduledTime": "10:00 ET",
-          "contentType": "text-post"
+          "contentType": "text-post",
+          "imagePath": null,
+          "altText": "Description of image for accessibility"
         },
         "tiktok": {
           "copy": "...",
           "scheduledTime": "17:00 ET",
           "contentType": "script",
           "hook": "...",
-          "format": "voiceover"
+          "format": "voiceover",
+          "imagePath": null
         }
       }
     }
@@ -158,6 +169,13 @@ Every 2 days. Best posting windows (ET):
 
 Human-readable version with the same content, formatted for review.
 
+### Batch Conflict Handling
+
+If `/social-content` is run while a batch for an overlapping date range already exists:
+
+- If existing batch is `draft` or `review`: overwrite it (replace with fresh generation)
+- If existing batch is `approved` or `scheduled`: error -- do not overwrite. Prompt Eric to choose: cancel the existing batch first, or shift the new batch to the next available 2-week window.
+
 ## Module 2: Image Router (social-image-gen)
 
 New skill at `.claude/skills/social-image-gen/`. Takes batch JSON, produces finished images.
@@ -165,7 +183,7 @@ New skill at `.claude/skills/social-image-gen/`. Takes batch JSON, produces fini
 ### Routing Logic
 
 | imageSource | Script | Input | Output |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | `playwright` | `scripts/compositor.js` | Old site URL + new site URL | Branded side-by-side PNG with "Before"/"After" labels and OphidianAI watermark |
 | `excalidraw` | `scripts/excalidraw-gen.js` | Workflow/diagram description from `imagePrompt` | PNG export of programmatically generated .excalidraw diagram |
 | `nanoBanana` | `scripts/nano-banana.js` | Text prompt from `imagePrompt` | AI-generated image via Gemini API |
@@ -176,7 +194,7 @@ New skill at `.claude/skills/social-image-gen/`. Takes batch JSON, produces fini
 Each image gets resized/cropped for each platform's specs:
 
 | Platform | Size | Aspect Ratio |
-|---|---|---|
+| --- | --- | --- |
 | Facebook | 1200x630 | Landscape |
 | LinkedIn | 1200x630 | Landscape |
 | Instagram Feed | 1080x1080 or 1080x1350 | Square or Portrait |
@@ -185,13 +203,34 @@ Each image gets resized/cropped for each platform's specs:
 ### Image Output
 
 Images saved to `marketing/social-media/images/YYYY-MM-DD/`:
+
 - `post-01-facebook.png`
 - `post-01-instagram.png`
 - `post-01-linkedin.png`
 - `post-01-tiktok.png`
 - (repeat per post)
 
-After generation, the batch JSON is updated with `imagePath` fields pointing to the generated files.
+After generation, the batch JSON is updated with `imagePath` fields inside each platform variant pointing to the platform-sized files.
+
+### Carousel Image Generation
+
+For Instagram carousel posts, the image router generates a separate image per slide:
+
+1. Each slide gets its own image with text overlay composited via Sharp/Canvas
+2. Slide images are saved as `post-01-instagram-slide-01.png`, `post-01-instagram-slide-02.png`, etc.
+3. The batch JSON `slides` array is updated with individual `imagePath` entries per slide
+4. The base image (from Nano Banana, Pexels, etc.) is used as the background, with slide text overlaid
+
+### Resize Pipeline
+
+All image source scripts output a single master image at the highest needed resolution. The shared `resize.js` script then:
+
+1. Reads the master image
+2. Produces platform-sized variants (crop + resize via Sharp)
+3. Saves each variant with the platform suffix
+4. Updates the batch JSON with per-platform paths
+
+This runs as a post-processing step after each image source script completes.
 
 ### Playwright Compositor Details
 
@@ -216,7 +255,7 @@ For AI Education posts with workflow/integration diagrams:
    - Simple flowchart/process nodes (3-5 steps max)
    - OphidianAI brand colors (#39ff14 accents on dark background)
    - Clean, readable layout
-3. Exports to PNG via Excalidraw CLI or headless rendering
+3. Exports to PNG via Playwright headless rendering of the `@excalidraw/excalidraw` React component (no standalone Excalidraw CLI exists -- use the same Playwright-based approach as the compositor)
 
 ## Module 3: Platform Scheduler (social-scheduler)
 
@@ -225,7 +264,7 @@ New skill at `.claude/skills/social-scheduler/`. Takes approved batch JSON with 
 ### API Integrations
 
 | Platform | API | Auth Method | Key Capabilities |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | Facebook | Meta Graph API v21 | OAuth 2.0 (Page Access Token) | Schedule posts with images, carousels |
 | Instagram | Meta Graph API v21 | Same token as FB (linked accounts) | Content Publishing API -- schedule media + captions |
 | LinkedIn | LinkedIn Marketing API | OAuth 2.0 (3-legged) | Share API -- schedule posts with images |
@@ -233,25 +272,38 @@ New skill at `.claude/skills/social-scheduler/`. Takes approved batch JSON with 
 
 ### Auth
 
-- API tokens stored in `.env` (gitignored)
-- Token refresh handled by individual platform scripts
-- Initial OAuth flows done manually once -- the skill guides through setup
-- Refresh tokens stored securely, access tokens auto-refreshed
+- Access tokens and refresh tokens stored in `.env` (gitignored)
+- Each platform script checks token validity before use and auto-refreshes if expired
+- **Meta (FB + IG):** Use System User long-lived Page Access Token (never expires). Obtained once via Business Manager. No refresh cycle needed.
+- **LinkedIn:** Access token expires in 60 days, refresh token in 365 days. Script auto-refreshes access token using refresh token. If refresh token expires (60+ days of inactivity), the skill prompts for re-auth via browser OAuth flow.
+- **TikTok:** Access token expires in 24 hours, refresh token in 365 days. Script auto-refreshes on every run.
+- **Initial setup:** Each platform has a setup script (`scripts/auth/<platform>-setup.js`) that opens a browser for OAuth consent, captures the callback, and writes tokens to `.env`. Run once per platform.
+- **Token health check:** The scheduler runs a pre-flight check on all tokens before attempting to schedule. Reports any expired or invalid tokens before processing the batch.
+
+### Blocker: Meta Business Verification
+
+Meta Business Verification is currently **pending approval**. FB and IG scheduling cannot go live until verification is complete. In the meantime:
+
+- Build and test all Meta API scripts against the Meta Graph API sandbox/test pages
+- The orchestrator and image router can run fully without Meta verification
+- Once verified, flip the scheduler to production endpoints
 
 ### Workflow
 
 1. Read approved batch JSON (status: `approved`)
-2. For each post, for each platform variant:
+2. Run token health check -- abort early if any platform tokens are invalid
+3. For each post, for each platform variant:
    - Upload the platform-sized image to the platform's media endpoint
    - Schedule the post at the assigned date/time with the platform-adapted copy and hashtags
    - Record the platform post ID back into the batch JSON
-3. Write deployment manifest to `marketing/social-media/scheduled/YYYY-MM-DD-manifest.json`
-4. Update batch status to `scheduled`
-5. Output summary of what was scheduled
+4. Write deployment manifest to `marketing/social-media/scheduled/YYYY-MM-DD-manifest.json`
+5. Update batch status to `scheduled`
+6. Output summary of what was scheduled
 
 ### TikTok Caveat
 
 TikTok's Content Posting API has two modes:
+
 - **Direct post:** Limited access, requires app review and approval. Posts publish automatically.
 - **Inbox notification:** Available immediately. Sends content to TikTok app inbox for manual publish.
 
@@ -263,6 +315,15 @@ Start with inbox notification. Upgrade to direct post once the TikTok developer 
 - Other platforms still get scheduled (no all-or-nothing)
 - Summary shows what succeeded and what needs manual attention
 - Failed posts can be retried with `/social-retry 3 tiktok`
+
+### Post Verification
+
+To move posts from `scheduled` to `published`:
+
+- `/social-check` command queries each platform API for post status after the scheduled publish time
+- Updates the deployment manifest with confirmed `published` status and live post URLs
+- Reports any posts that failed to publish (e.g., rejected by platform review)
+- Morning coffee briefing runs `/social-check` automatically for any batch in `scheduled` status
 
 ### Deployment Manifest
 
@@ -301,7 +362,7 @@ Start with inbox notification. Upgrade to direct post once the TikTok developer 
 
 ### Batch Status Lifecycle
 
-```
+```text
 draft -> review -> approved -> scheduled -> published
 ```
 
@@ -309,11 +370,12 @@ draft -> review -> approved -> scheduled -> published
 - `review` -- Images complete, ready for Eric's review
 - `approved` -- Eric approved, scheduler can run
 - `scheduled` -- Posts pushed to platform APIs
-- `published` -- Posts have gone live (confirmed via API callbacks or manual check)
+- `published` -- Posts have gone live (confirmed via `/social-check`)
 
 ### Morning Coffee Integration
 
 The morning briefing pulls current batch status:
+
 - "Social batch for Mar 17-30: **review** -- 7 posts ready for approval"
 - "Social batch for Mar 3-16: **scheduled** -- 3 posts remaining this week"
 
@@ -335,19 +397,19 @@ The morning briefing pulls current batch status:
 
 ### Rules (New)
 
-9. **LinkedIn tone shift.** Professional-first. Lead with insight, not promotion. No hashtags in body text -- 3-5 at end only.
-10. **TikTok adaptation.** Hook in first 2 seconds. Script under 60 seconds. Note if voiceover or on-camera needed.
-11. **One engagement post per batch.** Must include a direct question, poll, or callout that invites a response. Flag in batch summary.
-12. **Before/after prerequisites.** Requires old site URL (from prospect archives or Wayback Machine) + new live site URL. Skip Proof of Work pillar if no completed projects exist; backfill when portfolio grows.
-13. **AI Education simplicity.** Use outcome language, not tech language. "Your website answers customer questions at 2 AM" not "AI-powered chatbot integration." Excalidraw diagrams: 3-5 steps max, simple flowcharts.
-14. **CTA rotation.** Rotate through: "Drop your URL in the comments", "Save this for later", "DM me AUDIT", "Follow for more", "Book a free consultation". Never repeat same CTA within one batch.
+1. **LinkedIn tone shift.** Professional-first. Lead with insight, not promotion. No hashtags in body text -- 3-5 at end only.
+2. **TikTok adaptation.** Hook in first 2 seconds. Script under 60 seconds. Note if voiceover or on-camera needed.
+3. **One engagement post per batch.** Must include a direct question, poll, or callout that invites a response. Flag in batch summary.
+4. **Before/after prerequisites.** Requires old site URL (from prospect archives or Wayback Machine) + new live site URL. Skip Proof of Work pillar if no completed projects exist; backfill when portfolio grows.
+5. **AI Education simplicity.** Use outcome language, not tech language. "Your website answers customer questions at 2 AM" not "AI-powered chatbot integration." Excalidraw diagrams: 3-5 steps max, simple flowcharts.
+6. **CTA rotation.** Rotate through: "Drop your URL in the comments", "Save this for later", "DM me AUDIT", "Follow for more", "Book a free consultation". Never repeat same CTA within one batch.
 
 ### Post Template Library
 
 Recurring formats the orchestrator draws from:
 
 | # | Template | Pillar | Image Source |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | 1 | "X reasons your website is losing you customers" | Website Tips | Nano Banana or Pexels |
 | 2 | "How [AI tool] can save your [industry] business X hours/week" | AI Education | Excalidraw diagram |
 | 3 | "What we found when we audited [type of] businesses in Columbus" | Local Relevance | Pexels or Nano Banana |
@@ -358,7 +420,7 @@ Recurring formats the orchestrator draws from:
 
 ## File Structure
 
-```
+```text
 marketing/social-media/
   batches/
     YYYY-MM-DD-batch.md        # Human-readable batch
@@ -391,22 +453,34 @@ marketing/social-media/
       linkedin.js              # LinkedIn Marketing API
       tiktok.js                # TikTok Content Posting API
       auth/
-        meta-auth.js           # Shared Meta OAuth handler
-        linkedin-auth.js       # LinkedIn OAuth handler
-        tiktok-auth.js         # TikTok OAuth handler
+        meta-setup.js          # Meta OAuth setup (run once)
+        linkedin-setup.js      # LinkedIn OAuth setup (run once)
+        tiktok-setup.js        # TikTok OAuth setup (run once)
+        meta-auth.js           # Shared Meta token handler
+        linkedin-auth.js       # LinkedIn token handler
+        tiktok-auth.js         # TikTok token handler
 ```
 
 ## Dependencies
 
 - **Node.js** -- Runtime for all scripts
-- **Playwright** -- Browser automation for screenshots (already installed)
+- **Playwright** -- Browser automation for screenshots and Excalidraw rendering (already installed)
 - **Gemini API** -- Nano Banana 2 image generation (key stored, already used for scroll-scrub hero)
 - **Pexels API** -- Stock photos (key stored, already used for prospect mockups)
-- **Meta Graph API** -- FB + IG posting (requires OAuth setup)
+- **Meta Graph API** -- FB + IG posting (requires OAuth setup; blocked by pending Meta Business Verification)
 - **LinkedIn Marketing API** -- LinkedIn posting (requires OAuth setup)
 - **TikTok Content Posting API** -- TikTok posting (requires OAuth setup)
-- **Sharp or Canvas** -- Image resizing/compositing (npm package)
-- **Excalidraw CLI** -- Diagram export to PNG
+- **Sharp** -- Image resizing/compositing (npm package)
+- **@excalidraw/excalidraw** -- React component for diagram rendering (rendered headlessly via Playwright)
+
+## Future: Analytics & Performance Tracking (v2)
+
+Not in scope for v1, but the data model should accommodate:
+
+- Engagement metrics per post pulled from platform APIs (likes, comments, shares, reach)
+- Pillar performance tracking (which pillar drives the most engagement)
+- Template performance tracking (similar to email template rotation tracker in `sales/lead-generation/template-rotation.md`)
+- Engagement fields added to the deployment manifest post-publish
 
 ## Client Reuse Path
 
