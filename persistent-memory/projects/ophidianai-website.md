@@ -19,7 +19,7 @@ updated: 2026-03-10
 - **Submodule** at `engineering/projects/ophidian-ai/` -- commit inside submodule first, then push
 - **Repo:** `github-ophidian-ai:ophidian-ai/ophidian-ai.git`
 - **Stack:** Next.js 15 + Tailwind CSS 4 + TypeScript + App Router
-- **Deployed to:** Vercel at `ophidian-ai.vercel.app`
+- **Deployed to:** Vercel at `ophidianai.com`
 - **Dev server:** `cd engineering/projects/ophidian-ai && npm run dev`
 - **Pages:** Home, Services, Pricing, Contact, About, Portfolio, Blog, FAQ
 - **Brand:** Dark theme, teal #0DB1B2 primary, lime #39FF14 accent, navy #0D1B2A background

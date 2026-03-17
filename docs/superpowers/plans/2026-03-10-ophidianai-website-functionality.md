@@ -1438,8 +1438,8 @@ export async function POST(request: NextRequest) {
     // After checkout, a webhook handler creates the Stripe Customer with metadata
     // from the custom fields (company_name, website_url) via checkout.session.completed event.
     // The customer.subscription.created handler then uses this metadata for account creation.
-    success_url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://ophidian-ai.vercel.app"}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://ophidian-ai.vercel.app"}/pricing`,
+    success_url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://ophidianai.com"}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://ophidianai.com"}/pricing`,
   });
 
   return NextResponse.json({ url: session.url });
