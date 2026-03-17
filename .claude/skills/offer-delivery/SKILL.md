@@ -14,10 +14,10 @@ Deliver within 24 hours of the prospect's reply. Speed signals professionalism a
 ## Conversion Flow
 
 ```
-Offer Delivered > Suggest Call > Discovery Call > Proposal
+Interest Reply -> Auto-Prep (proposal + demo) -> Eric Reviews -> Proposal Sent -> Meeting -> Accepted/Negotiation
 ```
 
-This skill covers the "Offer Delivered" and "Suggest Call" steps in a single touchpoint.
+This skill covers offer delivery, proposal preparation, and the transition into the proposal flow.
 
 ## Inputs
 
@@ -115,20 +115,70 @@ Verify before staging:
 - Subject line is correct
 - Body is under 80 words
 
-### Step 6: Update Tracker
+### Step 5: Update Tracker
 
-Update `sales/lead-generation/prospect-tracker.md`:
+Update the prospect pipeline via the shared outreach-sheets module:
+
+```bash
+node -e "const s = require('./operations/automation/scripts/outreach-sheets.js'); s.updateProspect('Pipeline', 'Business Name', {'Status': 'Offer Delivered', 'Last Contact': new Date().toISOString().split('T')[0], 'Notes': 'Delivered [deliverable type]'});"
+```
+
+Also update `sales/lead-generation/prospect-tracker.md`:
 
 - Set status to **Offer Delivered**
 - Set the date to today
 - Add notes on what was delivered
 
+### Step 6: Proposal Flow Transition
+
+After delivering the free offer, immediately begin preparing the proposal and demo in the background:
+
+1. **Fire parallel background tasks:**
+   - `.claude/skills/proposal-generator/SKILL.md` -- Generates the proposal document
+   - `.claude/skills/prospect-mockup/SKILL.md` -- Builds the interactive demo site
+
+2. **Save outputs:**
+   - Proposal: `sales/lead-generation/prospects/[slug]/proposal/`
+   - Demo: `sales/lead-generation/prospects/[slug]/demo/`
+
+3. **Notify Eric when complete:**
+   - "Proposal and demo ready for [Business]. Review at sales/lead-generation/prospects/[slug]/proposal/ and sales/lead-generation/prospects/[slug]/demo/."
+
+Do not wait for these tasks to complete before finishing the offer delivery. They run in the background.
+
+### Step 7: Proposal Follow-Up Reminder
+
+After Eric sends the proposal, create a Google Calendar follow-up event 3-5 business days out:
+
+```bash
+gws calendar +insert --summary 'Follow up with [Business] on proposal' --start 'YYYY-MM-DDT10:00:00-04:00' --end 'YYYY-MM-DDT10:30:00-04:00' --description 'Proposal sent [date]. Follow up if no response.'
+```
+
+Update the prospect status via the shared module:
+
+```bash
+node -e "const s = require('./operations/automation/scripts/outreach-sheets.js'); s.updateProspect('Pipeline', 'Business Name', {'Status': 'Proposal Sent', 'Last Contact': new Date().toISOString().split('T')[0]});"
+```
+
+## Auto-Prep Mode
+
+When triggered by inbox-monitor detecting an interest reply:
+
+1. **Draft acknowledgment email** for Eric to review -- quick, personalized response thanking the prospect for their interest. Stage as Gmail draft.
+2. **Fire proposal-generator + prospect-mockup in background** -- do not block on completion.
+3. **Notify Eric when ready** -- "Proposal and demo ready for [Business]. Review at sales/lead-generation/prospects/[slug]/proposal/ and sales/lead-generation/prospects/[slug]/demo/."
+
+Auto-prep mode skips the manual trigger step. The inbox-monitor provides the prospect name, business name, and reply context automatically. Iris identifies the deliverable type and kicks off the full pipeline.
+
 ## Output
 
 - Deliverable PDF saved to `sales/lead-generation/prospects/[business-name]/outreach/offer-deliverable.pdf`
 - Delivery email HTML saved to `sales/lead-generation/prospects/[business-name]/outreach/offer-delivery.html`
-- Email sent (test first, then live)
-- Prospect tracker updated to "Offer Delivered"
+- Email staged as Gmail draft for Eric's review
+- Prospect tracker and Google Sheet updated to "Offer Delivered"
+- Proposal and demo generation kicked off in background (saved to `[slug]/proposal/` and `[slug]/demo/`)
+- Eric notified when proposal and demo are ready for review
+- Follow-up calendar event created after proposal is sent
 
 ## Example
 
