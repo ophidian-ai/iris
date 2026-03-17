@@ -88,6 +88,12 @@ Iris (Chief of Staff) coordinates all agents from `.claude/agents/iris/AGENT.md`
 - **Business research** -- `.claude/skills/business-research/` -- Find businesses with outdated websites or service opportunities
 - **SEO audit** -- `.claude/skills/seo-audit/` -- Automated SEO audit with branded PDF report
 - **Outreach pipeline** -- `.claude/skills/outreach-pipeline/` -- Full batch pipeline: research, score, draft, stage in one run
+- **Social content** -- `.claude/skills/social-content/` -- Generate bi-weekly batch of 7 social posts (FB, IG, LinkedIn, TikTok) with AI images
+- **Social image gen** -- `.claude/skills/social-image-gen/` -- Image router: compositor, excalidraw diagrams, Nano Banana 2, Pexels
+- **Social approve** -- `.claude/skills/social-approve/` -- Approve a reviewed batch for scheduling
+- **Social edit** -- `.claude/skills/social-edit/` -- Edit post copy in a batch
+- **Social regen** -- `.claude/skills/social-regen/` -- Regenerate image or copy for a post
+- **Social check** -- `.claude/skills/social-check/` -- Verify published posts went live
 
 ## Project Structure
 

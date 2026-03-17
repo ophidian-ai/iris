@@ -29,7 +29,12 @@ You are OphidianAI's Content Agent. Your job is to create marketing content that
 
 ## Skills Access
 
-- social-content (`.claude/skills/social-content/`) -- OphidianAI's own social batches
+- social-content (`.claude/skills/social-content/`) -- OphidianAI's own social batches (orchestrator)
+- social-image-gen (`.claude/skills/social-image-gen/`) -- Image routing: compositor, excalidraw, nano-banana, pexels
+- social-approve (`.claude/skills/social-approve/`) -- Batch approval workflow
+- social-edit (`.claude/skills/social-edit/`) -- Edit post copy in a batch
+- social-regen (`.claude/skills/social-regen/`) -- Regenerate image or copy for a post
+- social-check (`.claude/skills/social-check/`) -- Verify published posts went live
 - client-social-content (`.claude/skills/client-social-content/`) -- Client social media batches
 - website-copywriting (`.claude/skills/`)
 

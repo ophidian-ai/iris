@@ -1,0 +1,150 @@
+<h2>System Architecture (Final)</h2>
+<p class="subtitle">4 image sources, 6 content pillars, 4 platforms</p>
+
+<div class="mockup">
+  <div class="mockup-header">Social Content Engine -- Pipeline Flow</div>
+  <div class="mockup-body" style="padding: 2rem; font-family: monospace; font-size: 0.85rem; line-height: 1.6;">
+    <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+
+      <div style="background: #1a1a2e; border: 1px solid #39ff14; border-radius: 8px; padding: 1rem; text-align: center;">
+        <div style="color: #39ff14; font-weight: bold; font-size: 1rem;">TRIGGER</div>
+        <div style="color: #ccc; margin-top: 0.5rem;">Bi-weekly cron (every other Sunday AM) or manual <code>/social-content</code></div>
+      </div>
+
+      <div style="text-align: center; color: #666; font-size: 1.2rem;">|</div>
+
+      <div style="background: #1a1a2e; border: 2px solid #39ff14; border-radius: 8px; padding: 1rem;">
+        <div style="color: #39ff14; font-weight: bold; font-size: 1rem; text-align: center;">ORCHESTRATOR</div>
+        <div style="color: #aaa; text-align: center; margin-top: 0.25rem; font-size: 0.8rem;">.claude/skills/social-content/SKILL.md</div>
+        <div style="color: #ccc; margin-top: 0.75rem;">
+          - Determines date range (next 2 weeks, ~7 posts)<br>
+          - Rotates across 6 pillars + 1 engagement post<br>
+          - Generates copy per post, adapts per platform (FB, IG, LinkedIn, TikTok)<br>
+          - Assigns image pipeline per post type<br>
+          - Outputs batch JSON for downstream modules
+        </div>
+      </div>
+
+      <div style="text-align: center; color: #666; font-size: 1.2rem;">|</div>
+
+      <!-- Image Pipeline -->
+      <div style="display: flex; gap: 1rem;">
+        <div style="flex: 1; background: #1a1a2e; border: 1px solid #555; border-radius: 8px; padding: 1rem;">
+          <div style="color: #e8a838; font-weight: bold;">IMAGE ROUTER</div>
+          <div style="color: #aaa; font-size: 0.8rem;">.claude/skills/social-image-gen/</div>
+          <div style="color: #ccc; margin-top: 0.5rem; font-size: 0.85rem;">
+            Routes each post to the right image source:<br><br>
+            <span style="color: #e8a838;">Before/After</span> -- Playwright screenshots + compositor<br>
+            <span style="color: #e8a838;">AI Education</span> -- Excalidraw (workflow diagrams) or Nano Banana<br>
+            <span style="color: #e8a838;">Website Tips</span> -- Nano Banana or Pexels<br>
+            <span style="color: #e8a838;">Showcase</span> -- Project screenshots or Pexels<br>
+            <span style="color: #e8a838;">BTS/Local</span> -- Pexels or Nano Banana
+          </div>
+        </div>
+        <div style="flex: 1; background: #1a1a2e; border: 1px solid #555; border-radius: 8px; padding: 1rem;">
+          <div style="color: #e8a838; font-weight: bold;">IMAGE SOURCES</div>
+          <div style="color: #ccc; margin-top: 0.5rem; font-size: 0.85rem;">
+            <div style="margin-bottom: 0.5rem; padding: 0.5rem; background: #111; border-radius: 4px;">
+              <strong style="color: #39ff14;">Playwright Compositor</strong><br>
+              Screenshots old + new site, composites into branded side-by-side with OphidianAI watermark
+            </div>
+            <div style="margin-bottom: 0.5rem; padding: 0.5rem; background: #111; border-radius: 4px;">
+              <strong style="color: #39ff14;">Excalidraw</strong><br>
+              Programmatic .excalidraw JSON -- AI workflow diagrams, integration flowcharts, process visuals
+            </div>
+            <div style="margin-bottom: 0.5rem; padding: 0.5rem; background: #111; border-radius: 4px;">
+              <strong style="color: #39ff14;">Nano Banana 2</strong><br>
+              AI image gen via Gemini API -- polished graphics, lifestyle scenes, conceptual visuals
+            </div>
+            <div style="padding: 0.5rem; background: #111; border-radius: 4px;">
+              <strong style="color: #39ff14;">Pexels API</strong><br>
+              Stock photos -- local business scenes, professional contexts
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align: center; color: #666; font-size: 1.2rem;">|</div>
+
+      <div style="background: #2e1a1a; border: 2px solid #ff6b6b; border-radius: 8px; padding: 1rem; text-align: center;">
+        <div style="color: #ff6b6b; font-weight: bold; font-size: 1rem;">REVIEW GATE (Sunday)</div>
+        <div style="color: #ccc; margin-top: 0.5rem;">
+          Batch markdown + images saved to <code>marketing/social-media/</code><br>
+          Eric reviews copy + images together<br>
+          Approve all / Edit specific / Regenerate specific
+        </div>
+      </div>
+
+      <div style="text-align: center; color: #666; font-size: 1.2rem;">|</div>
+
+      <div style="background: #1a1a2e; border: 1px solid #555; border-radius: 8px; padding: 1rem;">
+        <div style="color: #6bc5ff; font-weight: bold; text-align: center;">PLATFORM SCHEDULER</div>
+        <div style="color: #aaa; text-align: center; font-size: 0.8rem;">.claude/skills/social-scheduler/</div>
+        <div style="display: flex; gap: 0.75rem; margin-top: 0.75rem;">
+          <div style="flex: 1; background: #111; border-radius: 4px; padding: 0.5rem; text-align: center;">
+            <div style="color: #1877f2; font-weight: bold;">Facebook</div>
+            <div style="color: #888; font-size: 0.75rem;">Meta Graph API</div>
+          </div>
+          <div style="flex: 1; background: #111; border-radius: 4px; padding: 0.5rem; text-align: center;">
+            <div style="color: #e4405f; font-weight: bold;">Instagram</div>
+            <div style="color: #888; font-size: 0.75rem;">Meta Graph API</div>
+          </div>
+          <div style="flex: 1; background: #111; border-radius: 4px; padding: 0.5rem; text-align: center;">
+            <div style="color: #0a66c2; font-weight: bold;">LinkedIn</div>
+            <div style="color: #888; font-size: 0.75rem;">LinkedIn API</div>
+          </div>
+          <div style="flex: 1; background: #111; border-radius: 4px; padding: 0.5rem; text-align: center;">
+            <div style="color: #fff; font-weight: bold;">TikTok</div>
+            <div style="color: #888; font-size: 0.75rem;">TikTok API</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div style="margin-top: 2rem;">
+  <h3>Content Pillars (6)</h3>
+  <table style="width: 100%; border-collapse: collapse; margin-top: 1rem;">
+    <tr style="border-bottom: 1px solid #333;">
+      <th style="text-align: left; padding: 0.5rem; color: #39ff14;">Pillar</th>
+      <th style="text-align: left; padding: 0.5rem; color: #39ff14;">What It Covers</th>
+      <th style="text-align: left; padding: 0.5rem; color: #39ff14;">Primary Image Source</th>
+    </tr>
+    <tr style="border-bottom: 1px solid #222;">
+      <td style="padding: 0.5rem; color: #e8a838;">Proof of Work</td>
+      <td style="padding: 0.5rem;">Before/after website transformations, client wins, results</td>
+      <td style="padding: 0.5rem;">Playwright compositor</td>
+    </tr>
+    <tr style="border-bottom: 1px solid #222;">
+      <td style="padding: 0.5rem; color: #e8a838;">AI Education</td>
+      <td style="padding: 0.5rem;">"How AI workflows help your business", chatbot demos, automation explainers</td>
+      <td style="padding: 0.5rem;">Excalidraw diagrams</td>
+    </tr>
+    <tr style="border-bottom: 1px solid #222;">
+      <td style="padding: 0.5rem; color: #e8a838;">Website Tips</td>
+      <td style="padding: 0.5rem;">"3 reasons your website is losing customers", mobile-first, speed tips</td>
+      <td style="padding: 0.5rem;">Nano Banana or Pexels</td>
+    </tr>
+    <tr style="border-bottom: 1px solid #222;">
+      <td style="padding: 0.5rem; color: #e8a838;">Showcase</td>
+      <td style="padding: 0.5rem;">Completed projects, portfolio pieces, feature highlights</td>
+      <td style="padding: 0.5rem;">Project screenshots or Pexels</td>
+    </tr>
+    <tr style="border-bottom: 1px solid #222;">
+      <td style="padding: 0.5rem; color: #e8a838;">Local Relevance</td>
+      <td style="padding: 0.5rem;">Columbus/Southern Indiana angle, local business stats, community</td>
+      <td style="padding: 0.5rem;">Pexels or Nano Banana</td>
+    </tr>
+    <tr>
+      <td style="padding: 0.5rem; color: #e8a838;">Behind the Scenes</td>
+      <td style="padding: 0.5rem;">Build process, tools, day-in-the-life, lessons learned</td>
+      <td style="padding: 0.5rem;">Pexels or Nano Banana</td>
+    </tr>
+  </table>
+</div>
+
+<div style="margin-top: 2rem;">
+  <p class="subtitle">Architecture look good? If so, I'll move into the detailed design for each module.</p>
+</div>

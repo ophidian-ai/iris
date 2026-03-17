@@ -62,11 +62,40 @@ Check for recent pipeline activity to include in the briefing:
 gws calendar +agenda --days 2 --format json
 ```
 
-**ClickUp -- Open tasks:**
+**ClickUp -- Open tasks + cleanup:**
+
+Scan ALL lists across both spaces. Known list IDs:
+
+| Space | Folder | List | ID |
+|-------|--------|------|----|
+| Web Design & SEO | -- | Backlog | 901711710045 |
+| Web Design & SEO | Bloomin Acres | Active Sprint | 901711866793 |
+| Web Design & SEO | Bloomin Acres | Backlog | 901711866796 |
+| Web Design & SEO | OphidianAI Website | Critical | 901711866798 |
+| Web Design & SEO | OphidianAI Website | High Priority | 901711866799 |
+| Web Design & SEO | OphidianAI Website | Medium Priority | 901711866800 |
+| Web Design & SEO | OphidianAI Website | Low Priority | 901711866801 |
+| Web Design & SEO | Sales & Outreach | Active Leads | 901711866803 |
+| Web Design & SEO | Sales & Outreach | Weekly Pipeline | 901711866804 |
+
 ```bash
-node .claude/skills/clickup/scripts/clickup.js tasks 901711710045
+for list_id in 901711710045 901711866793 901711866796 901711866798 901711866799 901711866800 901711866801 901711866803 901711866804; do
+  node .claude/skills/clickup/scripts/clickup.js tasks $list_id
+done
 ```
-Check all known list IDs: Backlog (901711710045), Project 1 (901711707665), Project 2 (901711707666).
+
+**ClickUp Cleanup:** After fetching tasks from all lists:
+1. Identify tasks with status "complete" or "done" that are still open
+2. Identify duplicate tasks across lists (same name in multiple lists)
+3. Identify overdue tasks (due date in the past) -- flag for Eric's attention
+4. Cross-reference with pipeline state, git history, or project state to confirm completion
+5. Close confirmed completed/duplicate tasks:
+   ```bash
+   echo '{"status":"closed"}' | node .claude/skills/clickup/scripts/clickup.js update <taskId>
+   ```
+6. Report in the terminal summary: `ClickUp: Cleaned up X completed tasks, Y duplicates removed, Z overdue flagged`
+
+Also flag tasks that have been in "in progress" for more than 7 days without updates -- these may be stale and need attention.
 
 **File reads (parallel):**
 
@@ -166,6 +195,20 @@ Parameters:
    - If a prospect's full history is available, provide richer follow-up recommendations
 
 If Pinecone is unavailable, skip silently. The briefing must never fail because of a knowledge base query.
+
+**Social Content Batches:**
+
+Check for active content batches that need attention:
+
+1. Read `marketing/social-media/batches/` directory for any JSON batch files
+2. For each batch, check the `status` field:
+   - `draft` -- Batch generated but not yet reviewed
+   - `review` -- Batch is in the review queue
+   - `approved` -- Approved and waiting to schedule
+   - `scheduled` -- Scheduled for posting
+3. Include in terminal summary: `Content: X batches (Y in review, Z approved)`
+4. If any batch has status `review`, flag it in recommendations as a MARKETING action: "Review pending social content batch -- [batch label]"
+5. If no batches exist or directory is empty, skip silently
 
 **AI News -- Firecrawl:**
 Use the Firecrawl skill to search for 2-3 of these topics (rotate daily):
@@ -287,6 +330,7 @@ Inbox: {{UNREAD_COUNT}} unread{{REPLY_ALERT}}
 Calendar: {{EVENT_COUNT}} events today
 Tasks: {{TASKS_DUE}} due today, {{TASKS_OVERDUE}} overdue
 Projects: {{ACTIVE_PROJECT_COUNT}} active -- {{ACTIVE_PROJECT_SUMMARY}}
+Content: {{BATCH_SUMMARY}}
 Outreach: {{STAGED_COUNT}} staged | {{TEMPLATE_PERFORMANCE}}
 Finance: ${{BURN_RATE}}/mo burn | {{OUTSTANDING_INVOICES}} outstanding{{TAX_DEADLINE_ALERT}}
 

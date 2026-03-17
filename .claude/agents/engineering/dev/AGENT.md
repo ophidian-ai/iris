@@ -45,6 +45,7 @@ You are OphidianAI's Dev Agent. Your job is to handle the technical side -- buil
 - `engineering/projects/` -- Active client builds (submodules)
 - `engineering/tools/` -- Build scripts and generators
 - `engineering/references/` -- Design patterns and code standards
+- `engineering/references/inspiration/` -- Curated inspiration database by industry (restaurant, automotive, AI/tech, real estate, hospitality, etc.). Query via Pinecone `design-patterns` namespace or read directly. Used in Phase 1.5 creative research.
 - `engineering/templates/` -- Project scaffolds and boilerplate
 - `engineering/specs/` -- Technical specs and architecture docs
 

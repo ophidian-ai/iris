@@ -29,7 +29,42 @@ Read `docs/site-brief.md` and extract:
 - **Target audience** (demographics, expectations)
 - **Brand personality** (professional, playful, rustic, sleek)
 
-### 2. Firecrawl Research (3-5 searches, target 7-12 minutes)
+### 2. Query Inspiration Database
+
+Query the Pinecone knowledge base for curated inspiration sites matching this client's industry and mood. Run 2 queries in parallel:
+
+**Query 1 — Industry match:**
+```
+Tool: mcp__plugin_pinecone_pinecone__search-records
+Parameters:
+  name: "ophidianai-kb"
+  namespace: "design-patterns"
+  query.inputs.text: "[industry] website design inspiration"
+  query.topK: 5
+```
+
+**Query 2 — Mood/style match:**
+```
+Tool: mcp__plugin_pinecone_pinecone__search-records
+Parameters:
+  name: "ophidianai-kb"
+  namespace: "design-patterns"
+  query.inputs.text: "[mood keywords] website design [industry]"
+  query.topK: 5
+```
+
+Filter results: keep only scores > 0.5. Deduplicate by URL. Extract the top 3-5 most relevant sites.
+
+For each result, note:
+- The site URL and what it does well
+- Specific design elements to borrow or reference for this client
+- Why it's relevant (industry match, mood match, or technique match)
+
+**If no results above 0.5:** Skip and note "No inspiration DB matches — relying on Firecrawl."
+
+These results populate the **Inspiration DB Matches** section of the output (see below).
+
+### 3. Firecrawl Research (3-5 searches, target 7-12 minutes)
 
 Run these searches using `/firecrawl`:
 
@@ -49,7 +84,7 @@ firecrawl scrape [url]
 - If Firecrawl is slow, limit to 2 searches
 - If Firecrawl is unavailable, skip to Step 3
 
-### 3. Match Against Pattern Library
+### 4. Match Against Pattern Library
 
 Read `engineering/design-system/_catalog.md` and score each pattern for relevance:
 
@@ -59,7 +94,7 @@ Read `engineering/design-system/_catalog.md` and score each pattern for relevanc
 
 Select 5-8 recommended patterns. If the catalog is empty (first build), skip this step and note it.
 
-### 4. Identify New Techniques
+### 5. Identify New Techniques
 
 From the research results, identify techniques that:
 - Are NOT already in the pattern library
@@ -68,7 +103,7 @@ From the research results, identify techniques that:
 
 For each, note: technique name, what it does visually, estimated complexity, and implementation approach.
 
-### 5. Typography and Color Recommendations
+### 6. Typography and Color Recommendations
 
 Based on research:
 - Recommend display + body font pairings with rationale
@@ -88,7 +123,16 @@ Write `docs/creative-research.md` in the current project root:
 ## Trend Pulse
 - [2-3 sentence summary of current relevant trends]
 
+## Inspiration DB Matches
+*From OphidianAI's curated database (`engineering/references/inspiration/`)*
+
+| Site | Why It's Relevant | What to Borrow |
+| --- | --- | --- |
+| [URL] | [industry/mood match reason] | [specific element or technique] |
+
 ## Industry Benchmarks
+*From Firecrawl research*
+
 - [Site URL] -- [what makes it good, specific techniques noted]
 - [Site URL] -- [what makes it good]
 - [Site URL] -- [what makes it good]
@@ -115,6 +159,7 @@ Write `docs/creative-research.md` in the current project root:
 
 | Scenario | Handling |
 | --- | --- |
+| Pinecone unavailable | Skip inspiration DB query, note "DB unavailable", fall back to reading `engineering/references/inspiration/` files directly. |
 | Firecrawl fully unavailable | Skip research, generate output from pattern library only. Note "research unavailable". |
 | site-brief.md missing | Abort Phase 1.5, prompt to run Discovery first. |
 | Empty catalog (first build) | Skip pattern matching, rely on Firecrawl. Note "library empty". |

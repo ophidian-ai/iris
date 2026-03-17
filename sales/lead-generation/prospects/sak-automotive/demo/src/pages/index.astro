@@ -2,13 +2,17 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Navigation from "../components/layout/Navigation.astro";
 import Footer from "../components/layout/Footer.astro";
+import HeroSection from "../components/sections/HeroSection.astro";
+import ServicesSection from "../components/sections/ServicesSection.astro";
+import StatsSection from "../components/sections/StatsSection.astro";
+import ReviewsSection from "../components/sections/ReviewsSection.astro";
+import CTASection from "../components/sections/CTASection.astro";
+import ContactSection from "../components/sections/ContactSection.astro";
 import { business } from "../data/business";
 import "../styles/global.css";
 
-// Define nav sections -- customize per demo
 const navSections = [
   { id: "services", label: "Services" },
-  { id: "about", label: "About" },
   { id: "reviews", label: "Reviews" },
   { id: "contact", label: "Contact" },
 ];
@@ -18,11 +22,17 @@ const fullAddress = `${business.address.street}, ${business.address.city}, ${bus
 
 <BaseLayout
   title={`${business.name} | ${business.tagline}`}
-  description={`${business.name} - ${business.tagline}. Located in ${business.address.city}, ${business.address.state}.`}
+  description={`${business.name} - Honest auto repair in ${business.address.city}, ${business.address.state}. ${business.phone}`}
+  fonts="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
 >
-  <Navigation businessName={business.name} sections={navSections} />
+  <Navigation businessName={business.name} phone={business.phone} sections={navSections} />
 
-  <!-- Add section components here -->
+  <HeroSection />
+  <ServicesSection />
+  <StatsSection />
+  <ReviewsSection />
+  <CTASection />
+  <ContactSection />
 
   <Footer
     businessName={business.name}

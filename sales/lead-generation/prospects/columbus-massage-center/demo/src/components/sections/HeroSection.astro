@@ -1,0 +1,60 @@
+---
+import { business } from "../../data/business";
+
+const phoneHref = `tel:${business.phone.replace(/[^0-9+]/g, "")}`;
+---
+
+<section id="hero" class="relative flex min-h-screen items-center justify-center overflow-hidden">
+  <div class="absolute inset-0">
+    <img
+      src="/images/hero.jpg"
+      alt={business.name}
+      class="h-full w-full object-cover"
+      loading="eager"
+    />
+    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/20"></div>
+    <div class="absolute inset-0 bg-gradient-to-r from-black/50 via-transparent to-transparent"></div>
+  </div>
+
+  <div class="relative z-10 mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+    <p class="section-label-spa mb-8 justify-center text-white/70 fade-in">Columbus, Indiana</p>
+
+    <h1 class="fade-in font-serif text-5xl font-light leading-tight tracking-wide sm:text-6xl md:text-7xl lg:text-8xl">
+      <span class="shimmer-text">{business.name.split("&")[0].trim()}</span>
+      {business.name.includes("&") && (
+        <>
+          <span class="text-white"> &amp; </span>
+          <span class="shimmer-text">{business.name.split("&")[1].trim()}</span>
+        </>
+      )}
+    </h1>
+
+    <div class="divider-accent mx-auto my-6 max-w-xs fade-in"></div>
+
+    <p class="fade-in font-serif text-xl tracking-widest text-white/70 sm:text-2xl">
+      {business.tagline}
+    </p>
+
+    <div class="fade-in mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+      <a
+        href={phoneHref}
+        class="btn-warm inline-flex items-center gap-2 rounded-full bg-primary px-10 py-4 text-sm font-medium uppercase tracking-widest text-white transition-all duration-300 hover:bg-primary-light hover:shadow-lg"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Book Now
+      </a>
+      <a
+        href="#services"
+        class="inline-flex items-center rounded-full border-2 border-white/40 px-10 py-4 text-sm font-medium uppercase tracking-widest text-white transition-all duration-300 hover:border-white hover:bg-white/10"
+      >
+        View Services
+      </a>
+    </div>
+  </div>
+
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2">
+    <div class="h-10 w-6 rounded-full border-2 border-white/30 p-1">
+      <div class="mx-auto h-2 w-1 animate-bounce rounded-full bg-white/50"></div>
+    </div>
+  </div>
+</section>

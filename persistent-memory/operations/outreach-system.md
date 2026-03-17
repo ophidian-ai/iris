@@ -46,10 +46,18 @@ Automation setup: `operations/automation/outreach-scheduler.md`
 - Day 7-8: Second follow-up
 - Day 14: Final graceful close
 
+## Sales Motion (Updated 2026-03-17)
+
+- **Old:** "Your website is outdated, let us rebuild it" (one-time project)
+- **New:** "Your website is outdated, let us rebuild it and keep growing your business with AI" (project + recurring)
+- Every website project becomes a gateway to a monthly AI tier ($297-$797/mo)
+- Score prospects for multi-service potential (AI Service Potential bonus criterion)
+- Lead magnets: free chatbot demo, free SEO audit, free website + AI assessment
+
 ## Template Rotation
 
 - Tracker: `sales/lead-generation/template-rotation.md`
-- Three categories: Website (W1-W4), SEO (S1-S4), Hybrid (H1-H4)
+- Five categories: Website (W1-W4), SEO (S1-S4), Hybrid (H1-H4), Creative Ideas (CI1), AI Services (A1-A4)
 - Always pick least-recently-used within category
 - Never send same template to two prospects in same batch
 - Flag templates with 10+ sends and 0 replies for replacement
@@ -63,13 +71,21 @@ Automation setup: `operations/automation/outreach-scheduler.md`
 - Keep warmup running during active campaigns
 - DNS required: SPF, DKIM, DMARC records
 - Target: 95%+ inbox placement before cold outreach
-- **Current status:** Warming up. No follow-ups or new cold outreach until after 2026-03-19.
+- **Current status:** Active. Warmup complete. Sending live outreach.
+
+## Target Geofence
+
+- Columbus, IN (primary)
+- Greensburg, IN (added 2026-03-16)
+- North Vernon, IN (added 2026-03-16)
+- Greenwood, IN (added 2026-03-16)
+- Franklin, IN (added 2026-03-16)
 
 ## Lead Sources
 
 - **Tier 1 (proven):** Yelp (via Firecrawl), Google Maps/Local Pack
-- **Tier 2:** Chamber of Commerce, Visit Columbus Indiana
-- **Good industries:** Auto services, fitness/gyms, food/restaurants, personal services
+- **Tier 2:** Chamber of Commerce, Visit Columbus Indiana, local directories
+- **Good industries:** Auto services, fitness/gyms, food/restaurants, personal services, health/wellness, professional services
 - **Bad industries:** HVAC/plumbing (franchises), lawn care/landscaping (merged businesses), retail (already on Shopify)
 - **Filtering:** 50+ reviews + bad website, established 5+ years, active socials, service business without online booking
 

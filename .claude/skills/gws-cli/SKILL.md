@@ -246,7 +246,7 @@ gws sheets +append --spreadsheet '<spreadsheetId>' --json-values '[["row1col1","
 ### Update Cell
 
 ```bash
-gws sheets spreadsheets.values update --params '{"spreadsheetId":"<id>","range":"Sheet1!A1","valueInputOption":"USER_ENTERED"}' --json '{"values":[["new value"]]}'
+gws sheets spreadsheets values update --params '{"spreadsheetId":"<id>","range":"Sheet1!A1","valueInputOption":"USER_ENTERED"}' --json '{"values":[["new value"]]}'
 ```
 
 ## Drive

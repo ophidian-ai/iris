@@ -61,6 +61,7 @@
     page-break-after: avoid;
   }
 
+  /* ---- HEADER ---- */
   .header {
     display: flex;
     align-items: center;
@@ -118,6 +119,7 @@
     margin-top: 2px;
   }
 
+  /* ---- STATS BAR ---- */
   .stats-bar {
     display: flex;
     gap: 12px;
@@ -180,6 +182,7 @@
     margin-top: 2px;
   }
 
+  /* ---- SECTIONS ---- */
   .section {
     margin-bottom: 14px;
   }
@@ -215,6 +218,7 @@
     margin-left: auto;
   }
 
+  /* ---- TABLES ---- */
   table {
     width: 100%;
     border-collapse: collapse;
@@ -265,8 +269,8 @@
   .status-badge.replied { color: #39FF14; background: rgba(57, 255, 20, 0.1); }
   .status-badge.closed-won { color: #39FF14; background: rgba(57, 255, 20, 0.15); }
   .status-badge.closed-lost { color: rgba(232, 237, 242, 0.4); background: rgba(232, 237, 242, 0.05); }
-  .status-badge.new-lead { color: #E8EDF2; background: rgba(232, 237, 242, 0.08); }
   .status-badge.staged { color: #A78BFA; background: rgba(167, 139, 250, 0.1); }
+  .status-badge.new-lead { color: rgba(232, 237, 242, 0.5); background: rgba(232, 237, 242, 0.06); }
 
   .price-cell {
     font-family: 'Space Mono', monospace;
@@ -314,6 +318,7 @@
     font-weight: 500;
   }
 
+  /* ---- INBOX ITEMS ---- */
   .inbox-item {
     padding: 6px 0;
     border-bottom: 1px solid rgba(232, 237, 242, 0.05);
@@ -355,6 +360,7 @@
     margin-left: 6px;
   }
 
+  /* ---- CALENDAR ---- */
   .cal-item {
     display: flex;
     gap: 10px;
@@ -385,6 +391,57 @@
     margin-bottom: 2px;
   }
 
+  /* ---- BOXES (two-column) ---- */
+  .box-grid {
+    display: flex;
+    gap: 14px;
+  }
+
+  .box {
+    flex: 1;
+    background: rgba(13, 14, 20, 0.8);
+    border: 1px solid rgba(0, 209, 178, 0.12);
+    border-radius: 8px;
+    padding: 12px 14px;
+  }
+
+  .box h3 {
+    font-size: 11px;
+    font-weight: 600;
+    color: #E8EDF2;
+    margin-bottom: 8px;
+  }
+
+  .box-item {
+    font-size: 10px;
+    color: rgba(232, 237, 242, 0.7);
+    padding: 2px 0;
+    padding-left: 14px;
+    position: relative;
+    line-height: 1.5;
+  }
+
+  .box-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #10B854;
+    opacity: 0.7;
+  }
+
+  .box-item.warning::before {
+    background: #FF6B35;
+  }
+
+  .box-item.inactive::before {
+    background: rgba(232, 237, 242, 0.3);
+  }
+
+  /* ---- REVENUE TRACKER ---- */
   .revenue-grid {
     display: flex;
     gap: 14px;
@@ -426,6 +483,7 @@
     margin-top: 4px;
   }
 
+  /* ---- ACTIVITY PULSE ---- */
   .pulse-grid {
     display: flex;
     gap: 10px;
@@ -462,6 +520,7 @@
     color: #FF6B35;
   }
 
+  /* ---- AI INTEL ---- */
   .intel-item {
     padding: 8px 0;
     border-bottom: 1px solid rgba(232, 237, 242, 0.05);
@@ -493,6 +552,7 @@
     margin-top: 3px;
   }
 
+  /* ---- RECOMMENDATIONS ---- */
   .rec-list {
     list-style: none;
     padding: 0;
@@ -543,44 +603,7 @@
     color: #00D1B2;
   }
 
-  .finance-grid {
-    display: flex;
-    gap: 14px;
-    margin-top: 6px;
-  }
-
-  .finance-box {
-    flex: 1;
-    background: rgba(13, 14, 20, 0.8);
-    border: 1px solid rgba(0, 209, 178, 0.12);
-    border-radius: 8px;
-    padding: 10px 14px;
-    text-align: center;
-  }
-
-  .finance-box h4 {
-    font-size: 8px;
-    font-family: 'Space Mono', monospace;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: rgba(232, 237, 242, 0.4);
-    margin-bottom: 4px;
-  }
-
-  .finance-value {
-    font-family: 'Space Mono', monospace;
-    font-size: 16px;
-    font-weight: 700;
-    color: #FF6B35;
-  }
-
-  .finance-detail {
-    font-size: 8px;
-    color: rgba(232, 237, 242, 0.35);
-    margin-top: 2px;
-  }
-
+  /* ---- FOOTER ---- */
   .footer {
     position: absolute;
     bottom: 24px;
@@ -605,6 +628,7 @@
     letter-spacing: 1px;
   }
 
+  /* ---- EMPTY STATE ---- */
   .empty {
     font-size: 10px;
     color: rgba(232, 237, 242, 0.3);
@@ -612,6 +636,7 @@
     padding: 6px 0;
   }
 
+  /* ---- PROJECT ITEMS ---- */
   .project-item {
     display: flex;
     justify-content: space-between;
@@ -641,6 +666,51 @@
     color: rgba(232, 237, 242, 0.5);
     margin-top: 1px;
   }
+
+  /* ---- FINANCE ---- */
+  .finance-grid {
+    display: flex;
+    gap: 14px;
+  }
+
+  .finance-box {
+    flex: 1;
+    background: rgba(13, 14, 20, 0.8);
+    border: 1px solid rgba(0, 209, 178, 0.12);
+    border-radius: 8px;
+    padding: 12px 14px;
+    text-align: center;
+  }
+
+  .finance-box h3 {
+    font-size: 9px;
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(232, 237, 242, 0.5);
+    margin-bottom: 6px;
+  }
+
+  .finance-value {
+    font-family: 'Space Mono', monospace;
+    font-size: 18px;
+    font-weight: 700;
+    color: #FF6B35;
+  }
+
+  .finance-detail {
+    font-size: 9px;
+    color: rgba(232, 237, 242, 0.4);
+    margin-top: 4px;
+  }
+
+  .finance-alert {
+    font-size: 9px;
+    color: #FF6B35;
+    font-weight: 600;
+    margin-top: 4px;
+  }
 </style>
 </head>
 <body>
@@ -656,7 +726,7 @@
       </div>
     </div>
     <div class="header-right">
-      <div class="header-date">MARCH 13, 2026</div>
+      <div class="header-date">MARCH 17, 2026</div>
       <div class="header-label">Morning Coffee</div>
     </div>
   </div>
@@ -665,7 +735,7 @@
   <div class="stats-bar">
     <div class="stat-card highlight">
       <div class="stat-label">Pipeline Value</div>
-      <div class="stat-value">$54,700</div>
+      <div class="stat-value">$112,200</div>
       <div class="stat-sub">potential</div>
     </div>
     <div class="stat-card">
@@ -675,12 +745,12 @@
     </div>
     <div class="stat-card">
       <div class="stat-label">Active Prospects</div>
-      <div class="stat-value">19</div>
+      <div class="stat-value">37</div>
       <div class="stat-sub">in pipeline</div>
     </div>
     <div class="stat-card">
       <div class="stat-label">Last Outreach</div>
-      <div class="stat-value">2</div>
+      <div class="stat-value">1</div>
       <div class="stat-sub">days ago</div>
     </div>
   </div>
@@ -689,15 +759,23 @@
   <div class="section">
     <div class="section-title">
       <div class="dot"></div> Inbox
-      <div class="count">0 unread</div>
+      <div class="count">2 unread</div>
     </div>
-    <div class="empty">No unread emails.</div>
+    <div class="inbox-item">
+      <div class="inbox-from">Facebook</div>
+      <div class="inbox-subject">Getting Started with Marketing API</div>
+    </div>
+    <div class="inbox-item">
+      <div class="inbox-from">Facebook</div>
+      <div class="inbox-subject">Getting Started with Marketing API</div>
+    </div>
   </div>
 
   <!-- Pipeline -->
   <div class="section">
     <div class="section-title">
       <div class="dot"></div> Pipeline
+      <div class="count">37 prospects</div>
     </div>
     <table>
       <thead>
@@ -711,61 +789,86 @@
       </thead>
       <tbody>
         <tr>
-          <td>Point of Hope Church</td>
-          <td><span class="status-badge outreach">Outreach Sent</span></td>
-          <td>2</td>
-          <td>Mar 19</td>
-          <td class="price-cell">$1,200</td>
-        </tr>
-        <tr class="value-breakdown-row"><td colspan="5"><div class="value-breakdown"><div class="value-breakdown-label">VALUE BASIS</div><div class="value-breakdown-items"><div class="value-breakdown-item"><span>Starter tier</span> $1,200</div><div class="value-breakdown-item">Warm referral via Steve Stock</div><div class="value-breakdown-item">Two options offered: Starter $1,200 / Professional $2,500</div></div></div></td></tr>
-        <tr>
           <td>Columbus Massage Center</td>
           <td><span class="status-badge outreach">Outreach Sent</span></td>
-          <td>7</td>
-          <td class="overdue">Mar 10 (overdue)</td>
+          <td>11</td>
+          <td class="overdue">Mar 10 (7d overdue)</td>
           <td class="price-cell">$3,500</td>
         </tr>
-        <tr class="value-breakdown-row"><td colspan="5"><div class="value-breakdown"><div class="value-breakdown-label">VALUE BASIS</div><div class="value-breakdown-items"><div class="value-breakdown-item"><span>Professional tier</span></div><div class="value-breakdown-item">Website + assessment PDF sent</div></div></div></td></tr>
         <tr>
           <td>SAK Automotive</td>
           <td><span class="status-badge outreach">Outreach Sent</span></td>
-          <td>7</td>
-          <td class="overdue">Mar 10 (overdue)</td>
+          <td>11</td>
+          <td class="overdue">Mar 10 (7d overdue)</td>
           <td class="price-cell">$3,500</td>
         </tr>
-        <tr class="value-breakdown-row"><td colspan="5"><div class="value-breakdown"><div class="value-breakdown-label">VALUE BASIS</div><div class="value-breakdown-items"><div class="value-breakdown-item"><span>Professional tier</span></div><div class="value-breakdown-item">Website + assessment PDF sent</div></div></div></td></tr>
         <tr>
-          <td>Nanos Car Detailing</td>
-          <td><span class="status-badge staged">Staged</span></td>
-          <td>--</td>
-          <td>--</td>
+          <td>Nano's Car Detailing</td>
+          <td><span class="status-badge outreach">Outreach Sent</span></td>
+          <td>7</td>
+          <td class="overdue">Mar 14 (3d overdue)</td>
           <td class="price-cell">$3,500</td>
         </tr>
         <tr>
           <td>Total Fitness of Columbus</td>
-          <td><span class="status-badge staged">Staged</span></td>
-          <td>--</td>
-          <td>--</td>
+          <td><span class="status-badge outreach">Outreach Sent</span></td>
+          <td>7</td>
+          <td class="overdue">Mar 14 (3d overdue)</td>
           <td class="price-cell">$3,500</td>
         </tr>
         <tr>
           <td>Voelz Body Shop</td>
-          <td><span class="status-badge staged">Staged</span></td>
-          <td>--</td>
-          <td>--</td>
+          <td><span class="status-badge outreach">Outreach Sent</span></td>
+          <td>7</td>
+          <td class="overdue">Mar 14 (3d overdue)</td>
           <td class="price-cell">$3,500</td>
         </tr>
         <tr>
           <td>Expressions Ink Tattoo</td>
+          <td><span class="status-badge outreach">Outreach Sent</span></td>
+          <td>7</td>
+          <td class="overdue">Mar 14 (3d overdue)</td>
+          <td class="price-cell">$3,500</td>
+        </tr>
+        <tr>
+          <td>Point of Hope Church</td>
+          <td><span class="status-badge outreach">Outreach Sent</span></td>
+          <td>6</td>
+          <td>Mar 19</td>
+          <td class="price-cell">$1,200</td>
+        </tr>
+        <tr>
+          <td>Carriage on the Square</td>
+          <td><span class="status-badge outreach">Outreach Sent</span></td>
+          <td>1</td>
+          <td>Mar 20</td>
+          <td class="price-cell">$3,500</td>
+        </tr>
+        <tr>
+          <td>Platinum Auto Repair</td>
+          <td><span class="status-badge outreach">Outreach Sent</span></td>
+          <td>1</td>
+          <td>Mar 20</td>
+          <td class="price-cell">$3,500</td>
+        </tr>
+        <tr>
+          <td>Storie's Restaurant</td>
           <td><span class="status-badge staged">Staged</span></td>
           <td>--</td>
           <td>--</td>
           <td class="price-cell">$3,500</td>
         </tr>
         <tr>
-          <td>+ 11 more prospects</td>
-          <td colspan="3" style="color: rgba(232,237,242,0.4); font-size: 10px;">5 New Leads, 6 Outreach Staged</td>
-          <td class="price-cell">$33,500</td>
+          <td>JoCo Fitness</td>
+          <td><span class="status-badge staged">Staged</span></td>
+          <td>--</td>
+          <td>--</td>
+          <td class="price-cell">$3,500</td>
+        </tr>
+        <tr>
+          <td>+8 staged, 11 new leads</td>
+          <td colspan="3" style="font-size:9px;color:rgba(232,237,242,0.4);">See prospect tracker for full pipeline</td>
+          <td class="price-cell" style="font-size:10px;">$57,700</td>
         </tr>
       </tbody>
     </table>
@@ -776,7 +879,20 @@
     <div class="section-title">
       <div class="dot"></div> Calendar
     </div>
-    <div class="empty">Calendar unavailable -- API scopes not configured.</div>
+    <div class="cal-day-label">TODAY -- MARCH 17</div>
+    <div class="cal-item">
+      <div class="cal-time">All Day</div>
+      <div class="cal-title">St. Patrick's Day</div>
+    </div>
+    <div class="cal-item">
+      <div class="cal-time">All Day</div>
+      <div class="cal-title">Home</div>
+    </div>
+    <div class="cal-day-label">TOMORROW -- MARCH 18</div>
+    <div class="cal-item">
+      <div class="cal-time">All Day</div>
+      <div class="cal-title">Home</div>
+    </div>
   </div>
 
   <div class="footer">
@@ -796,7 +912,7 @@
       </div>
     </div>
     <div class="header-right">
-      <div class="header-date">MARCH 13, 2026</div>
+      <div class="header-date">MARCH 17, 2026</div>
       <div class="header-label">Morning Coffee</div>
     </div>
   </div>
@@ -809,9 +925,23 @@
     <div class="project-item">
       <div>
         <div class="project-name">Bloomin' Acres</div>
-        <div class="project-detail">Sourdough &amp; fresh produce website -- In progress</div>
+        <div class="project-detail">Sourdough &amp; fresh produce website -- 5 ClickUp tasks in active sprint</div>
       </div>
-      <div class="project-status">BUILD</div>
+      <div class="project-status">In Progress</div>
+    </div>
+    <div class="project-item">
+      <div>
+        <div class="project-name">OphidianAI Website</div>
+        <div class="project-detail">Company site -- 2 urgent, 3 high, 4 medium, 3 low priority tasks</div>
+      </div>
+      <div class="project-status">In Progress</div>
+    </div>
+    <div class="project-item">
+      <div>
+        <div class="project-name">AI Products GTM</div>
+        <div class="project-detail">8 AI products, 3-tier pricing, website pages, updated outreach</div>
+      </div>
+      <div class="project-status">Planning</div>
     </div>
   </div>
 
@@ -819,15 +949,53 @@
   <div class="section">
     <div class="section-title">
       <div class="dot"></div> Tasks
-      <div class="count">unavailable</div>
+      <div class="count">22 open</div>
     </div>
-    <div class="empty">Tasks unavailable -- ClickUp API token not configured.</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Task</th>
+          <th>Priority</th>
+          <th>List</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>End-to-end Stripe checkout test</td>
+          <td class="overdue">Urgent</td>
+          <td>OphidianAI Critical</td>
+        </tr>
+        <tr>
+          <td>Verify contact form works in production</td>
+          <td class="overdue">Urgent</td>
+          <td>OphidianAI Critical</td>
+        </tr>
+        <tr>
+          <td>Client handoff prep and documentation</td>
+          <td style="color:#FF6B35;">High</td>
+          <td>Bloomin' Acres Sprint</td>
+        </tr>
+        <tr>
+          <td>Final QA pass -- all pages, mobile/tablet</td>
+          <td style="color:#FF6B35;">High</td>
+          <td>Bloomin' Acres Sprint</td>
+        </tr>
+        <tr>
+          <td>Outreach Pipeline: 8 Emails Staged for Review</td>
+          <td style="color:#FF6B35;">High</td>
+          <td>Weekly Pipeline</td>
+        </tr>
+        <tr>
+          <td colspan="3" style="font-size:9px;color:rgba(232,237,242,0.4);">+17 more tasks across all lists</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 
   <!-- Revenue Tracker -->
   <div class="section">
     <div class="section-title">
-      <div class="dot"></div> Revenue
+      <div class="dot"></div> Revenue &amp; Finance
     </div>
     <div class="revenue-grid">
       <div class="revenue-box">
@@ -837,32 +1005,20 @@
       </div>
       <div class="revenue-box">
         <h3>Potential Pipeline</h3>
-        <div class="revenue-amount">$54,700</div>
-        <div class="revenue-detail">19 active prospects</div>
+        <div class="revenue-amount">$112,200</div>
+        <div class="revenue-detail">37 prospects across 7 industries</div>
       </div>
     </div>
-  </div>
-
-  <!-- Financial Pulse -->
-  <div class="section">
-    <div class="section-title">
-      <div class="dot"></div> Financial Pulse
-    </div>
-    <div class="finance-grid">
+    <div class="finance-grid" style="margin-top:10px;">
       <div class="finance-box">
-        <h4>Burn Rate</h4>
-        <div class="finance-value">$149/mo</div>
-        <div class="finance-detail">GWS $18 + Cloudflare $10 + Claude $100 + Warmbox $20</div>
+        <h3>Monthly Burn</h3>
+        <div class="finance-value">$168.79</div>
+        <div class="finance-detail">Anthropic, Vercel, GWS, Cloudflare, Warmbox</div>
       </div>
       <div class="finance-box">
-        <h4>Next Tax Deadline</h4>
-        <div class="finance-value">Apr 15</div>
-        <div class="finance-detail">Q1 estimated taxes -- 33 days</div>
-      </div>
-      <div class="finance-box">
-        <h4>Outstanding</h4>
-        <div class="finance-value">$0</div>
-        <div class="finance-detail">No invoices sent</div>
+        <h3>Tax Deadline</h3>
+        <div class="finance-value" style="font-size:14px;">APR 15</div>
+        <div class="finance-alert">29 days -- Q1 estimated taxes</div>
       </div>
     </div>
   </div>
@@ -875,15 +1031,15 @@
     <div class="pulse-grid">
       <div class="pulse-item">
         <div class="pulse-label">Outreach/Wk</div>
-        <div class="pulse-value">1</div>
+        <div class="pulse-value">4</div>
       </div>
       <div class="pulse-item">
         <div class="pulse-label">Outreach/Mo</div>
-        <div class="pulse-value">3</div>
+        <div class="pulse-value">18</div>
       </div>
       <div class="pulse-item">
         <div class="pulse-label">Response Rate</div>
-        <div class="pulse-value">0%</div>
+        <div class="pulse-value stale">0%</div>
       </div>
       <div class="pulse-item">
         <div class="pulse-label">Last Social</div>
@@ -902,14 +1058,14 @@
       <div class="dot"></div> AI Intel
     </div>
     <div class="intel-item">
-      <div class="intel-headline">Claude Code: Memory Leak Fix, Model Overrides, Windows RTL Fix</div>
-      <div class="intel-source">GitHub / Anthropic</div>
-      <div class="intel-analysis">Claude Code shipped fixes for streaming memory leaks and Windows-specific bugs (RTL text, LSP URIs). New modelOverrides setting lets you map model picker entries to custom providers. Direct benefit: more stable long sessions and better Windows experience for OphidianAI's dev workflow.</div>
+      <div class="intel-headline">Claude Code March 2026: Voice Mode, /loop, 1M Context, Opus 4.6</div>
+      <div class="intel-source">Releasebot / Pasquale Pillitteri</div>
+      <div class="intel-analysis">Major update wave: push-to-talk voice mode, /loop for autonomous iteration, 1M token context window, and MCP elicitation (servers can request structured input during tasks). The MCP elicitation feature could power interactive client onboarding flows in your chatbot product.</div>
     </div>
     <div class="intel-item">
-      <div class="intel-headline">AI Agencies in 2026: From Task Execution to Growth Partnerships</div>
-      <div class="intel-source">Seven Figure Agency / Forrester</div>
-      <div class="intel-analysis">Agencies polarizing into three tiers: task-based, efficiency-driven, and strategic growth partners. Gartner predicts 40% of enterprise apps will embed AI agents by end of 2026. Opportunity: position OphidianAI as a strategic partner (not just a website vendor) by bundling AI integrations with web builds.</div>
+      <div class="intel-headline">AI Website Builders Accelerating SMB Adoption in 2026</div>
+      <div class="intel-source">Veza Digital / CyberNews</div>
+      <div class="intel-analysis">AI builders like Framer and Wix AI are pushing "beyond templates" -- but still can't match custom design and local business understanding. This validates OphidianAI's positioning: custom-built sites with AI efficiency, not cookie-cutter AI output. Use this angle in outreach messaging.</div>
     </div>
   </div>
 
@@ -919,11 +1075,11 @@
       <div class="dot"></div> Today's Priorities
     </div>
     <ol class="rec-list">
-      <li><span class="rec-tag">FOLLOW-UP</span> Columbus Massage Center and SAK Automotive follow-ups are 3 days overdue (due Mar 10). Send follow-up emails today -- 13 staged drafts include FU1 templates for both.</li>
-      <li><span class="rec-tag">OUTREACH</span> 13 cold emails are staged as Gmail drafts and ready to send. Review and fire them off to activate the pipeline -- these cover 11 new prospects plus 2 follow-ups.</li>
-      <li><span class="rec-tag">PIPELINE</span> Point of Hope Church (warm referral) was contacted Mar 11. Follow-up due Mar 19. No action needed today, but keep this one warm -- warm leads close at higher rates.</li>
-      <li><span class="rec-tag">REVENUE</span> Zero revenue with $149/mo burn rate. Every week without a close costs ~$37. Focus energy on the 3 prospects with outreach sent -- they are closest to converting.</li>
-      <li><span class="rec-tag">MARKETING</span> No social media or blog activity logged. Even one post per week builds visibility. Consider a quick launch post or a before/after web design showcase.</li>
+      <li><span class="rec-tag">FOLLOW-UP</span> Columbus Massage Center and SAK Automotive follow-ups are 7 days overdue. Send FU2 or call today -- these were your first two prospects.</li>
+      <li><span class="rec-tag">FOLLOW-UP</span> 6 prospects from the Mar 10 batch (Nanos, Total Fitness, Voelz, Expressions Ink, Taulman, Hawkins) have follow-ups 3 days overdue. Send follow-up emails today.</li>
+      <li><span class="rec-tag">PIPELINE</span> 13 cold emails still sitting in Gmail drafts (staged since Mar 10). Review and send, or they'll go stale. Also 8 new staged emails from the Mar 16 batch need review.</li>
+      <li><span class="rec-tag">REVENUE</span> Zero revenue with $168.79/mo burn. Focus on converting the warmest leads -- Point of Hope Church (warm referral, follow-up Mar 19) is the most likely first close.</li>
+      <li><span class="rec-tag">MARKETING</span> No social media or blog content yet. Even one post per week builds credibility. Consider launching with an AI-focused LinkedIn post about your agency's approach.</li>
     </ol>
   </div>
 

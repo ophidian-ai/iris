@@ -69,11 +69,10 @@ async function main() {
 
   // Create Gmail draft via gws cli
   const draftJson = JSON.stringify({ message: { raw } });
-  const result = execFileSync(
-    "gws",
-    ["gmail", "users", "drafts", "create", "--params", '{"userId":"me"}', "--json", draftJson],
-    { encoding: "utf8" }
-  );
+  const gwsArgs = ["gmail", "users", "drafts", "create", "--params", '{"userId":"me"}', "--json", draftJson];
+  const result = process.platform === "win32"
+    ? execFileSync("cmd", ["/c", "gws", ...gwsArgs], { encoding: "utf8" })
+    : execFileSync("gws", gwsArgs, { encoding: "utf8" });
 
   const draft = JSON.parse(result);
   const draftId = draft.id;

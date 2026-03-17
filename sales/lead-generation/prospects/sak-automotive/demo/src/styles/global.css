@@ -1,17 +1,18 @@
 @import "tailwindcss";
 
-/* Brand tokens -- override these per demo */
+/* Brand tokens */
 @theme inline {
-  --color-primary: #3f831c;
-  --color-primary-light: #5aa33c;
-  --color-accent: #f0b012;
-  --color-accent-light: #f5c842;
-  --color-background: #fafaf8;
-  --color-surface: #ffffff;
-  --color-foreground: #1a1a1a;
-  --color-muted: #6b7280;
-  --color-muted-light: #9ca3af;
-  --color-border: #e5e7eb;
+  --color-primary: #C41E2A;
+  --color-primary-light: #D93240;
+  --color-accent: #C41E2A;
+  --color-accent-light: #E0434F;
+  --color-background: #111111;
+  --color-surface: #1a1a1a;
+  --color-surface-light: #222222;
+  --color-foreground: #f5f5f5;
+  --color-muted: #9ca3af;
+  --color-muted-light: #6b7280;
+  --color-border: #2a2a2a;
 }
 
 /* Smooth scrolling */
@@ -27,11 +28,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Scroll animation base */
+/* ── Scroll animations ───────────────────── */
 .fade-in {
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.23, 1, 0.32, 1),
+              transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .fade-in.visible {
@@ -39,10 +41,135 @@ body {
   transform: translateY(0);
 }
 
-/* Stagger children */
 .stagger > .fade-in:nth-child(1) { transition-delay: 0ms; }
-.stagger > .fade-in:nth-child(2) { transition-delay: 100ms; }
-.stagger > .fade-in:nth-child(3) { transition-delay: 200ms; }
-.stagger > .fade-in:nth-child(4) { transition-delay: 300ms; }
-.stagger > .fade-in:nth-child(5) { transition-delay: 400ms; }
-.stagger > .fade-in:nth-child(6) { transition-delay: 500ms; }
+.stagger > .fade-in:nth-child(2) { transition-delay: 120ms; }
+.stagger > .fade-in:nth-child(3) { transition-delay: 240ms; }
+.stagger > .fade-in:nth-child(4) { transition-delay: 360ms; }
+
+/* ── Animated stat counters ──────────────── */
+.stat-counter {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Tilt cards ──────────────────────────── */
+.tilt-card {
+  transform-style: preserve-3d;
+  perspective: 800px;
+  transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.tilt-card-inner {
+  transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  transform-style: preserve-3d;
+}
+
+/* ── Glow button ─────────────────────────── */
+.btn-glow {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-glow::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: inherit;
+  filter: blur(16px);
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.4s ease;
+}
+
+.btn-glow:hover::after {
+  opacity: 0.5;
+}
+
+/* ── Shimmer text ────────────────────────── */
+.shimmer-text {
+  background: linear-gradient(
+    110deg,
+    var(--color-foreground) 35%,
+    var(--color-accent) 50%,
+    var(--color-foreground) 65%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 4s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%, 100% { background-position: 200% center; }
+  50% { background-position: -200% center; }
+}
+
+/* ── Divider glow ────────────────────────── */
+.divider-glow {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
+  box-shadow: 0 0 12px var(--color-accent), 0 0 24px rgba(240, 176, 18, 0.3);
+}
+
+/* ── Noise overlay ───────────────────────── */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ── Section label ───────────────────────── */
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.section-label::before {
+  content: "";
+  display: block;
+  width: 2rem;
+  height: 2px;
+  background: var(--color-accent);
+}
+
+/* ── Glass card ──────────────────────────── */
+.glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+}
+
+/* ── Accent bar animation ────────────────── */
+.accent-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.group:hover .accent-bar {
+  transform: scaleX(1);
+}
+
+/* ── Reduced motion ──────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .fade-in { opacity: 1; transform: none; transition: none; }
+  .shimmer-text { animation: none; }
+  .btn-glow::after { display: none; }
+}

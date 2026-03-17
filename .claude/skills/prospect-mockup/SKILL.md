@@ -32,7 +32,19 @@ If a current site URL is provided:
 
 If no URL, use whatever info is available from the prospect's research folder at `sales/lead-generation/prospects/<name>/research/`.
 
-### Step 2: Get Design Inspiration
+### Step 2: Layout Differentiation Check (MANDATORY)
+
+Before choosing any layouts, read `engineering/references/layout-variations.md`:
+
+1. Check the **Recently Used** table at the bottom
+2. Identify which layout variants (Hero, Services, Stats, Reviews, CTA, Contact) were used in the last 3 projects
+3. For each section, pick a variant **NOT used in the last 3 builds**
+4. If the "Overused Patterns" list flags a variant, it is **banned** for this build
+5. Document your chosen variant IDs (e.g., H2, S4, R3) before writing any code
+
+**At least 3 sections must use variants that differ from ALL recent projects.** If you cannot find 3 different variants, stop and flag it -- the library needs new entries.
+
+### Step 3: Get Design Inspiration
 
 If a design reference URL is provided:
 1. Use Firecrawl to scrape the reference site
@@ -46,7 +58,7 @@ If no reference, use a clean, modern single-page design appropriate for the indu
 - **Retail:** Product-forward, grid layouts, browsable
 - **General local business:** Clean, approachable, phone number prominent
 
-### Step 3: Build the Mockup
+### Step 4: Build the Mockup
 
 Create a single-file HTML page (`index.html`) with:
 
@@ -59,7 +71,7 @@ Create a single-file HTML page (`index.html`) with:
 - **Prominent phone number and address** (local businesses care about calls)
 - **Footer** with business info
 
-### Step 4: Save and Screenshot
+### Step 5: Save and Screenshot
 
 1. Save the mockup to `sales/lead-generation/prospects/<name>/mockup/index.html`
 2. Take screenshots using Playwright:
@@ -89,6 +101,12 @@ Report to Eric:
 - Path to screenshots
 - Brief notes on design decisions made
 - Any content gaps (things that would need client input for a real build)
+
+### Step 6: Log Layout Choices
+
+After the build is complete, update the **Recently Used** table in `engineering/references/layout-variations.md`:
+1. Add a new row at the top of the table with: project name, date, and variant IDs used for each section
+2. Update the **Overused Patterns** list: any variant used in 2+ of the last 3 builds gets flagged
 
 ## Rules
 

@@ -1,0 +1,43 @@
+<h2>Architecture Approach</h2>
+<p class="subtitle">Three ways to build the overhauled social content engine</p>
+
+<div class="options">
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Monolithic Skill Overhaul</h3>
+      <p>Rewrite the existing <code>social-content</code> SKILL.md as one big skill that handles everything: content generation, image pipeline routing, platform API integration, scheduling, and approval workflow. Single entry point, single file.</p>
+      <br>
+      <div class="pros-cons">
+        <div class="pros"><h4>Pros</h4><ul><li>Simple to invoke -- one command does everything</li><li>All logic in one place</li><li>Fastest to build initially</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>Massive skill file -- hard to maintain</li><li>Can't reuse image pipeline or scheduling for client-social-content</li><li>Testing individual pieces is difficult</li><li>Doesn't scale to client offering</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="b" onclick="toggleSelect(this)" style="border: 2px solid #39ff14;">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Modular Pipeline (Recommended)</h3>
+      <p>Break into composable sub-skills that chain together. The <code>social-content</code> skill becomes the orchestrator that calls: (1) content generator, (2) image pipeline, (3) platform scheduler. Each piece works independently and can be reused by <code>client-social-content</code>.</p>
+      <br>
+      <div class="pros-cons">
+        <div class="pros"><h4>Pros</h4><ul><li>Reusable -- client skill uses the same image pipeline and scheduler</li><li>Testable -- each module works independently</li><li>Maintainable -- change scheduling without touching content generation</li><li>Scales to client offering naturally</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>More files to manage</li><li>Slightly more complex to build initially</li><li>Need to define interfaces between modules</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="c" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Script-Driven Engine</h3>
+      <p>Build the pipeline as Node.js scripts (like the GWS CLI scripts) rather than skill files. The skill just orchestrates the scripts. Image generation, API calls, and scheduling are all executable scripts in a <code>scripts/</code> folder.</p>
+      <br>
+      <div class="pros-cons">
+        <div class="pros"><h4>Pros</h4><ul><li>Scripts can run on cron/schedule without Claude</li><li>Most portable -- works outside the skill system</li><li>Easiest to debug (run scripts individually)</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>Content generation still needs Claude (can't script AI writing)</li><li>Two systems to maintain (scripts + skill)</li><li>Loses the "one command" simplicity for the AI-driven parts</li></ul></div>
+      </div>
+    </div>
+  </div>
+</div>

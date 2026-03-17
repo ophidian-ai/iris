@@ -94,11 +94,10 @@ async function main() {
 
     try {
       const sendJson = JSON.stringify({ id: entry.draftId });
-      execFileSync(
-        "gws",
-        ["gmail", "users", "drafts", "send", "--params", '{"userId":"me"}', "--json", sendJson],
-        { encoding: "utf8" }
-      );
+      const paramsJson = '{"userId":"me"}';
+      // Use shell with single-quoted JSON to prevent shell interpretation
+      const cmd = `gws gmail users drafts send --params '${paramsJson}' --json '${sendJson}'`;
+      execFileSync("bash", ["-c", cmd], { encoding: "utf8" });
 
       console.log(`  SENT [${entry.template}] ${entry.prospect} -> ${entry.to}`);
       sent.push(entry);

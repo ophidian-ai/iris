@@ -19,6 +19,11 @@ const { title, description, fonts } = Astro.props;
     {fonts && <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />}
     {fonts && <link href={fonts} rel="stylesheet" />}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <noscript>
+      <style>
+        .fade-in { opacity: 1 !important; transform: none !important; }
+      </style>
+    </noscript>
   </head>
   <body>
     <slot />
@@ -37,6 +42,55 @@ const { title, description, fonts } = Astro.props;
 
       document.querySelectorAll(".fade-in").forEach((el) => {
         observer.observe(el);
+      });
+
+      // ── 3D tilt cards ──
+      document.querySelectorAll(".tilt-card").forEach((card) => {
+        const inner = card.querySelector(".tilt-card-inner") as HTMLElement;
+        if (!inner) return;
+
+        card.addEventListener("mousemove", (e: Event) => {
+          const me = e as MouseEvent;
+          const rect = (card as HTMLElement).getBoundingClientRect();
+          const x = (me.clientX - rect.left) / rect.width - 0.5;
+          const y = (me.clientY - rect.top) / rect.height - 0.5;
+          inner.style.transform = `rotateY(${x * 10}deg) rotateX(${-y * 10}deg)`;
+        });
+
+        card.addEventListener("mouseleave", () => {
+          inner.style.transform = "rotateY(0deg) rotateX(0deg)";
+        });
+      });
+
+      // ── Animated stat counters ──
+      const counterObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            const el = entry.target as HTMLElement;
+            const target = parseInt(el.dataset.target || "0", 10);
+            const suffix = el.dataset.suffix || "";
+            const duration = 2000;
+            const start = performance.now();
+
+            const tick = (now: number) => {
+              const elapsed = now - start;
+              const progress = Math.min(elapsed / duration, 1);
+              const eased = 1 - Math.pow(1 - progress, 4);
+              const current = Math.round(target * eased);
+              el.textContent = current + suffix;
+              if (progress < 1) requestAnimationFrame(tick);
+            };
+
+            requestAnimationFrame(tick);
+            counterObserver.unobserve(el);
+          });
+        },
+        { threshold: 0.5 }
+      );
+
+      document.querySelectorAll(".stat-counter").forEach((el) => {
+        counterObserver.observe(el);
       });
     </script>
   </body>

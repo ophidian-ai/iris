@@ -137,7 +137,14 @@ Ask these questions one at a time. Use multiple choice where possible.
    - Input: `docs/site-brief.md`
    - Output: `docs/creative-research.md`
 
-2. **Generate creative brief:**
+2. **Layout Differentiation Check (MANDATORY):**
+   - Read `engineering/references/layout-variations.md`
+   - Check the **Recently Used** table -- identify which variant IDs were used in the last 3 projects
+   - Any variant flagged in "Overused Patterns" is **banned** for this build
+   - Select variant IDs for each section type, ensuring at least 3 differ from ALL recent projects
+   - Document chosen variants in the creative brief under "Section Layout Approach"
+
+3. **Generate creative brief:**
    - Read: `docs/site-brief.md` + `docs/creative-research.md` + `engineering/design-system/_catalog.md` + relevant pattern docs from `engineering/design-system/patterns/`
    - Also read: `engineering/references/design-philosophy-2026.md` (2026 trend philosophy), `engineering/references/ai-website-workflow.md` (conversion structure, prompting strategies)
    - Produce `docs/creative-brief.md` covering:
@@ -146,7 +153,7 @@ Ask these questions one at a time. Use multiple choice where possible.
      - Background treatment (technique, pattern reference, reduced-motion fallback)
      - Typography pairings with rationale
      - Extended color treatment (overlays, accent glows, tinted shadows, selection color)
-     - Section layout approach (per-section layout assignments)
+     - Section layout approach (per-section layout assignments using variant IDs from `layout-variations.md`)
      - Hover/interaction micro-patterns (per-element effects)
      - Divider strategy
      - Dependencies to install
@@ -396,6 +403,8 @@ Reference: `operations/references/sops/seo-full-setup.md`
 5. Promote to production
 6. Configure custom domain (if ready)
 7. Set up post-launch monitoring (`operations/references/sops/monitoring-setup.md`)
+
+8. **Log layout choices:** Update the **Recently Used** table in `engineering/references/layout-variations.md` with the variant IDs used for each section. Update the **Overused Patterns** list.
 
 **Output:** Live, production-ready website.
 

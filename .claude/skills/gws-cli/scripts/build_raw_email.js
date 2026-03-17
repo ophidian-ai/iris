@@ -38,7 +38,7 @@ function buildRawMessage({ to, cc, from, subject, body, html, attachments, inRep
 
     for (const att of attachments) {
       const fileData = fs.readFileSync(att.path);
-      const base64Data = fileData.toString("base64");
+      const base64Data = fileData.toString("base64").replace(/.{76}/g, "$&\r\n");
       const filename = att.filename || path.basename(att.path);
       const mimeType = att.mimeType || "application/octet-stream";
       lines.push(`--${boundary}`);

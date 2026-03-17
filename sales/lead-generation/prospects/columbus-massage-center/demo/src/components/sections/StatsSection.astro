@@ -1,0 +1,35 @@
+---
+const stats = [
+  { target: 250, suffix: "+", label: "Five-Star Reviews" },
+  { target: 11, suffix: "+", label: "Years of Excellence" },
+];
+---
+
+<section class="relative overflow-hidden bg-gradient-to-r from-primary to-accent py-20">
+  <div class="absolute inset-0 opacity-10">
+    <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; viewBox=&quot;0 0 60 60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cg fill=&quot;none&quot; fill-rule=&quot;evenodd&quot;%3E%3Cg fill=&quot;%23ffffff&quot; fill-opacity=&quot;0.15&quot;%3E%3Cpath d=&quot;M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z&quot;/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+  </div>
+
+  <div class="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <div class="mb-4 text-center">
+      <span class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-medium uppercase tracking-widest text-white backdrop-blur-sm">
+        Locally Owned &amp; Operated
+      </span>
+    </div>
+
+    <div class="stagger grid grid-cols-1 gap-8 text-center sm:grid-cols-2">
+      {stats.map((stat) => (
+        <div class="fade-in">
+          <div
+            class="stat-counter font-serif text-5xl font-light text-white md:text-6xl"
+            data-target={stat.target}
+            data-suffix={stat.suffix}
+          >
+            0{stat.suffix}
+          </div>
+          <div class="mt-2 text-sm font-medium uppercase tracking-[0.15em] text-white/80">{stat.label}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

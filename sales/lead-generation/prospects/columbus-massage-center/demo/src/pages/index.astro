@@ -2,10 +2,16 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Navigation from "../components/layout/Navigation.astro";
 import Footer from "../components/layout/Footer.astro";
+import HeroSection from "../components/sections/HeroSection.astro";
+import ServicesSection from "../components/sections/ServicesSection.astro";
+import AboutSection from "../components/sections/AboutSection.astro";
+import StatsSection from "../components/sections/StatsSection.astro";
+import ReviewsSection from "../components/sections/ReviewsSection.astro";
+import CTASection from "../components/sections/CTASection.astro";
+import ContactSection from "../components/sections/ContactSection.astro";
 import { business } from "../data/business";
 import "../styles/global.css";
 
-// Define nav sections -- customize per demo
 const navSections = [
   { id: "services", label: "Services" },
   { id: "about", label: "About" },
@@ -14,15 +20,24 @@ const navSections = [
 ];
 
 const fullAddress = `${business.address.street}, ${business.address.city}, ${business.address.state} ${business.address.zip}`;
+
+const fonts = "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap";
 ---
 
 <BaseLayout
   title={`${business.name} | ${business.tagline}`}
-  description={`${business.name} - ${business.tagline}. Located in ${business.address.city}, ${business.address.state}.`}
+  description={`${business.name} - Massage, hair, facials, and spa services in ${business.address.city}, ${business.address.state}. ${business.phone}`}
+  fonts={fonts}
 >
-  <Navigation businessName={business.name} sections={navSections} />
+  <Navigation businessName={business.name} phone={business.phone} sections={navSections} />
 
-  <!-- Add section components here -->
+  <HeroSection />
+  <ServicesSection />
+  <AboutSection />
+  <StatsSection />
+  <ReviewsSection />
+  <CTASection />
+  <ContactSection />
 
   <Footer
     businessName={business.name}

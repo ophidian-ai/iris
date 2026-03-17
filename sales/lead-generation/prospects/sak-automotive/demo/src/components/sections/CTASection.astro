@@ -1,0 +1,42 @@
+---
+/**
+ * C5: Full-Bleed Color -- solid brand color background, no image
+ * Structurally different from C1 (image overlay) used in Classic Auto Body and SAK previous
+ */
+import { business } from "../../data/business";
+
+const phoneHref = `tel:${business.phone.replace(/[^0-9+]/g, "")}`;
+---
+
+<section class="relative overflow-hidden bg-primary py-20">
+  <!-- Subtle pattern overlay -->
+  <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.3) 1px, transparent 0); background-size: 24px 24px;"></div>
+
+  <div class="relative z-10 mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+    <div class="fade-in">
+      <h2 class="mb-4 text-4xl font-extrabold text-white sm:text-5xl">
+        Ready to Get Your Vehicle Serviced?
+      </h2>
+      <p class="mb-10 text-lg text-white/70">
+        Give us a call or stop by the shop. No appointment necessary for most services.
+      </p>
+      <div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
+        <a
+          href={phoneHref}
+          class="inline-flex items-center gap-3 rounded-lg bg-white px-10 py-4 text-lg font-bold text-primary shadow-lg transition-all hover:shadow-xl hover:scale-[1.02]"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+          </svg>
+          Call {business.phone}
+        </a>
+        <a
+          href="#contact"
+          class="inline-flex items-center rounded-lg border-2 border-white/40 px-10 py-4 text-lg font-bold text-white transition-all hover:border-white hover:bg-white/10"
+        >
+          Get Directions
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

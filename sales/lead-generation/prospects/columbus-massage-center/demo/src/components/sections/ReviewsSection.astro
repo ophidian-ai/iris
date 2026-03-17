@@ -1,0 +1,47 @@
+---
+import { business } from "../../data/business";
+---
+
+<section id="reviews" class="py-24">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <div class="fade-in mb-16 text-center">
+      <p class="section-label-spa mb-4 justify-center">Testimonials</p>
+      <h2 class="font-serif text-4xl font-light text-foreground sm:text-5xl">What Our Clients Say</h2>
+      <div class="divider-accent mx-auto mt-4 max-w-[4rem]"></div>
+    </div>
+
+    <div class="stagger grid grid-cols-1 gap-8 md:grid-cols-3">
+      {business.reviews.map((review) => (
+        <div class="fade-in group relative overflow-hidden rounded-2xl border border-border bg-surface p-8 card-lift">
+          <div class="mb-4 flex gap-1">
+            {Array.from({ length: review.rating }).map(() => (
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-accent" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+              </svg>
+            ))}
+          </div>
+
+          <div class="mb-4 font-serif text-5xl font-light text-accent/20">"</div>
+
+          <blockquote class="-mt-4 mb-6 text-sm leading-relaxed text-muted">
+            {review.text}
+          </blockquote>
+
+          <div class="border-t border-border pt-4">
+            <div class="flex items-center gap-3">
+              <div class="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-primary to-accent text-sm font-medium text-white">
+                {review.author.charAt(0)}
+              </div>
+              <div>
+                <p class="text-sm font-medium text-foreground">{review.author}</p>
+                <p class="text-xs text-muted-light">{review.role}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="accent-bar"></div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

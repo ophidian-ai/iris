@@ -169,7 +169,19 @@ Human-readable version with the same content, formatted for review with a summar
 
 After writing both output files, invoke the `social-image-gen` skill to generate all images for the batch. The image router reads the batch JSON, generates master images, resizes for each platform, and updates the batch JSON with `imagePath` fields.
 
-### 7. Set Status
+### 7. Sync to Dashboard
+
+After writing the batch JSON and generating images, sync the batch to the Supabase database so it appears in the dashboard content engine:
+
+```bash
+cd "c:/Claude Code/OphidianAI" && node .claude/skills/social-content/scripts/sync-to-supabase.js "marketing/social-media/batches/YYYY-MM-DD-batch.json"
+```
+
+Replace `YYYY-MM-DD` with the actual batch date. This creates or updates the batch and all posts in the `content_batches` and `content_posts` tables. If the batch already exists (same label), it updates in place.
+
+If the sync fails, note the error but don't block the workflow -- the batch JSON on disk is the source of truth.
+
+### 8. Set Status
 
 Batch starts as `draft`. After images are generated, the image router updates it to `review`.
 

@@ -76,11 +76,24 @@ Each criterion scored 1-5. Total out of 25.
 
 | Score | Criteria |
 |-------|----------|
-| 5 | Perfect match -- needs website + SEO, local service business, in our sweet spot |
-| 4 | Strong match -- needs one of our core services, straightforward project |
+| 5 | Perfect match -- needs website + SEO + AI services, local service business, multi-service LTV potential |
+| 4 | Strong match -- needs 1-2 core services (website, SEO, or AI), straightforward project |
 | 3 | Moderate match -- could use our services but may need things outside our scope |
 | 2 | Weak match -- primarily needs services we don't offer (custom software, app dev) |
 | 1 | Poor match -- enterprise, franchise with corporate site control, or needs we can't fill |
+
+### 6. AI Service Potential (Bonus)
+
+This is a **bonus criterion** scored 0-5. Add to the base score (max total becomes 30). Use this to weight prospects who could become recurring AI service clients.
+
+| Score | Criteria |
+|-------|----------|
+| 5 | High-volume customer interactions, no automation, no chatbot, stale reviews, no email marketing -- perfect AI client |
+| 4 | Multiple AI service opportunities (chatbot + reviews + content), clear time savings |
+| 3 | Could benefit from 1-2 AI services, moderate customer volume |
+| 2 | Limited AI fit -- low customer volume or simple business that doesn't need automation |
+| 1 | Minimal AI fit -- already has automation or too small to justify monthly services |
+| 0 | No AI fit -- skip AI scoring for this prospect |
 
 ## Disqualifiers
 
@@ -96,11 +109,13 @@ If a disqualifier is present, note it clearly in the score card regardless of to
 
 ## Tier Assignment
 
+Base score is out of 25 (criteria 1-5). AI bonus adds up to 5 more (max 30).
+
 | Score | Tier | Action |
 |-------|------|--------|
-| 20-25 | **Hot** | Prioritize immediately. Full research + mockup + outreach. |
-| 14-19 | **Warm** | Worth pursuing. Research + outreach, mockup if time allows. |
-| 8-13 | **Cool** | Low priority. Add to list, revisit later. |
+| 22-30 | **Hot** | Prioritize immediately. Full research + mockup + outreach. High LTV if AI bonus is 3+. |
+| 15-21 | **Warm** | Worth pursuing. Research + outreach, mockup if time allows. |
+| 8-14 | **Cool** | Low priority. Add to list, revisit later. |
 | Below 8 | **Skip** | Not a fit. Don't invest time. |
 
 ## Service & Pricing Recommendation
@@ -110,7 +125,10 @@ Based on scoring, recommend one or more:
 **Service type:**
 - Website (new build or redesign)
 - SEO (cleanup or ongoing)
-- Both
+- AI Services (chatbot, content, reviews, email, CRM)
+- Website + AI (project + recurring revenue)
+- Both (website + SEO)
+- Full Stack (website + SEO + AI)
 
 **Pricing tier** (reference `operations/references/pricing-structure.md`):
 
@@ -121,6 +139,10 @@ Based on scoring, recommend one or more:
 | E-Commerce | $4,500-$6,000 | Sells products, needs online store |
 | SEO Cleanup | $400-$1,200 | Has a decent site but invisible on search |
 | SEO Growth | $200-$350/mo | Ongoing SEO retainer after cleanup or site launch |
+| AI Essentials | $297/mo + $500 setup | Chatbot + content + monthly SEO report |
+| AI Growth | $497/mo + $1,000 setup | + email marketing + review management + live dashboard |
+| AI Pro | $797/mo + $1,500 setup | Full suite: ads, CRM, AI insights, multi-channel |
+| AI A La Carte | Varies | Individual AI services, see GTM plan for pricing |
 
 ## Process
 
@@ -163,7 +185,8 @@ Format:
 | Website Gap | X/5 | [Brief note] |
 | Revenue Signals | X/5 | [Brief note] |
 | Service Fit | X/5 | [Brief note] |
-| **Total** | **X/25** | |
+| AI Service Potential | X/5 | [Brief note -- 0 if not applicable] |
+| **Total** | **X/30** | |
 
 ## Result
 

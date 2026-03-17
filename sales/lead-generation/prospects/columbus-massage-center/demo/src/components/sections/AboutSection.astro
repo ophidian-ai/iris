@@ -1,0 +1,58 @@
+---
+import { business } from "../../data/business";
+---
+
+<section id="about" class="bg-surface py-24">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
+      <div class="fade-in relative">
+        <div class="img-reveal overflow-hidden rounded-2xl shadow-lg">
+          <img
+            src="/images/about.jpg"
+            alt="Inside Columbus Massage Center & Salon"
+            class="h-full w-full object-cover"
+            loading="lazy"
+          />
+        </div>
+        <div class="absolute -bottom-6 -right-4 w-40 overflow-hidden rounded-xl border-4 border-background shadow-lg sm:w-48 md:-right-6">
+          <img
+            src="/images/gift.jpg"
+            alt="Gift cards available"
+            class="h-full w-full object-cover"
+            loading="lazy"
+          />
+        </div>
+      </div>
+
+      <div class="fade-in">
+        <p class="section-label-spa mb-4">About Us</p>
+        <h2 class="font-serif text-4xl font-light text-foreground sm:text-5xl">A Tradition of Care</h2>
+        <div class="divider-accent mt-4 max-w-[4rem]"></div>
+
+        <p class="mt-8 leading-relaxed text-muted">
+          For more than 11 years, {business.name} has been a trusted destination for relaxation and self-care
+          in Columbus, Indiana. What began as a small, locally owned practice has grown into a full-service
+          salon and spa -- built on genuine care, skilled hands, and a commitment to making every client
+          feel their best.
+        </p>
+        <p class="mt-4 leading-relaxed text-muted">
+          We are proud to be locally owned and operated, deeply rooted in the Columbus community.
+          From therapeutic massage to expert hair styling, facials, and nail care, our team brings
+          passion and precision to every appointment.
+        </p>
+
+        <div class="mt-8 flex items-center gap-4 rounded-xl border border-border bg-surface-warm p-5 card-lift">
+          <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-accent/10">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8V6a5 5 0 0 1 10 0v2"/>
+            </svg>
+          </div>
+          <div>
+            <p class="font-serif text-lg font-medium text-foreground">Gift Cards Available</p>
+            <p class="text-sm text-muted">The perfect way to share relaxation with someone you care about.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -314,6 +314,7 @@ Never send the same template to two prospects in the same batch.
 - **Website** -- Their site is broken, outdated, missing, or not on mobile. They need a new or rebuilt site.
 - **SEO** -- Their site is decent but they don't show up in search results. They need visibility, not a rebuild.
 - **Hybrid** -- Their site is bad AND they're invisible in search. They need both.
+- **AI** -- They could benefit from AI services (chatbot, content, reviews, email, CRM). May or may not need a website too. Use AI templates (A1-A4) for the opening, or pair with a Website/Hybrid template and pitch AI in the follow-up.
 
 ---
 
@@ -602,6 +603,139 @@ Want me to send it over?
 
 Eric Lefler
 OphidianAI
+
+---
+
+## AI Service Templates (A1-A4)
+
+Use when the prospect could benefit from AI-powered services (chatbot, content, reviews, email marketing, CRM). Works for businesses with or without website needs -- the AI pitch is the recurring revenue play.
+
+**Key principle:** Lead with outcomes, not technology. "AI" scares some small business owners. Frame everything as saving time, getting more customers, or making money while they sleep.
+
+### Choosing the Prospect Type
+
+- **AI-primary** -- Their website is fine (or they don't want a rebuild), but they're missing automation, customer engagement, or marketing.
+- **Website + AI** -- Use a Website or Hybrid template for the opening, then pitch AI services in the follow-up or delivery call. Don't try to sell both in one cold email.
+
+### A1 -- "You're answering the same questions over and over"
+
+**Angle:** Business owners spend hours answering the same customer questions. An AI chatbot handles that 24/7 so they can focus on the work.
+
+**Subject pattern:** `saving [business name] a few hours a week`
+
+**Example:**
+
+Subject: saving columbus massage center a few hours a week
+
+Hi Dana,
+
+I noticed Columbus Massage Center gets a lot of the same questions -- hours, pricing, how to book. Right now someone has to answer every call and message.
+
+I built a tool that answers those questions automatically on your website, 24/7 -- so customers get what they need and you get your time back. I can show you what it would look like for your business.
+
+Want me to send a quick demo?
+
+Eric Lefler
+OphidianAI
+
+---
+
+### A2 -- "Your competitors are staying in touch with customers"
+
+**Angle:** Other businesses in their industry are using automated email and review campaigns to stay top-of-mind. This prospect isn't, and they're losing repeat business.
+
+**Subject pattern:** `how [competitor] keeps customers coming back`
+
+**Example:**
+
+Subject: how studio 27 keeps customers coming back
+
+Hi Sarah,
+
+I noticed Studio 27 sends follow-up emails after every appointment, asks for reviews automatically, and runs monthly specials to past clients. That's how they stay booked solid.
+
+I can set up the same system for Wild Root -- automated follow-ups, review requests, and promotions that run on their own. Takes me about 15 minutes to map it out for your business.
+
+Want me to show you what it would look like?
+
+Eric Lefler
+OphidianAI
+
+---
+
+### A3 -- "You're missing customers after hours"
+
+**Angle:** Most customer searches happen outside business hours. Without an instant way to engage, those customers go somewhere else.
+
+**Subject pattern:** `the customers reaching out at 10pm`
+
+**Example:**
+
+Subject: the customers reaching out at 10pm
+
+Hi Scott,
+
+Most people searching for auto repair are doing it at night or on weekends -- after something breaks. If they land on SAK Automotive's site and there's no one to help, they'll just call the first shop that answers.
+
+I built a tool that talks to customers on your website any time of day -- answers questions, gives estimates, and books appointments while you sleep.
+
+Want me to show you what it would look like for SAK?
+
+Eric Lefler
+OphidianAI
+
+---
+
+### A4 -- "Your reviews could be working harder for you"
+
+**Angle:** They have good reviews but no system to consistently generate new ones. Or their review count has stagnated. Automated review requests after every job/visit solve this.
+
+**Subject pattern:** `getting more reviews for [business name]`
+
+**Example:**
+
+Subject: getting more reviews for paswater automotive
+
+Hi there,
+
+Paswater Automotive has solid reviews but the last few are months old. Google rewards businesses that get fresh reviews consistently -- it's one of the biggest factors in who shows up first in local search.
+
+I can set up an automated system that texts customers after every visit and asks them to leave a review. Most shops see 3-5x more reviews within the first month.
+
+Want me to show you how it works?
+
+Eric Lefler
+OphidianAI
+
+---
+
+## AI Prospect Flow
+
+AI templates work best when you can reference something specific about how the prospect currently handles (or doesn't handle) customer engagement.
+
+### Step 1: Quick Recon
+
+- Check if they have a chatbot or live chat (most don't)
+- Check their review recency and frequency
+- Look for email signup forms or marketing
+- Check social media activity and posting frequency
+
+### Step 2: Pick the Right Template
+
+| Signal | Template |
+|--------|----------|
+| High call/message volume, FAQ-heavy business | A1 (answering questions) |
+| Competitor is doing email/review automation | A2 (competitors staying in touch) |
+| Service business with after-hours demand | A3 (missing customers after hours) |
+| Good reviews but stale/infrequent | A4 (reviews working harder) |
+
+### Step 3: Frame the Offer
+
+The offer for AI prospects is always a quick demo or mockup:
+
+- "I can show you what it would look like for your business"
+- The deliverable is a chatbot demo page or a mapped-out automation flow
+- Deliver via the `offer-delivery` skill after they reply
 
 ---
 
