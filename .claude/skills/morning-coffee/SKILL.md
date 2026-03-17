@@ -24,38 +24,47 @@ Run all of these simultaneously:
 gws gmail +triage --query "in:inbox is:unread" --format json
 ```
 
-**Gmail -- Prospect replies:**
-```bash
-# Read pipeline from Google Sheet (primary source):
-gws sheets +read --spreadsheet '1FJOPS3ABR2BQtFOn4cUAGLZzIYukKbPozK_t_m7Dwg0' --range 'Pipeline' --format json
-# For each prospect email from the sheet:
-gws gmail users messages list --params '{"userId":"me","q":"from:<prospect-email> newer_than:7d","maxResults":5}'
+**Prospect Replies (via inbox-monitor):**
+
+Delegate reply detection to the `inbox-monitor` skill in **orchestrated mode**. This replaces the old inline Gmail query approach.
+
 ```
-Build the prospect email JSON array by reading the **Google Sheet pipeline** (Sheet ID: `1FJOPS3ABR2BQtFOn4cUAGLZzIYukKbPozK_t_m7Dwg0`, column C) and extracting all email addresses. Fall back to `sales/lead-generation/prospect-tracker.md` if the sheet is unavailable.
+Run inbox-monitor in orchestrated mode.
+It returns: reply count, classifications (Interest/Question/Negative), action items.
+```
 
-**Cold Email Reply Tracking:**
+The inbox-monitor handles: Gmail queries, dedup (skips already-processed replies), classification, sheet updates (Reply Date, Reply Touch, Reply Type, Time to Reply), drafting responses, and auto-prep for interest replies. See `.claude/skills/inbox-monitor/SKILL.md` for details.
 
-Cross-reference prospect replies with the template rotation tracker to update performance data:
-
-1. Read `sales/lead-generation/template-rotation.md`
-2. For each prospect reply detected above, check if the prospect name matches a "Last Prospect" entry in the rotation tracker
-3. If a match is found and the template's Replies count hasn't already been incremented for this prospect:
-   - Increment the Replies column for that template
-   - Recalculate Reply Rate (Replies / Times Used as %)
-   - Update the Performance Summary table
-   - Save the updated `template-rotation.md`
-4. Include a **Template Performance** line in the terminal summary if any replies were attributed:
-   `Template wins: [template] got a reply from [prospect]`
+Include inbox-monitor results in the briefing:
+- `New replies: X (Interest: A, Question: B, Negative: C)`
+- For each interest reply: `[Business Name] replied with interest -- proposal + demo prep started`
+- For each question reply: `[Business Name] asked a question -- response drafted for review`
 
 **Outreach Pipeline Status:**
 
-Check for recent pipeline activity to include in the briefing:
+Check outreach analytics from all 3 Google Sheets via outreach-sheets.js:
 
-1. Read `sales/lead-generation/staged-emails.json` (if it exists) -- note how many emails are staged and waiting
-2. Read `sales/lead-generation/template-rotation.md` -- pull the Performance Summary for the briefing
-3. Include in the terminal summary:
-   - `Staged emails: X waiting to send` (if any)
-   - `Template performance: [best template] at [X]% reply rate` (if any data)
+```bash
+node -e "
+const s = require('./operations/automation/scripts/outreach-sheets.js');
+const pipeline = s.readAllRows('Pipeline');
+const failed = s.readAllRows('Failed Outreach');
+const successful = s.readAllRows('Successful Outreach');
+const staged = require('fs').existsSync('sales/lead-generation/staged-emails.json') ? JSON.parse(require('fs').readFileSync('sales/lead-generation/staged-emails.json','utf8')).staged.length : 0;
+const today = new Date().toISOString().split('T')[0];
+const fuDue = pipeline.filter(r => [r['FU1 Date'],r['FU2 Date'],r['FU3 Date'],r['FU4 Date'],r['Breakup Date']].includes(today));
+const reengagement = failed.filter(r => r['Re-engagement Eligible'] && r['Re-engagement Eligible'] <= today);
+console.log(JSON.stringify({pipeline: pipeline.length, failed: failed.length, successful: successful.length, staged, fuDueToday: fuDue.length, reengagementEligible: reengagement.length}));
+"
+```
+
+Include in the terminal summary and briefing:
+- `Pipeline: X active | Failed: Y | Won: Z`
+- `Staged emails: X waiting to send` (if any)
+- `Follow-ups due today: [list of business names and which touch]`
+- `Re-engagement eligible: X prospects` (if any -- list names)
+- `Template performance: CI1 at X% reply rate, ALT at Y% reply rate` (from template-rotation.md)
+- `Funnel: X sent -> Y replied -> Z meetings -> W proposals -> V won`
 
 **Google Calendar -- Today + next 48 hours:**
 ```bash
