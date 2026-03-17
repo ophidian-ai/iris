@@ -1,90 +1,112 @@
-# Outreach Pipeline Scheduler
+# Outreach Scheduler
 
-Automate the weekly outreach pipeline so it runs without manual intervention.
+Automated scheduling for the weekly outreach pipeline. All tasks run via Windows Task Scheduler for persistence across reboots and sessions.
 
-## Two Scheduling Approaches
+## send-scheduler.js
 
-### 1. Session Cron (Within Claude Code)
+**Location:** `operations/automation/scripts/send-scheduler.js`
 
-Use when Claude Code is already running. Jobs live only in the current session and auto-expire after 3 days.
+Runs at 10:00 AM ET on weekdays. Handles the actual sending of staged emails.
 
-**Setup:** Ask Iris to set up the Monday schedule:
+**What it does:**
+
+1. Reads `staged-emails.json` for queued emails
+2. Filters by `scheduledDate == today`
+3. Sends matching emails with 5-minute spacing between each
+4. Updates the Google Sheet pipeline via `outreach-sheets.js` (status -> "Outreach Sent")
+5. Updates template rotation tracker with send counts and dates
+6. Logs results to `operations/automation/logs/`
+
+**Flags:**
+
+- `--dry-run` -- Preview what would send without actually sending. Use this to verify the day's queue.
+
+**Example:**
+
+```bash
+# Preview today's sends
+node operations/automation/scripts/send-scheduler.js --dry-run
+
+# Send for real
+node operations/automation/scripts/send-scheduler.js
 ```
-Set up the weekly outreach schedule
+
+## Windows Task Scheduler Tasks
+
+Four scheduled tasks handle the full outreach automation:
+
+| Task Name | Schedule | Time (ET) | Action |
+| --- | --- | --- | --- |
+| `OphidianAI-WeeklyPipeline` | Monday | 7:00 AM | Run full outreach pipeline (research, score, re-engagement, draft, schedule, stage) |
+| `OphidianAI-SendScheduler` | Weekdays (Mon-Fri) | 10:00 AM | Run send-scheduler.js to send today's scheduled emails |
+| `OphidianAI-InboxNoon` | Weekdays (Mon-Fri) | 12:00 PM | Run inbox monitor standalone (reply detection) |
+| `OphidianAI-Inbox4PM` | Weekdays (Mon-Fri) | 4:00 PM | Run inbox monitor standalone (reply detection) |
+
+The 7:00 AM inbox check is handled by morning-coffee and does not need a separate task.
+
+**To view tasks:**
+```powershell
+Get-ScheduledTask | Where-Object {$_.TaskName -like "OphidianAI*"}
 ```
 
-Iris will create:
-- **Monday 7:00 AM ET** -- Run `/run-outreach-pipeline` (research, score, draft, stage)
-- **Thursday 7:00 AM ET** -- Run `/morning-coffee` with reply tracking emphasis
-- **Friday 3:00 PM ET** -- Run template performance review
+**To disable a task:**
+```powershell
+Disable-ScheduledTask -TaskName "OphidianAI-SendScheduler"
+```
 
-These fire while the REPL is idle. If you're mid-conversation, they queue.
+**To delete a task:**
+```powershell
+Unregister-ScheduledTask -TaskName "OphidianAI-SendScheduler" -Confirm:$false
+```
 
-**Limitation:** Session-only. Gone when Claude exits. Must be re-created each session.
+**To manually trigger a task:**
+```powershell
+Start-ScheduledTask -TaskName "OphidianAI-SendScheduler"
+```
 
-### 2. Windows Task Scheduler (Persistent)
+## Setup
 
-Use for true unattended automation. Survives reboots, runs whether Claude is open or not.
-
-**How it works:**
-1. Tasks are registered with "Run whether user is logged on or not" + WakeToRun
-2. Your Windows password is stored securely with the task (prompted once during setup)
-3. At the scheduled time, a task launches Claude Code in non-interactive mode
-4. Claude executes the pipeline skill, creates ClickUp tasks, and stages emails
-5. Eric reviews Gmail drafts at his convenience
-6. Works whether you're logged in, logged out, or the PC is asleep
-
-**Setup script:** `operations/automation/scripts/setup-scheduler.ps1`
+**Setup script:** `operations/automation/scripts/setup-outreach-scheduler.ps1`
 
 Run in PowerShell (Admin):
 ```powershell
 cd "c:\Claude Code\OphidianAI"
-powershell -ExecutionPolicy Bypass -File operations/automation/scripts/setup-scheduler.ps1
+powershell -ExecutionPolicy Bypass -File operations/automation/scripts/setup-outreach-scheduler.ps1
 ```
 
-**What it creates:**
+The setup script:
 
-| Task Name                    | Schedule              | Action                           |
-| ---------------------------- | --------------------- | -------------------------------- |
-| OphidianAI-OutreachPipeline  | Monday 7:00 AM        | Run outreach pipeline            |
-| OphidianAI-ReplyCheck        | Thu-Fri 7:00 AM       | Check replies, update trackers   |
-
-**To view/edit scheduled tasks:**
-```powershell
-# List OphidianAI tasks
-Get-ScheduledTask | Where-Object {$_.TaskName -like "OphidianAI*"}
-
-# Disable a task
-Disable-ScheduledTask -TaskName "OphidianAI-OutreachPipeline"
-
-# Delete a task
-Unregister-ScheduledTask -TaskName "OphidianAI-OutreachPipeline" -Confirm:$false
-```
-
-## Pipeline Notifications
-
-After each scheduled run, Eric gets notified via:
-
-1. **ClickUp tasks** -- Created at each pipeline stage (Research Complete, Scoring Complete, Drafts Ready, Staged for Review)
-2. **Morning coffee** -- Next morning briefing includes staged email count and template performance
-3. **Gmail drafts** -- Emails sitting in Drafts folder ready for review
-
-## Safety Rails
-
-- The pipeline **never sends emails automatically**. It only stages drafts. Eric always sends.
-- If the pipeline fails, it creates a ClickUp task with the error details.
-- Daily send limits are enforced at the send step (not the staging step).
-- If no qualifying leads are found, the pipeline reports that honestly instead of lowering standards.
+1. Registers all four scheduled tasks with Windows Task Scheduler
+2. Configures "Run whether user is logged on or not" + WakeToRun
+3. Prompts for Windows password once (stored securely with the tasks)
+4. Sets correct working directory and environment for each task
 
 ## Monitoring
 
-Check pipeline run history:
-```bash
-# View automation logs
-ls operations/automation/logs/
+**Log location:** `operations/automation/logs/`
 
-# Check ClickUp for pipeline tasks
-node .claude/skills/clickup/scripts/clickup.js tasks 901711710045
+Log files follow the naming pattern:
+
+- `pipeline-YYYY-MM-DD.log` -- Monday pipeline run output
+- `send-scheduler-YYYY-MM-DD.log` -- Daily send results
+- `inbox-monitor-YYYY-MM-DD-HHMM.log` -- Inbox monitor results
+
+**Check recent logs:**
+```bash
+ls operations/automation/logs/
 ```
 
-Pipeline run logs are saved to `operations/automation/logs/YYYY-MM-DD-pipeline.log`.
+**Check pipeline summary:**
+```bash
+cat operations/automation/logs/pipeline-latest.log
+```
+
+## Safety Rails
+
+- **Auto-send policy.** send-scheduler.js sends automatically at 10:00 AM. Eric reviews staged emails before 10:00 AM to catch anything that needs editing or removal.
+- **Pipeline never sends directly.** The Monday pipeline only stages drafts. Actual sending is handled exclusively by send-scheduler.js.
+- **Failed sends retry next day.** If send-scheduler.js encounters a failure, those emails remain in staged-emails.json and are retried on the next business day.
+- **Daily send limits enforced.** send-scheduler.js respects the daily cap from the volume targets. Excess emails roll to the next day.
+- **Dry-run available.** Always run `--dry-run` first if verifying a new batch or debugging.
+- **No weekend sends.** All tasks are scheduled for weekdays only.
+- **Logging.** Every send attempt and result is logged for audit purposes.

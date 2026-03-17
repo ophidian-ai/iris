@@ -4,105 +4,134 @@ Standard operating procedure for the weekly cold outreach cycle. Run every week 
 
 ## Weekly Cadence
 
-| Day       | Task                          | Time    | Command / Skill                          |
-| --------- | ----------------------------- | ------- | ---------------------------------------- |
-| Monday    | Research new leads            | Morning | `/business-research` or `/run-outreach-pipeline` |
-| Monday    | Score and qualify leads       | Morning | `/prospect-scoring` (batch mode)         |
-| Tuesday   | Draft and stage cold emails   | Morning | `/cold-email-outreach` (stages as drafts)|
-| Tuesday   | Review staged emails in Gmail | Midday  | Check Gmail Drafts folder manually       |
-| Wednesday | Send staged batch             | 8-10 AM | `node .claude/skills/gws-cli/scripts/send_staged.js` |
-| Thursday  | Check for replies             | Morning | Morning coffee flags prospect replies    |
-| Thursday  | Deliver offers to responders  | Morning | `/offer-delivery` for each reply         |
-| Friday    | Review template performance   | Morning | Check `sales/lead-generation/template-rotation.md` |
-| Friday    | Plan follow-ups for next week | Afternoon| `/follow-up-email` for non-responders    |
+| Day | Time | What Happens |
+| --- | --- | --- |
+| Monday | 7:00 AM | Pipeline runs: research, score, re-engagement check, draft all emails (first-touch + follow-ups), compute send schedule, stage as drafts |
+| Monday | 10:00 AM | Any follow-ups due Monday send via send-scheduler.js |
+| Tue-Fri | 10:00 AM | Scheduled emails for that day send via send-scheduler.js |
+| Wednesday | 10:00 AM | New first-touch batch sends (B2B optimal day) |
+| Every day | 7:00 AM | Inbox monitor runs as part of morning-coffee |
+| Every day | 12:00 PM | Inbox monitor runs standalone |
+| Every day | 4:00 PM | Inbox monitor runs standalone |
+| Friday | Afternoon | Review template performance (CI1 vs ALT reply rates), plan next week |
+
+## What Changed
+
+- **Old:** Manual send on Wednesday 8-10 AM. **Now:** Auto-send at 10 AM daily via send-scheduler.js.
+- **Old:** 3-touch follow-up (FU1, FU2, final). **Now:** 6-touch sequence (FU1-FU4 + Breakup) over 25 days.
+- **Old:** Follow-ups planned on Friday. **Now:** Follow-ups drafted Monday, sent on exact due dates automatically.
+- **Old:** Reply check on Thursday morning. **Now:** 3x daily inbox monitoring (7 AM, 12 PM, 4 PM).
+- **Old:** Manual template rotation. **Now:** CI1 default (67%) + ALT (33%) A/B testing with automatic tracking.
+- **Policy change:** Auto-send replaces manual-send. Eric reviews staged emails before 10 AM.
 
 ## Volume Targets
 
-| Metric              | Starting | Ramp (Month 2+) | Max   |
-| ------------------- | -------- | ---------------- | ----- |
-| Leads researched    | 10/week  | 20/week          | 30/week |
-| Emails staged       | 10/week  | 20/week          | 30/week |
-| Emails sent         | 10/week  | 20/week          | 30/week |
-| Daily send limit    | 20/day   | 35/day           | 50/day |
-| Send spacing        | 5 min    | 5 min            | 3 min |
+| Metric | Starting | Ramp (Month 2+) | Max |
+| --- | --- | --- | --- |
+| Leads researched | 10/week | 20/week | 30/week |
+| Emails staged | 10/week | 20/week | 30/week |
+| Emails sent | 10/week | 20/week | 30/week |
+| Daily send limit | 20/day | 35/day | 50/day |
+| Send spacing | 5 min | 5 min | 3 min |
 
-## Monday: Research and Score
+## Monday: Full Pipeline Run (7:00 AM)
 
-1. Pick a niche or location to target this week (rotate across niches to avoid pattern)
-2. Run business research to find 10-20 potential leads
-3. Score each lead using prospect-scoring (batch mode)
-4. Only advance Hot (20-25) and Warm (14-19) prospects to outreach
-5. Create prospect folders and save research for each qualifying lead
-6. Update the Google Sheet pipeline with new leads
+The pipeline runs automatically at 7:00 AM via Windows Task Scheduler (`OphidianAI-WeeklyPipeline`). It executes these steps in order:
 
-**Or run the full pipeline in one shot:**
+1. **Research** -- Pick a niche or location, find 10-20 potential leads
+2. **Score** -- Score each lead using prospect-scoring (batch mode). Only advance Hot (20-25) and Warm (14-19) prospects
+3. **Re-engagement check** -- Identify stale prospects eligible for re-engagement sequences
+4. **Draft first-touch emails** -- Auto-select template using CI1 (67%) / ALT (33%) split. For SEO/hybrid prospects, run competitive search first
+5. **Draft follow-up emails** -- Generate FU1-FU4 + Breakup for all prospects in active sequences
+6. **Compute send schedule** -- Assign each email a `scheduledDate` based on sequence timing:
+   - First-touch: next Wednesday
+   - FU1: +3 days after first-touch
+   - FU2: +5 days after FU1
+   - FU3: +5 days after FU2
+   - FU4: +5 days after FU3
+   - Breakup: +7 days after FU4
+7. **Stage as drafts** -- Write all emails to `staged-emails.json` and create Gmail drafts
+8. **Update pipeline** -- Update Google Sheet via `outreach-sheets.js` module with new leads and statuses
+
+Create prospect folders and save research for each qualifying lead. All emails saved to `sales/lead-generation/prospects/[slug]/outreach/`.
+
+**Or run manually:**
 ```
 /run-outreach-pipeline
 ```
-This chains research, scoring, drafting, and staging automatically.
 
-## Tuesday: Draft and Stage
+## Monday 10:00 AM: First Scheduled Send
 
-1. For each qualified prospect, run cold-email-outreach
-2. The skill auto-selects the least-recently-used template from the correct category
-3. For SEO/hybrid prospects, the skill runs a competitive search first
-4. Each email is staged as a Gmail draft (not sent)
-5. Review all drafts in Gmail -- edit anything that doesn't sound right
-6. All emails saved to `sales/lead-generation/prospects/[slug]/outreach/`
+send-scheduler.js runs and sends any follow-ups with `scheduledDate` matching today. First-touch emails for new prospects are scheduled for Wednesday.
 
-## Wednesday: Send
+## Tuesday-Friday 10:00 AM: Daily Sends
 
-1. Preview the batch:
-   ```bash
-   node .claude/skills/gws-cli/scripts/send_staged.js --dry-run
-   ```
-2. Send between 8-10 AM ET (best open rates for cold email):
-   ```bash
-   node .claude/skills/gws-cli/scripts/send_staged.js
-   ```
-3. After sending, the skill updates:
-   - Template rotation tracker (date, count, prospect)
-   - Google Sheet pipeline (status -> "Outreach Sent")
-   - Prospect tracker backup
+send-scheduler.js runs daily at 10:00 AM via Windows Task Scheduler (`OphidianAI-SendScheduler`):
 
-## Thursday: Reply Handling
+1. Reads `staged-emails.json`
+2. Filters for emails where `scheduledDate` == today
+3. Sends with 5-minute spacing between emails
+4. Updates Google Sheet pipeline via `outreach-sheets.js` (status -> "Outreach Sent")
+5. Updates template rotation tracker with send counts
 
-1. Morning coffee flags any prospect replies automatically
+Eric should review staged emails before 10:00 AM. Remove or edit any that need changes.
+
+## Wednesday 10:00 AM: First-Touch Batch
+
+Wednesday is the primary first-touch send day (B2B optimal). New prospect emails scheduled on Monday are dated for Wednesday. They send automatically with the rest of the day's batch.
+
+## Daily: Inbox Monitoring (3x)
+
+Inbox monitoring runs at 7 AM (via morning-coffee), 12 PM, and 4 PM:
+
+1. Scan for prospect replies using thread matching
 2. For each reply:
-   - If positive ("yes", "sure", "send it"): Run `/offer-delivery`
-   - If question: Draft a response with `/email-response`
-   - If negative: Mark as "Closed Lost" in pipeline, note the reason
+   - If positive ("yes", "sure", "send it"): Flag for `/offer-delivery`
+   - If question: Flag for `/email-response`
+   - If negative: Mark as "Closed Lost" in pipeline via `outreach-sheets.js`, note the reason
+   - If out-of-office: Reschedule next follow-up
 3. Template rotation tracker gets updated with reply counts automatically
+4. Any active follow-up sequences for replying prospects are paused
 
 ## Friday: Review and Plan
 
 1. Check template performance in `sales/lead-generation/template-rotation.md`
-   - Which templates are getting replies?
+   - Compare CI1 vs ALT reply rates
    - Any template with 10+ sends and 0 replies needs replacement
-2. Check pipeline for prospects approaching follow-up windows:
-   - Day 3-4: First follow-up
-   - Day 7-8: Second follow-up
-   - Day 14: Final follow-up (graceful close)
-3. Queue follow-up emails for next week using `/follow-up-email`
-4. Note any patterns -- what niches, templates, or angles are working
+   - Adjust the 67/33 split if ALT outperforms CI1
+2. Review overall pipeline health in Google Sheet via `outreach-sheets.js`
+3. Note patterns -- what niches, templates, or angles are working
+4. Plan next week's target niche/location
 
 ## Pipeline Flow
 
 ```
-Research (Mon) -> Score (Mon) -> Draft (Tue) -> Review (Tue) -> Send (Wed) -> Reply Check (Thu) -> Deliver (Thu) -> Follow-up (Fri)
+Research (Mon 7am)
+  -> Score (Mon 7am)
+  -> Re-engagement Check (Mon 7am)
+  -> Draft All Emails (Mon 7am)
+  -> Compute Schedule (Mon 7am)
+  -> Stage Drafts (Mon 7am)
+  -> Eric Reviews (Mon-Wed before 10am)
+  -> Auto-Send (10am daily, Mon-Fri)
+  -> Inbox Monitor (7am, 12pm, 4pm daily)
+  -> Reply Handling (as detected)
+  -> Follow-ups (auto-sent on due dates)
 ```
 
-Each stage updates the Google Sheet pipeline and optionally posts a ClickUp status update.
+Each stage updates the Google Sheet pipeline via `outreach-sheets.js`.
 
-## Rules
+## Safety Rails
 
-- Never skip the scoring step. Bad leads waste time and hurt sender reputation.
-- Never send more than the daily limit. Ramp gradually.
-- Never send the same template to two prospects in the same batch.
-- Always review staged emails before sending. The system drafts, Eric approves.
-- Keep the loop boring. Consistency beats creativity. Same process every week.
-- If reply rate drops below 5% for two weeks straight, stop and audit: templates, targeting, or deliverability issue.
+- **Daily send limit enforced.** Never exceed the daily cap. Ramp gradually.
+- **Template uniqueness.** Never send the same template to two prospects in the same batch.
+- **Review window.** Eric reviews staged emails before 10 AM. Auto-send fires at 10 AM sharp.
+- **No direct pipeline sends.** The pipeline only stages. send-scheduler.js handles actual sends.
+- **Reply rate monitoring.** If reply rate drops below 5% for two weeks straight, stop and audit: templates, targeting, or deliverability issue.
+- **Failed sends retry next day.** If send-scheduler.js fails, those emails roll to the next business day.
+- **Scoring gate.** Never skip the scoring step. Bad leads waste time and hurt sender reputation.
+- **Consistency.** Keep the loop boring. Same process every week.
 
 ## Automation
 
-The batch pipeline skill (`/run-outreach-pipeline`) can automate Monday + Tuesday in one run. The task scheduler can trigger it automatically on Monday mornings. See `.claude/skills/outreach-pipeline/SKILL.md` for details.
+The batch pipeline skill (`/run-outreach-pipeline`) automates the full Monday pipeline. Windows Task Scheduler handles all recurring triggers. See `operations/automation/outreach-scheduler.md` for scheduler details and `.claude/skills/outreach-pipeline/SKILL.md` for pipeline skill details.
