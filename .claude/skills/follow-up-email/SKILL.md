@@ -1,15 +1,15 @@
 ---
 name: follow-up-email
-description: Generate follow-up emails for prospects who haven't replied to initial cold outreach. Use when Eric says "follow up with them", "send a follow-up", "they haven't replied", or when the morning briefing flags overdue follow-ups. Supports a 3-touch sequence (Day 3-4, Day 7-8, Day 14) with escalating value and graceful close.
+description: Generate follow-up emails for prospects who haven't replied to initial cold outreach. 5-touch + breakup sequence (FU1-FU4 + Breakup) over 25 days. Each touch leads with NEW value from a different angle. Plain text only. Use when Eric says "follow up with them", "send a follow-up", "they haven't replied", or when the morning briefing flags overdue follow-ups.
 ---
 
 # Follow-Up Email
 
-Generate follow-up emails for prospects who haven't replied to initial cold outreach.
+Generate follow-up emails for prospects who haven't replied to initial cold outreach. 6-touch total sequence: First Contact (Day 0) + 4 follow-ups + 1 breakup, each with a different angle and new value.
 
 ## When to Use
 
-When a prospect hasn't replied to a cold email and it's time for a follow-up. Supports a 3-touch sequence before moving on.
+When a prospect hasn't replied to a cold email and it's time for the next touch. Supports 5 follow-up touches (FU1-FU4 + Breakup) before closing the loop.
 
 ## Inputs
 
@@ -17,107 +17,295 @@ When a prospect hasn't replied to a cold email and it's time for a follow-up. Su
 - **Original email subject line**
 - **What was offered in the original email** (the specific free deliverable)
 - **Days since original email**
-- **Follow-up number** (1st, 2nd, or 3rd)
-- **New angle or info** (optional -- a stat, insight, or observation to add value)
+- **Follow-up number** (1-5, where 5 = Breakup)
+- **New angle or insight** (optional -- if not provided, generate one using angle guidance below)
+
+## Cadence
+
+| Touch | Day | Template | Word Count | Signature |
+|-------|-----|----------|------------|-----------|
+| First Contact | 0 | (cold-email-outreach skill) | 60-80 | Eric Lefler, OphidianAI |
+| FU1 | 3 | Micro value drop + reference original | 40-60 | Eric |
+| FU2 | 7 | Different angle entirely | 40-70 | Eric |
+| FU3 | 12 | Social proof or broader pattern | 40-60 | Eric |
+| FU4 | 18 | Last value drop, shortest | 30-50 | Eric |
+| Breakup | 25 | Clean close, door open | 30-40 | Eric Lefler, OphidianAI |
+
+Each follow-up MUST be shorter than or equal to the previous. Never go longer.
+
+## Core Principles
+
+1. **Every touch leads with value, not a reminder.** Never "just checking in" or "circling back."
+2. **Each touch uses a DIFFERENT angle.** Never repeat the same pitch.
+3. **Plain text only.** No HTML, no images, minimal links. Same rules as cold email.
+4. **Progressive signature casualness:** FU1-FU4 = "Eric". Breakup = "Eric Lefler, OphidianAI" (formal close).
+5. **PS in FU1 only.** Dropped after that.
+6. **Subject: stay in the same thread.** Reply to the original email using `threadId`.
 
 ## Follow-Up Sequence
 
-### Follow-Up 1 (Day 3-4)
+### FU1 (Day 3) -- Micro Value Drop + Reference Original Offer
 
-Short and casual. Reference the specific offer from the original email. Restate what they'd get. Under 60 words.
+**Goal:** Deliver a timely insight they can use immediately, then softly reference the original offer.
 
-**Goal:** Remind them of the tangible thing you offered to give them for free.
+```
+Hi [first name],
 
-### Follow-Up 2 (Day 7-8)
+[Timely industry insight or Google/platform change they can capitalize on -- 1-2 sentences].
 
-Add new value. Share a quick insight, stat, or relevant observation specific to their industry. Don't repeat the original offer -- give them a new reason to engage. Under 80 words.
+I still have those ideas for [business name] if you're interested. Happy to send them over.
 
-**Goal:** Demonstrate expertise with a specific, relevant insight they haven't heard before.
+Eric
 
-### Follow-Up 3 (Day 14)
+P.S. [Actionable quick win related to the insight -- something they can do in 5 minutes]
+```
 
-Final touch. Acknowledge they're busy, leave the door open. Keep the offer standing. Under 60 words.
+40-60 words. PS is the only follow-up that gets one.
 
-**Goal:** Close the loop gracefully. No pressure.
+### FU2 (Day 7) -- Different Angle Entirely
+
+**Goal:** Share something genuinely interesting about their industry or competitors. Not about their problems -- about an opportunity or pattern.
+
+```
+Hi [first name],
+
+[Observation about their industry or competitors -- something they'd find genuinely interesting. Not about their problems, about an opportunity or pattern. 2-3 sentences.]
+
+If you ever want to talk about getting more of that working for [business name], I've got some ideas.
+
+Eric
+```
+
+40-70 words. No PS.
+
+### FU3 (Day 12) -- Social Proof or Broader Pattern
+
+**Goal:** Build credibility through pattern recognition or social proof. Show you know their world.
+
+```
+Hi [first name],
+
+[Social proof or pattern observation -- "I've been helping local businesses..." or "The businesses that do best in [industry] all have one thing in common..." -- 2-3 sentences.]
+
+Happy to show you what it would take to [specific outcome] for [business name].
+
+Eric
+```
+
+40-60 words. No PS.
+
+### FU4 (Day 18) -- Last Value Drop, Shortest
+
+**Goal:** Give them one specific, actionable idea they can use for free. No pitch, just generosity.
+
+```
+Hi [first name],
+
+[One specific, actionable idea they can use for free -- 1-2 sentences.]
+
+If you ever want to chat about [business name]'s online presence, I'm here.
+
+Eric
+```
+
+30-50 words. No PS. Shortest follow-up in the sequence.
+
+### Breakup (Day 25) -- Clean Close, Door Open
+
+**Goal:** End the sequence with dignity. No value drop, no pitch. Just close.
+
+```
+Hi [first name],
+
+I've reached out a few times about helping [business name] get more visible online. I'll stop filling your inbox.
+
+If it ever becomes a priority, the offer stands. You know where to find me.
+
+Eric Lefler
+OphidianAI
+```
+
+30-40 words. No PS. Formal signature (full name + company).
+
+## Follow-Up Angle Guidance by Industry
+
+Use these as starting points. Always tailor to the specific prospect.
+
+### FU1 Angles (Micro Value Drops)
+
+- Google Business Profile changes or new features
+- Seasonal trends relevant to their business
+- Platform updates (Google, Yelp, Facebook algorithm changes)
+- Local search behavior shifts
+
+### FU2 Angles (Different Perspective)
+
+- Competitor observations ("I noticed [competitor] just updated their site...")
+- Industry benchmarks ("The average [industry] website converts at X%...")
+- Consumer behavior patterns ("70% of [service] customers search on mobile...")
+- Local market observations
+
+### FU3 Angles (Social Proof / Patterns)
+
+- "Businesses I've helped..." (use real examples when available)
+- "The top [industry] businesses in Indiana all..."
+- "One thing I keep noticing about [city] businesses..."
+- Industry-wide patterns that validate your expertise
+
+### FU4 Angles (Free Quick Wins)
+
+- "Your Saturday specials would make a great recurring Google post"
+- "Adding 3 photos to your Google listing would..."
+- "Responding to your newest reviews with a personal note would..."
+- Specific, actionable, 5-minute tips they can implement today
+
+### Breakup
+
+No angle. No value drop. Just close.
 
 ## Language Rules
 
-- Same rules as cold email: outcome language, not technical language.
-- 7th-grade reading level. No jargon.
-- Each follow-up should be shorter than the previous.
-- Reference the original offer but don't re-explain it.
-- No "just checking in" or "circling back" -- be direct about why you're writing.
-- No emojis. No fluff. No filler.
+Same rules as cold email:
+
+- **Outcome language, not technical language.** 7th-grade reading level.
+  - "show up when people search" not "SEO optimization"
+  - "look great on phones" not "mobile-responsive design"
+  - "turn visitors into customers" not "conversion rate"
+- No jargon, no buzzwords, no fluff, no filler.
+- No emojis.
 - Sound like a real person writing to that specific business.
-- If no new angle is provided for Follow-Up 2, find one (e.g., a relevant industry stat, a competitor observation, a seasonal opportunity).
+- Reference the original offer but don't re-explain it.
+- Never say "just checking in", "circling back", "touching base", or "following up on my last email."
+- Be direct about the value you're providing in this specific email.
 
 ## Output Format
 
-Generate an HTML email using the OphidianAI branded template:
+Generate a **plain text** email. No HTML.
 
-- Dark gradient header (#0D1B2A), teal accent (#0DB1B2), lime green (#39FF14)
-- OphidianAI logo in header (base64-encoded from `shared/brand-assets/logo_icon_40.png`)
-- Signature block and footer matching cold email template
-- Subject line: `Re: [original subject]` (keeps it in the same thread)
-- Email body should be significantly shorter than the cold email
-
-Save the HTML file to:
+Save the email content to:
 ```
-sales/lead-generation/prospects/[business-name]/outreach/follow-up-[number].html
+sales/lead-generation/prospects/[slug]/outreach/follow-up-[N].txt
 ```
 
-## Sending
+Save the send-ready JSON to:
+```
+sales/lead-generation/prospects/[slug]/outreach/follow-up-[N].json
+```
 
-1. Write a JSON file with `to`, `subject`, `html`, and `threadId` fields:
-   ```
-   sales/lead-generation/prospects/[business-name]/outreach/follow-up-[number].json
-   ```
+Where `[N]` is the follow-up number (1-5, where 5 = breakup).
 
-2. **Stage as a Gmail draft.** Eric will inspect and send on his own timeline.
-   Use `gws gmail users drafts create` to create the draft with the prospect's email as the recipient.
+### JSON Schema
 
-4. Update the **Google Sheet pipeline** (Sheet ID: `1FJOPS3ABR2BQtFOn4cUAGLZzIYukKbPozK_t_m7Dwg0`) -- set Status to "Follow-Up Sent", write the FU date in the appropriate column (O for FU1, P for FU2, Q for FU3). Also update `sales/lead-generation/prospect-tracker.md` as backup.
+```json
+{
+  "to": "prospect@example.com",
+  "subject": "Re: original subject line here",
+  "body": "Full plain text email body here",
+  "threadId": "thread_id_from_original_sent_email",
+  "prospect": "business-slug",
+  "template": "FU1",
+  "scheduledDate": "2026-03-20"
+}
+```
+
+Fields:
+
+- `to` -- Prospect email address
+- `subject` -- `Re: [original subject]` to keep it in the same thread
+- `body` -- Plain text email body (NOT `html`)
+- `threadId` -- Thread ID from the original sent email (required for threading)
+- `prospect` -- Business slug matching the prospect folder name
+- `template` -- One of: `FU1`, `FU2`, `FU3`, `FU4`, `Breakup`
+- `scheduledDate` -- ISO date string for when the email should be sent (based on cadence)
+
+## Threading
+
+Follow-ups MUST stay in the same Gmail thread as the original cold email. This requires the `threadId` from the original sent email.
 
 ### Getting the threadId
 
-The threadId comes from the original sent email. Check the prospect's outreach folder or Gmail for the thread ID of the initial cold email. Without it, the follow-up won't appear in the same thread.
+1. Check the prospect's `outreach/cold-email.json` for a stored `threadId`
+2. If not there, search Gmail for the original sent email:
+   ```bash
+   gws gmail users messages list --params '{"userId":"me","q":"to:prospect@email.com subject:original subject"}' | head -20
+   ```
+3. Without a `threadId`, the follow-up will appear as a new thread (bad -- avoid this)
 
-## Examples
+## Staging
 
-### Follow-Up 1
+Follow-ups are **staged as Gmail drafts** with a `scheduledDate` for the send-scheduler. Eric reviews and sends on his timeline.
 
-Hi Scott,
+### Stage the Email
 
-Wanted to make sure my email didn't get buried. I offered to put together a quick plan showing what needs to change on your site so more people find SAK Automotive when they search for a mechanic in Columbus.
+After writing the JSON file, stage it as a Gmail draft:
+```bash
+cat sales/lead-generation/prospects/[slug]/outreach/follow-up-[N].json | node .claude/skills/gws-cli/scripts/stage_email.js
+```
 
-Still happy to do it -- takes me about 10 minutes. Want me to send it over?
+This creates a draft in Eric's Gmail and adds it to the staging manifest at `sales/lead-generation/staged-emails.json`.
 
-Eric Lefler
-OphidianAI
+### Review Staged Emails
 
-### Follow-Up 2
+```bash
+node .claude/skills/gws-cli/scripts/send_staged.js --list
+```
 
-Hi Scott,
+### Send Staged Emails
 
-Quick thought -- I noticed "auto repair Columbus IN" searches have jumped this quarter. Most of those searchers pick from the first 3 results on Google, and right now SAK isn't showing up there.
+When Eric says "send all staged emails" or "send the batch":
+```bash
+node .claude/skills/gws-cli/scripts/send_staged.js
+```
 
-A few small changes to your site could fix that. Happy to show you what I mean if you're interested.
+## Sheet Updates
 
-Eric Lefler
-OphidianAI
+Use the `outreach-sheets.js` module for all Google Sheet updates. Never hardcode column letters.
 
-### Follow-Up 3
+```javascript
+const sheets = require('./operations/automation/scripts/outreach-sheets');
+```
 
-Hi Scott,
+### After Staging a Follow-Up
 
-I know things get busy. If a website update isn't on your radar right now, no worries at all. The offer to put together that search visibility plan still stands whenever the timing feels right.
+Update the Pipeline sheet:
 
-Eric Lefler
-OphidianAI
+| Follow-Up | Status Value | Date Column |
+|-----------|-------------|-------------|
+| FU1 | "FU1 Sent" | FU1 Date |
+| FU2 | "FU2 Sent" | FU2 Date |
+| FU3 | "FU3 Sent" | FU3 Date |
+| FU4 | "FU4 Sent" | FU4 Date |
+| Breakup | "Breakup Sent" | Breakup Date |
+
+Also update `sales/lead-generation/prospect-tracker.md` as the local backup.
+
+### Column Mappings (via outreach-sheets.js)
+
+- `FU1 Date` -> Column O
+- `FU2 Date` -> Column P
+- `FU3 Date` -> Column Q
+- `FU4 Date` -> Column AC
+- `Breakup Date` -> Column AD
+- `Status` -> Column I
+
+## Breakup Handling
+
+After the breakup email is sent:
+
+1. Wait 3 days for a reply
+2. If no reply after 3 days, move the prospect to the Failed Outreach sheet:
+   ```javascript
+   sheets.moveProspect('Pipeline', 'Failed Outreach', 'Business Name', {
+     'Touches Sent': 6,
+     'Failure Reason': 'No reply after full sequence',
+     'Last Touch Date': '<breakup date>'
+   });
+   ```
+3. Update `sales/lead-generation/prospect-tracker.md` to reflect the status change
 
 ## Knowledge Base
 
-After drafting the follow-up email and saving, index it:
+After drafting the follow-up email and saving, index it in Pinecone:
 
 1. Upsert the follow-up:
 
@@ -127,16 +315,16 @@ Parameters:
   name: "ophidianai-kb"
   namespace: "outreach"
   records: [{
-    "_id": "outreach/<prospect-slug>/<followup-filename-without-ext>",
+    "_id": "outreach/<prospect-slug>/follow-up-<N>",
     "text": "<follow-up email content>",
-    "source_file": "sales/lead-generation/prospects/<slug>/outreach/<filename>",
+    "source_file": "sales/lead-generation/prospects/<slug>/outreach/follow-up-<N>.txt",
     "department": "revenue",
     "created_date": "<today>",
     "updated_date": "<today>",
-    "tags": ["<industry>", "follow-up", "sequence-<N>"]
+    "tags": ["<industry>", "follow-up", "sequence-<N>", "<template>"]
   }]
 ```
 
-2. Log: `Indexed to knowledge base: outreach/<prospect-slug>/<filename>`
+2. Log: `Indexed to knowledge base: outreach/<prospect-slug>/follow-up-<N>`
 
 If indexing fails, log the error and continue.
