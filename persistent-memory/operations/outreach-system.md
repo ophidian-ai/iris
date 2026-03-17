@@ -12,89 +12,114 @@ triggers:
   - lead source
   - find prospects
   - weekly cadence
+  - outreach engine
+  - inbox monitor
+  - send scheduler
 created: 2026-03-10
-updated: 2026-03-10
+updated: 2026-03-17
 ---
 
 # Outreach System
 
+**Overhauled 2026-03-17** -- Hormozi-inspired value-first engine replacing the old negative-first template system.
+
+Spec: `docs/superpowers/specs/2026-03-17-outreach-engine-design.md`
+Plan: `docs/superpowers/plans/2026-03-17-outreach-engine-implementation.md`
 Full SOP: `operations/references/sops/weekly-outreach.md`
 Email warmup SOP: `operations/references/sops/email-warmup.md`
 Automation setup: `operations/automation/outreach-scheduler.md`
 
+## Architecture
+
+Orchestrator + specialized skills pattern:
+- `outreach-engine` -- Central orchestrator, owns state machine
+- `cold-email-outreach` -- CI1 (default) + ALT (A/B test) templates
+- `follow-up-email` -- 5-touch + breakup (FU1-FU4 + Breakup)
+- `inbox-monitor` -- 3x daily reply detection and classification
+- `outreach-tracker` -- 3 Google Sheets management
+- `send-scheduler.js` -- Automated daily sends at 10am ET
+- `outreach-sheets.js` -- Shared module for all sheet I/O
+
 ## Weekly Cadence
 
-| Day | Task | Skill/Command |
+| Day | Time | What Happens |
 |---|---|---|
-| Mon | Research 10-20 leads + score | `/run-outreach-pipeline` |
-| Tue | Draft cold emails + stage as drafts | Auto-selects least-recently-used template |
-| Wed | Send batch 8-10 AM ET | `node .claude/skills/gws-cli/scripts/send_staged.js` |
-| Thu | Check replies + deliver offers | `/offer-delivery` for "yes" responses |
-| Fri | Review template performance + plan follow-ups | Check `template-rotation.md` |
+| Monday | 7:00 AM | Pipeline runs: research, score, draft all emails, stage with scheduledDate |
+| Monday | 10:00 AM | Any follow-ups due Monday send automatically |
+| Tue-Fri | 10:00 AM | Scheduled emails for that day send automatically |
+| Wednesday | 10:00 AM | New first-touch batch sends (B2B optimal day) |
+| Every day | 7 AM, 12 PM, 4 PM | Inbox monitor checks for replies |
 
-## Volume Targets
+## Email Templates
 
-| Phase | Leads/week | Daily send limit | Send spacing |
-|---|---|---|---|
-| Start | 10 | 20/day | 5 min |
-| Ramp (month 2) | 20 | 35/day | 3 min |
-| Max | 30 | 50/day | 3 min |
+- **CI1 (3 Creative Ideas)** -- Default, 67% of sends. Value-first, industry insight opener, 3 actionable ideas, PS quick win.
+- **ALT (One Sharp Insight)** -- A/B test, 33% of sends. One sharp observation, shorter format.
+- **Old W/S/H/A templates retired** from first-touch. Angles preserved as follow-up material.
 
-## Follow-Up Schedule
+## Follow-Up Cadence
 
-- Day 3-4: First follow-up
-- Day 7-8: Second follow-up
-- Day 14: Final graceful close
+6-touch sequence over 25 days:
+- Day 0: First-touch (CI1 or ALT)
+- Day 3: FU1 (micro value drop)
+- Day 7: FU2 (different angle entirely)
+- Day 12: FU3 (social proof / pattern)
+- Day 18: FU4 (last value drop, shortest)
+- Day 25: Breakup (clean close, door open)
 
-## Sales Motion (Updated 2026-03-17)
+Follow-ups send on their exact due date at 10am ET. Weekend dates shift to Monday.
 
-- **Old:** "Your website is outdated, let us rebuild it" (one-time project)
-- **New:** "Your website is outdated, let us rebuild it and keep growing your business with AI" (project + recurring)
-- Every website project becomes a gateway to a monthly AI tier ($297-$797/mo)
-- Score prospects for multi-service potential (AI Service Potential bonus criterion)
-- Lead magnets: free chatbot demo, free SEO audit, free website + AI assessment
+## Send Policy
 
-## Template Rotation
+**Auto-send at 10am ET** (policy change from manual-send as of 2026-03-17). Eric reviews/edits/deletes drafts before 10am. Anything still staged at 10am sends automatically via `send-scheduler.js`.
 
-- Tracker: `sales/lead-generation/template-rotation.md`
-- Five categories: Website (W1-W4), SEO (S1-S4), Hybrid (H1-H4), Creative Ideas (CI1), AI Services (A1-A4)
-- Always pick least-recently-used within category
-- Never send same template to two prospects in same batch
-- Flag templates with 10+ sends and 0 replies for replacement
-- Alert: If reply rate drops below 5% for two consecutive weeks, stop and audit
+## 3 Google Sheets (Full Analytics)
 
-## Email Warmup
+Spreadsheet: `1FJOPS3ABR2BQtFOn4cUAGLZzIYukKbPozK_t_m7Dwg0`
+- **Pipeline** -- Active prospects (27 columns A-AH)
+- **Failed Outreach** -- Completed sequences / declined (18 columns)
+- **Successful Outreach** -- Closed deals (23 columns)
 
-- Tool: Warmbox Solo ($19/mo)
-- Ramp: 5-10 warmup emails/day initially, ramp to 30-40/day over 2-3 weeks
-- Minimum 14 days before any cold outreach
-- Keep warmup running during active campaigns
-- DNS required: SPF, DKIM, DMARC records
-- Target: 95%+ inbox placement before cold outreach
-- **Current status:** Active. Warmup complete. Sending live outreach.
+All sheet I/O via `outreach-sheets.js` module. Never hardcode column letters.
+
+## Interest Reply Flow
+
+1. Inbox-monitor detects reply, classifies as Interest/Question/Negative
+2. Interest -> auto-prep (proposal + demo in background), draft acknowledgment, notify Eric
+3. Eric reviews package, sends proposal + demo
+4. Meeting scheduled -> Eric presents
+5. Proposal accepted -> client-onboarding fires -> Successful Outreach sheet
+6. Proposal rejected -> clarifying questions -> revised proposal -> loop (Eric closes manually)
+
+## Paths to Failed Outreach (3 only)
+
+1. Full 6-touch sequence with no reply (automatic)
+2. Prospect explicitly declines (after Eric confirms close)
+3. Eric manually closes a negotiation
+
+## Re-engagement
+
+Failed prospects become re-engagement eligible 90 days after last touch. Monday pipeline checks for eligible prospects and surfaces to Eric.
 
 ## Target Geofence
 
 - Columbus, IN (primary)
-- Greensburg, IN (added 2026-03-16)
-- North Vernon, IN (added 2026-03-16)
-- Greenwood, IN (added 2026-03-16)
-- Franklin, IN (added 2026-03-16)
+- Greensburg, IN
+- North Vernon, IN
+- Greenwood, IN
+- Franklin, IN
 
 ## Lead Sources
 
-- **Tier 1 (proven):** Yelp (via Firecrawl), Google Maps/Local Pack
+- **Tier 1:** Yelp (via Firecrawl), Google Maps/Local Pack
 - **Tier 2:** Chamber of Commerce, Visit Columbus Indiana, local directories
 - **Good industries:** Auto services, fitness/gyms, food/restaurants, personal services, health/wellness, professional services
 - **Bad industries:** HVAC/plumbing (franchises), lawn care/landscaping (merged businesses), retail (already on Shopify)
-- **Filtering:** 50+ reviews + bad website, established 5+ years, active socials, service business without online booking
 
-## Safety Rails
+## Email Warmup
 
-- Emails staged as drafts -- never auto-sent
-- Eric always reviews before sending
-- Staged manifest: `sales/lead-generation/staged-emails.json`
-- Pipeline fails gracefully with ClickUp notification
+- Tool: Warmbox Solo ($19/mo)
+- **Current status:** Active. Warmup complete. Sending live outreach.
+- DNS: SPF, DKIM, DMARC verified
 
 ## Related
 
