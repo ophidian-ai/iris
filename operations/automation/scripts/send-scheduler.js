@@ -28,7 +28,8 @@ const sheets = require('./outreach-sheets.js');
 // ---------------------------------------------------------------------------
 
 const PROJECT_ROOT = path.resolve(__dirname, '..', '..', '..');
-const MANIFEST_PATH = path.join(PROJECT_ROOT, 'sales', 'lead-generation', 'staged-emails.json');
+// stage_email.js writes to .claude/sales/ (relative to its location in .claude/skills/gws-cli/scripts/)
+const MANIFEST_PATH = path.join(PROJECT_ROOT, '.claude', 'sales', 'lead-generation', 'staged-emails.json');
 const LOG_DIR = path.join(PROJECT_ROOT, 'operations', 'automation', 'logs');
 
 const DRY_RUN = process.argv.includes('--dry-run');

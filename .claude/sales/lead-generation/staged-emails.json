@@ -63,6 +63,72 @@
       "prospect": "andis-plumbing",
       "template": "S4",
       "stagedAt": "2026-03-16T13:50:46.263Z"
+    },
+    {
+      "draftId": "r8338366333574364741",
+      "to": "dana@columbusmassagecenter.com",
+      "subject": "Re: your site might be costing you customers",
+      "prospect": "Columbus Massage Center",
+      "template": "FU2",
+      "scheduledDate": "2026-03-18",
+      "niche": "Personal Services",
+      "city": "Columbus, IN",
+      "stagedAt": "2026-03-17T19:10:30.563Z"
+    },
+    {
+      "draftId": "r6232686452814504703",
+      "to": "scott.kelsay@sakautomotive.com",
+      "subject": "Re: sak automotive is losing customers two ways",
+      "prospect": "SAK Automotive",
+      "template": "FU2",
+      "scheduledDate": "2026-03-18",
+      "niche": "Auto Services",
+      "city": "Columbus, IN",
+      "stagedAt": "2026-03-17T19:10:31.312Z"
+    },
+    {
+      "draftId": "r6368075735116256446",
+      "to": "carriageonthesquare@hotmail.com",
+      "subject": "Re: some ideas for carriage on the square",
+      "prospect": "Carriage on the Square",
+      "template": "FU1",
+      "scheduledDate": "2026-03-20",
+      "niche": "Restaurant",
+      "city": "Greensburg, IN",
+      "stagedAt": "2026-03-17T19:10:32.028Z"
+    },
+    {
+      "draftId": "r5371708229460953724",
+      "to": "platinumautorepairwrecker@gmail.com",
+      "subject": "Re: some ideas for platinum auto repair",
+      "prospect": "Platinum Auto Repair",
+      "template": "FU1",
+      "scheduledDate": "2026-03-20",
+      "niche": "Auto Services",
+      "city": "Greensburg, IN",
+      "stagedAt": "2026-03-17T19:10:32.779Z"
+    },
+    {
+      "draftId": "r2602666285956628182",
+      "to": "dontrowbridgetire@gmail.com",
+      "subject": "Re: your site might be costing you customers",
+      "prospect": "Dons Tire & Auto Repair",
+      "template": "FU1",
+      "scheduledDate": "2026-03-20",
+      "niche": "Auto Services",
+      "city": "North Vernon, IN",
+      "stagedAt": "2026-03-17T19:10:33.522Z"
+    },
+    {
+      "draftId": "r5739293888457216344",
+      "to": "booking.glowaesthetics@gmail.com",
+      "subject": "Re: glow aesthetics on mobile",
+      "prospect": "Glow Aesthetics",
+      "template": "FU1",
+      "scheduledDate": "2026-03-20",
+      "niche": "Med Spa",
+      "city": "Greensburg, IN",
+      "stagedAt": "2026-03-17T19:10:34.268Z"
     }
   ]
 }
