@@ -6,7 +6,7 @@
  * Output: Draft ID and confirmation.
  *
  * Usage:
- *   echo '{"to":"x@y.com","subject":"Hi","body":"Hello","prospect":"business-name","template":"W1"}' | node stage_email.js
+ *   echo '{"to":"x@y.com","subject":"Hi","body":"Hello","prospect":"business-name","template":"CI1","scheduledDate":"2026-03-19","niche":"restaurant","city":"Greensburg, IN"}' | node stage_email.js
  *
  * The script:
  *   1. Builds the MIME message
@@ -85,6 +85,9 @@ async function main() {
     subject: input.subject,
     prospect: input.prospect || "unknown",
     template: input.template || "unknown",
+    scheduledDate: input.scheduledDate || "",
+    niche: input.niche || "",
+    city: input.city || "",
     stagedAt: new Date().toISOString(),
   });
   saveManifest(manifest);
