@@ -71,7 +71,49 @@ For every post, produce all of the following:
 - **Visual direction:** 1-3 sentences describing what the graphic, photo, or video should look like. Reference client's brand colors and style.
 - **Scheduled posting:** Day and time based on client's preferred schedule from their profile.
 
-### 5. Platform-Specific Rules
+### 5. Write Output Files
+
+#### Batch Markdown
+
+Save to: `engineering/projects/[client-slug]/social/batches/YYYY-MM-DD-batch.md`
+
+Human-readable review format (use the existing output structure below).
+
+#### Batch JSON
+
+Save to: `engineering/projects/[client-slug]/social/batches/YYYY-MM-DD-batch.json`
+
+Use the same schema as the OphidianAI social content batch JSON (see `.claude/skills/social-content/SKILL.md` for the full schema). Key fields:
+- `batchId`: `[client-slug]-YYYY-MM-DD`
+- `clientSlug`: the client slug (used for Supabase lookup)
+- `status`: `"draft"`
+- `posts[]`: each post with `postNumber`, `pillar`, `title`, `scheduledDate`, `imageSource`, `imagePrompt`, `platforms` (FB/IG/TikTok/GBP/LinkedIn/Pinterest variants)
+
+### 6. Generate Images
+
+After writing both output files, invoke the `social-image-gen` skill to generate all images for the batch:
+
+```
+Invoke social-image-gen skill with batch path: engineering/projects/[client-slug]/social/batches/YYYY-MM-DD-batch.json
+```
+
+The image router reads the batch JSON, generates master images via the assigned source (Pexels, Nano Banana 2, Playwright, Excalidraw), resizes for each platform, and updates the batch JSON with `imagePath` fields.
+
+After images are generated, the batch status updates from `draft` to `review`.
+
+### 7. Sync to Dashboard
+
+After images are generated, sync the batch to the Supabase `content_batches` and `content_posts` tables:
+
+```bash
+node "c:/Claude Code/OphidianAI/.claude/skills/social-content/scripts/sync-to-supabase.js" "engineering/projects/[client-slug]/social/batches/YYYY-MM-DD-batch.json"
+```
+
+The sync script reads `NEXT_PUBLIC_SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` from `engineering/projects/ophidian-ai/.env.local`.
+
+If the sync fails, note the error but don't block the workflow -- the batch JSON on disk is the source of truth.
+
+### 9. Platform-Specific Rules
 
 **Facebook + Instagram (all tiers):**
 
@@ -199,9 +241,24 @@ Approval workflow: [Review first / Trust and post / Hybrid]
 9. **Respect blackout periods.** Never schedule posts during the client's specified blackout days/times.
 10. **Photo library awareness.** Reference available photos from the client's asset folder when writing visual direction. Note when new photos are needed.
 
+## Delivery (Post-Approval)
+
+Once the batch reaches `approved` status in the dashboard, use the `social-scheduler` skill to push to platform APIs:
+
+```
+Invoke social-scheduler skill with batch path: engineering/projects/[client-slug]/social/batches/YYYY-MM-DD-batch.json
+```
+
+The scheduler reads the approved batch JSON, uploads platform-sized images, schedules posts via Meta Graph API / LinkedIn Marketing API / TikTok Content Posting API, and writes a deployment manifest to `engineering/projects/[client-slug]/social/scheduled/YYYY-MM-DD-manifest.json`.
+
+**Prerequisite:** Platform OAuth tokens must be configured for the client account (separate from OphidianAI's tokens). See `.claude/skills/social-scheduler/scripts/auth/` for setup scripts.
+
 ## Reference
 
-- OphidianAI social content skill (internal use): `.claude/skills/social-content/SKILL.md`
+- OphidianAI social content skill (internal): `.claude/skills/social-content/SKILL.md`
+- Image router skill: `.claude/skills/social-image-gen/SKILL.md`
+- Scheduler skill: `.claude/skills/social-scheduler/SKILL.md`
+- Supabase sync script: `.claude/skills/social-content/scripts/sync-to-supabase.js`
 - Client profile template: `operations/templates/social-client-profile.md`
 - Onboarding checklist: `operations/templates/social-onboarding-checklist.md`
 - Delivery SOP: `operations/references/sops/social-media-delivery.md`

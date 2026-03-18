@@ -4,7 +4,8 @@
 # Tasks created:
 #   1. OphidianAI-MorningBriefing  -- Weekdays 7:57 AM
 #   2. OphidianAI-InboxMonitor     -- Weekdays 9:57 AM and 4:53 PM
-#   3. OphidianAI-PipelineCheck    -- Weekdays 10:03 AM
+#   3. OphidianAI-PipelineCheck      -- Weekdays 10:03 AM
+#   4. OphidianAI-SocialContentCron  -- Every other Monday 6:00 AM (bi-weekly)
 #
 # All tasks run whether user is logged on or not (prompts for password once).
 # All tasks wake the PC from sleep.
@@ -44,6 +45,16 @@ $Settings3 = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGo
 
 Register-ScheduledTask -TaskName $TaskName3 -Action $Action3 -Trigger $Trigger3 -Settings $Settings3 -User $Username -Password $Password -RunLevel Highest -Description "Check prospect pipeline for follow-ups via Claude Code" -Force
 Write-Host "Registered: $TaskName3 (Weekdays 10:03 AM)"
+
+# -- 4. Social Content Cron: Every other Monday at 6:00 AM --
+# Uses Weekly trigger on Monday -- runs every 2 weeks via WeeksInterval=2
+$TaskName4 = "OphidianAI-SocialContentCron"
+$Action4 = New-ScheduledTaskAction -Execute $PowerShell -Argument "-NoProfile -ExecutionPolicy Bypass -File `"$AutomationDir\social-content-cron.ps1`""
+$Trigger4 = New-ScheduledTaskTrigger -Weekly -WeeksInterval 2 -DaysOfWeek Monday -At 6:00AM
+$Settings4 = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -StartWhenAvailable -WakeToRun -ExecutionTimeLimit (New-TimeSpan -Minutes 30)
+
+Register-ScheduledTask -TaskName $TaskName4 -Action $Action4 -Trigger $Trigger4 -Settings $Settings4 -User $Username -Password $Password -RunLevel Highest -Description "Auto-generate bi-weekly social media content batch via Claude Code" -Force
+Write-Host "Registered: $TaskName4 (Every other Monday 6:00 AM)"
 
 Write-Host ""
 Write-Host "All tasks registered with run-whether-logged-on-or-not and wake-from-sleep."
