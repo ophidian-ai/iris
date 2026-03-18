@@ -84,7 +84,7 @@ All sheet I/O via `outreach-sheets.js` module. Never hardcode column letters.
 ## Interest Reply Flow
 
 1. Inbox-monitor detects reply, classifies as Interest/Question/Negative
-2. Interest -> auto-prep (proposal + demo in background), draft acknowledgment, notify Eric
+2. Interest -> **create prospect folder** (`sales/lead-generation/prospects/[slug]/`) with README, research, mockup, demo, proposal dirs -> auto-prep (proposal + demo in background), draft acknowledgment, notify Eric
 3. Eric reviews package, sends proposal + demo
 4. Meeting scheduled -> Eric presents
 5. Proposal accepted -> client-onboarding fires -> Successful Outreach sheet
@@ -102,24 +102,35 @@ Failed prospects become re-engagement eligible 90 days after last touch. Monday 
 
 ## Target Geofence
 
-- Columbus, IN (primary)
-- Greensburg, IN
-- North Vernon, IN
-- Greenwood, IN
-- Franklin, IN
+**Statewide Indiana** (expanded 2026-03-17 from 5-city local radius)
+
+- **Tier 1 (metro, priority):** Indianapolis / Carmel / Fishers / Noblesville, Fort Wayne, Evansville
+- **Tier 2 (mid-size):** South Bend / Mishawaka, Bloomington, Lafayette / West Lafayette, Terre Haute
+- **Tier 3 (original local):** Columbus, Greensburg, North Vernon, Greenwood, Franklin
 
 ## Lead Sources
 
 - **Tier 1:** Yelp (via Firecrawl), Google Maps/Local Pack
-- **Tier 2:** Chamber of Commerce, Visit Columbus Indiana, local directories
+- **Tier 2:** Chamber of Commerce, local directories
+- **Tier 3 (April 2026):** Indiana Secretary of State new business registrations database (monthly purchase, covers entire state). Highest-intent source -- new businesses need websites from day one.
 - **Good industries:** Auto services, fitness/gyms, food/restaurants, personal services, health/wellness, professional services
 - **Bad industries:** HVAC/plumbing (franchises), lawn care/landscaping (merged businesses), retail (already on Shopify)
 
-## Email Warmup
+## Email Infrastructure
 
-- Tool: Warmbox Solo ($19/mo)
-- **Current status:** Active. Warmup complete. Sending live outreach.
-- DNS: SPF, DKIM, DMARC verified
+**Current (pre-April 2026):**
+- Sending from: `eric.lefler@ophidianai.com` (temporary -- personal email used for outreach)
+- Warmbox Solo ($19/mo): Active, warmup complete, sending live outreach
+- DNS: SPF (`-all`), DKIM, DMARC (`p=quarantine`) verified
+- Deliverability: 10/10 (mail-tester.com, verified 2026-03-17)
+
+**Planned (April 2026):**
+- `value@ophidianai.com` -- Dedicated outreach inbox on primary domain. Display name: "Eric Lefler". Created when GWS downgrades to Starter on Jun 2, 2026, or sooner if a seat is available.
+- `value@getophidianai.com` -- Second outreach domain for 2x capacity and reputation isolation. Display name: "Eric Lefler".
+- `eric.lefler@ophidianai.com` -- Reserved for replies, proposals, client communication only. No cold outreach.
+- Second domain (`getophidianai.com`) needs: registration (~$12/yr), GWS Starter ($7/mo), SPF/DKIM/DMARC, 14-day Warmbox warmup
+- Both outreach inboxes need: List-Unsubscribe header (URL + One-Click, not mailto) built into the email pipeline. Build a proper `/unsubscribe` endpoint on ophidianai.com. Do NOT add List-Unsubscribe to eric.lefler@ophidianai.com -- personal email stays clean.
+- Total added cost: ~$14/mo for 2x sending capacity with domain isolation
 
 ## Related
 
