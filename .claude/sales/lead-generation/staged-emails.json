@@ -151,6 +151,226 @@
       "niche": "Restaurant",
       "city": "Greensburg, IN",
       "stagedAt": "2026-03-17T19:21:01.756Z"
+    },
+    {
+      "draftId": "r2399045158920852153",
+      "to": "kennydar@att.net",
+      "subject": "some ideas for discount auto repair",
+      "prospect": "discount-auto-repair",
+      "template": "CI1",
+      "scheduledDate": "2026-03-19",
+      "niche": "auto-services",
+      "city": "Indianapolis, IN",
+      "stagedAt": "2026-03-18T00:22:52.247Z"
+    },
+    {
+      "draftId": "r-2748165458766850545",
+      "to": "transport@hobbsindy.com",
+      "subject": "some ideas for hobbs automotive",
+      "prospect": "hobbs-automotive",
+      "template": "CI1",
+      "scheduledDate": "2026-03-19",
+      "niche": "auto-services",
+      "city": "Indianapolis, IN",
+      "stagedAt": "2026-03-18T00:23:08.675Z"
+    },
+    {
+      "draftId": "r5716831807365264126",
+      "to": "revelesautoservice@hotmail.com",
+      "subject": "some ideas for reveles auto service",
+      "prospect": "reveles-auto-service",
+      "template": "CI1",
+      "scheduledDate": "2026-03-19",
+      "niche": "auto-services",
+      "city": "Indianapolis, IN",
+      "stagedAt": "2026-03-18T00:23:24.120Z"
+    },
+    {
+      "draftId": "r5296522458404663432",
+      "to": "kidwellauto@gmail.com",
+      "subject": "kidwell automotives website",
+      "prospect": "kidwell-automotive",
+      "template": "ALT",
+      "scheduledDate": "2026-03-19",
+      "niche": "auto-services",
+      "city": "Indianapolis, IN",
+      "stagedAt": "2026-03-18T00:23:39.104Z"
+    },
+    {
+      "draftId": "r305779213456284193",
+      "to": "swiftauto@sbcglobal.net",
+      "subject": "swift auto services online reviews",
+      "prospect": "swift-auto-service",
+      "template": "ALT",
+      "scheduledDate": "2026-03-19",
+      "niche": "auto-services",
+      "city": "Indianapolis, IN",
+      "stagedAt": "2026-03-18T00:23:55.447Z"
+    },
+    {
+      "draftId": "r-7285007473230782190",
+      "to": "chiropractorindianapolisin@gmail.com",
+      "subject": "some ideas for health first wellness center",
+      "prospect": "health-first-wellness",
+      "template": "CI1",
+      "scheduledDate": "2026-03-19",
+      "niche": "health-wellness",
+      "city": "Indianapolis, IN",
+      "stagedAt": "2026-03-18T00:24:11.600Z"
+    },
+    {
+      "draftId": "r-3620451725060697781",
+      "to": "info@billingsleychiro.com",
+      "subject": "some ideas for billingsley chiropractic",
+      "prospect": "billingsley-chiropractic",
+      "template": "CI1",
+      "scheduledDate": "2026-03-19",
+      "niche": "health-wellness",
+      "city": "Indianapolis, IN",
+      "stagedAt": "2026-03-18T00:24:29.381Z"
+    },
+    {
+      "draftId": "r3580325170901117920",
+      "to": "downtownwip@gmail.com",
+      "subject": "some ideas for wip downtown",
+      "prospect": "wip-downtown",
+      "template": "CI1",
+      "scheduledDate": "2026-03-19",
+      "niche": "salon-spa",
+      "city": "Indianapolis, IN",
+      "stagedAt": "2026-03-18T00:24:45.386Z"
+    },
+    {
+      "draftId": "r-6606433128029861239",
+      "to": "kyle@uniquetechtraining.com",
+      "subject": "unique auto repairs website",
+      "prospect": "unique-auto-repair",
+      "template": "ALT",
+      "scheduledDate": "2026-03-19",
+      "niche": "auto-services",
+      "city": "Fort Wayne, IN",
+      "stagedAt": "2026-03-18T00:25:03.467Z"
+    },
+    {
+      "draftId": "r3968579452668383168",
+      "to": "europeandayspa@hotmail.com",
+      "subject": "some ideas for optimum health beauty and spa",
+      "prospect": "optimum-health-beauty-spa",
+      "template": "CI1",
+      "scheduledDate": "2026-03-19",
+      "niche": "salon-spa",
+      "city": "Fort Wayne, IN",
+      "stagedAt": "2026-03-18T00:25:19.961Z"
+    },
+    {
+      "draftId": "r-9053124559764093800",
+      "to": "contactus@indysgarage.com",
+      "subject": "indys garages coming soon page",
+      "prospect": "indys-garage",
+      "template": "ALT",
+      "scheduledDate": "2026-03-19",
+      "niche": "auto-services",
+      "city": "Indianapolis, IN",
+      "stagedAt": "2026-03-18T00:26:00.902Z"
+    },
+    {
+      "draftId": "r5043919975451199641",
+      "to": "dfischer@evansvilleauto.net",
+      "subject": "some ideas for evansville auto repair",
+      "prospect": "evansville-auto-repair",
+      "template": "CI1",
+      "scheduledDate": "2026-03-19",
+      "niche": "auto-services",
+      "city": "Evansville, IN",
+      "stagedAt": "2026-03-18T03:35:22.920Z"
+    },
+    {
+      "draftId": "r-9175359389383859937",
+      "to": "charleshamilton@chamfitstudios.com",
+      "subject": "chamfit studios online presence",
+      "prospect": "chamfit-studios",
+      "template": "ALT",
+      "scheduledDate": "2026-03-19",
+      "niche": "fitness",
+      "city": "Evansville, IN",
+      "stagedAt": "2026-03-18T03:35:24.323Z"
+    },
+    {
+      "draftId": "r6296246427916292094",
+      "to": "acrc@evansvillechiro.com",
+      "subject": "some ideas for active chiropractic",
+      "prospect": "active-chiropractic",
+      "template": "CI1",
+      "scheduledDate": "2026-03-19",
+      "niche": "health-wellness",
+      "city": "Evansville, IN",
+      "stagedAt": "2026-03-18T03:35:25.748Z"
+    },
+    {
+      "draftId": "r6103651798065189599",
+      "to": "autosol1@comcast.net",
+      "subject": "some ideas for auto specialty of lafayette",
+      "prospect": "auto-specialty-lafayette",
+      "template": "CI1",
+      "scheduledDate": "2026-03-19",
+      "niche": "auto-services",
+      "city": "Lafayette, IN",
+      "stagedAt": "2026-03-18T03:35:27.175Z"
+    },
+    {
+      "draftId": "r-3949762462360077200",
+      "to": "jjbanes@hotmail.com",
+      "subject": "banes automotives marine repair advantage",
+      "prospect": "banes-automotive",
+      "template": "ALT",
+      "scheduledDate": "2026-03-19",
+      "niche": "auto-services",
+      "city": "Lafayette, IN",
+      "stagedAt": "2026-03-18T03:35:28.574Z"
+    },
+    {
+      "draftId": "r-3549625926249015268",
+      "to": "jakesauto1336@gmail.com",
+      "subject": "some ideas for jakes auto",
+      "prospect": "jakes-auto",
+      "template": "CI1",
+      "scheduledDate": "2026-03-19",
+      "niche": "auto-services",
+      "city": "Terre Haute, IN",
+      "stagedAt": "2026-03-18T03:35:29.943Z"
+    },
+    {
+      "draftId": "r4517497308605252138",
+      "to": "drummondchiropractic@gmail.com",
+      "subject": "drummond chiropractics downtown location",
+      "prospect": "drummond-chiropractic",
+      "template": "ALT",
+      "scheduledDate": "2026-03-19",
+      "niche": "health-wellness",
+      "city": "Bloomington, IN",
+      "stagedAt": "2026-03-18T03:35:31.313Z"
+    },
+    {
+      "draftId": "r-61953496164037594",
+      "to": "btownautorepair@gmail.com",
+      "subject": "some ideas for b town auto repair",
+      "prospect": "b-town-auto-repair",
+      "template": "CI1",
+      "scheduledDate": "2026-03-19",
+      "niche": "auto-services",
+      "city": "Bloomington, IN",
+      "stagedAt": "2026-03-18T03:35:32.654Z"
+    },
+    {
+      "draftId": "r-6444777925072534114",
+      "to": "jessa@salonnouveau.com",
+      "subject": "some ideas for salon nouveau",
+      "prospect": "salon-nouveau",
+      "template": "CI1",
+      "scheduledDate": "2026-03-19",
+      "niche": "salon-spa",
+      "city": "South Bend, IN",
+      "stagedAt": "2026-03-18T03:35:34.029Z"
     }
   ]
 }

@@ -1,0 +1,66 @@
+{
+  "batchId": "2026-03-17-mini",
+  "dateRange": "2026-03-17 to 2026-03-21",
+  "status": "draft",
+  "posts": [
+    {
+      "postNumber": 1,
+      "pillar": "Website Tips",
+      "title": "5 Seconds Is All You Get",
+      "scheduledDate": "2026-03-17",
+      "imageSource": "pexels",
+      "imagePrompt": "person scrolling phone looking frustrated, close up hands on smartphone, warm indoor lighting",
+      "platforms": {
+        "facebook": {
+          "copy": "A visitor lands on your website. You have about 5 seconds before they decide to stay or leave.\n\nHere is what makes them leave:\n\n- The page takes forever to load\n- They can not tell what you do within 3 seconds\n- It looks broken on their phone\n- There is no way to call, book, or message you\n\nHere is the thing. Most of these are fixable in an afternoon.\n\nThe businesses that show up first on Google are not always the best at what they do. They just made it easy for customers to find them and take the next step.\n\nIf your website has not been updated in a while, it might be working against you without you even knowing it.\n\nEric Lefler\nOphidianAI\neric.lefler@ophidianai.com",
+          "hashtags": ["#SmallBusiness", "#WebDesign", "#ColumbusIndiana", "#SouthernIndiana", "#SmallBizTips"],
+          "scheduledTime": "19:00 ET",
+          "contentType": "text-post",
+          "imagePath": null,
+          "altText": "Person scrolling on phone with frustrated expression"
+        },
+        "instagram": {
+          "copy": "A visitor lands on your website. You have about 5 seconds before they decide to stay or leave.\n\nSwipe to see the 4 things that make them leave -- and what to do about it.\n\nSave this post if your website has not been updated in a while. These fixes can make a real difference.\n\nEric Lefler -- OphidianAI -- eric.lefler@ophidianai.com\n\n#SmallBusiness #WebDesign #ColumbusIndiana #SouthernIndiana #SmallBizTips #WebsiteTips #LocalBusiness",
+          "hashtags": ["#SmallBusiness", "#WebDesign", "#ColumbusIndiana", "#SouthernIndiana", "#SmallBizTips", "#WebsiteTips", "#LocalBusiness"],
+          "scheduledTime": "19:00 ET",
+          "contentType": "carousel",
+          "imagePath": null,
+          "altText": "Carousel: 5 seconds is all you get - what makes visitors leave your website",
+          "slides": [
+            { "text": "5 Seconds Is All You Get\n\nWhat makes a visitor stay or leave your website", "imagePath": null },
+            { "text": "Slow load time\n\nIf your site takes more than 3 seconds to load, over half your visitors are already gone", "imagePath": null },
+            { "text": "Unclear message\n\nVisitors need to know what you do and where you are within 3 seconds of landing", "imagePath": null },
+            { "text": "Broken on phones\n\nMore than half of all website visits come from phones. If yours does not work on mobile, you are invisible to most people", "imagePath": null },
+            { "text": "No next step\n\nIf there is no way to call, book, or message you, visitors leave and find someone who makes it easy\n\nSave this for later", "imagePath": null }
+          ]
+        }
+      }
+    },
+    {
+      "postNumber": 2,
+      "pillar": "Local Relevance",
+      "title": "Indiana Businesses Without Websites",
+      "scheduledDate": "2026-03-21",
+      "imageSource": "pexels",
+      "imagePrompt": "small town main street Indiana storefronts, American small business downtown, warm afternoon light",
+      "platforms": {
+        "facebook": {
+          "copy": "I have been researching small businesses across Indiana for the past few weeks.\n\nWhat I have found is surprising. There are businesses with hundreds of five-star reviews, loyal customers for 20+ years, and real expertise -- but when you search for them online, they do not show up.\n\nSome have no website at all. Others have a site that has not been touched since it was built years ago. A few have placeholder text still showing on the homepage.\n\nThese are good businesses. They are just invisible to anyone who searches online before making a decision -- which is most people now.\n\nIf you own a business in Indiana and are not sure how your online presence looks to a stranger, drop your website in the comments. I will take a quick look and let you know what I see. No pitch, just honest feedback.\n\nEric Lefler\nOphidianAI\neric.lefler@ophidianai.com",
+          "hashtags": ["#IndianaSmallBusiness", "#ColumbusIndiana", "#SupportLocal", "#SmallBusiness", "#SouthernIndiana"],
+          "scheduledTime": "12:00 ET",
+          "contentType": "text-post",
+          "imagePath": null,
+          "altText": "Small town main street with local business storefronts"
+        },
+        "instagram": {
+          "copy": "I have been researching small businesses across Indiana for the past few weeks.\n\nBusinesses with hundreds of five-star reviews, decades of loyal customers, real expertise -- completely invisible online.\n\nNo website. Or a website that has not been updated in years. Placeholder text still showing on the homepage.\n\nThese are great businesses. They are just impossible to find if you search online first -- which most people do now.\n\nIf you own a business in Indiana, drop your URL in the comments. I will take a quick look and share what I see. No pitch. Just honest feedback.\n\nEric Lefler\nOphidianAI\neric.lefler@ophidianai.com\n\n#IndianaSmallBusiness #ColumbusIndiana #SupportLocal #SmallBusiness #SouthernIndiana #SmallBizTips #LocalBusiness",
+          "hashtags": ["#IndianaSmallBusiness", "#ColumbusIndiana", "#SupportLocal", "#SmallBusiness", "#SouthernIndiana", "#SmallBizTips", "#LocalBusiness"],
+          "scheduledTime": "12:00 ET",
+          "contentType": "text-post",
+          "imagePath": null,
+          "altText": "Small town Indiana main street with local business storefronts"
+        }
+      }
+    }
+  ]
+}

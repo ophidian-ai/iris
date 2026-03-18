@@ -21,17 +21,18 @@ Niche offers reference: `operations/references/niche-offer-templates.md`
 
 ## Prospect Folder Structure
 
-Each prospect gets: `sales/lead-generation/prospects/[business-slug]/`
+**Rule: Prospect folders are only created when a prospect replies with interest.** Do NOT create folders for cold prospects. All pre-reply data (scores, emails, research notes) lives in the Pipeline Google Sheet and staged-emails.json only. Folders are created when the interest reply flow triggers demo/proposal prep.
 
-Standard layout:
+Path: `sales/lead-generation/prospects/[business-slug]/`
+
+Standard layout (created on interest reply):
 
 - `README.md` -- Prospect brief (contact info, current site issues, scope, pricing tier, upsell opportunities, sales angle)
 - `research/technical-audit.md` -- Website audit findings
 - `research/score-card.md` -- Scoring results
-- `outreach/cold-email.json` + `cold-email.txt` -- Outreach email
-- `outreach/follow-up-1.json` + `follow-up-1.txt` -- Follow-ups
 - `mockup/index.html` -- Self-contained pitch mockup (no external deps)
-- `demo/` -- Live demo site (Next.js project, deployed to Vercel). Every prospect gets a deployable demo, not just a screenshot.
+- `demo/` -- Live demo site (Next.js project, deployed to Vercel)
+- `proposal/` -- Generated proposal (HTML + PDF)
 
 ## Scoring Tiers (out of 25)
 

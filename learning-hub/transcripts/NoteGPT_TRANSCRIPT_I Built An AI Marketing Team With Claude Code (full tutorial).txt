@@ -1,0 +1,366 @@
+00:00:00
+What if you could build AI powered marketing systems without writing a single line of code? Well, that's exactly what Claude Code allows you to do. So, in this episode, we're going to sit down with Craig Hwitt, who's going to walk us through his entire Claude Code for Marketing setup live. He is the founder of a 7 figureure SAS, and he's grown his YouTube from 250 subscribers to over 13,000 by educating non-technical business owners on how to use tools like Claude Code for marketing. and he said something that
+
+00:00:29
+stuck with me in this episode. He built the first iteration of some of these SAS tools that you're going to see sitting on outside of his son's basketball practice on his phone. He's not technical and you don't have to be either. So, let's dive right in and learn how to use claude code for marketing. >> All right, Greg Hwitt, what are we going to learn today? >> We're going to learn about Claude Code for marketing. I think cloud code is probably the most uh poorly understood
+
+00:00:56
+AI product out there these days outside of developers and it is a powerhouse for marketing. So I'm going to walk through some of the things that uh I use internally. We've open source that anybody can use and kind of both specific things and kind of frameworks and abstractions that you can use in your business and in your products. >> Yeah. And cloud code is crazy powerful and one thing that we're going to do is we're going to kind of bring it down to the ground level for the non-technical
+
+00:01:19
+business owner. So, I know myself included, I anytime I heard the word code, my brain just shuts off. But I promise you guys, this is going to be worth your time, especially if you're non-technical like me. So, uh, before we jump in, Craig's going to share his screen and kind of dive into some of his workflows in action. But before we do that, Craig, do you mind just giving us the the rundown on why people should listen to you? Like, what's your background? >> Yeah, so I'm the founder of Castos.
+
+00:01:44
+We're a podcast hosting and analytics platform. We're a sevenf figureure SAS business and been doing this for eight years. Uh, and in that time like kind of gone from conventional SAS to like very AI forward as a as an owner and operator and marketer. My background is all in kind of sales and marketing. Um, and uh middle of last year in the fall uh kind of ramped back up my YouTube channel all about AI now and did 100 videos in 100 days. grew my channel from 250 subscribers to 13,000 as of today uh and
+
+00:02:17
+had some some really big wins like 100,000 plus view videos uh about AI. So, so I live and breathe AI uh I advise and coach folks on how to use AI in their business. uh and so both like a practitioner doing it uh and every day at CASTOS and also uh helping folks in situations like this to to teach them how to use AI specifically cloud code often just because in my opinion it's the best AI platform and tool on the market these days >> and 100 days of AI I love that concept that's actually how you came on my radar
+
+00:02:51
+is I I stumbled across that playlist but no that's so cool and I think um there's a lot you can learn from that both as far as like learning about all the AI tools. If I'm going to have to publish a video about it every day, I'm certainly going to be in the weeds quite a bit, but also learning about YouTube and and you know, how to run a YouTube channel. So, I think that was a great experiment. >> Cool. Thank you. Yeah. Um, okay. For me to go ahead and share my screen then?
+
+00:03:14
+>> Yeah, let's dive in. >> Yeah. Cool. Um, [clears throat] so I think we'll be a little uh a little general at the beginning to kind of orient folks on kind of tooling here. And Corey just like most folks here you think familiar with what claude code is or do we need to really like start from basics? >> Yeah, we can kind of start from the basics as far as like what is it? What does it do? How is it different from like your normal claude and then we can kind of get into the weeds from there.
+
+00:03:41
+>> Cool. Cool. So, so at a high level normal claude uh just like chat GBT in a lot of ways or Gemini Grock is just a chat interface and and like uh it's like mental ping pong to me. like I have an idea, it says a thing, I come back and we do a thing and we might like hone in on an idea like that. That's fine. Um, and it's kind of dumb, right? As amazing as chat GBT and Cloud R, they're they're kind of dumb and that they can't do things for us. Uh, but but within cloud
+
+00:04:08
+code, like first of all, cloud code, you interact with it in what's called the terminal. And the terminal is that super scary place that developers go to write code and do scripts and a bunch of stuff that like I don't understand. Like I'm not a developer. Uh, so I think like first of all, >> yeah. So, so like don't don't be scared of this place. Um, I'm using an application here called Ghosty. Ghosty with two T's. Uh, it's a terminal emulator. So, it's kind of like uh it
+
+00:04:39
+just makes the terminal kind of look and feel a little more human um than than it would otherwise. And in here, I'm in this project. Uh, and a project is just uh a place on my computer. So I have this folder called coding and I'm in this project called Castos Writer. And so this is the tool we use to create all of our content on our website. So SEO, landing pages, comparison pages. Uh we use it to do uh like conversion rate optimization. A and there's a lot of ways that you can use Claude code. I'm going to pull up um
+
+00:05:17
+I'm going to pull up a different program to show you kind of the structure because they get the conceptual level. It's easier to see here before we get in and like actually um actually start like using the tool. >> Yeah. And I think that's a good preface, too, because again, it's like you hear terminal and your brain shuts off, or at least mine. And then once you finally muster up the courage to get in there, you're like, well, how do I even arrange my folders? Like, how do I set things
+
+00:05:46
+up? How do I kind of set the foundation >> so that I can start using what I think is quite honestly the most powerful software tool on the planet right now. So, I think this is a great uh segue. >> Yeah. So, and in terms of like tooling, uh there are ways to do this all in one place. Uh, and that is in what's called like an IDE, an integrated development environment. And so folks might have heard of like VS Code or Cursor or anti-gravity from Google. Those are all cool. You can use those. Um, and
+
+00:06:14
+actually, you know what? For for today, I'm going to do that so we can just see everything in one place. So, let me just pull up uh and all of these kind of are and can be free. Um, anti-gravity definitely free. VS Code owned by Microsoft free. Um, and these are just like applications that run on your computer where you can access all this stuff. Um, so let me just open up this project >> and I'm using Cursor as well and I've been using it for a few months completely free and it's a great tool.
+
+00:06:45
+So yeah, very similar. >> Yep. Yep. Um, okay. So this will be the last the nice thing about this. This is the last time I'll stop sharing my screen and switching. Um, okay. So, the nice thing about an IDE, uh, and so you can see the files on the left here, and then the terminal down here. Is that right, Cory? You can see what I'm looking at. >> Yep. Cool. Um, so this kind of looks like a combination of the two screens I showed before, right? The terminal down here, this is the place where you're
+
+00:07:16
+going to talk to the product. Um, and then the file structure over here, kind of like, hey, what's in this folder? if you were imagining looking at Windows Explorer or Finder on a Mac like what you know these are folders inside folders you have files and stuff like that. So, just to orient, um, you have a couple of folders over here. By far the most important one is this context folder. And you can see like I'll just pick up a couple of these, right? Um, so brand like who who am I? Who is Casus? What what is this all
+
+00:07:52
+about? Right? Like who what kind of product do I have? Who do I serve? What do they want? um what kind of like uh what kind of things they want and need, what are they scared of, who am I serving, uh what kind of tone do I use in my language when I write, right? So, so this is like who I am and how I want to represent myself. And we have a bunch of these. These are the most important documents in this whole project because I use the term intentionality a lot in AI because like when you get subpar
+
+00:08:30
+like performance from an AI 95% of the time it's because you didn't give it the context that it needs to be successful especially now like the models are so good models being like uh within chat GBT you're using 5.2 2 medium or whatever. In Claude, you're using Opus 4.5. That's the model. The models are so good. You don't have to like prompt engineer anything more. You just say like, "Hey, write me an email." >> Right? >> If it doesn't know who you are or who
+
+00:08:58
+your business is or what your customers want or what features you have, like it can't write you the email you have in your head. Um, and so context is the way that you seed this project with all of the things that it needs. So you all can see here like features, competitors, uh other examples of stuff I've written. Um we have a thing called a creator spotlight at Castus where we highlight one of our customers like this is what goes into this um landing page templates, right? So this is where if
+
+00:09:26
+you're like going from zero to cloud code expert, this is where you're going to spend 70% of your time. >> Yeah. And this is where you're going to spend 70 70% of the time because like uh I'll share in a little bit like uh we've open sourced a a version like a skeleton of this project for folks to just go download and start using today and you can all of the other stuff that I'll talk about is 100% in there and it's for free. But this like this is you like you got to you got to come in and like tell
+
+00:09:55
+the machine who you are and who your who your company is and who your brand is and what your product is and all that kind of stuff. Um, so Corey, any like any questions or anything you want to touch on here with like context seating? >> No, I mean I think you hit the nail on the head. Like I even that was pretty much my exact LinkedIn post today where I think the opening line was like I downloaded an AI agent expecting it to work magic. And what ended up happened what ended up happening is it was just
+
+00:10:23
+another dumb chatbot and my purpose of that post is like well it's because I didn't seat it with the proper context. So, so I think you're spot on. It's like most of your time, most of your effort, it's like that Abraham Lincoln quote where it's like he'll spend, he's got six hours to chop a tree, he'll spend the first four hours sharpening the axe. And right, the sharpening of the axe in a clawed code world is giving it all the context that it needs to do its job.
+
+00:10:49
+Because once it has the proper context, >> it's it's a Ferrari. Like it's a racehorse. It'll just go to work and you just let it do its thing. But that's like 80% of the battle is giving it the proper context for the task. >> Yep. Yep. Absolutely. And so in the in the kind of sample project that we'll share, y'all can check it out. It's uh seoomachine.io. It's like entirely free. Just you can check it out and we'll include a link uh in the description. You basically
+
+00:11:15
+download a skeleton version of this app, but you will need to fill this out. It's basically all you need to do. And so go spend a few hours doing this. If you're using something like chat GPT already that has infinite memory. It it might actually do a good job. Be like, "Hey, I need to create these uh 10 documents, you could download the examples and load it in there and say like, "Hey, make this for me." That's kind of my favorite thing to do with AI is like, "Hey, take
+
+00:11:36
+this other thing over here that's an example and make my version of it." >> You could do that. Uh so load the context, right? That's that's like by far the most important from there. If you think about the analogy I love with this kind of stuff is like, okay, I um I just hired a really smart marketer that kind of doesn't know what to do yet, right? And and so we've we've solved the problem of it knowing my business now because we have context. Now we need to give it SOPs. Basically,
+
+00:12:03
+we need to give it standard operating procedures. And the tool the the term we use internally is like the definition of done or what good looks like. And that has to do with skills and commands. And so within this claude folder here, you have a couple of things going on. And I don't want to gloss over any of these because they're all really important, but they're all pretty different. Uh so the first one is agents. And so y'all y'all have heard like the term like AI agents and you're like the heck what the
+
+00:12:34
+heck does that like actually mean? I think it means a lot of different things to a lot of people. Uh but to me and on my channel uh the definition of an AI agent has it has three things. It has access to a model. It has access to one or more tools and it has memory. And so if you think about like this content analyzer agent, it has access to these scripts. So I'm going to go look at the search intent of this term using this Python script. uh it has a lot of knowledge because it's going to reference all sorts of other
+
+00:13:12
+context and information in this project and then it's going to call a model it's going to call open AI or it's going to call enthropic right so these agents can run anytime you can invoke them manually you can call them down here in the terminal you could call them you can also set up in the definition of the agent for it to run on specific times like when I commit this code to GitHub or when I run this other command like down here in commands and skills and we'll talk about those in a minute. Uh
+
+00:13:46
+or the the machine cloud code can just decide when it wants to run these on their own. So agents are pretty autonomous. They can be invoked. They can just run whenever. Um, I like agents uh as a secondary thing in my um in my productivity kind of suite, my tooling. Uh, and I want to I want to pause here to just underscore something. It's like I hope we're starting to see like that the how much more powerful this is than just chat GBT, right? In chat GBT, you you could do this, right? You could you
+
+00:14:24
+could load up a chat a GPT or a Claude project or a Gemini gem with all of this stuff. And you could even have like a really fancy um system prompt in there, right? To do a single thing, >> right? >> And then that's it. And then you're like, I got to go create another one when I want to create email. And then I got to go create another one when I want to analyze my AdWords. And I got to go create another one when I do conversion rate optimization. And that's where things get interesting
+
+00:14:54
+is within the do.claude folder. By the way, for like the non-developery folks, uh when you see a dot in front of a folder like this, it just means that like it only ever lives on your computer. This stuff doesn't get sent to GitHub. Uh and GitHub, Git and GitHub are u what's called like version control. And so like this project I share with our team. So that when we go down here and like draft articles or we run research, I share all of these with my team. So we can push them to a website. I can pull them down. Uh kind
+
+00:15:31
+of like you would with a Google doc. Uh you can share and collaborate on these. Uh but this folder here, this cloud folder does not get shared. It's only yours. And so if you're like, gosh, that kind of sucks. I don't want to do that. Well, cool. like figure out a way to include this in your git or do something else. Have a central repository for all these skills because like if you're a a 10 person marketing team, you might really want everyone to be playing on the same playbook. Um and so figuring
+
+00:16:00
+out a way to to share these in a standardized way is pretty important. But um but so skills and commands, truth be told, are pretty similar. Uh [laughter] so commands you invoke manually. And I'll show you what I mean here. So down here in the terminal, the way to start cla code is just say claude. Uh, and if you don't have claude code installed, like just look it up and there's like literally a oneline thing. Um, and from here now you're still in the terminal, but you see like claude code is running here.
+
+00:16:29
+And you can invoke a command here just by doing slash and then optimize. And so I'll just do uh slashresarch. Um how to start a podcast. Uh I'll just do uh let's best USB microphone. Okay. And so what just happened is it's reading the context here and then it's doing whatever I asked it to do here. So, it's doing a bunch of >> read the like I'm assuming because right right when you hit the hit enter, right, it said read brand voice, read context, read like two other things, read uh
+
+00:17:13
+target keywords, read SEO guidelines. So, I assume that it de like it reads those first every time because that was probably part of like the research command probably tells Claude code that hey before you go out and do your research read these four reference files first. Is that correct? >> That's correct. Yep. >> Okay. Yeah. >> Yep. And I don't just off the top of my head, I don't see where that is in this document, but Yeah. >> Yep. So, right. Exactly. It's going to
+
+00:17:44
+get the context it thinks it needs to do these things. Um, it is running three different agents in parallel now. So, it's doing keyword research, it's doing competitive research, uh, and it's doing USB mic market research. It's using web research for all like it's going out to the web to research all of these. Um, and it's asking me like, do I want to access this website? And I'll just say yep. I'll click down here and just say yep. And I just want it to access all these
+
+00:18:15
+websites. And so it's going out and it's getting a ton of information here. And it's going to come back and give me an outline of all this. Again, like how much more powerful is this than just asking chat GPD to do a thing? Like there are other tools that can do a similar amount of work. Uh the only other one that I know of is called Manis. M an u manis.im. Uh Manis can do this level of work. It's all just in the browser. And in a lot of ways, I like Manis more for specific things. And by that I mean
+
+00:18:46
+like if I'm just starting something new, um I might just go into Manis and kind of just like oneshot it. Like if I'm not I'm not going to set up all this context. I'm not going to like do all this stuff. I'm on my phone. Maybe cloud code doesn't work really great on your phone. It works on your computer, which is why it's so powerful because it has access to the whole kind of breadth of your computer. Um, you know, Manis is just an app like uh chat GBT or whatever. So, um, but it's a it's an
+
+00:19:14
+agentic AI tool. So, it will go out and do all this. It can spawn up to a hundred sub aents to go do all this research. uh and it can create scripts and write documents and in a lot of ways is really similar to cloud code. Uh Manis was acquired by Meta like Facebook um a couple months ago. So so it's gone out and it's done all of this research here, right? Uh all of this research like whoa that's really great. Like I what do I do now? Like uh this is all in the context of content marketing. So you're like oh
+
+00:19:45
+cool um what do you do with this now? Right? and it's done this and it's saved this in this file here or it wants to ask, do I want to save this in this file? Uh, and I'm like, yeah, cool. Let's save this. And so, if we come back over here to our little file tree, we can find research. It's creating the document now. And in just a minute, it'll pop over here. It's probably here. Yep. So, it's here. This is the document it created. So, cool. You could just stop here and be like,
+
+00:20:24
+I'm going to hand this off to like the marketing person on my team or the writer. Uh, that's fine. Uh, or you can invoke another command and say like write this this file. And when you click up here, you're now referencing this file in this command. So if you're kind of active in this file up here, then it knows that you're when you say write, you want to write about this thing. Uh and so once this is done stewing as it says, you can just write based on this. Um and while this is working, I want to
+
+00:20:59
+pause and just say like I'm not technical. [laughter] I [gasps] don't I don't really know like I'm not an amazing marketer. I'm not an amazing AI person. Uh, truth be told, I did the first version of this uh, sitting outside my son's basketball practice. Like, I wasn't allowed into basketball practice. I was sitting out there like 45 minutes and I was like, this is really what I want. And I was just talking to Claude Code about how we could build this thing. So, like don't
+
+00:21:27
+think that like, oh my gosh, like Craig's some kind of like freaking AI wizard and I could never possibly do this. Like, literally, you could just, and we'll do this in a minute, we'll like spin up a whole new project. you just talk to cloud code about what you want and it'll make it. And especially if you have like an example project like our SEO machine, like it is literally all of this stuff. We just updated it this week. I gave a big presentation yesterday on this topic. So, we like
+
+00:21:53
+tuned everything up and published it. It's entirely free for you to go check out. Um, if you're like, "Hey, this just isn't right for us, but like this is a cool kind of starting point." point you' be like, "Hey, I want to make a project kind of like this, but not exactly because I'm a DTOC consumer brand and really what I want to optimize for is ads, but I really like the concept of like I want to research, I want to write, I want to create ad scripts, I want to create uh maybe like video uh
+
+00:22:21
+you know, storyboards or something be like I want to do that but in the kind of robustness and style of the stuff that we have here, >> right?" >> Um, cool. So cloud code is really smart and it's like cool I created this brief. Next step is run best USB mic and so we'll just do that. So write best USB microphone and it's going to write the article based on with all this context based on the research it just did which is exactly how every good writer in the world would do it. If you
+
+00:22:54
+go back three years we've done a lot of content marketing at Castos. We would pay thousands of dollars a month for for writers and what they would do is they would have like five different tabs open in Chrome and they would read all the articles on the topic. They'd create an outline. They'd pick and choose the best parts of each one and they'd smush it together into an article. That's essentially what we've done in like >> two clicks of a button. Uh and then you're going to get like a 95% optimized
+
+00:23:20
+article here basically for free. What it costs like 10 cents probably in tokens. Uh or you're on a subscription, so it doesn't even cost that. Like Claude Code costs like a paid Claude plan costs 20 bucks a month. >> Mhm. Yep. And I'm on the I saw you were on max. Like I'm on pro, so I pay 100 a month, you pay 200 a month. But like the everyday person who's just getting started with this thing, I mean, you can be very dangerous for the $20 a month plan, right? >> Yeah. Yeah. Yep. Yep. Um and so this
+
+00:23:54
+will take this will take a while, right? And this always makes me feel good that it like doesn't just spit something out instantly like like some other a tools like [laughter] >> it's it's yeah it's doing its work. It's doing all this kind of stuff. I'm going to I'm going to pause here and just flip over to share one share something in a different screen because I think it's it could be easier to like to kind of get what I'm talking about. Um so okay so talking about skills skills are
+
+00:24:36
+things that you can invoke and you say slash um research slashwrite slashanalyze uh a friend of mine guy named Corey Haynes really really really good marketer has put together a list of marketing skills. Again, it's entirely free. It's in this, we talked about GitHub, this place. Um, and it has all these skills and you can go in and you can check them out for free. So, he has uh I want to set up a split test. I want to check my analytics. I want to look at like competitives and alternative pages.
+
+00:25:08
+I want to do like a conversion rate optimization. And you can go in and you can see these uh and you can open them and see kind of how Corey thinks about doing a job. And a skill is just a job that you want the AI to do. And so in this case, the job is I'm going to do conversion rate optimization on a page, a homepage, a landing page, or whatever. And you have all of these skills. And so y'all can be like, I want all of them. They're free, right? It's like it's it's nothing to just install all of
+
+00:25:38
+them. Or I don't really want to do any of this, but I want to see how like a really good marketer and a pretty savvy AI person thinks about it. You just go look at these skills and see like, hey, if I want to create my own version of this, how how is this as an example set up? How is it organized? How does it define what good is? How does it give it parameters, things to do, things not to do? Um, [snorts] all of these marketing skills are bundled inside our SEO machine, you know, the kind of sample project. Uh and
+
+00:26:09
+so you get these all ready to go and so you can do all of these kind of activities uh within your cloud code project. >> And just to kind of touch on skills a little deeper. So I agree. I mean I think skills are some of the most valuable weapons you can arm your AI with for lack of a better example, right? And what I tell people I'm like think of a skill as an SOP. It's just a process that you do in your business. And so by creating a skill file for your AI, when you ask it to go do that
+
+00:26:41
+process, it's just going to do it the same way every time now based on whatever you laid out in that skill. And what's really cool about Claude and and a Claude code is that it actually has a skill builder skill built in. So you could go into Claude, you don't even need to be in Claude Code. You could just go into the regular Claude app and say, "Hey, I need you to help me creating a create a skill for how I draft emails." Right? and it'll it'll kind of interview you or walk you
+
+00:27:07
+through the the context that it needs in order to generate a solid skill and then it'll create it and it'll even install it to itself. So now every time you ask it to write an email, it's going to do it based on the out uh you know the the guidelines that you laid out in the skill building process. So yeah, skills are very important. >> Skills are important and I think that um you know you think of skills as like uh yeah, an SOP is a really good one. Uh and and if we if we think about what we
+
+00:27:37
+did to do the research and the write action, uh they're both an SOP and they're a command. You can invoke them manually with the slash slashresarch or slashwright. You also they also could be called automatically. So you could say, "Hey, go do CRO on casto.com." >> Right? >> It's obviously very smart that skill. >> Yep. It will know to use that skill. Um, and so like the the last thing I would say and then we'll we'll like we'll just create a new project from scratch here
+
+00:28:06
+in just a minute is like SEO machine go check it out. We'll include this link or just Google for SEO machine. It should it should pop up and then like just grab the link from this page and just tell cloud code that you want to use this. And it's super smart. [laughter] >> It's like uh it would see you would say like clone this or it'll it'll know what to do like hey I want to use this as a marketing project on my machine. make this happen on my on my computer. Um, and look like we just updated all this
+
+00:28:34
+stuff like yesterday or the day before yesterday. So, um, and SEO machine is pretty cool. So, like back to context, as opposed to all this stuff existing in a bubble, what we do is we get data uh via like custom integrations we created from three places. And I'm trying to figure out where we write them here. Um but the three three places are your Google Analytics and you'd have to connect this your Google search console and a thirdparty uh data provider that's kind of like ah refs if folks are
+
+00:29:08
+familiar with it uh called data for SEO here it is data sources uh and so we're getting actual traffic metrics from your website getting actual like clicks and impressions from Google search console and we're getting actual comparisons of how you're doing versus everyone else uh in data for SEO. So this is not just like hey I want to go write an article about something. It's like hey what should I write about? Like we have a skill for prioritize and it does all of this analysis that again like a really
+
+00:29:37
+senior content marketer would do uh for you like basically for free. Um and we look at like search intent keyword analyzer all so like super super robust uh kind of platform here. Uh download it, check it out, plug the data sources in. Um, and and like I think you'll I think you'll you'll have a lot of fun if nothing else. Like it's >> it's pretty cool. And of course, we'll link that in the description, too. So, for and again, it's free. So, anybody that wants to grab that like like Craig
+
+00:30:10
+said, something I like to do is just when I find a skill pack that I want to implement, I just copy the GitHub link, literally paste it into Claude and say, "Hey, install these." And it'll just go to the link and pull the files and install them. in 30 seconds. So, >> yeah. Yep. Yeah. Cool. So, um I thought that we could like create a new project uh from here because I think folks might be like, gosh, this seems like like a lot. And I totally get it. Um >> so, we're back in our IDE, anti-gravity.
+
+00:30:42
+And so, it could be cursor, it could be VS Code, it could just be the terminal on your computer, which is how I use it a lot of times. But I want to um I want I Okay, so we we'll work from here. I just want to figure the best way. Uh so so this is all done, right? It has like a comparison table here. It has the full blog post. This was running while we were talking. So it has this full blog post. This is like 3,000 words. It's optimized based on the research we did. So this is this is cool. Um so I don't want to create
+
+00:31:12
+anything here. So what I'm going to do is quit out of here right now. And I can see I'm in this folder on my computer. So I'm going to do a little bit of like the little bit of terminal stuff I know which is like cd change directory. And you do space dot dot means go back one folder. So like in the hierarchy like go up one folder. And this is where like all my projects live. Uh and so like I have all these projects on my machine. Uh so I'm going to make a new one. So mkdir make directory. Um,
+
+00:31:45
+Corey, what do we want to make a cloud code project about? >> Let's make one on. So, I mean, we're on the SEO topic. Let's make one for uh or would that be kind of duplicating the one you already have? Would you rather do Let's actually do a project maybe for coming up with YouTube uh topic ideas. >> Yeah. >> Based on let's say what's trending in the AI space. >> Yep. Um, let's be real original and call it YouTube Machine. Oh, no. I already I already have one
+
+00:32:15
+called YouTube Machine. >> Uh uh. Okay. We'll call it YouTube Magic. Okay, cool. So, we made a directory. We made a folder on our computer called YouTube Magic. And then let's say cd change directory again into that YouTube magic folder. Um magic. Cool. And then we just say Claude to start Claude here. Uh so we see Claude is running here. And what I'm going to do now is make sure my Super Whisper is working. Cool. Okay. So, I use a tool called Super Whisper on my computer. Like again, like in terms
+
+00:32:51
+of tools, Cloud Code and Manis are amazing. By far the most powerful AI tool is called Super Whisper or Whisper Flow or there's a couple out there, but it's basically >> Whisper Flow. >> Put a touch a key on my computer, it starts recording, I speak, it transcribes, and it pastes it in wherever my cursor is. And so we'll say uh I'll do my for me it's option space. I want to create a claude code project that will uh search YouTube and find viral video ideas that I can implement
+
+00:33:24
+into my channel. So I need an area for context for me to tell you about my channel. I need a way for you to create uh to gather data on existing YouTube channels and things that videos are doing there. So, you'll need to go find winning videos. We probably should have a concept of like a winning formula because we'll probably want to repeat several different formula types throughout time. Um, and there's probably some other stuff that we'll need, but the goal here is I want to use
+
+00:33:54
+this YouTube magic project to find winning video ideas so I can grow my channel. >> Now, Craig, let me ask you something, too. So, the the project that we're that like we're looking at here currently on the lefth hand side of the screen, that's your writing project, right? So, that is for anything that you're doing on the SEO side or content writing. But this new project that we're creating is specific to YouTube. So, one of the things I was going to ask is so like this YouTube project, I know you already
+
+00:34:24
+mentioned it, but obviously we're going to have to give it some context in order to give us the best details. So, like what what is some of the context you would give Claude Code for the YouTube project? Would it be like, hey, here's my channel. Here's the videos I've made thus far. Here's what my average, you know, viewer looks like. Here's their demographics. That type of thing. just more specific context for that it would only need for that project. >> Yeah. So, so I think in terms of like
+
+00:34:51
+how we're using this right now, um that's a bit why I don't use an IDE because if if y'all saw when I was sharing Ghosty before the the terminal, like I have six different projects going at a time. Uh because I have like I have one that I call like my second brain. Like it's just it's everything, right? I have one that's like Casto's co-founder. it's my co-founder that's just like gut checks me on what I'm doing. I have the writer one. I have like the actual
+
+00:35:20
+product and products that we're building. And so the IDE to me is not a great way to multitask like that. Um >> I know that's kind of what you're asking, but like there are man I hate to say because we're talking about cloud code, but Codeex actually does this really well now. Um >> really? >> Yeah. Like I don't I tweeted this out last night like I didn't want to like codeex but I used it yesterday and it's like it just came out yesterday uh the new version of it. It it really does
+
+00:35:51
+this well. Um where you can have Let me just let me just share that real quick because I think it's just like it's appropriate to to have folks see like the the kinds of ways you can work that's almost as important as like what we're what we're talking about. Um okay. So, so this is codeex. This codeex is a chat GBT product and um [sighs and gasps] this is just it's a different style but but it kind of gets at the same thing. And so this polyboard is a project I have that is um it's like a Trello board
+
+00:36:30
+for AI agents. So like I have open claw on my machine and I was like I need a way to see what all my eight agents are doing and polyboard is like just this open source thing I want to do. So like they can report and I can give them feedback and stuff like that. Um so I have in this case two projects going because I just started using this but you could add a new project. Uh but in here like you can just say like go do a thing here and then you come over here and say go do go do another thing. uh
+
+00:36:59
+you can have five or six projects running and all of them running at at one time. So, so like compare that to how you would use a standard IDE like it doesn't matter, right? Like cursor, VS Code, anti-gravity, all are kind of like not meant to do this, right? They're meant for you to work in one place. So, you can have the files up here, the terminal down here, or multiple terminal windows, you could do that, right? Uh, and the file structure over here. Well, like truth be told, I don't use this and I don't use this
+
+00:37:32
+hardly ever. Um, for for marketing, I use the I I visualize the documents a lot more than anything else. But but like even then, like I just don't use it that much. So that's why most of the time from a tooling perspective, I just use especially if it's like my my thought partner, like I just want a place to chat that has [snorts] all of the context, >> right? Um and so I'll use terminal. Uh if I'm developing product like increasingly I'll use something like codeex or for cloud code there's a
+
+00:38:05
+product called conductor conductor.build. Exactly the same thing. Um has uh uses what's called git work trees. So it creates a separate instance of the application. So you could like really multitask on a project. Um, and and the the primary way you use it is just chatting. And I think that's the thing. So, because like what you're like what you're getting at here is like really true, which is like um we're about to create this or we've created this project, but then like we're stuck
+
+00:38:39
+in this folder that's the wrong folder, >> right? Um, so anyways, we're going to hit go here. And uh it's it's like Okay, cool. It has uh kind of the gist of what we want here. Uh actually, I'm going to hit stop. Uh oh, it entered plan mode by itself. Cool. So, that's smart. So, um if it hadn't entered plan mode, I would hit shift tab. Uh and you can hit shift tab for it to accept edits. We just like it's just going to go do whatever it wants, which I usually do. Uh, and then plan mode.
+
+00:39:12
+When you have a prompt like this and you're like, "Hey, I got this really big thing I'm gonna ask you to do, I want to enter plan mode so we can kind of like square on what I'm talking about and that you understand it and that we're on the same page." Um, and so like if you've canled your uh your like progress here, I I I had just hit escape. You would just hit up and it pulls the previous prompt back. And you're in plan mode. And I would just hit enter to kind of restart this
+
+00:39:40
+even though it was entering plan mode just for demonstration purposes. >> And so entering plan mode it's like cool let me get a lay of the land here. Let me figure out what's going on. It's going to read a bunch of files. Uh from there it might go out into the internet and do some more research. If you're referencing another project on your machine like uh Okay, cool. So it's asking me already like how do you want to gather this data? Um because this is what we do at Outlier. I
+
+00:40:08
+know this is [laughter] this is what you want to do. Uh so we b we built this into a tool. It's called Outlier. Outlier.so. Um so use the YouTube API. It's free. Uh what makes a winning video to you? Cool. Um let's see. View count. And here I'll just hit spacebar to check this. Um all these things. Uh recency. No, it can be a little older. So, I'm picking three of the four here. And if you wanted, you could put something else down here. Um, and I'll just >> your own answer.
+
+00:40:38
+>> You can type in your own answer. It's like, hey, are you sure this is what you want to tell me? And you say yes. Uh, and from here, plan mode often will like go out into the internet. It'll ask you if it can access other projects on your machine. Um like the really common one is like we have the Castos and the Outlier application that we develop from like a code perspective and we have marketing and kind of ops projects for each of them and I want them to talk to each other to understand uh they're not
+
+00:41:06
+in the same place from like a folder perspective but but they can and should reference each other to understand back to context like what what's going on. Cool. And so it's done a lot of thinking and it has this kind of con uh like project structure, right? So it has a folder for context. It has formulas. Uh so this is uh where like winning formulas that we want to be able to repeat are. It's going to do research. It's going to have this script to go get the data from the YouTube API. Um, and
+
+00:41:38
+it'll have a place to put environment variables which are just like um kind of like passwords for computer systems to talk to each other. So, it has the plan and like the plan is good and we're going to say like cool just go make it. And so, Cloud Code about two weeks ago introduced this thing where like it clears the context and auto accepts like the implementation of the plan. Context being like an important thing here in context management is always an important thing in a powerful like AI tool like this
+
+00:42:10
+because uh this is going to go work for this is a pretty simple thing. It'll go work for a couple minutes but it could fill up the context window. Um and if that happens it has to like compact the context and context window just means like the number of tokens that it can send from your computer uh to the model to the AI. Uh, and over time like that just grows. [laughter] And so at some point it's got to be like, okay, I got to like trim this back down, give me the cliffnotes version of
+
+00:42:41
+it, and then I can kind of start again. Um, but clearing the context of the beginning, like if you had gone back and forth a lot with it up here to get to a point, uh, your context window could be like half full already. Uh, and that would be a bummer. So, this is pretty smart because it's like, cool, we have landed on the plan, and we're just going to go make the plan now. And so, I'll just say, yeah, and it'll go refamiliarize itself with everything because it gave itself all the context
+
+00:43:09
+in the plan up here. Um, and so it wants to start doing things on my computer here. So, it's going to go create these subfolders, and I'm just going to give it accept edits, and it'll just start doing stuff. And so, you know, this is like a pretty quick and dirty example, but you really don't need to give it a lot more instruction than that for it to start creating the structure and the file system and the functionality that like that what we have here in the casto writer tool is I mean really
+
+00:43:44
+sophisticated uh but you get like 70% of the way there in like 10 minutes, >> right? So, it's creating an entirely separate folder. So, we would have to technically go up and and open that new folder to start working in this new YouTube Magic project. Is that correct? >> Yeah. And to be honest, like I don't know how to do that here. I don't know how to do that without like messing up what we're doing here. But like what I would Yeah. What you could do is like create this. It's done. Close all of
+
+00:44:13
+this out. And then open up this project. um the the YouTube magic project. Um you can see down here like this is the folder. Um so so that's what I would do is like uh well what I would ideally do is like start in the folder where you want this thing to live eventually >> but create create everything inside this folder. >> Yeah. But but that's a pretty cool it's a pretty cool thing that like clawed code can reach vertically and horizontally from where you start it. So we started it in this cast writer folder
+
+00:44:49
+and now it's working in this other folder um because we told it to. So yeah and like oh I guess we changed this but but even if we had started in one folder you can tell it hey go look and work somewhere else. Um so so some of my friends just have one claude code kind of one place from which they run claude code. It's like a a parent if you will. And then they have like the the the repository for the the application like the software. They have like the marketing assistant. They have the
+
+00:45:20
+salesperson. They have the ops project. And that kind of parent has context to everything. And so you could do that. >> Got it. >> I I could see that being maybe even like a cleaner way to keep everything together. uh especially if you're just you know if you're going to have like a few projects like if you're not going to be a power user like you somebody's just like hey I want to have a couple of little uh specialized cloud code projects for each of these functions in
+
+00:45:47
+my business I don't plan to do much more outside of that then that can be a really good structure for that I feel like >> yeah I think one thing to be be kind of uh a little bit aware of there is there is definitely a concept of like context bloat um so so kind of the other side of it like where we talked about like if I just go in and say like, "Hey, write me an email for Cory's business." They're like, "Who's Corey? What's his business? Who's the customer? It doesn't know any
+
+00:46:09
+of that stuff." If you just throw the whole kitchen sink at it, especially a bunch of different types of context, >> code and marketing and sales and financials, it it might not do great, you know, at like at specific things. So, like I I don't know the answer. I don't I've not done what we're talking about there of having like a parent um a parent project, but uh I would just be aware if you really start doing a lot in there, it you might have to drill down a level to do specific things.
+
+00:46:41
+>> Yeah. And that's that's a good point, too. And so, this is a question that I've selfishly been looking for an answer for. So, let's say, you know, I want to have um different projects for for different platforms, right? So, if I'm posting on YouTube and then X and LinkedIn and all these places, I assume your advice would be to have like one project per platform, right? As opposed to just like a general writing project that might encompass say X and LinkedIn. It's probably more effective to have
+
+00:47:13
+just an X project that has just context around X. Same for LinkedIn, same for YouTube, same for each individual platform. I mean, am I looking at that correctly? Um, I have this project and so I want to open it to just share how I think about it. Um, >> yeah, I'd love to see that. >> Yeah. So, I just started on this. Uh, and this is like a lot of this stuff is is days and weeks old. So, like um I I think this is all moving so fast. One of the biggest challenges we all kind of have is like how to stay up to date with
+
+00:47:50
+this stuff without going crazy. Um, >> yeah, that's my biggest like flaw. I just so behind the eight-ball every day and then I'm like, wait, 99% of people have never even heard of Claude, so we're not >> Yeah. Yeah. Yeah. Yeah. Yeah. So, so my advice there and like what I do is I have literally a handful of people that I follow. So, I have like a playlist on uh on YouTube and a a group or whatever it's called on Twitter and I just kind of look at those folks once a day and if
+
+00:48:17
+there's something I need to be aware of, I I kind of get it from them. So, um, if someone wants to make me that person, that would be cool. Um, >> but, uh, but no, Cory, to answer your question, like I, you know, I create a fair amount of content. YouTube is my primary channel these days. And so, what I want to be able to do is say like take my YouTube content and slice and dice it a bunch of different ways. And so, what it would do is uh, so we have like again context. And this is not like super
+
+00:48:42
+robust right now, but like it has um uh context of what I want the emails to look like. And this is like my style guide, right? Um and then I have output formats that I want it to go in. Uh and this is just where it would go. Uh and then I have prompts that I'll send to the LLMs for each type of content. So, a LinkedIn article, LinkedIn post, a YouTube short script, Substack note, which is like a tweet, uh, and a Substack post. Um, and then what this project does is it just goes and gets the transcript from YouTube.
+
+00:49:19
+And this is just a some Python that Claude wrote for me. Um, and then it repurposes it by calling these uh prompts with the transcript that it got. And so ideally, and like I just I'm like [snorts] this is like 90% done. Ideally, what would happen in this project is I would set it up on my computer on a [snorts] cron. Uh and cron is just like a way to make things happen on a schedule. Yep. Um it would go get this get the transcript. So set it to happen every day at 10 o'clock in the morning. It would get the
+
+00:49:57
+transcript. it would repurpose uh it and send the transcript to all of these prompts, get the content back uh and put it in the output folders and then I would just wire these up to be published or give them to an assistant or give them to my open claw or whatever. Um but but that's how I'm thinking about doing what you're talking about. So I don't have separate projects, but I have separate prompts. Um, and because like that's tone and format and length and pacing and style
+
+00:50:30
+and stuff like that. Uh, so that's how I'm thinking about this. And this is like again 90% done and we just have to like finish doing the rest of this. But um, that's how I'm thinking about it. >> And I mean this it's essentially a repurposing project, right? It's not like it's like yes, it's pulling your YouTube transcript and that's kind of the input that it's starting with, but it's not like this project is skewed more towards one platform or the other.
+
+00:50:54
+It's more of like a a general repurposing project. But so, so my question, you mentioned Open Claw a couple of times. I've been deep in the experimentation uh with that and I'm sure you you probably have your opinions on that tool as well. But so my another question would be so obviously claude code is an agent harnessed um open claw is an agent harness is there any like drawback from let's say instead of having a a clawed code project that's like your repurposing project is there
+
+00:51:28
+any drawback from having let's say like an openclaw agent where they're just your repurposing agent same context same everything but it's like openclaw is the one doing the execution versus claw code. Is there any real difference there? [snorts] >> Yeah, I don't know. >> Yeah, I don't I don't I don't think anybody knows. I mean, like, >> right. >> Um I I'll give context on kind of what Open Claw is for folks and then like that helps me think through kind of my
+
+00:51:54
+my answer here a bit. So, uh Claude coat like if I think about it as an evolution. So, the first time you use Chat GBT, you're like, "Whoa." Like, it talks to me and it remembers stuff and I can ask it questions and like, uh, you know, my wife, we were at lunch yesterday, she's like, "It's like having my best friend that I just like chat with all the time." I'm like, "Yeah, like it's crazy." Uh, but that that's like that that's where she is, right?
+
+00:52:17
+Uh, and so I think a lot of folks here are like, "Kind of cool. I'm past that. I want to get past that. I want to use cloud code, which is like I can type stuff. I can do commands. I could maybe put it on a cron which is like pretty advanced for cloud code but really if you're not sitting there it's not doing stuff. Uh the next level is an AI agent and like we said Claude Code and Manis I put very much in a similar place except for Manis runs in the cloud um are agentic tools but they're not agents
+
+00:52:44
+where like they're just going to go do stuff on their own >> right >> uh Janet which is my my openclaw uh like shout out to [laughter] okay shout out to like the good place um just does stuff like she pinged me this morning she's like hey I made a website last night. Uh like give me the DNS so I can publish this. I was like whoa. Okay, that's that's cool. Like so Janet has a website now. We got her a domain this morning and and set it up. Um >> I've seen some insane stuff like you
+
+00:53:15
+know a guy gives his like an email account and a credit card and it gets uh it gets a phone number and starts calling people. Uh like it's where it gets a little it gets a little weird. So I guess I guess my answer is like back to The SOP thing it is like uh if you want to be really specific with what you're getting out of your AI tool, I probably wouldn't just give it to an open claw that you gave kind of shitty sorry it's kind of bad um context and guidance to like if you just
+
+00:53:49
+say hey Janet go write me a tweet like it's probably going to be pretty good but if you said like Janet go read my last hundred tweets create a style guide create the dos and don'ts blah blah blah blah blah and create an SOP and a skill around it like it's going to be a lot better and and I think at that point whether Janet runs that or whether a cloud code thing on some kind of cron runs that I don't think is really that much different because at at the end of the day it's like basically using the
+
+00:54:11
+same mechanism to do that thing. >> Yeah. And again I I think I have my answer like it's it's it I guess I was making an assumption and I should have vocalized this but like assuming context is the same in clawed code versus open claw which is going to perform better on that type of task but I mean like you said it's it's probably probably going to be roughly the same especially if claw code is using opus 45 and openclaw is using opus45 like it's pretty much going to give you the same output again
+
+00:54:43
+assuming context >> is the same. I guess what I'm trying to wrap my head around is like because again I have one open claw agent right now. Her name's Claire. She's kind of just like my general assistant. And I'm starting to realize like I'm giving her all these skills. Like I'm giving her writing skills and outreach skills and all these different things. And I'm like [snorts] thinking about it from the perspective of like if she was just my employee. I don't really want an
+
+00:55:08
+employee that's a jack of all trades. I want an employee who's a specialist. So, I'm like I'm I'm kind of taking a step back. I'm like, "All right, maybe I'm just going to make Claire my assistant." Like, she, you know, she's just like your typical admin assistant. Email scheduling, that type of stuff. And then I'm thinking I'm going to just spin up a new agent. And maybe that new agent is my YouTube employee. Like, his whole job is to go kind of like what you showed us
+
+00:55:36
+with the YouTube magic project. He goes out and he researches titles and he writes intros for our episodes and he does guest research and all the stuff related to YouTube and he's just the master of that domain. So that's kind of how I'm starting to think about these like agents or agentic tools. >> Yep. [gasps] Yeah. I don't I I I think that's a very that's a very solid way of thinking about it. Like I don't I don't know the answer. My my personal approach right
+
+00:56:01
+now is uh I have Janet which is kind of at the head of things and then I have six or seven six, seven, I have like six or seven different sub agents under her. >> Uh, so like one one for Castus, one for Outlier, one for all my content, uh, one for like my my health and fitness, one for our our personal finances, and Janet can call and invoke and spawn those agents at any time she wants if she feels like she needs it. Um, we're thinking about uh getting an open claw setup or or an array of open claw
+
+00:56:34
+for our employees at Castos. And in that situation, we would have what you're talking about where like Kelly has an agent, Jimmy has an agent, you know, Sergey has an agent. They would share some context over over here, like talking about the the parent kind of thing. Uh but but we would all be horizontal. And in that like in that respect and maybe just my last thing on OpenClaw, it is not safe. Like [snorts] it is not the thing you install on your main computer. It is not to be used on the
+
+00:57:03
+same machine where you have access to Stripe and your email and your personal stuff. Like I have it on an old MacBook sitting here on my desk and if we do this with Castos, we'll put it in a digital ocean droplet behind Cloudflare and all sorts of crazy security and it'll all be dockerized into a container per person. Uh because like it we we talk about like taking the rails off like that's what we've done with cloud code a little bit, right? take GPT or you know claude and we put it on your
+
+00:57:31
+computer and give it access to a bunch of tools. Uh open claw does the same thing but even more so really intentionally like it can literally do anything. Um and you don't want that to happen without knowing what it can and can't do on in a place where it can do harm to your business. >> Yep. And we've seen I mean I'm I'm sure you've seen the horror stories on X over the last couple of weeks. I mean, people just setting it up with no guard rails and just letting it go to town and that
+
+00:58:00
+only that that can only end poorly. In fact, I Yeah. So, mine's set up virtually right now and my business partner is the tech brain behind what we do. So, he's, you know, done all the things that need to be done to secure it properly. So, I do feel comfortable in that regard. But I am literally as soon as we finish recording here in a couple of minutes, I'm going straight to the Apple store here locally and pick picking up a Mac Mini to start, you know, hosting mine locally and start
+
+00:58:24
+building out an actual team of agents that that are, you know, I can give a higher level of access to because it's hosted locally and more locked down. So, yeah, something I'm going to be doing future videos on and diving a lot deeper into. Yeah, I'd love to come back and and chat about it because I think it's um my my interpretation of where we are with it is this is probably not the answer. Uh this is not the thing we'll be using in 5 years. >> Um but this this archetype this mo model
+
+00:58:58
+is a bad word. um this type of thing is the next evolution chatbd to cloud code or codeex or whatever to uh an autonomous agent or agents um is absolutely the thing I don't think any of us expected open claw to be the implementation of it and it probably won't be the ultimate answer um I I think that I think that someone and that is probably anthropic will come up with a version of this for you to use >> for sure. Yeah. And that's something that we've been saying internally is
+
+00:59:33
+like look, we're staying agent harness agnostic and just trying to master the underlying principles and just trying to get a really good grasp on this technology because you're right, it's not going to be open claw in five years. I can almost guarantee it. So whenever that next one does come along, it's like, hey, we're already prepared. We know how how this technology works. You understand the principles and then it's just plug and play on whatever the again the agent harness dour ends up being.
+
+01:00:00
+>> Yeah. Yeah. And the principles are all the same. Yeah. >> Yep. >> Perfect. Well, Craig, this has been fantastic. I've learned quite a bit myself and I'm sure the audience has too. >> Awesome. >> So, uh before we go, two things. One, >> go ahead and drop the URL for the SEO skills or the marketing skills pack you mentioned earlier. People can just go there and download it. What was that URL again? >> Oh, gracious. Um, I would just search for >> machine.io.
+
+01:00:26
+>> Sorry. So, yeah, the the Claude project is SEO machine. So, SEO machine.io. And then if you want to search for just the marketing skills, I would just for search for marketing skills Corey Hannes. So, spelled like your first name and then Hannes. H A I N. Um, yeah, it's great. And so, you could use either or both of them. The the marketing skills kind of just the skills. The SEO machine is the whole kitten kaboodleoodle including the skills. And then you just fill in the context. Uh, so that would
+
+01:00:52
+get you like zero to to rocking and rolling pretty quickly. >> Perfect. And then where can people go follow you or find out more about you? Where do you want to send them? >> Yeah, so I think uh Twitter for social is the best place. So I'm the Craig Huwitt and then YouTube. I'm YouTube.comthecrawitt um on there and I talk all about this stuff all the time. >> Awesome. Well Craig, thank you so much for your time. We'll definitely have you back in the future. Uh for the folks in
+
+01:01:19
+the audience, hope you enjoyed it and we will be back next week as always. Thanks, guys.
+
