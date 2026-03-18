@@ -39,7 +39,7 @@ Client Website
 
 ### Components
 
-- **embed.js** -- Standalone JS file (~5KB). Creates floating button + iframe. Accepts `data-client` slug and optional `data-theme` overrides. Served from ophidianai.com as a static asset.
+- **embed.js** -- Standalone JS file (~5KB). Creates floating button + iframe. Accepts `data-client` slug and optional theme overrides via `data-color` and `data-position` attributes. Served from ophidianai.com as a static asset.
 - **Widget page** -- `/chat/[slug]/widget` Next.js page rendered inside the iframe. Full chat UI with streaming, lead capture form, and branding.
 - **Chat API** -- `/api/chat/[slug]` route handler. Loads config, queries RAG, streams response. Stateless per request.
 - **Lead API** -- `/api/chat/[slug]/leads` route handler. Stores captured lead info in Supabase, sends notification email to client.
@@ -64,7 +64,9 @@ Client Website
 | system_prompt | text | |
 | greeting | text | Initial message shown in widget |
 | knowledge_source | jsonb | `{ type: "namespace" | "index", name: "chatbot-slug" }` |
-| theme | jsonb | `{ primaryColor, position, logoUrl }` |
+| theme | jsonb | `{ primaryColor, position, logoUrl }` -- logoUrl must be Vercel Blob or ophidianai.com origin |
+| allowed_origins | text[] | CORS whitelist for widget and API requests |
+| conversation_count_month | int, default 0 | Atomic counter for monthly cap enforcement (reset by cron on 1st) |
 | lead_capture | jsonb | `{ enabled, mode: "message_count" | "intent", trigger_after: 3, fields: [...] }` |
 | fallback_contact | jsonb | `{ phone, email, address }` |
 | page_limit | int | Enforced during indexing |
@@ -82,12 +84,25 @@ Client Website
 | id | uuid, PK | |
 | config_id | uuid, FK -> chatbot_configs | |
 | session_id | text | Browser session identifier |
-| messages | jsonb[] | Array of `{ role, content, timestamp }` |
+| message_count | int, default 0 | Denormalized count for cap enforcement |
 | page_url | text | Which page the visitor was on |
-| visitor_fingerprint | text, nullable | Anonymous tracking across sessions |
+| visitor_token | text, nullable | First-party localStorage token for cross-session tracking (consent-based, not fingerprinting) |
 | lead_captured | boolean, default false | |
 | created_at | timestamptz | |
 | updated_at | timestamptz | |
+
+#### chatbot_messages
+
+| Column | Type | Notes |
+|--------|------|-------|
+| id | uuid, PK | |
+| conversation_id | uuid, FK -> chatbot_conversations | |
+| role | text | "user", "assistant", "system" |
+| content | text | Message content |
+| metadata | jsonb, nullable | Lead capture signals, intent flags |
+| created_at | timestamptz | |
+
+Append-only table. One row per message instead of rewriting a growing jsonb array on every turn. Index on `(conversation_id, created_at)` for ordered retrieval.
 
 #### chatbot_leads
 
@@ -148,12 +163,13 @@ Client Website
 **Flow per request:**
 1. Load `chatbot_configs` by slug (cache in Runtime Cache, 5min TTL)
 2. Validate: config exists, is active, not expired demo
-3. Tier enforcement: check conversation count against monthly cap
-4. Query Pinecone: embed latest user message, search client's namespace/index, top 5 chunks
-5. Build system prompt: config system prompt + RAG context + lead capture instructions (if intent-based)
-6. Stream response via AI SDK `streamText` with model from config
-7. After stream completes: upsert conversation to `chatbot_conversations`
-8. If lead capture triggered: return a `lead_capture_request` part in the stream
+3. Session rate limit: check Upstash Redis sliding window (`rl:session:[sessionId]`, 30 msgs / 5 min)
+4. Monthly cap enforcement: atomic increment via Postgres function -- `SELECT increment_and_check_cap(config_id, tier_limit)` returns boolean. If cap exceeded, return 429 with user-facing message and fallback contact.
+5. Query Pinecone: embed latest user message, search client's namespace/index, top 5 chunks
+6. Build system prompt: config system prompt + RAG context + lead capture instructions (if intent-based)
+7. Stream response via AI SDK `streamText` with model from config
+8. After stream completes: append message to `chatbot_messages`, update `chatbot_conversations.message_count`
+9. If lead capture triggered: return a `lead_capture_request` part in the stream
 
 ### Lead Capture Endpoint
 
@@ -180,8 +196,8 @@ Client Website
 ### Admin Endpoints (Auth-Protected)
 
 - `GET /api/admin/chatbot/configs` -- List all client chatbot configs
-- `POST /api/admin/chatbot/configs` -- Create new config (provisions Pinecone namespace/index)
-- `PATCH /api/admin/chatbot/configs/[id]` -- Update config
+- `POST /api/admin/chatbot/configs` -- Create new config (provisions Pinecone namespace/index). Validates `theme.logoUrl` against allowed origins (Vercel Blob, ophidianai.com).
+- `PATCH /api/admin/chatbot/configs/[id]` -- Update config. Same logo URL validation on write.
 - `DELETE /api/admin/chatbot/configs/[id]` -- Deactivate config + schedule namespace cleanup
 - `GET /api/admin/chatbot/analytics/[id]` -- Get analytics for a config
 - `POST /api/admin/chatbot/demo` -- Spin up demo (scrape site, index, create temp config)
@@ -288,14 +304,17 @@ Triggered when prospect replies or engages:
 
 ### Stage 4 -- Production Handoff (Close)
 
-- Prospect converts to paying client
-- Flip config: `is_demo = false`, `demo_expires_at = null`
-- Assign tier (Essentials/Growth/Pro)
-- If Pro: migrate namespace to dedicated index
-- Swap `demo-[slug]` namespace to `chatbot-[slug]`
-- Remove preview banner
-- Provide embed script tag for their site
-- No rebuild, no data loss -- the demo becomes the product
+Prospect converts to paying client. Migration sequence (order matters):
+
+1. Assign tier (Essentials/Growth/Pro)
+2. Copy all vectors from `demo-[slug]` namespace to `chatbot-[slug]` namespace (or dedicated index for Pro)
+3. Verify vector count matches between source and destination
+4. Update config: `is_demo = false`, `demo_expires_at = null`, `knowledge_source.name = chatbot-[slug]`
+5. Delete `demo-[slug]` namespace
+6. Remove preview banner
+7. Provide embed script tag for their site
+
+Config is not updated until the copy is verified -- ensures zero downtime. The demo namespace serves requests until step 4 completes. No rebuild, no data loss -- the demo becomes the product.
 
 ### Expiry
 
@@ -328,8 +347,8 @@ Triggered when prospect replies or engages:
 
 - Cron job runs nightly
 - Aggregates from `chatbot_conversations` and `chatbot_leads` into `chatbot_analytics`
-- Top questions: cluster similar messages using embeddings, surface top 5 per client
-- Retention: tracks returning visitors via `visitor_fingerprint`
+- Top questions: simple keyword/phrase frequency analysis on user messages (v1). Embedding-based clustering deferred to Phase 2 when volume justifies the cost.
+- Retention: tracks returning visitors via `visitor_token` (first-party localStorage token, set with consent banner in widget)
 
 ### Client-Facing Analytics (Phase 2)
 
@@ -367,22 +386,35 @@ Triggered when prospect replies or engages:
 
 ## Security & Rate Limiting
 
+### HTTP Headers & iframe Security
+
+The existing `vercel.json` sets `X-Frame-Options: DENY` globally. This must be scoped to exclude widget routes:
+
+- **All non-widget routes:** Keep `X-Frame-Options: DENY` (existing behavior)
+- **`/chat/[slug]/widget`:** Remove `X-Frame-Options`, replace with `Content-Security-Policy: frame-ancestors 'self' [allowed_origins from config]`. This allows only the client's domain and ophidianai.com to embed the iframe.
+- **Widget page CSP:** Tight policy on the widget page itself:
+  - `script-src 'self'` -- no inline scripts, no external scripts
+  - `img-src 'self' https://*.vercel-storage.com https://ophidianai.com` -- logo URLs restricted to Vercel Blob and ophidianai.com
+  - `connect-src 'self'` -- API calls only to ophidianai.com
+  - `style-src 'self' 'unsafe-inline'` -- inline styles needed for dynamic theming
+
+Implementation: Scoped header rules in `vercel.json` with `/chat/:path*` pattern override.
+
 ### Authentication
 
-- **Widget requests:** No auth token in browser. Validated by slug + allowed origin (CORS whitelist in config).
+- **Widget requests:** No auth token in browser. Validated by slug + allowed origin (`allowed_origins` in config, enforced via CORS + `frame-ancestors` CSP).
 - **Direct API access:** Bearer token (API key generated per client, stored hashed in `chatbot_configs`).
 - **Admin endpoints:** Supabase auth (existing dashboard flow).
 
 ### Rate Limiting
 
-- **Per-session:** Max 30 messages per 5-minute window
+- **Per-session:** Max 30 messages per 5-minute window (Upstash Redis sliding window counter, key: `rl:session:[sessionId]`, TTL: 5min)
   - Message: "You're sending messages too quickly. Please wait a moment before trying again."
-- **Per-config monthly caps:**
+- **Per-config monthly caps:** Atomic Postgres counter (`conversation_count_month` on `chatbot_configs`, incremented via `SELECT increment_and_check_cap()` function). Cron resets all counters on the 1st of each month.
   - Essentials: 500 conversations/month
   - Growth: 2,000 conversations/month
   - Pro: Unlimited
   - Message: "This business's chat has reached its monthly message limit. Please contact them directly at [fallback phone/email]."
-- Rate limit state: conversation counts in Supabase, Redis cache layer if needed later
 
 ### Input Sanitization
 
@@ -402,12 +434,22 @@ Triggered when prospect replies or engages:
 - API endpoints: CORS whitelist per client config (their domain + ophidianai.com)
 - Preflight caching: `Access-Control-Max-Age: 86400`
 
+### Webhooks (Pro Tier)
+
+- **Events:** `lead.captured`, `conversation.completed`
+- **Delivery:** POST to client-configured webhook URL with JSON payload
+- **Retry policy:** 3 attempts with exponential backoff (5s, 30s, 5min)
+- **Timeout:** 10s per attempt
+- **On total failure:** Log to `chatbot_webhook_failures` table, surface in admin dashboard. No dead-letter queue (overkill at current scale).
+- **Signature:** HMAC-SHA256 of payload body using client's API key, sent in `X-OphidianAI-Signature` header
+
 ### Data Privacy
 
 - RLS in Supabase (each client only accesses their own data)
 - Lead data encrypted at rest (Supabase default)
 - Conversation retention: 90 days default, configurable per client
-- GDPR: delete endpoint for removing visitor conversation data on request
+- Visitor tracking uses first-party `visitor_token` stored in localStorage (set only after consent banner acceptance in widget). Not browser fingerprinting.
+- GDPR: delete endpoint for removing visitor conversation data on request. Also clears `visitor_token` association.
 
 ---
 
@@ -429,12 +471,25 @@ Triggered when prospect replies or engages:
 
 ---
 
+### Embed Script Attributes
+
+| Attribute | Required | Description |
+| --- | --- | --- |
+| `data-client` | Yes | Client slug (matches `chatbot_configs.slug`) |
+| `data-position` | No | Widget position: `bottom-right` (default), `bottom-left` |
+| `data-color` | No | Override primary color (hex, e.g. `#39ff14`). Takes precedence over config `theme.primaryColor`. |
+
+Config-driven theming (from `chatbot_configs.theme`) is the default. `data-color` and `data-position` attributes on the script tag override the config values, allowing clients to customize without admin changes.
+
+---
+
 ## Dependencies
 
 - **AI SDK** (`ai`, `@ai-sdk/react`) -- Streaming chat, `useChat`, `streamText`
-- **AI Gateway** -- Model routing (provider/model strings)
+- **Vercel AI Gateway** -- Model routing via `"provider/model"` strings (e.g. `"google/gemini-2.5-flash"`, `"anthropic/claude-haiku-4.5"`). Uses OIDC auth via `vercel env pull`. No direct provider SDK keys needed. Env: `VERCEL_OIDC_TOKEN` (auto-provisioned).
+- **Upstash Redis** -- Session rate limiting (sliding window counters). Env: `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN`.
 - **Pinecone** (`@pinecone-database/pinecone`) -- RAG knowledge base
-- **Supabase** (existing) -- Config storage, conversations, leads, analytics, auth
+- **Supabase** (existing) -- Config storage, conversations, messages, leads, analytics, auth
 - **Resend** (existing) -- Lead notification emails to clients
 - **Firecrawl** (existing) -- Site scraping for demo provisioning
 - **Next.js 16** (existing) -- App router, API routes, MDX for docs
