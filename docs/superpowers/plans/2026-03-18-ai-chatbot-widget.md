@@ -17,7 +17,7 @@
 ### New Files (Create)
 
 **Database and Types:**
-- supabase/migrations/001_chatbot_tables.sql -- SQL migration for all chatbot tables + RLS policies + increment_and_check_cap function
+- supabase/migrations/20260318000000_chatbot_tables.sql -- SQL migration for all chatbot tables + RLS policies + increment_and_check_cap function
 - src/lib/supabase/chatbot-types.ts -- TypeScript types for chatbot tables
 
 **Chatbot Core Library:**
@@ -57,6 +57,7 @@
 - src/app/docs/chatbot-api/layout.tsx -- Docs layout (minimal, sidebar nav)
 - src/app/docs/chatbot-api/page.mdx -- Getting started + embed reference
 - src/app/docs/chatbot-api/rest-api/page.mdx -- REST API reference
+- src/app/docs/chatbot-api/webhooks/page.mdx -- Events and webhooks (Pro tier)
 - src/app/docs/chatbot-api/theming/page.mdx -- Theming guide
 
 **Product Page Integration:**
@@ -64,13 +65,14 @@
 
 ### Modified Files
 
-- vercel.json -- Scoped headers for /chat/:path* (CSP, remove X-Frame-Options for widget) + cron jobs
+- vercel.json -- Scoped headers for /chat/:path* (CSP, remove X-Frame-Options from global rule) + cron jobs
+- next.config.ts -- Add headers() function to apply X-Frame-Options: DENY to non-widget routes
 - src/middleware.ts -- Exclude /chat/ and /api/chat/ from auth middleware
 - src/lib/supabase/types.ts -- Import and re-export chatbot types
 - src/lib/modules.ts -- Add chatbot module to dashboard module map
 - src/components/dashboard/sidebar.tsx -- Add chatbot admin menu item
 - src/app/services/ai-chatbot/page.tsx -- Add live demo widget to the product page
-- package.json -- Add dependencies: ai, @ai-sdk/react, @ai-sdk/gateway, @pinecone-database/pinecone, @upstash/redis
+- package.json -- Add dependencies: ai, @ai-sdk/react, @pinecone-database/pinecone, @upstash/redis
 
 ---
 
@@ -84,11 +86,11 @@
 - [ ] **Step 1: Install AI SDK, Pinecone, and Upstash Redis**
 
 Run in engineering/projects/ophidian-ai:
-npm install ai @ai-sdk/react @ai-sdk/gateway @pinecone-database/pinecone @upstash/redis
+npm install ai @ai-sdk/react @pinecone-database/pinecone @upstash/redis
 
 - [ ] **Step 2: Verify installation**
 
-Run: npm ls ai @ai-sdk/react @ai-sdk/gateway @pinecone-database/pinecone @upstash/redis
+Run: npm ls ai @ai-sdk/react @pinecone-database/pinecone @upstash/redis
 Expected: All packages listed, no errors
 
 - [ ] **Step 3: Pull OIDC env vars from Vercel**
@@ -107,23 +109,31 @@ git commit -m "chore: add AI SDK, Pinecone, and Upstash Redis dependencies"
 ### Task 2: Database Migration -- Chatbot Tables
 
 **Files:**
-- Create: supabase/migrations/001_chatbot_tables.sql
+- Create: supabase/migrations/20260318000000_chatbot_tables.sql
+
+- [ ] **Step 0: Initialize Supabase CLI in the project (if not already done)**
+
+Run: supabase init (creates supabase/ directory)
+Run: supabase link --project-ref {ref} (link to existing Supabase project)
 
 - [ ] **Step 1: Write the migration SQL**
 
 Create all 6 tables: chatbot_configs, chatbot_conversations, chatbot_messages, chatbot_leads, chatbot_analytics, chatbot_webhook_failures.
+
+chatbot_webhook_failures schema: id (uuid PK), config_id (uuid FK to chatbot_configs), event_type (text), payload (jsonb), attempts (int default 0), last_error (text nullable), created_at (timestamptz).
+
 Include: chatbot_tier enum, indexes, increment_and_check_cap() function, reset_monthly_conversation_counts() function, increment_daily_leads() function, updated_at triggers, RLS policies (admin full access, client read own, anon insert for widget visitors).
 Add unique constraint on chatbot_conversations(config_id, session_id) for upsert support.
 See spec data model section for full schema.
 
 - [ ] **Step 2: Run migration against Supabase**
 
-Run via Supabase Dashboard SQL Editor or supabase db push.
+Run: supabase db push (or run SQL directly via Supabase Dashboard SQL Editor).
 Verify: All 6 tables created, RLS policies active, functions exist.
 
 - [ ] **Step 3: Commit**
 
-git add supabase/migrations/001_chatbot_tables.sql
+git add supabase/migrations/20260318000000_chatbot_tables.sql
 git commit -m "feat: add chatbot database tables, RLS policies, and cap enforcement function"
 
 ---
@@ -183,8 +193,10 @@ git commit -m "feat: add chatbot tier defaults and constants"
 
 - [ ] **Step 1: Create config loader**
 
-loadConfig(slug): Query chatbot_configs by slug where active=true. In-memory Map cache with 5min TTL. Check demo expiry. Return ChatbotConfig or null.
-invalidateConfigCache(slug): Clear cache entry.
+loadConfig(slug): Check Upstash Redis cache first (key: chatbot:config:{slug}, TTL 5min). On miss: query chatbot_configs by slug where active=true from Supabase, check demo expiry, cache in Redis, return ChatbotConfig or null. Uses the same Redis instance as rate limiting.
+invalidateConfigCache(slug): Delete Redis key chatbot:config:{slug}.
+
+Note: In-memory Map caches do not work reliably on Vercel serverless (cold starts clear them). Use Upstash Redis for consistent caching across instances.
 
 - [ ] **Step 2: Commit**
 
@@ -283,7 +295,11 @@ POST handler flow:
 10. onFinish callback: upsert conversation record, append user and assistant messages to chatbot_messages
 11. Return result.toUIMessageStreamResponse()
 
-Follow existing API route pattern from src/app/api/content-engine/batches/route.ts.
+Also implement:
+- CORS handling: Check Origin header against config.allowed_origins. Return Access-Control-Allow-Origin, Access-Control-Allow-Methods, Access-Control-Max-Age: 86400. Export OPTIONS handler for preflight requests.
+- API key auth (Growth/Pro direct API access): If request has Authorization: Bearer header, hash the token and compare against config.api_key_hash. If no Bearer header and request is NOT from the widget iframe origin, return 401.
+
+Follow existing API route pattern from src/app/api/admin/clients/route.ts for the admin auth pattern.
 
 - [ ] **Step 2: Commit**
 
@@ -322,9 +338,11 @@ Add: api/chat/|chat/ to the exclusion list, add js to file extension list.
 
 - [ ] **Step 2: Update vercel.json with scoped headers**
 
-Add /chat/:path* rule with: X-Content-Type-Options nosniff, Referrer-Policy strict-origin, CSP (script-src self, img-src self + vercel-storage + ophidianai.com, connect-src self, style-src self unsafe-inline, frame-ancestors *).
-Update existing global rule to use negative lookahead excluding /chat/ routes.
-Keep /images/* cache rule unchanged.
+Vercel header config does NOT support regex negative lookaheads. Strategy: Remove X-Frame-Options from the global /(.*) rule entirely. Add it back via next.config.ts headers() function with a has/missing matcher that excludes /chat/ routes. Add a /chat/:path* rule with widget-specific CSP (script-src self, img-src self + vercel-storage + ophidianai.com, connect-src self, style-src self unsafe-inline, frame-ancestors *).
+
+Implementation:
+1. In vercel.json: remove X-Frame-Options from the global /(.*) headers array. Add /chat/:path* rule with CSP headers. Keep /images/* cache rule.
+2. In next.config.ts: add headers() async function that returns X-Frame-Options: DENY for all routes NOT matching /chat/. This is where the exclusion logic lives (Next.js headers support regex source patterns).
 
 Note: frame-ancestors * is the baseline. Per-client origin restriction happens at the application layer via CORS validation in the API route.
 
@@ -383,6 +401,8 @@ Features:
 
 Use inline styles (not Tailwind) since this renders in an isolated iframe.
 
+PostMessage API: On message list changes and form open/close, send window.parent.postMessage({ type: "ophidian-resize", height: document.body.scrollHeight }, "*") so embed.js can resize the iframe container dynamically.
+
 - [ ] **Step 2: Commit**
 
 git add src/components/chatbot/chat-widget.tsx
@@ -431,6 +451,8 @@ Features:
 - Initialize on DOMContentLoaded or immediately if document already loaded
 
 SECURITY: All icon rendering must use document.createElementNS + setAttribute for SVG elements. No innerHTML, no textContent with markup, no string-based DOM construction.
+
+PostMessage listener: Listen for "ophidian-resize" messages from the iframe. On receive, adjust iframe container height dynamically. Validate message origin before acting.
 
 - [ ] **Step 2: Commit**
 
@@ -512,6 +534,28 @@ git commit -m "feat: add admin chatbot dashboard overview page"
 
 ---
 
+### Task 19b: Admin Chatbot Config Form and Detail Pages
+
+**Files:**
+
+- Create: src/app/dashboard/admin/chatbot/new/page.tsx
+- Create: src/app/dashboard/admin/chatbot/[id]/page.tsx
+
+- [ ] **Step 1: Create new config form page**
+
+Server component with client form. Fields: slug, client (dropdown from clients table), tier (select), system_prompt (textarea), greeting, allowed_origins (comma-separated text), fallback_contact (phone, email, address), theme primaryColor (color picker or hex input). On submit: POST to /api/admin/chatbot/configs. Redirect to overview on success. Include "Generate API Key" button for Growth/Pro tiers that generates a random key, displays it once, and stores the hash via the API.
+
+- [ ] **Step 2: Create per-client detail page**
+
+Server component: fetch config by id, fetch analytics (last 30 days), fetch recent leads and conversations. Display: config summary card, analytics chart (conversations over time using Recharts), leads table, conversation list with click-to-expand transcript viewer. Link to edit config (reuses form from /new with pre-populated values).
+
+- [ ] **Step 3: Commit**
+
+git add src/app/dashboard/admin/chatbot/new/ src/app/dashboard/admin/chatbot/[id]/
+git commit -m "feat: add admin chatbot config form and detail pages"
+
+---
+
 ## Phase 5: Generic Demo + Product Page Integration
 
 ### Task 20: Add Live Demo to Product Page
@@ -556,11 +600,11 @@ git commit -m "feat: add live AI chatbot demo to product page"
 
 - [ ] **Step 1: Create docs layout**
 
-Minimal layout with left sidebar nav (Getting Started, REST API, Theming). Max-width 1200px centered container.
+Minimal layout with left sidebar nav (Getting Started, REST API, Events/Webhooks, Theming). Max-width 1200px centered container.
 
 - [ ] **Step 2: Create Getting Started page (MDX)**
 
-Quick start with embed script tag example. data-* attributes table (data-client required, data-position optional, data-color optional). JavaScript API reference (OphidianChat.open/close/destroy). CSP requirements note for client sites.
+Quick start with embed script tag example. data-* attributes table (data-client required, data-position optional, data-color optional). JavaScript API reference (OphidianChat.open/close/destroy/on). CSP requirements note for client sites.
 
 - [ ] **Step 3: Create REST API reference page (MDX)**
 
@@ -569,11 +613,15 @@ Authentication section (Bearer API key header). Endpoints:
 - POST /api/chat/[slug]/leads -- request format, response
 Rate limits table by tier. Error responses (400, 401, 404, 429, 500).
 
-- [ ] **Step 4: Create Theming guide (MDX)**
+- [ ] **Step 4: Create Events and Webhooks page (MDX)**
+
+Events: lead.captured, conversation.completed. Webhook configuration (Pro tier). Payload format examples. HMAC-SHA256 signature verification. Retry policy (3 attempts, exponential backoff). OphidianChat.on(event, callback) JavaScript API for client-side events (open, close, lead_captured).
+
+- [ ] **Step 5: Create Theming guide (MDX)**
 
 Config-driven theming (primaryColor, logoUrl, position from admin dashboard). Script tag overrides (data-color, data-position take precedence). Light/dark mode behavior.
 
-- [ ] **Step 5: Commit**
+- [ ] **Step 6: Commit**
 
 git add src/app/docs/
 git commit -m "feat: add API documentation pages for chatbot widget"
