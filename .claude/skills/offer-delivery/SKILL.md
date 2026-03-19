@@ -50,6 +50,18 @@ Common deliverable types by niche:
 | Home services | Google search plan (local SEO keywords + strategy) |
 | Professional services | Homepage mockup or service page rewrite |
 
+### Step 1.5: Check for Pre-Generated Revenue Leak Report
+
+Before creating any deliverable, check if a scan report was already generated during the pipeline run:
+
+1. Check for `sales/lead-generation/prospects/[slug]/scan/revenue-leak-report.pdf`
+2. **If the report exists:** Use it as the primary deliverable -- skip directly to Step 3 (writing the delivery email). No need to generate a new deliverable.
+3. **If the report does not exist:** Fall back to the standard deliverable routing in Step 2.
+
+The revenue leak report is the preferred deliverable when available. It's pre-built, branded, and specific to their site -- higher-quality than most inline-generated PDFs.
+
+---
+
 ### Step 2: Create the Deliverable
 
 Route to the appropriate skill or generate inline:

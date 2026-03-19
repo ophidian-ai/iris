@@ -131,12 +131,53 @@ OphidianAI
 
 Use these as starting points. Always tailor to the specific prospect.
 
+### Scan Findings Angle (FU1 or FU2 Only)
+
+If scan data exists for the prospect (`sales/lead-generation/prospects/[slug]/scan/results.json`), specific scan findings can serve as a high-credibility value drop. Reference a concrete metric from their scan to show you've done the work.
+
+**When to use:** FU1 or FU2 only. Only use if scan data exists. Do not fabricate metrics.
+
+**Example (FU1 with scan data):**
+```
+Hi [first name],
+
+I ran a quick check on [business name]'s site -- it's loading in [X] seconds on mobile.
+The industry average for [industry] is around [Y] seconds, and Google starts penalizing
+rankings past 3. That's worth fixing regardless of anything else.
+
+I still have those ideas ready if you'd like to see them.
+
+Eric
+
+P.S. You can check your own score at PageSpeed Insights (pagespeed.web.dev) -- it's free
+and takes 30 seconds.
+```
+
+**Example (FU2 with scan data):**
+```
+Hi [first name],
+
+One thing stood out when I looked at [business name]'s site: [specific finding from scan
+-- e.g., "no meta descriptions on any pages", "missing structured data", "broken image
+alt tags"]. That's usually worth [specific outcome -- e.g., "a 10-15% bump in click-through
+rate from search"] once it's fixed.
+
+If you ever want to talk through what's on the list, I'm happy to walk you through it.
+
+Eric
+```
+
+Pull the specific metric or finding directly from `scan/results.json`. Keep the reference concrete and outcome-focused -- never technical jargon.
+
+---
+
 ### FU1 Angles (Micro Value Drops)
 
 - Google Business Profile changes or new features
 - Seasonal trends relevant to their business
 - Platform updates (Google, Yelp, Facebook algorithm changes)
 - Local search behavior shifts
+- Scan findings (if scan data exists -- see Scan Findings Angle above)
 
 ### FU2 Angles (Different Perspective)
 

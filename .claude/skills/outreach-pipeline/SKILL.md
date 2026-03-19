@@ -28,6 +28,7 @@ All optional. Defaults cover the standard weekly run.
 ```
 Step 1: Research
 Step 2: Score
+Step 2.5: Scan
 Step 3: Re-engagement Check
 Step 4: Draft First-Touch Emails
 Step 5: Draft Follow-Ups
@@ -79,6 +80,49 @@ echo '{"name":"Weekly Pipeline: Scoring Complete","description":"Scored [X] lead
 ```
 
 **Output:** Comparison table sorted by score. Only Hot and Warm prospects (score >= 14) advance.
+
+---
+
+### Step 2.5: Scan
+
+**What it does:** Run the revenue leak scan for each qualifying prospect (score >= 14) to generate a site health score and revenue leak report PDF before drafting emails.
+
+**Process:**
+1. For each qualifying prospect from Step 2:
+   ```bash
+   curl -X POST https://ophidianai.com/api/scan \
+     -H "Authorization: Bearer $SCAN_API_KEY" \
+     -H "Content-Type: application/json" \
+     -d '{"url": "<prospect-url>"}'
+   ```
+2. Store the JSON response at `sales/lead-generation/prospects/[slug]/scan/results.json`
+3. Download the PDF report from `/api/scan/[id]/pdf` and save to `sales/lead-generation/prospects/[slug]/scan/revenue-leak-report.pdf`
+4. Update the Pipeline Google Sheet: add the scan score to the Scan Score column and set status to "Scanned"
+5. Index scan metadata to Pinecone:
+   ```
+   Tool: mcp__plugin_pinecone_pinecone__upsert-records
+   Parameters:
+     name: "ophidianai-kb"
+     namespace: "scans"
+     records: [{
+       "_id": "scans/<prospect-slug>",
+       "text": "<scan summary -- site score, key issues found, revenue leak indicators>",
+       "source_file": "sales/lead-generation/prospects/<slug>/scan/results.json",
+       "department": "revenue",
+       "created_date": "<today>",
+       "updated_date": "<today>",
+       "tags": ["<industry>", "scan", "<score-tier: high-pain|moderate|healthy>"]
+     }]
+   ```
+
+**Error handling:** If the scan API fails for a prospect, skip scanning for that prospect and continue. Note the failure in the pipeline summary. The prospect still advances to drafting without scan data.
+
+**ClickUp update:**
+```bash
+echo '{"name":"Weekly Pipeline: Scan Complete","description":"Scanned [X] prospects. High pain (<30): [Y], Moderate (30-50): [Z], Healthy (>50): [W]. Failed: [F].","priority":3,"status":"complete"}' | node .claude/skills/clickup/scripts/clickup.js create 901711866804
+```
+
+**Output:** Scan results stored per prospect, Pipeline Sheet updated with scan scores, scan metadata indexed to Pinecone.
 
 ---
 
@@ -227,6 +271,7 @@ After completion, output:
 Pipeline complete.
   New leads researched: X
   Qualified (score 14+): Y
+  Scanned: S (high pain: _, moderate: _, healthy: _, failed: _)
   Re-engagement eligible: Z
   First-touch emails drafted: A
   Follow-ups drafted: B (FU1: _, FU2: _, FU3: _, FU4: _, Breakup: _)

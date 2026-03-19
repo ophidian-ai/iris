@@ -258,6 +258,26 @@ If the prospect's industry isn't listed, find a relevant stat. The stat must be 
 - **No links in the first email.** Links in cold emails are a spam trigger.
 - **No images or attachments.** Plain text only.
 
+## Revenue Leak Report CTA
+
+When a revenue leak report has been pre-generated for the prospect (`sales/lead-generation/prospects/[slug]/scan/revenue-leak-report.pdf` exists), add a P.S. referencing it.
+
+**Rules:**
+- The report is the reward for replying -- do NOT lead with it or put it in the body
+- The P.S. is the only place it appears
+- Keep the body value-first (Hormozi model unchanged)
+- Never describe what's in the report -- let curiosity do the work
+- Only add this P.S. if the report exists; do not fabricate or promise a report that hasn't been generated
+
+**P.S. wording (pick the most natural fit):**
+- "P.S. I put together a free revenue leak report for your site -- want me to send it over?"
+- "P.S. I ran a quick revenue leak analysis on [business name]'s site. Happy to send it if you're curious."
+- "P.S. There's a free site report ready for [business name] if you'd like to see it -- just say the word."
+
+This replaces the standard quick-win P.S. when a report is available. If no report exists, use the standard quick-win P.S. as normal.
+
+---
+
 ## Spam Avoidance Checklist
 
 Before finalizing any cold email, verify:
@@ -374,6 +394,30 @@ Also update:
 
 - **Template rotation tracker** (`sales/lead-generation/template-rotation.md`) -- date, count, prospect.
 - **Prospect tracker** (`sales/lead-generation/prospect-tracker.md`) -- set status to "Outreach Sent", write outreach date.
+
+### Step 5: Check for Delivery Failures
+
+After all sends complete, wait 2 minutes, then check the inbox for bounce-backs and delivery failure notifications:
+
+```bash
+gws gmail users messages list --params '{"userId":"me","q":"from:mailer-daemon OR from:postmaster OR subject:\"delivery status\" OR subject:\"undeliverable\" OR subject:\"Mail Delivery\" newer_than:1h","maxResults":10}' 2>/dev/null
+```
+
+If any delivery failures are found:
+
+1. Read each failure message to identify the bounced recipient address and reason (invalid address, full mailbox, domain not found, etc.).
+2. **Attempt to find an alternate email.** Before marking the prospect as dead:
+   - Check the prospect's website for other contact emails (info@, hello@, contact@, or a different personal address).
+   - Check their Google Business Profile, Facebook page, or LinkedIn for alternate emails.
+   - If an alternate email is found:
+     a. Update the prospect's research file and `cold-email.json` with the new address.
+     b. Re-stage the email as a new Gmail draft with the corrected recipient.
+     c. Update the prospect tracker with the new email and set status back to "Staged".
+   - If no alternate email can be found, proceed to step 3.
+3. Update the prospect tracker -- set status to "Bounced" with the bounce reason.
+4. Remove the prospect's email from any follow-up sequences.
+5. Log the failure in the template rotation tracker so it doesn't count toward reply rate metrics.
+6. If multiple bounces occur in a single batch, flag it to Eric -- could indicate a deliverability issue.
 
 ## Direct Send (Override)
 

@@ -82,7 +82,20 @@ Each criterion scored 1-5. Total out of 25.
 | 2 | Weak match -- primarily needs services we don't offer (custom software, app dev) |
 | 1 | Poor match -- enterprise, franchise with corporate site control, or needs we can't fill |
 
-### 6. AI Service Potential (Bonus)
+### 6. Scan Score (Bonus)
+
+If a scan has been run for this prospect (check `sales/lead-generation/prospects/[slug]/scan/results.json`), add points based on the site score returned by the scan engine:
+
+| Site Score | Bonus Points | Rationale |
+|------------|-------------|-----------|
+| < 30 | +2 | High pain -- site has serious problems, strong urgency |
+| 30-50 | +1 | Moderate issues -- clear opportunity |
+| > 50 | +0 | Site is in reasonable shape |
+| No scan data | +0 | Skip -- no penalty for missing scan |
+
+Include the scan score in the score card if data is available.
+
+### 7. AI Service Potential (Bonus)
 
 This is a **bonus criterion** scored 0-5. Add to the base score (max total becomes 30). Use this to weight prospects who could become recurring AI service clients.
 
@@ -109,7 +122,7 @@ If a disqualifier is present, note it clearly in the score card regardless of to
 
 ## Tier Assignment
 
-Base score is out of 25 (criteria 1-5). AI bonus adds up to 5 more (max 30).
+Base score is out of 25 (criteria 1-5). AI bonus adds up to 5 more, and scan score bonus adds up to 2 more (max total: 32).
 
 | Score | Tier | Action |
 |-------|------|--------|
@@ -185,8 +198,9 @@ Format:
 | Website Gap | X/5 | [Brief note] |
 | Revenue Signals | X/5 | [Brief note] |
 | Service Fit | X/5 | [Brief note] |
+| Scan Score Bonus | +0/+1/+2 | [Site score from scan, or "No scan data"] |
 | AI Service Potential | X/5 | [Brief note -- 0 if not applicable] |
-| **Total** | **X/30** | |
+| **Total** | **X/32** | |
 
 ## Result
 
