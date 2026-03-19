@@ -109,10 +109,10 @@ City population sourced from a static lookup table of US cities (bundled, no API
   "overall_grade": "A|B|C|D|F (derived: 90+=A, 80+=B, 70+=C, 60+=D, <60=F)",
   "estimated_monthly_leak": "dollar amount",
   "modules": {
-    "speed": { "score": "0-100", "findings": [...] },
-    "seo": { "score": "0-100", "findings": [...] },
-    "mobile": { "score": "0-100", "findings": [...] },
-    "trust": { "score": "0-100", "findings": [...] }
+    "speed": { "score": "0-100", "grade": "A-F", "status": "ok|unavailable", "error": "string|null", "findings": [...] },
+    "seo": { "score": "0-100", "grade": "A-F", "status": "ok|unavailable", "error": "string|null", "findings": [...] },
+    "mobile": { "score": "0-100", "grade": "A-F", "status": "ok|unavailable", "error": "string|null", "findings": [...] },
+    "trust": { "score": "0-100", "grade": "A-F", "status": "ok|unavailable", "error": "string|null", "findings": [...] }
   },
   "findings": [
     {
