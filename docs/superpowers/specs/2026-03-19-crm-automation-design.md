@@ -56,6 +56,17 @@ Core CRM:
 - **Email Marketing** -- Sequence enrollment from CRM automations
 - **SEO / Content** -- Activity logging on events
 
+### Cross-Product Lead Flow
+
+When a chatbot captures a lead:
+1. Chatbot writes to `chatbot_leads` (existing behavior)
+2. Post-capture hook checks if client has CRM provisioned (join chatbot_configs.client_id -> crm_configs.client_id)
+3. If CRM exists: upsert `email_contacts` (dedupe on client_id + email), create `crm_deals` with source='chatbot', log `crm_activities` with type='chatbot_conversation' and linked_content_id pointing to the conversation
+4. If CRM does not exist: no CRM action (chatbot lead stored in chatbot_leads only)
+5. Idempotency: duplicate emails for the same client skip contact creation, append activity only
+
+Same pattern for SEO audit completion, contact form submissions, and content publishes -- each product checks for CRM config before logging activities.
+
 ---
 
 ## Data Model
@@ -70,11 +81,12 @@ Core CRM:
 | max_pipelines | int | 1 / 3 / null (unlimited) |
 | max_custom_fields | int | 0 / 5 / null (unlimited) |
 | custom_fields | jsonb | Array of `{ name, type, required }` |
-| automation_enabled | boolean | false for Essentials/Growth |
 | api_access | text | none / read / full |
 | active | boolean, default true | |
 | created_at | timestamptz | |
 | updated_at | timestamptz | |
+
+Automation availability is derived from tier at runtime (Pro only). No separate flag needed.
 
 ### crm_pipelines
 
@@ -100,7 +112,7 @@ Default stages for Essentials: `[{Lead, 10%}, {Contacted, 20%}, {Qualified, 40%}
 | contact_id | uuid, FK -> email_contacts | |
 | title | text | e.g. "Website redesign - Bloomin' Acres" |
 | value | numeric, nullable | Deal amount in dollars |
-| stage | text | Current stage name (matches pipeline stages) |
+| stage | text | Current stage name. Validated on write against pipeline's stages array -- rejected if stage name not found in associated pipeline. |
 | probability | int | Auto-set from pipeline stage probability |
 | expected_close_at | date, nullable | |
 | won_at | timestamptz, nullable | |
@@ -124,6 +136,7 @@ Default stages for Essentials: `[{Lead, 10%}, {Contacted, 20%}, {Qualified, 40%}
 | linked_content_type | text, nullable | campaign, conversation, audit, sequence, task |
 | linked_content_id | uuid, nullable | FK to the source record |
 | auto_logged | boolean, default false | true if system-generated |
+| linked_content_available | boolean, default true | Set to false when source record is deleted. UI shows "Content no longer available" instead of broken link. |
 | created_at | timestamptz | |
 
 ### crm_tasks
@@ -138,7 +151,7 @@ Default stages for Essentials: `[{Lead, 10%}, {Contacted, 20%}, {Qualified, 40%}
 | description | text, nullable | |
 | due_at | timestamptz | |
 | completed_at | timestamptz, nullable | |
-| status | enum: pending, completed, overdue | |
+| status | enum: pending, completed | Overdue is computed at read time (due_at < now AND status = pending), not stored. |
 | auto_generated | boolean, default false | Created by automation |
 | automation_id | uuid, nullable FK -> crm_automations | Which rule created it |
 | reminder_sent | boolean, default false | |
@@ -179,7 +192,7 @@ Default stages for Essentials: `[{Lead, 10%}, {Contacted, 20%}, {Qualified, 40%}
 - `POST /api/admin/crm/configs` -- Create config (provisions default pipeline)
 - `PATCH /api/admin/crm/configs/[id]` -- Update config, custom fields
 - `GET /api/admin/crm/pipelines/[config_id]` -- List pipelines for a config
-- `POST /api/admin/crm/pipelines` -- Create pipeline (Growth/Pro)
+- `POST /api/admin/crm/pipelines` -- Create pipeline (Growth/Pro). Validates against crm_configs.max_pipelines -- returns 422 if limit exceeded.
 - `PATCH /api/admin/crm/pipelines/[id]` -- Update stages
 - `GET /api/admin/crm/deals` -- List deals with filters
 - `POST /api/admin/crm/deals` -- Create deal
@@ -192,6 +205,8 @@ Default stages for Essentials: `[{Lead, 10%}, {Contacted, 20%}, {Qualified, 40%}
 - `POST /api/admin/crm/automations` -- Create automation rule
 - `PATCH /api/admin/crm/automations/[id]` -- Update/toggle automation
 - `GET /api/admin/crm/analytics/[id]` -- Pipeline analytics
+
+Custom field creation validates against crm_configs.max_custom_fields. Returns 422 with upgrade prompt if limit exceeded.
 
 ### Internal Event Bus (server-side only)
 
@@ -267,6 +282,7 @@ Default stages for Essentials: `[{Lead, 10%}, {Contacted, 20%}, {Qualified, 40%}
 - Client dashboard: Supabase auth, RLS scoped to own crm_configs
 - Client API: API key auth (reuses email_configs API key)
 - Internal event bus: server-side only
+- API key identifies the client, not the product tier. Each product endpoint independently checks the client's tier for that product. A Growth CRM client with a Pro Email key still gets read-only CRM API access.
 
 ### Rate Limits
 
@@ -278,7 +294,7 @@ Default stages for Essentials: `[{Lead, 10%}, {Contacted, 20%}, {Qualified, 40%}
 
 - Deals per config: Essentials 100, Growth 500, Pro unlimited
 - Activities retained indefinitely
-- Tasks overdue > 30 days auto-archived
+- Tasks pending with due_at > 30 days past auto-archived by monthly cron (status set to completed with note).
 - Custom fields validated on write against config field definitions
 
 ### Cross-Product Event Flow
@@ -287,6 +303,7 @@ Default stages for Essentials: `[{Lead, 10%}, {Contacted, 20%}, {Qualified, 40%}
 - Automation triggers evaluated synchronously on deal/contact changes
 - Automation actions executed asynchronously (queued via cron, 1-min interval)
 - Failed automation actions logged to crm_activities with error type
+- Automation actions are deduped via idempotency key: `hash(automation_id + deal_id + floor(trigger_timestamp / 60s))`. Prevents duplicate actions from rapid stage changes within the same minute.
 
 ### Data Privacy
 

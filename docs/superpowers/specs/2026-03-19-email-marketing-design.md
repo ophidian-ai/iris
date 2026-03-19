@@ -63,6 +63,10 @@ Sequence flow:
 - **SEO** -- Audit completion -> sequence trigger
 - **Resend** -- Already integrated for transactional, extends to bulk
 
+### Sending API
+
+Uses Resend's individual `emails.send()` API (not Broadcasts). Each email is a separate API call with the client's verified domain as the sender. Rate pacing is managed application-side at 10 req/sec per campaign. Concurrent campaigns from different clients share the account-level Resend rate limit -- the campaign cron serializes sends across clients to prevent collisions.
+
 ---
 
 ## Data Model
@@ -80,8 +84,11 @@ Sequence flow:
 | from_email | text | e.g. `hello@news.bloomin-acres.com` |
 | brand_config | jsonb | `{ logoUrl, primaryColor, footerText, socialLinks, address }` |
 | monthly_send_limit | int | Essentials: 1,000. Growth: 5,000. Pro: 25,000 |
-| sends_this_month | int, default 0 | Atomic counter, reset by cron |
+| sends_this_month | int, default 0 | Enforced via Postgres RPC: `increment_and_check_send_limit(config_id, batch_size)`. Returns false if limit would be exceeded. Reset by monthly cron. |
 | max_active_sequences | int | 2 / 5 / null (unlimited) |
+| max_contacts | int | Essentials: 500. Growth: 2,500. Pro: null (unlimited). Enforced on contact creation. |
+| campaigns_this_month | int, default 0 | Essentials: 2 max. Growth: 8 max. Pro: unlimited. Reset by monthly cron. |
+| unsubscribe_secret | text | Random 32-byte hex for HMAC-signing unsubscribe links. Separate from api_key_hash. |
 | api_key_hash | text, nullable | Hashed API key for contact/trigger endpoints |
 | active | boolean, default true | |
 | created_at | timestamptz | |
@@ -89,10 +96,12 @@ Sequence flow:
 
 ### email_contacts (shared with CRM)
 
+Shared across all products for this client. FK to clients, not to any product config.
+
 | Column | Type | Notes |
 |--------|------|-------|
 | id | uuid, PK | |
-| config_id | uuid, FK -> email_configs | |
+| client_id | uuid, FK -> clients | |
 | email | text, NOT NULL | |
 | name | text, nullable | |
 | phone | text, nullable | |
@@ -104,7 +113,7 @@ Sequence flow:
 | unsubscribed_at | timestamptz, nullable | |
 | created_at | timestamptz | |
 | updated_at | timestamptz | |
-| UNIQUE | (config_id, email) | |
+| UNIQUE | (client_id, email) | |
 
 ### email_templates
 
@@ -130,12 +139,14 @@ Sequence flow:
 | name | text | |
 | subject | text | Final subject line |
 | subject_variants | text[], nullable | A/B variants (Pro) |
+| winning_variant | int, nullable | Index of winning variant after A/B test completes |
+| ab_metric | text, default 'open_rate' | Metric for winner selection: open_rate or click_rate |
 | content | text | Final HTML body |
 | segment_filter | jsonb, nullable | `{ tags: [...], engagement_min: N, last_engaged_after: date }` |
 | scheduled_at | timestamptz, nullable | |
 | sent_at | timestamptz, nullable | |
 | status | enum: draft, scheduled, sending, sent, cancelled | |
-| stats | jsonb | `{ total, sent, delivered, opened, clicked, bounced, complained }` |
+| stats | jsonb | `{ total, sent, delivered, opened, clicked, bounced, complained, per_variant: [{ variant, sent, opened, clicked }] }` |
 | created_at | timestamptz | |
 | updated_at | timestamptz | |
 
@@ -149,6 +160,7 @@ Sequence flow:
 | resend_message_id | text, nullable | For webhook matching |
 | status | enum: pending, sent, delivered, opened, clicked, bounced, complained | |
 | link_clicks | jsonb, nullable | `{ url: count }` (Pro) |
+| variant_index | int, nullable | Which A/B variant this recipient received (Pro) |
 | sent_at | timestamptz, nullable | |
 | opened_at | timestamptz, nullable | |
 | clicked_at | timestamptz, nullable | |
@@ -179,7 +191,7 @@ Sequence flow:
 | next_send_at | timestamptz, nullable | When the next step fires |
 | created_at | timestamptz | |
 | updated_at | timestamptz | |
-| UNIQUE | (sequence_id, contact_id) | |
+| UNIQUE | (sequence_id, contact_id) WHERE status = 'active' | Partial unique: allows re-enrollment after completion -- old row status changes to completed, new row created. |
 
 ### email_events
 
@@ -197,7 +209,7 @@ Sequence flow:
 
 ### Webhook (public, Resend-verified)
 
-- `POST /api/webhooks/resend` -- Receives all Resend events. Verifies webhook signature via svix headers. Updates email_events, campaign_recipients, contact engagement, and evaluates sequence conditions.
+- `POST /api/webhooks/resend` -- Receives all Resend events (delivered, opened, clicked, bounced, complained, unsubscribed). Verifies webhook signature via svix headers. Updates email_events, campaign_recipients, contact engagement. Handles `email.unsubscribed` by setting contact.subscribed=false and halting sequence enrollments (mirrors manual unsubscribe). Evaluates sequence conditions on open/click events.
 
 ### Contact API (client-accessible via API key)
 
@@ -260,10 +272,12 @@ Sequence flow:
    - Advance current_step, calculate next_send_at from delay_hours
    - If last step: set status to `completed`
 
+Essentials tier: sequence steps have `condition: null` enforced on write. Step evaluation skips condition checks when null -- always advances to next step unconditionally.
+
 ### Unsubscribe Handling
 
 - Every email includes unsubscribe link: `/api/email/[slug]/unsubscribe?contact=[id]&token=[hmac]`
-- HMAC token signed with config's API key hash
+- HMAC-SHA256 signed with config's `unsubscribe_secret` (dedicated signing key, not the API key hash).
 - Sets contact.subscribed = false, halts all active sequence enrollments
 - Resend handles List-Unsubscribe header automatically
 
@@ -335,6 +349,15 @@ Sequence flow:
 - Unsubscribe honored immediately, no re-enrollment
 - Contact data retained 90 days after unsubscribe, then purged
 - GDPR: delete endpoint for full contact data removal
+
+### Indexes
+
+- `email_contacts (client_id)` -- Multi-tenant lookups
+- `email_campaign_recipients (resend_message_id)` -- Webhook event routing
+- `email_campaign_recipients (campaign_id, status)` -- Campaign stats aggregation
+- `email_events (resend_message_id)` -- Event dedup and lookup
+- `email_sequence_enrollments (status, next_send_at)` -- 15-minute cron query
+- `email_configs (client_id)` -- Config lookup by client
 
 ---
 
