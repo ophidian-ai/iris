@@ -51,6 +51,7 @@
 - src/app/docs/seo-api/page.mdx -- Getting started + dashboard guide
 - src/app/docs/seo-api/rest-api/page.mdx -- REST API reference
 - src/app/docs/seo-api/keywords/page.mdx -- Keyword discovery API
+- src/app/docs/seo-api/faq/page.mdx -- FAQ (scores, ranking methodology, report frequency)
 
 ### Modified Files
 
@@ -58,8 +59,8 @@
 - src/app/api/cron/chatbot-demo-expiry/route.ts -- Add GBP draft expiry query
 - src/lib/supabase/types.ts -- Re-export SEO types
 - src/components/dashboard/sidebar.tsx -- Add SEO admin menu item
-- src/app/dashboard/seo/page.tsx -- Replace placeholder with real client SEO dashboard
-- package.json -- Add @vercel/blob dependency
+- src/app/dashboard/seo/page.tsx -- Replace placeholder with real client SEO dashboard (create if not exists)
+- package.json -- Add @vercel/blob and puppeteer dependencies
 
 ---
 
@@ -70,20 +71,22 @@
 **Files:**
 - Modify: package.json
 
-- [ ] **Step 1: Install Vercel Blob**
+- [ ] **Step 1: Install Vercel Blob and promote Puppeteer to production dependency**
 
 Run in engineering/projects/ophidian-ai:
-npm install @vercel/blob
+npm install @vercel/blob puppeteer
+
+Note: Puppeteer may already be in devDependencies. This moves it to dependencies so it's available in Vercel production builds for PDF generation.
 
 - [ ] **Step 2: Verify installation**
 
-Run: npm ls @vercel/blob
-Expected: Package listed, no errors
+Run: npm ls @vercel/blob puppeteer
+Expected: Both packages listed, no errors
 
 - [ ] **Step 3: Commit**
 
 git add package.json package-lock.json
-git commit -m "chore: add @vercel/blob dependency for SEO report storage"
+git commit -m "chore: add @vercel/blob and puppeteer dependencies for SEO reports"
 
 ---
 
@@ -106,7 +109,7 @@ seo_configs schema:
 - location (text nullable)
 - tier (seo_tier NOT NULL DEFAULT 'essentials')
 - target_keywords (text[] NOT NULL DEFAULT '{}')
-- competitors (jsonb NOT NULL DEFAULT '[]')
+- competitors (jsonb NOT NULL DEFAULT '[]') -- single jsonb column storing a JSON array of {name, url} objects (NOT jsonb[] postgres array type)
 - gbp_url (text nullable)
 - delivery_email (text NOT NULL)
 - active (boolean NOT NULL DEFAULT true)
@@ -356,6 +359,8 @@ git commit -m "feat: add keyword discovery engine with Firecrawl"
 
 ### Task 10: Report Generator
 
+**Depends on:** Task 5 (RankResult type), Task 6 (AuditResult type). Complete those first.
+
 **Files:**
 - Create: src/lib/seo/report-generator.ts
 
@@ -464,7 +469,7 @@ GET: requireAdmin, accept ?days=30 query param. Return JSON with:
 - rankings: latest month from seo_rankings for config
 - gbpDrafts: from seo_gbp_drafts for config, order by created_at desc, limit 10
 
-Follow pattern from src/app/api/admin/chatbot/analytics/[id]/route.ts.
+Follow pattern from src/app/api/admin/chatbot/analytics/[id]/route.ts (created by the AI Chatbot Widget plan -- if implementing SEO first, follow the general admin analytics pattern: requireAdmin, date range query param, parallel Supabase queries, return JSON).
 
 - [ ] **Step 2: Commit**
 
@@ -490,7 +495,7 @@ GET: Auth required. Get client's seo_config. Query seo_audits for config, select
 
 - [ ] **Step 3: Create GBP draft approval endpoint**
 
-POST: Auth required. Verify the draft belongs to the client's config. Update seo_gbp_drafts set status='approved' where id=param and status='draft'. Return success.
+POST: Auth required. Verify the draft belongs to the client's config. Update seo_gbp_drafts set status='approved' where id=param AND status='draft' AND expires_at > NOW(). If no rows updated, return 410 (Gone) with message "Draft has expired or was already processed." Return success on update.
 
 - [ ] **Step 4: Commit**
 
@@ -531,7 +536,7 @@ git commit -m "feat: add shared keyword discovery and rank check API endpoints"
 
 - [ ] **Step 1: Create monthly dispatch cron**
 
-GET handler: Verify CRON_SECRET. Query all active seo_configs (select id only). For each config: fetch(`/api/admin/seo/configs/${id}/run`, { method: 'POST', headers: { Authorization: 'Bearer ' + process.env.CRON_SECRET } }). Don't await responses (fire-and-forget fan-out). Return { dispatched: count }.
+GET handler: Verify CRON_SECRET. Query all active seo_configs (select id, url, client join for company_name). Construct base URL from process.env.NEXT_PUBLIC_SITE_URL (e.g. "https://ophidianai.com"). For each config: fetch(`${baseUrl}/api/admin/seo/configs/${id}/run`, { method: 'POST', headers: { Authorization: 'Bearer ' + process.env.CRON_SECRET } }). Don't await responses (fire-and-forget fan-out). After dispatching: send Eric a summary email via Resend listing client names and dispatch count ("SEO Monthly Audit: Dispatched audits for N clients: ClientA, ClientB, ..."). Return { dispatched: count }.
 
 - [ ] **Step 2: Add GBP draft expiry to chatbot cron**
 
@@ -588,9 +593,9 @@ git commit -m "feat: add admin SEO dashboard pages"
 ### Task 18: Client SEO Dashboard
 
 **Files:**
-- Modify: src/app/dashboard/seo/page.tsx
+- Create or modify: src/app/dashboard/seo/page.tsx (may exist as placeholder or may need to be created)
 
-- [ ] **Step 1: Replace placeholder with real dashboard**
+- [ ] **Step 1: Replace placeholder with real dashboard (or create if it doesn't exist)**
 
 Fetch data from /api/seo/dashboard. Render:
 - Score card row: 6 category scores with color indicators (1-2 red, 3 yellow, 4-5 green) + trend arrows vs previous month
@@ -641,7 +646,11 @@ POST /api/seo/keywords/discover -- find longtail keywords for a topic + location
 POST /api/seo/keywords/check-rank -- check keyword ranking for a URL
 Rate limits. Request/response examples.
 
-- [ ] **Step 5: Commit**
+- [ ] **Step 5: Create FAQ page (MDX)**
+
+Common questions: What do the scores mean? How are rankings tracked (directional visibility tiers, not exact positions)? How often are reports generated? Can I run an audit on demand? How does GBP draft approval work? What is AI Visibility?
+
+- [ ] **Step 6: Commit**
 
 git add src/app/docs/seo-api/
 git commit -m "feat: add SEO API documentation pages"
@@ -656,10 +665,11 @@ git commit -m "feat: add SEO API documentation pages"
 
 Run in engineering/projects/ophidian-ai. Fix any TypeScript or build errors.
 
-- [ ] **Step 2: Run the database migration**
+- [ ] **Step 2: Verify database tables exist**
 
-Run: npx supabase db push
-Verify all 4 SEO tables created.
+SEO tables should already exist from Task 2. Verify with:
+npx supabase db query --linked "SELECT table_name FROM information_schema.tables WHERE table_name LIKE 'seo_%';"
+Expected: seo_configs, seo_audits, seo_rankings, seo_gbp_drafts. If missing, run: npx supabase db push
 
 - [ ] **Step 3: Commit all changes and push**
 
