@@ -675,7 +675,7 @@ Implementation using Puppeteer (already in devDependencies):
 
 Follow the same Puppeteer-based approach used in the existing report generation pipeline. This produces better visual results than hand-drawing with pdf-lib.
 
-- [ ] **Step 2: Add PDF endpoint**
+- [ ] **Step 3: Add PDF endpoint**
 
 Add a `GET /api/scan/[id]/pdf` route that:
 1. Fetches scan result from Supabase by `scan_id`
@@ -684,16 +684,16 @@ Add a `GET /api/scan/[id]/pdf` route that:
 
 Create: `src/app/api/scan/[id]/pdf/route.ts`
 
-- [ ] **Step 3: Verify PDF generation**
+- [ ] **Step 4: Verify PDF generation**
 
 1. Call: `curl http://localhost:3000/api/scan/<scan_id>/pdf -o test-report.pdf`
 2. Open `test-report.pdf` -- verify branding, scores, findings render correctly
 3. Check: all 5 pages present, colors correct, text readable
 
-- [ ] **Step 4: Commit**
+- [ ] **Step 5: Commit**
 
 ```bash
-git add src/lib/scan/report-pdf.ts src/app/api/scan/
+git add src/lib/scan/report-pdf.ts src/lib/scan/report-template.html src/app/api/scan/
 git commit -m "feat(scan): add PDF report generation with OphidianAI branding"
 ```
 
