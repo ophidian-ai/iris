@@ -13,12 +13,14 @@ Automated SEO product that extends the existing seo-audit skill into a recurring
 ### Key Decisions
 
 - **Product positioning:** Search Visibility Automation -- SEO + AEO + GEO, not just traditional SEO
-- **Two standalone products, shared engine:** SEO Automation and Content Generation are separate products with own pricing. They share a keyword engine, content pipeline, and GBP sync. Bundle at 15-20% discount.
+- **Two standalone products, shared engine:** SEO Automation and Content Generation are separate products with own pricing. They share a keyword engine, content pipeline, and GBP sync. Bundle discount: 15% for Essentials, 20% for Growth/Pro.
 - **Fixes at all tiers:** Every tier gets fixes implemented, not just reports. Full SEO management is the Pro differentiator.
 - **AEO/GEO tiered by depth:** Essentials: structured data. Growth: monitoring + optimization. Pro: full strategy + content.
-- **Rank tracking:** Firecrawl v1, upgrade to SerpApi at 3+ clients
+- **Rank tracking:** Firecrawl v1 (directional estimates: "top-3/10/20/not-found"), upgrade to SerpApi at 3+ clients for precise positions. Reports and dashboard frame rank data as visibility tiers, not exact positions.
 - **Report delivery:** Email PDF + live dashboard for all tiers. AI-written insights for Pro only.
-- **Blog + GBP loop:** Auto-generate GBP updates from blog content with keyword alignment (Growth/Pro)
+- **Blog + GBP loop:** Auto-generate GBP update copy from blog content with keyword alignment (Growth/Pro). Copy is staged for client to post manually. No GBP API integration (requires per-business OAuth -- deferred until scale justifies).
+- **A la carte features:** Standalone $299/mo purchase gets Growth-tier features.
+- **Clients table:** The existing `clients` table in Supabase (uuid PK, profile_id FK) is referenced by seo_configs.client_id. No new clients table needed.
 
 ---
 
@@ -28,6 +30,7 @@ Automated SEO product that extends the existing seo-audit skill into a recurring
 
 - Setup: $400
 - Monthly: $299/mo
+- Feature scope: Growth-tier features (15 keywords, 5 competitors, monitoring + optimization AEO/GEO, auto GBP drafts, content freshness alerts)
 
 ### Within Platform Tiers and Search Visibility Bundle
 
@@ -45,7 +48,7 @@ Automated SEO product that extends the existing seo-audit skill into a recurring
 
 ### Search Visibility Bundle
 
-15-20% discount when purchasing SEO Automation + Content Generation together. AEO/GEO depth follows the tier level of the bundle.
+Discount when purchasing SEO Automation + Content Generation together: 15% for Essentials bundle, 20% for Growth/Pro bundles. AEO/GEO depth follows the tier level of the bundle.
 
 ---
 
@@ -65,11 +68,11 @@ Monthly Cycle (cron or manual trigger)
   |     |-- Competitor rank check for same keywords
   |-- Content Freshness Scan (Growth/Pro)
   |     |-- Check publish dates on client blog posts
-  |     |-- Flag pages older than 6 months with declining traffic
-  |-- GBP Sync (Growth/Pro)
+  |     |-- Flag pages older than 6 months for refresh
+  |-- GBP Copy Generation (Growth/Pro)
   |     |-- Pull latest blog post from client site
   |     |-- AI summarize to 1500 chars with keyword alignment
-  |     |-- Stage as GBP update draft for approval
+  |     |-- Stage as GBP update draft for client to copy-paste into GBP
   |-- Report Generation
   |     |-- Score card (overall health + trend vs last month)
   |     |-- Ranking changes (up/down/new/lost)
@@ -86,10 +89,10 @@ Monthly Cycle (cron or manual trigger)
 
 - **SEO audit engine** -- Extended from existing `seo-audit` skill. Adds AEO/GEO checks (schema presence, Q&A structure, AI Overview detection) to the existing technical/on-page/local/content/speed scoring.
 - **Rank tracker** -- Firecrawl search per keyword, parse results for client URL position. Stores monthly snapshots. Upgrade path to SerpApi for precision.
-- **Content freshness scanner** -- Crawls client blog pages, checks publish dates and last-modified headers. Flags stale content (>6 months) for refresh.
-- **GBP sync pipeline** -- Pulls latest blog content from client site, AI summarizes to 1500 chars with target keyword alignment, stages as draft for client approval. Shared with Content Generation product.
+- **Content freshness scanner** -- Crawls client blog pages, checks publish dates and last-modified headers. Flags pages older than 6 months for refresh. Traffic-based signals deferred until Google Search Console integration.
+- **GBP copy generator** -- Pulls latest blog content from client site, AI summarizes to 1500 chars with target keyword alignment, stages as draft. Client copies the text into their own GBP. No GBP API posting (requires per-business OAuth -- deferred). Shared with Content Generation product.
 - **Keyword engine** -- Longtail keyword discovery using Firecrawl search ("People also search for" mining). Shared with Content Generation product.
-- **Report generator** -- Extends existing branded PDF report templates. Adds ranking charts, competitor tables, trend arrows.
+- **Report generator** -- Generates branded PDF reports server-side. PDFs stored in Vercel Blob, URL written to `seo_audits.report_url`. Uses `@react-pdf/renderer` or Puppeteer (already in devDependencies) for server-safe PDF generation. Adds ranking charts, competitor tables, trend arrows to existing report template structure.
 - **Dashboard** -- Client-facing view in ophidianai.com with scores, rankings, issues, reports, GBP drafts.
 
 ---
@@ -128,7 +131,7 @@ Monthly Cycle (cron or manual trigger)
 | score_content | int | 1-5 |
 | score_local | int | 1-5 |
 | score_speed | int | 1-5 |
-| score_ai_visibility | int | 1-5 (AEO/GEO) |
+| score_ai_visibility | int | 1-5 (AEO/GEO). Rubric: 1=no schema, no Q&A structure, not cited in AI Overviews. 2=basic schema only. 3=schema + some Q&A formatting, not cited. 4=schema + Q&A + cited in some AI Overviews. 5=full structured data + cited across multiple AI search engines. |
 | issues | jsonb | Array of `{ area, finding, severity, impact, status }` |
 | recommendations | jsonb | Prioritized action items |
 | ai_insights | text, nullable | Pro tier narrative summary |
@@ -211,24 +214,35 @@ Replaces existing placeholder page:
 
 ## Cron Jobs
 
-### Monthly Audit (`/api/cron/seo-monthly-audit`)
+### Monthly Audit Dispatcher (`/api/cron/seo-monthly-dispatch`)
 
 - Schedule: 1st of each month at 3am ET (`0 3 1 * *`)
-- Iterates all active `seo_configs`
-- Per client: run audit, check rankings, scan freshness, generate GBP draft, build report, email PDF, update dashboard
-- Estimated runtime: 2-5 minutes per client (Firecrawl scrape + search queries)
+- Queries all active `seo_configs`
+- For each config: sends a POST request to `/api/admin/seo/configs/[id]/run` (fan-out pattern)
+- Each client audit runs as its own function invocation with its own timeout budget
+- Dispatcher function is lightweight (~5 seconds), no timeout risk regardless of client count
+- After dispatching: sends Eric a summary notification listing which clients were queued
+
+### Per-Client Audit Worker (`/api/admin/seo/configs/[id]/run`)
+
+- Handles a single client audit end-to-end
+- Run audit, check rankings, scan freshness, generate GBP draft, build report, store PDF in Vercel Blob, email PDF, update dashboard
+- Estimated runtime: 2-5 minutes per client
 - Vercel function timeout: 300s (Fluid Compute)
-- Eric notification: summary of all audits completed, any clients with declining scores flagged
+- Called by: monthly dispatcher cron OR manual "Run Now" button on admin dashboard
 
 ### Manual Trigger
 
 - "Run Now" button on admin dashboard calls `POST /api/admin/seo/configs/[id]/run`
-- Same logic as cron, single client
+- Same logic as cron worker, single client
+- Button disabled after trigger with toast: "Audit running. Results will appear in ~5 minutes."
+- Rate limited: max 1 per client per day. On 429: toast "Audit already ran today. Next available tomorrow."
 
 ### GBP Draft Expiry
 
-- Handled by the existing chatbot demo expiry cron or a check within the monthly audit
-- Drafts older than 14 days set to `status = expired`
+- Added to the existing daily chatbot demo expiry cron (`/api/cron/chatbot-demo-expiry`, runs daily at 6am ET)
+- Query: `UPDATE seo_gbp_drafts SET status = 'expired' WHERE status = 'draft' AND expires_at < NOW()`
+- No separate cron needed
 
 ---
 
@@ -280,11 +294,12 @@ Replaces existing placeholder page:
 
 ### Firecrawl Usage
 
-Per client per month:
-- Essentials: ~1 scrape + 5 keyword searches + 4 competitor searches = ~10 Firecrawl calls
-- Growth: ~1 scrape + 15 keyword searches + 75 competitor searches = ~91 Firecrawl calls
-- Pro: ~1 scrape + 30 keyword searches + 300 competitor searches = ~331 Firecrawl calls
-- At 10 clients: monitor Firecrawl usage against plan limits
+Per client per month (one search call per keyword returns both client and competitor positions from the same results):
+
+- Essentials: ~1 scrape + 5 keyword searches = ~6 Firecrawl calls
+- Growth: ~1 scrape + 15 keyword searches = ~16 Firecrawl calls
+- Pro: ~1 scrape + 30 keyword searches = ~31 Firecrawl calls
+- At 10 Pro clients: ~310 Firecrawl calls/month. Monitor against plan limits.
 
 ### Upgrade Path
 
@@ -297,7 +312,7 @@ Per client per month:
 
 - **Firecrawl** (existing) -- Site scraping, keyword rank checking, longtail discovery
 - **Existing seo-audit skill** -- Core audit logic, extended with AEO/GEO checks
-- **Existing report generator** -- Branded PDF generation
+- **Vercel Blob** (`@vercel/blob`) -- PDF report storage. Reports generated server-side, stored in Blob, URL saved to `seo_audits.report_url`.
 - **Resend** (existing) -- Monthly report email delivery
 - **Supabase** (existing) -- Config storage, audit results, rankings, GBP drafts, auth
 - **AI SDK + AI Gateway** (existing) -- GBP draft generation, AI insights (Pro tier)
