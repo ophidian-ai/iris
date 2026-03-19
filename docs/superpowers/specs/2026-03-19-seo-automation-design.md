@@ -26,6 +26,7 @@ Monthly automated SEO auditing, rank tracking, competitor analysis, AEO/GEO opti
 
 - Setup: $400
 - Monthly: $299/mo
+- Includes Growth-tier features (15 keywords, 5 competitors, monitoring + optimization)
 
 ### Within Platform Tiers / Search Visibility Bundle
 
@@ -43,7 +44,7 @@ Monthly automated SEO auditing, rank tracking, competitor analysis, AEO/GEO opti
 
 ### Search Visibility Bundle
 
-15-20% discount when SEO Automation + Content Generation purchased together. AEO/GEO depth follows the tier level.
+Discount when SEO Automation + Content Generation purchased together: 15% for Essentials, 20% for Growth/Pro. AEO/GEO depth follows the tier level.
 
 ---
 
@@ -91,7 +92,11 @@ Monthly Cycle (cron: 1st of month at 3am ET, or manual trigger)
 
 ## Data Model
 
-### New Supabase Tables
+### Migration Strategy
+
+An existing migration (`20260318100000_seo_tables.sql`) deployed the initial SEO tables. The column names below are the **canonical spec** -- a delta migration will reconcile any differences (e.g., `url` -> `website_url`, `target_keywords` -> `keywords`, individual score columns -> `scores` jsonb). The existing `clients` table in Supabase (uuid PK, profile_id FK) is referenced by `seo_configs.client_id`. The `service_type` enum must be extended with `seo_automation` and `content_generation` values.
+
+### Tables
 
 #### seo_configs
 
@@ -101,15 +106,17 @@ Monthly Cycle (cron: 1st of month at 3am ET, or manual trigger)
 | client_id | uuid, FK -> clients | |
 | tier | enum: essentials, growth, pro | |
 | website_url | text NOT NULL | Client's website URL |
+| industry | text, nullable | Client's industry vertical |
+| location | text, nullable | Service area for local SEO |
 | keywords | text[] | Target keywords to track |
 | competitors | jsonb[] | Array of { name, url } |
 | gbp_url | text, nullable | Google Business Profile URL |
 | delivery_email | text NOT NULL | Where to send monthly reports |
-| keyword_limit | int | 5/15/30 by tier |
-| competitor_limit | int | 2/5/10 by tier |
 | active | boolean, default true | |
 | created_at | timestamptz | |
 | updated_at | timestamptz | |
+
+Keyword and competitor limits enforced in application code from `TIER_DEFAULTS[config.tier]`, not as DB columns.
 
 #### seo_audits
 
@@ -121,7 +128,7 @@ Monthly Cycle (cron: 1st of month at 3am ET, or manual trigger)
 | overall_score | int | 0-100 |
 | scores | jsonb | `{ technical, onPage, content, local, speed, aiVisibility }` each 0-100 |
 | issues | jsonb[] | Array of `{ category, severity, title, description, recommendation, status }` |
-| report_pdf_url | text, nullable | Vercel Blob URL for PDF |
+| report_url | text, nullable | Vercel Blob URL for PDF |
 | ai_insights | text, nullable | Pro tier AI narrative |
 | created_at | timestamptz | |
 
@@ -133,8 +140,8 @@ Monthly Cycle (cron: 1st of month at 3am ET, or manual trigger)
 | config_id | uuid, FK -> seo_configs | |
 | date | date NOT NULL | |
 | keyword | text NOT NULL | |
-| position | text | "top-5", "top-10", "top-20", "top-50", "not-found" (v1 granularity) |
-| ai_overview_present | boolean, default false | Whether client appears in AI Overview for this keyword |
+| position | text | "top-3", "top-10", "top-20", "not-found" (v1 granularity) |
+| ai_overview | boolean, default false | Whether client appears in AI Overview for this keyword |
 | competitor_positions | jsonb | `{ "competitor-name": "top-10", ... }` |
 | created_at | timestamptz | |
 
@@ -216,20 +223,30 @@ Extends existing branded PDF report generator:
 
 ## Cron Jobs
 
-### Monthly Audit (`/api/cron/seo-monthly-audit`)
+### Monthly Audit Dispatcher (`/api/cron/seo-monthly-audit`)
 
 - Schedule: `0 3 1 * *` (1st of month, 3am ET)
-- Iterates all active `seo_configs`
+- **Fan-out pattern:** Lightweight dispatcher queries all active `seo_configs`, then sends a POST to `/api/admin/seo/configs/[id]/run` for each client. Each client runs in its own Vercel function invocation with its own 300s timeout budget.
+- This avoids the single-function timeout problem (2-5 minutes per client would exceed 300s at 2-3 clients).
+
+### Per-Client Audit Worker (`/api/admin/seo/configs/[id]/run`)
+
+- Triggered by: dispatcher cron OR manual "Run Now" button in admin dashboard
 - Per client: audit, rank check, freshness scan, GBP draft, report, email, dashboard update
 - Estimated runtime: 2-5 minutes per client
 - Vercel function timeout: 300s (Fluid Compute)
+- Rate limit: max 1 per client per day (prevents accidental re-runs)
 
-**No additional crons.** Manual audits triggered via admin dashboard "Run Now" button using the same logic.
+### GBP Draft Expiry
+
+- Added to the existing daily chatbot demo expiry cron (`/api/cron/chatbot-demo-expiry`)
+- Checks `seo_gbp_drafts` where `status = 'draft'` AND `expires_at < now()`
+- Updates status to `expired`
 
 ### Notifications
 
-- Client: emailed PDF + GBP draft approval notice (Growth/Pro)
-- Eric: summary of all audits completed, clients with declining scores flagged
+- Client: emailed PDF via Resend + GBP draft approval notice (Growth/Pro)
+- Eric: summary email after all audits complete listing: clients processed, score changes, any clients with score decline > 5 points flagged as "needs attention"
 
 ---
 
@@ -267,11 +284,13 @@ Extends existing branded PDF report generator:
 
 ### Firecrawl Usage per Client per Month
 
-| Tier | Site scrape | Keyword searches | Competitor searches | Total calls |
-|------|------------|-----------------|-------------------|-------------|
-| Essentials | 1 | 5 | 10 (5 kw x 2 comp) | ~16 |
-| Growth | 1 | 15 | 75 (15 kw x 5 comp) | ~91 |
-| Pro | 1 | 30 | 300 (30 kw x 10 comp) | ~331 |
+A single Firecrawl search per keyword returns results for both the client and competitors in the same result set. No separate competitor searches needed.
+
+| Tier | Site scrape | Keyword searches | Total calls |
+|------|------------|-----------------|-------------|
+| Essentials | 1 | 5 | ~6 |
+| Growth | 1 | 15 | ~16 |
+| Pro | 1 | 30 | ~31 |
 
 At 10 clients: monitor Firecrawl usage against plan limits.
 
