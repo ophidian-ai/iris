@@ -65,10 +65,12 @@ The core service that analyzes any website and returns structured findings.
 
 | Module | Data Source | What It Checks |
 |---|---|---|
-| **Speed & Performance** | PageSpeed Insights API (free, no key needed) | Load time, LCP, CLS, FCP, performance score, mobile vs desktop |
+| **Speed & Performance** | PageSpeed Insights API (free tier, API key recommended for volume -- 25k queries/day with key) | Load time, LCP, CLS, FCP, performance score, mobile vs desktop |
 | **SEO Health** | Firecrawl scrape + HTML parsing | Title tag, meta description, H1 structure, image alt text, canonical URLs, sitemap, robots.txt |
-| **Mobile Experience** | Lighthouse mobile audit + viewport checks | Mobile-friendly score, tap target sizing, font readability, responsive viewport |
-| **Trust & Visibility** | Firecrawl scrape + Google Places API (free tier) | SSL status, visible contact info, Google Business Profile presence, review count/rating |
+| **Mobile Experience** | Lighthouse mobile audit (via PageSpeed Insights) + viewport checks | Mobile-friendly score, tap target sizing, font readability, responsive viewport |
+| **Trust & Visibility** | Firecrawl scrape (including Google Maps listing) | SSL status, visible contact info, Google Business Profile presence, review count/rating |
+
+**API keys:** PageSpeed Insights requires a Google Cloud API key for production volume (unauthenticated rate limit is ~2 req/s). Store as `GOOGLE_PSI_API_KEY` Vercel env var. Firecrawl uses existing `FIRECRAWL_API_KEY`. No Google Places API needed -- GBP data scraped via Firecrawl to avoid Places API data retention restrictions.
 
 ### Revenue Impact Calculation
 
@@ -79,11 +81,21 @@ Each finding gets a severity weight (critical/moderate/minor). Revenue estimates
 - No Google Business Profile means invisible in local search
 - Missing SSL triggers browser warnings, killing trust instantly
 
-**Visitor estimation:** Simple heuristic based on business type + location population size. Conservative -- better to understate and be credible than overstate and lose trust.
+**Visitor estimation:** Lookup table by city size tier and industry. Conservative -- better to understate and be credible than overstate and lose trust.
+
+| City Size | Population | Base Monthly Visitors |
+|---|---|---|
+| Small | < 25,000 | 200 |
+| Medium | 25,000 - 100,000 | 500 |
+| Large | 100,000+ | 1,500 |
+
+Industry multipliers: Restaurants 1.5x, Home Services 1.0x, Auto Services 0.8x, Professional Services 0.6x, Health/Wellness 1.2x.
+
+City population sourced from a static lookup table of US cities (bundled, no API call). Business industry inferred from Firecrawl scrape content or manually specified.
 
 **Formula per finding:**
 ```
-estimated_monthly_visitors * severity_conversion_impact * avg_local_business_order_value = monthly_revenue_leak
+(base_visitors * industry_multiplier) * severity_conversion_impact * avg_local_order_value = monthly_revenue_leak
 ```
 
 ### Output Schema
@@ -94,6 +106,7 @@ estimated_monthly_visitors * severity_conversion_impact * avg_local_business_ord
   "url": "string",
   "scanned_at": "ISO timestamp",
   "overall_score": "0-100",
+  "overall_grade": "A|B|C|D|F (derived: 90+=A, 80+=B, 70+=C, 60+=D, <60=F)",
   "estimated_monthly_leak": "dollar amount",
   "modules": {
     "speed": { "score": "0-100", "findings": [...] },
@@ -124,12 +137,65 @@ estimated_monthly_visitors * severity_conversion_impact * avg_local_business_ord
 
 ### Location in Codebase
 
-- `app/api/scan/route.ts` -- API endpoint
-- `lib/scan/` -- Scan engine modules (speed, seo, mobile, trust)
-- `lib/scan/revenue.ts` -- Revenue impact calculation logic
-- `lib/scan/benchmarks.ts` -- Industry benchmark data
+- `src/app/api/scan/route.ts` -- API endpoint
+- `src/lib/scan/` -- Scan engine modules (speed, seo, mobile, trust)
+- `src/lib/scan/revenue.ts` -- Revenue impact calculation logic
+- `src/lib/scan/benchmarks.ts` -- Industry benchmark data
 
 All within the ophidianai.com Next.js project (`ophidian-ai` submodule).
+
+### Rate Limiting & Abuse Prevention
+
+**Public (inbound web tool):**
+- IP-based throttle: 3 scans per IP per hour, 10 per day
+- Honeypot field on the web form to block bots
+- URL validation: must be a valid HTTP/HTTPS URL before scanning
+- Duplicate URL debounce: if the same URL was scanned in the last 60 minutes, return cached results
+
+**Internal (Iris / outreach pipeline):**
+- Internal API key (`SCAN_API_KEY` env var) bypasses public rate limits
+- Passed via `Authorization: Bearer <key>` header
+- No per-IP throttle for internal calls
+
+### Timeout & Failure Handling
+
+**Vercel function config:** `maxDuration: 60` (requires Pro plan -- ophidianai.com is already on Pro)
+
+**Per-module timeouts:**
+- Each module gets 15 seconds max
+- Total scan timeout: 45 seconds
+- If a module times out or errors, the scan returns partial results with that module marked `"status": "unavailable"` rather than failing entirely
+
+**Module status field** (added to output schema):
+```json
+"modules": {
+  "speed": { "score": 72, "status": "ok", "findings": [...] },
+  "seo": { "score": null, "status": "unavailable", "error": "Timeout", "findings": [] }
+}
+```
+
+**Client-side handling:**
+- Loading UI shows per-module progress
+- If a module fails, the report renders available modules and shows "We couldn't check [module] for this site -- try again later" for unavailable ones
+- Overall score calculated from available modules only (weighted average of what succeeded)
+
+### Edge Cases
+
+| Scenario | Handling |
+| --- | --- |
+| URL behind login/paywall | Firecrawl returns limited content; report notes "restricted access" and scores only publicly visible elements |
+| Single-page app (JS-heavy) | Firecrawl renders JS by default; PageSpeed Insights handles SPAs natively |
+| Redirect chain | Follow up to 3 redirects; report shows final resolved URL |
+| Site is down (DNS resolves, HTTP fails) | Return immediately with "Site Unreachable" status, no scores, CTA: "Your site appears to be down -- that's the biggest revenue leak possible" |
+| Non-URL input (business name, gibberish) | Client-side URL validation before API call; API returns 400 if invalid |
+| Parked/placeholder domain | Firecrawl scrape detects minimal content; report flags "This appears to be a placeholder site" |
+
+### Caching
+
+- Scan results cached by URL hash for 24 hours
+- Inbound web tool: always returns cached result if available within 24h (user can force re-scan)
+- Outreach pipeline: uses cached result if available within 7 days
+- Cache storage: same as scan persistence (see Section 5: Data Storage)
 
 ---
 
@@ -150,7 +216,7 @@ Raw scan data becomes a persuasion tool. The same JSON powers two output formats
 
 ### Output Format: Interactive Web Report
 
-- Route: `app/report/[id]/page.tsx`
+- Route: `src/app/report/[id]/page.tsx`
 - Branded page with OphidianAI design system (dark gradient, teal accent, venom green)
 - Animated score reveal (number counting up creates tension)
 - Expandable sections per module
@@ -213,12 +279,12 @@ Enter URL -> Loading state (15-30s) -> Headline score revealed (no gate)
 
 **SEO targeting for the page:**
 - "free website checker", "website speed test for small business", "is my website losing customers"
-- Unique report pages per scan add indexable content over time
+- Report page SEO indexing deferred to future phase (see Out of Scope)
 
 **Codebase location:**
-- `app/tools/website-checkup/page.tsx` -- tool page
-- `app/report/[id]/page.tsx` -- report view
-- `app/api/scan/route.ts` -- scan API endpoint
+- `src/app/tools/website-checkup/page.tsx` -- tool page
+- `src/app/report/[id]/page.tsx` -- report view
+- `src/app/api/scan/route.ts` -- scan API endpoint
 
 ---
 
@@ -293,17 +359,54 @@ Once CI1/ALT have enough sends to evaluate performance (target: 30+ sends per te
 | `Inbound - Call Booked` | Clicked CTA and booked a call. Highest intent. |
 | `Scanned` | Outreach prospect -- scan complete, cold email not yet sent. |
 
+### Data Storage
+
+**Inbound scans (web tool):**
+
+- Stored in Supabase `scans` table: `scan_id`, `url`, `url_hash`, `email`, `results_json`, `score`, `created_at`
+- Report page (`/report/[id]`) reads from Supabase by `scan_id`
+- Retention: indefinite (scan results are lightweight JSON, useful for re-engagement)
+- Cache lookups use `url_hash` to find recent scans of the same URL
+
+**Outreach scans (pipeline):**
+
+- Stored as files: `sales/lead-generation/prospects/[slug]/scan/results.json`
+- PDF pre-generated: `sales/lead-generation/prospects/[slug]/scan/revenue-leak-report.pdf`
+- Also indexed to Pinecone for cross-prospect queries ("show me all prospects with speed scores under 30")
+
+**Both channels:** Pipeline sheet (Google Sheets) updated via GWS CLI with scan score column.
+
+### Email Delivery
+
+**Inbound confirmation email (transactional):**
+
+- Sent via Resend (already available as a Vercel Marketplace integration)
+- Triggered server-side after email capture on the web tool
+- Contains: PDF report attached + link to web report + OphidianAI branding
+- Template: React Email component in `src/emails/scan-report.tsx`
+- Env var: `RESEND_API_KEY` (provisioned via `vercel integration add resend`)
+- Sending domain: ophidianai.com (requires DNS verification)
+
+**Outreach emails (offer delivery, follow-ups):**
+
+- Continue using GWS CLI to stage Gmail drafts (no change to existing workflow)
+- PDF report attached to offer delivery email when prospect replies "yes"
+
 ### Inbound Follow-Up Sequence
 
-- **Immediate:** Confirmation email with PDF report + link to web report
+Executed by a new `inbound-follow-up` skill (extension of the follow-up-email pattern, but for inbound leads rather than cold outreach).
+
+- **Immediate:** Resend transactional email with PDF report + link to web report
 - **Day 2:** "Did you get a chance to review your report? Here's the #1 thing I'd fix first." (Context reinforcement)
 - **Day 5:** "Quick question -- are you handling your website yourself or working with someone?" (Permission probe)
 - **Day 10:** Breakup if no engagement
 
+Day 2/5/10 emails triggered by Iris during morning coffee (checks Pipeline sheet for inbound leads with pending follow-ups). Drafted via Resend, not Gmail -- these are transactional follow-ups from the tool, not personal outreach.
+
 ### Data Flow
 
-- All scan results stored in prospect folder + indexed to Pinecone
-- Pipeline sheet (Google Sheets) updated via GWS CLI
+- Inbound scans stored in Supabase + Pipeline sheet updated via GWS CLI
+- Outreach scans stored in prospect folders + indexed to Pinecone
 - Inbound leads auto-create a prospect folder on email capture
 - Weekly pipeline summary includes inbound vs outreach breakdown
 
